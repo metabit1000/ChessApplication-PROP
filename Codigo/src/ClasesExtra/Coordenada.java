@@ -8,7 +8,7 @@ public class Coordenada {
     private int x;
     private int y;
     
-    public void setCoordenada(int x,int y) {
+    public Coordenada(int x,int y) {
         this.x = x;
         this.y = y;
     }
@@ -29,7 +29,11 @@ public class Coordenada {
         return y;
     }
     
-    boolean esValid() {
+    public void printxy() {  //para pruebas de fichas
+        System.out.println(x+" "+y);
+    }
+    
+    public boolean esValid() {
         return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
     }
 }

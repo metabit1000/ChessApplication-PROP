@@ -1,14 +1,14 @@
 package Dominio;
 
+import java.util.*;
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
 /**
  *
  * @author Àlex
  */
 public abstract class Ficha {
-    private Coordenada posicion;
-    private final boolean color; //white = true, black = false
+    protected Coordenada posicion;
+    protected boolean color; //white = true, black = false
     
     public Ficha(boolean color,Coordenada posicion) {
         this.color = color;
@@ -27,7 +27,5 @@ public abstract class Ficha {
         posicion = p;
     }
     
-    public void move() {
-        
-    }
+    public abstract ArrayList<Coordenada> posiblesMovimientos(Problema p);  
 }
