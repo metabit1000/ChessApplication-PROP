@@ -39,7 +39,7 @@ public class Peon extends Ficha{
             /* MOVERSE */
             c = new Coordenada(x - 1, y);
             if (c.esValid() && p.getFicha(c) == null) res.add(c); //avanzar para delante 
-            if (x == 7 && c.esValid()) {  //avanzar casillas para delante; solo en el inicio es posible!
+            if (x == 6 && c.esValid()) {  //avanzar casillas para delante; solo en el inicio es posible!
                 c = new Coordenada(x - 2 ,y);
                 if (c.esValid() && p.getFicha(c) == null) res.add(c);
             }

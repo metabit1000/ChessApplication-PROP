@@ -15,7 +15,7 @@ public class Caballo extends Ficha{
     @Override
     public ArrayList<Coordenada> posiblesMovimientos(Problema p) {
         ArrayList<Coordenada> res = new ArrayList();
-        int x = posicion.getY();
+        int x = posicion.getX();
         int y = posicion.getY();
         Coordenada c;
         

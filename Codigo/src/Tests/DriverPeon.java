@@ -19,7 +19,7 @@ public class DriverPeon {
         res = p.posiblesMovimientos(probl);
     } 
     public static void main (String [] args) {
-        Peon p = new Peon(true,new Coordenada(1,4));
+        Peon p = new Peon(true,new Coordenada(7,7));
         Peon p2 = new Peon(false,new Coordenada(6,5));
         Problema probl = new Problema(p,p2);
         ArrayList<Coordenada> res = new ArrayList();
