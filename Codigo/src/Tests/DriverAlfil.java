@@ -1,28 +1,29 @@
 package Tests;
 
-import Dominio.fichas.Caballo;
-import Dominio.Problema;
 import ClasesExtra.Coordenada;
-import java.util.*;
+import Dominio.fichas.Alfil;
+import Dominio.Problema;
+import java.util.ArrayList;
 
 /**
  *
  * @author Àlex
  */
-public class DriverCaballo {
-    public void testConstructor() {}
+public class DriverAlfil {
+    public void testConstructor() {//que pongo?
+    }
     
-    public void testPosiblesMovimientos() {}
+    public void testPosiblesMovimientos() {//que pongo?   
+    }
     
     public static void main (String [] args) { 
-        Caballo c = new Caballo(true,new Coordenada(3,1));
-        Caballo c2 = new Caballo(false,new Coordenada(4,6)); 
+        Alfil c = new Alfil(true,new Coordenada(3,1));
+        Alfil c2 = new Alfil(false,new Coordenada(4,6)); 
         Problema probl = new Problema(c,c2);
         ArrayList<Coordenada> res = c2.posiblesMovimientos(probl);
         
         for(int x=0;x<res.size();x++) {
             res.get(x).printxy();
         }
-
     }
 }

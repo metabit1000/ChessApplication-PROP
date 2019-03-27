@@ -1,7 +1,7 @@
 package Tests;
 
 import ClasesExtra.Coordenada;
-import Dominio.Rey;
+import Dominio.fichas.Rey;
 import Dominio.Problema;
 import java.util.ArrayList;
 

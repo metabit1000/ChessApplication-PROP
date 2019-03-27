@@ -1,7 +1,8 @@
-package Dominio;
+package Dominio.fichas;
 
 import java.util.*;
 import ClasesExtra.Coordenada;
+import Dominio.Problema;
 /**
  *
  * @author Àlex

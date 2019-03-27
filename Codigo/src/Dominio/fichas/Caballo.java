@@ -1,6 +1,7 @@
-package Dominio;
+package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
+import Dominio.Problema;
 import java.util.ArrayList;
 
 /**

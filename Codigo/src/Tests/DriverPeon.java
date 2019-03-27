@@ -1,6 +1,6 @@
 package Tests;
 
-import Dominio.Peon;
+import Dominio.fichas.Peon;
 import Dominio.Problema;
 import ClasesExtra.Coordenada;
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package Dominio;
 
+import Dominio.fichas.Ficha;
 import ClasesExtra.Coordenada;
 /**
  *
