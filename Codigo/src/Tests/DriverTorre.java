@@ -22,5 +22,5 @@ public class DriverTorre {
         for(int x=0;x<res.size();x++) {
             res.get(x).printxy();
         }
-     }
+    }
 }

@@ -18,7 +18,7 @@ public class DriverAlfil {
     
     public static void main (String [] args) { 
         Alfil c = new Alfil(true,new Coordenada(3,1));
-        Alfil c2 = new Alfil(false,new Coordenada(4,6)); 
+        Alfil c2 = new Alfil(false,new Coordenada(4,4)); 
         Problema probl = new Problema(c,c2);
         ArrayList<Coordenada> res = c2.posiblesMovimientos(probl);
         

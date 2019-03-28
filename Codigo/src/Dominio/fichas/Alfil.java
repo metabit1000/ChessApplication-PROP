@@ -21,12 +21,37 @@ public class Alfil extends Ficha{
         Coordenada c;
         
         /* ARRIBA/IZQUIERDA (pensando en las blancas) */
-            //seguir aqui
-        /* ABAJO/DERECHA */
-        
-        /* ARRIBA/DERECHA */
-        
+        for (int i = 1; i <= x; ++i) {
+            c = new Coordenada(x - i,y - i);
+                if (c.esValid()) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
+                        res.add(c);
+                }
+        }
         /* ABAJO/IZQUIERDA */
+        for (int i = 1; i <= 7; ++i) {
+            c = new Coordenada(x + i,y - i);
+                if (c.esValid()) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
+                        res.add(c);
+                }
+        }
+        /* ARRIBA/DERECHA */
+        for (int i = 1; i <= x; ++i) {
+            c = new Coordenada(x + i,y + i);
+                if (c.esValid()) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
+                        res.add(c);
+                }
+        }
+        /* ABAJO/DERECHA */
+        for (int i = 1; i <= 7; ++i) {
+            c = new Coordenada(x - i,y + i);
+                if (c.esValid()) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
+                        res.add(c);
+                }
+        }
         return res;
     }  
 }
