@@ -1,7 +1,6 @@
-package Tests;
+package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.fichas.Alfil;
 import Dominio.Problema;
 import java.util.ArrayList;
 

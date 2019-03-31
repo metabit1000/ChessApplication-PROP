@@ -1,6 +1,5 @@
-package Tests;
+package Dominio.fichas;
 
-import Dominio.fichas.Caballo;
 import Dominio.Problema;
 import ClasesExtra.Coordenada;
 import java.util.*;

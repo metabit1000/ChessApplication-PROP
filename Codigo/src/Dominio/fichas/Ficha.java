@@ -24,6 +24,10 @@ public abstract class Ficha {
         return color;
     }
     
+    public void setColor(Boolean c) {
+        color = c;
+    }
+    
     public void setPosicion(Coordenada p) {
         posicion = p;
     }
