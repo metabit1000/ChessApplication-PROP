@@ -32,7 +32,7 @@ public class Usuarios {
             }
             String num = "0123456789";
             for(int i = 0; i < num.length(); ++i)
-                if (num.charAt(i) == pass.charAt(j)) n = true; // Es una número
+                if (num.charAt(i) == pass.charAt(j)) n = true; // Es un número
             }
         return pass.length() > 5 && n && m && M;
     }
