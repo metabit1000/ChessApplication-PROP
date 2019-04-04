@@ -15,11 +15,19 @@ public class Problema {
          Coordenada c = f1.getPosicion();
          Coordenada c2 = f2.getPosicion();
          board[c.getX()][c.getY()] = f1;
-         board[c2.getX()][c2.getY()] = f2;
-         
+         board[c2.getX()][c2.getY()] = f2; 
      }
      
      public Ficha getFicha(Coordenada c) {
          return board[c.getX()][c.getY()];
      }
+     
+    //Cambio de Coordenada a Problema
+     public Boolean esValid(Coordenada c) {
+        int x = c.getX();
+        int y = c.getY();
+        return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
+     }  
+     
+    
 }

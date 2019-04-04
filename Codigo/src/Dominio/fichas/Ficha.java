@@ -11,6 +11,8 @@ public abstract class Ficha {
     protected Coordenada posicion;
     protected boolean color; //white = true, black = false
     
+    public Ficha() {}
+    
     public Ficha(boolean color,Coordenada posicion) {
         this.color = color;
         this.posicion = posicion;

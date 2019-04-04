@@ -34,8 +34,4 @@ public class Coordenada {
     public void printxy() {  //para pruebas de fichas
         System.out.println(x+" "+y);
     }
-    
-    public boolean esValid() {
-        return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
-    }
 }

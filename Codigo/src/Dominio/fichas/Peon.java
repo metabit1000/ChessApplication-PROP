@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class Peon extends Ficha{
     
+    public Peon() {}
+    
     public Peon(boolean color,Coordenada posicion) {
         super(color,posicion);
     }
@@ -24,32 +26,32 @@ public class Peon extends Ficha{
         if (!color) { //negras
             /* MOVERSE */
             c = new Coordenada(x + 1, y);
-            if (c.esValid() && p.getFicha(c) == null) res.add(c); //avanzar para delante 
-            if (x == 1 && c.esValid()) {  //avanzar casillas para delante; solo en el inicio es posible!
+            if (p.esValid(c) && p.getFicha(c) == null) res.add(c); //avanzar para delante 
+            if (x == 1 && p.esValid(c)) {  //avanzar casillas para delante; solo en el inicio es posible!
                 c = new Coordenada(x + 2 ,y);
-                if (c.esValid() && p.getFicha(c) == null) res.add(c);
+                if (p.esValid(c) && p.getFicha(c) == null) res.add(c);
             }
             
             /* ATACAR */
             c = new Coordenada(x + 1, y + 1);
-            if (c.esValid() && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
+            if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
             c = new Coordenada(x + 1, y - 1);
-            if (c.esValid() && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
+            if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
         }
         else { //blancas
             /* MOVERSE */
             c = new Coordenada(x - 1, y);
-            if (c.esValid() && p.getFicha(c) == null) res.add(c); //avanzar para delante 
-            if (x == 6 && c.esValid()) {  //avanzar casillas para delante; solo en el inicio es posible!
+            if (p.esValid(c) && p.getFicha(c) == null) res.add(c); //avanzar para delante 
+            if (x == 6 && p.esValid(c)) {  //avanzar casillas para delante; solo en el inicio es posible!
                 c = new Coordenada(x - 2 ,y);
-                if (c.esValid() && p.getFicha(c) == null) res.add(c);
+                if (p.esValid(c) && p.getFicha(c) == null) res.add(c);
             }
             
             /* ATACAR */
             c = new Coordenada(x - 1, y + 1);
-            if (c.esValid() && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
+            if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
             c = new Coordenada(x - 1, y - 1);
-            if (c.esValid() && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
+            if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).color != color) res.add(c);
         }
         return res;
     }

@@ -23,7 +23,7 @@ public class Alfil extends Ficha{
         /* ARRIBA/IZQUIERDA (pensando en las blancas) */
         for (int i = 1; i <= x; ++i) {
             c = new Coordenada(x - i,y - i);
-                if (c.esValid()) {
+                if (p.esValid(c)) {
                     if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
                         res.add(c);
                 }
@@ -31,7 +31,7 @@ public class Alfil extends Ficha{
         /* ABAJO/IZQUIERDA */
         for (int i = 1; i <= 7; ++i) {
             c = new Coordenada(x + i,y - i);
-                if (c.esValid()) {
+                if (p.esValid(c)) {
                     if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
                         res.add(c);
                 }
@@ -39,7 +39,7 @@ public class Alfil extends Ficha{
         /* ARRIBA/DERECHA */
         for (int i = 1; i <= x; ++i) {
             c = new Coordenada(x + i,y + i);
-                if (c.esValid()) {
+                if (p.esValid(c)) {
                     if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
                         res.add(c);
                 }
@@ -47,7 +47,7 @@ public class Alfil extends Ficha{
         /* ABAJO/DERECHA */
         for (int i = 1; i <= 7; ++i) {
             c = new Coordenada(x - i,y + i);
-                if (c.esValid()) {
+                if (p.esValid(c)) {
                     if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color))
                         res.add(c);
                 }

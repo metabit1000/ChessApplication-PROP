@@ -1,6 +1,5 @@
 package Dominio.fichas;
 
-import Dominio.fichas.Ficha;
 import ClasesExtra.Coordenada;
 import Dominio.Problema;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class Torre extends Ficha {
         /* ARRIBA (pensando en las blancas) */
         for (int i = 1; i <= x; ++i) {
             c = new Coordenada(x - i, y);
-            if (c.esValid()) {
+            if (p.esValid(c)) {
                 if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
                     res.add(c);
             } 
@@ -32,7 +31,7 @@ public class Torre extends Ficha {
         /* ABAJO */
         for (int i = 1; i <= 7; ++i) {
             c = new Coordenada(x + i, y);
-            if (c.esValid()) {
+            if (p.esValid(c)) {
                 if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
                     res.add(c);
             } 
@@ -41,7 +40,7 @@ public class Torre extends Ficha {
         /* DERECHA */
         for (int i = 1; i <= 7; ++i) {
             c = new Coordenada(x, y + i);
-            if (c.esValid()) {
+            if (p.esValid(c)) {
                 if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
                     res.add(c);
             } 
@@ -50,7 +49,7 @@ public class Torre extends Ficha {
         /* IZQUIERDA */
         for (int i = 1; i <= y; ++i) {
             c = new Coordenada(x, y - 1);
-            if (c.esValid()) {
+            if (p.esValid(c)) {
                 if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
                     res.add(c);
             } 

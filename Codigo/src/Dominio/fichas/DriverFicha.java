@@ -1,7 +1,7 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import java.io.IOException;
+import Excepciones.*;
 import java.util.Scanner;
 
 /**
@@ -14,7 +14,7 @@ public class DriverFicha {
     public void testGetColor() {}
     public void testsetPosicion() {}
     //testPosiblesMovimientos en cada subclase
-    public static void main (String [] args) throws IOException {
+    public static void main (String [] args) throws Exception {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
@@ -28,6 +28,7 @@ public class DriverFicha {
             System.out.println("6. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
+            Peon prueba = new Peon();
             switch (estado) {
                 case 1:
                     Boolean color;
@@ -43,13 +44,18 @@ public class DriverFicha {
                     System.out.println("Introduzca un coordenada(y): ");
                     res2 = sc.nextInt();
                     c.setY(res2);
-                    Peon prueba = new Peon(color,c); //como ejemplo peon, por ser abstracta
+                    prueba = new Peon(color,c); //como ejemplo peon, por ser abstracta
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
                     System.out.println("Ha elegido: GetPosicion");
-                    Peon prueba2 = new Peon(false,new Coordenada(1,1));
-                    Coordenada c2 = prueba2.getPosicion();
+                    Coordenada c2 = new Coordenada();
+                    try {
+                        c2 = prueba.getPosicion();
+                        c2.printxy();
+                    } catch (NullPointerException e) {
+                        System.out.println("ERROR: Es necesario crear la clase");
+                    }
                     System.out.println("La posicion de una ficha peon cualquiera es: ");
                     c2.printxy();
                     break;
@@ -81,7 +87,7 @@ public class DriverFicha {
                     break;
                 case 6: 
                     fin = 6;
-                    System.out.println("Gracias por utilizar nuestros servicios. Que tenga un buen día.");
+                    System.out.println("Gracias. Que tenga un buen día.");
                     break;
             }
         }
