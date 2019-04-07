@@ -5,16 +5,13 @@ import java.util.*;
  * @author joan
  */
 public class Usuarios {
+    
     private Map<String, String> Users = new HashMap<String, String>();
     
     public Usuarios() {}
          
     public void addUser(String nom, String password) {
-        if (!existUser(nom) && correctPass(password)) {
-            Users.put("nom", "password");
-        }
-        else if (existUser(nom)) System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
-        else if (!correctPass(password)) System.out.println("La contraseña necesita como mínimo 6 carácteres, y tener, como mínimo una letra minúscula, una mayúscula y un número.");
+        Users.put(nom, password);
     }
     
     public Boolean correctPass(String pass) {
@@ -41,12 +38,29 @@ public class Usuarios {
         return Users.containsKey(nom);
     }
     
-    public void changePass(String nom, String newpassword) {
-        if (existUser(nom) && correctPass(newpassword)) {
-            Users.put("nom", "password");
-        }
-        else if (existUser(nom)) System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
-        else if (!correctPass(newpassword)) System.out.println("La nueva contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
-    }
+//    public void changePass(String nom, String newpassword) {
+//        if (existUser(nom) && correctPass(newpassword)) {
+//            Users.put(nom, newpassword);
+//        }
+//        else if (existUser(nom)) System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
+//        else if (!correctPass(newpassword)) System.out.println("La nueva contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+//    }
     
+    public void printMap() {
+//    Iterator it = Users.entrySet().iterator();
+//    while (it.hasNext()) {
+//        Map.Entry pair = (Map.Entry)it.next();
+//        System.out.println(pair.getKey() + " = " + pair.getValue());
+//        it.remove(); // avoids a ConcurrentModificationException
+//        Users.put("foo", "1");
+//        Users.put("bar", "2");
+        for ( String key : Users.keySet() ) {
+            System.out.println( key );
+        }
+    }
+
+    
+    public Boolean isEmpty() {
+        return Users.isEmpty();
+    }
 }
