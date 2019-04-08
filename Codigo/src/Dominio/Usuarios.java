@@ -1,41 +1,30 @@
 package Dominio;
 import java.util.*;
+//import Dominio.Usuario;
+
 /**
  *
  * @author joan
  */
 public class Usuarios {
     
-    private Map<String, String> Users = new HashMap<String, String>();
+    private ArrayList<Usuario> Users = new ArrayList<Usuario>();
     
     public Usuarios() {}
          
-    public void addUser(String nom, String password) {
-        Users.put(nom, password);
+    public void addUser(Usuario u) {
+        Users.add(u);
     }
     
-    public Boolean correctPass(String pass) {
-        boolean n = false;
-        boolean m = false;
-        boolean M = false;
-        for (int j = 0; j < pass.length(); ++j) {
-            String mayu ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            for(int i = 0; i < mayu.length(); ++i) {
-                if (mayu.charAt(i) == pass.charAt(j)) M = true; // Es una letra mayuscula
-            }
-            String minu = "abcdefghijklmnopqrstuvwxyz";
-            for(int i = 0; i < minu.length(); ++i) {
-                if (minu.charAt(i) == pass.charAt(j)) m = true; // Es una letra minúscula
-            }
-            String num = "0123456789";
-            for(int i = 0; i < num.length(); ++i)
-                if (num.charAt(i) == pass.charAt(j)) n = true; // Es un número
-            }
-        return pass.length() > 5 && n && m && M;
-    }
+    
     
     public Boolean existUser(String nom) {
-        return Users.containsKey(nom);
+        for (int i = 0; i < Users.size(); i++) {
+            Usuario u = Users.get(i);
+            String n = u.getNombre();
+            if (nom == n) return true;
+        }
+        return false;
     }
     
 //    public void changePass(String nom, String newpassword) {
@@ -52,11 +41,9 @@ public class Usuarios {
 //        Map.Entry pair = (Map.Entry)it.next();
 //        System.out.println(pair.getKey() + " = " + pair.getValue());
 //        it.remove(); // avoids a ConcurrentModificationException
-//        Users.put("foo", "1");
-//        Users.put("bar", "2");
-        for ( String key : Users.keySet() ) {
-            System.out.println( key );
-        }
+//        for ( String key : Users.keySet() ) {
+//            System.out.println( key );
+//        }
     }
 
     
