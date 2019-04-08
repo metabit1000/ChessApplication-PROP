@@ -1,6 +1,5 @@
 package Dominio;
 import Dominio.Usuarios;
-//import java.Excepciones.*;
 import java.util.*;
 
 /**
@@ -18,6 +17,7 @@ public class DriverUsuarios {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Usuarios prueba = new Usuarios();
+
         while (estado != fin) {
             System.out.println("Usuarios:");
             System.out.println("1. Crear Usuario");
@@ -35,12 +35,13 @@ public class DriverUsuarios {
                     Boolean passwordCorrect;
                     System.out.println("Ha elegido: Crear Usuario");
                     System.out.println("Introduzca un nombre: ");
-                    nom = sc.nextLine();
+                    nom = sc.next();
                     sc.nextLine();
                     existeNom = prueba.existUser(nom);
                     while (existeNom){
                         System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
-                        nom = sc.nextLine();
+                        nom = sc.next();
+                        sc.nextLine();
                         existeNom = prueba.existUser(nom);
                     }
                     if (!existeNom) System.out.println("Nombre de usuario disponible.");
@@ -50,7 +51,8 @@ public class DriverUsuarios {
                     passwordCorrect = prueba.correctPass(pass);
                     while (!passwordCorrect){
                         System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
-                        pass = sc.nextLine();
+                        pass = sc.next();
+                        sc.nextLine();
                         passwordCorrect = prueba.correctPass(pass);
                     }
                     if (passwordCorrect) System.out.println("Contraseña aceptada correctamente.");
