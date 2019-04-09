@@ -27,7 +27,7 @@ public class Usuario {
     
     public Usuario(String nombre, String password, Boolean login) {
         //Comprobar que el nombre de usuario existe???????????????????????????
-        if (!correctPass(pass)) System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+        if (!correctPass(password)) System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         nom = nombre;
         pass = password;
         log = login;
@@ -47,7 +47,7 @@ public class Usuario {
         if (!correctPass(pass)) System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         pass = password;
     }
-    public void setLog(Boolean login) {  
+    public void setLog(Boolean login) {
         log = login;
     }
     
