@@ -1,5 +1,7 @@
 package Dominio;
 import Dominio.Usuarios;
+import Dominio.Usuario;
+
 import java.util.*;
 
 /**
@@ -37,28 +39,10 @@ public class DriverUsuarios {
                     System.out.println("Introduzca un nombre: ");
                     nom = sc.next();
                     sc.nextLine();
-                    existeNom = prueba.existUser(nom);
-                    while (existeNom){
-                        System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
-                        nom = sc.next();
-                        sc.nextLine();
-                        existeNom = prueba.existUser(nom);
-                    }
-                    if (!existeNom) System.out.println("Nombre de usuario disponible.");
-                    
                     System.out.println("Introduzca una constraseña: ");
-                    pass = sc.nextLine();
-                    passwordCorrect = prueba.correctPass(pass);
-                    while (!passwordCorrect){
-                        System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
-                        pass = sc.next();
-                        sc.nextLine();
-                        passwordCorrect = prueba.correctPass(pass);
-                    }
-                    if (passwordCorrect) System.out.println("Contraseña aceptada correctamente.");
-                    
-                    prueba.addUser(nom, pass);
-                    prueba.printMap();
+                    pass = sc.next();
+                    sc.nextLine();
+                    prueba.registrarUsuario(nom, pass);
                     
                     break;
 //                case 2:
