@@ -22,69 +22,68 @@ public class DriverUsuarios {
 
         while (estado != fin) {
             System.out.println("Usuarios:");
-            System.out.println("1. Crear Usuario");
+            System.out.println("1. Registrar Usuario");
             System.out.println("2. Login");
-            System.out.println("3. Cambiar contraseña");
-            System.out.println("4. Salir");
+            System.out.println("3. Cerrar sesión");
+            System.out.println("4. Modificar contraseña");
+            System.out.println("5. Print Usuarios");
+            System.out.println("6. Salir");
             //faltaria logout y hacer booleano en usuarios que diga si un usuario está logeado
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String nom;
-                    String pass;
-                    Boolean existeNom;
-                    Boolean passwordCorrect;
-                    System.out.println("Ha elegido: Crear Usuario");
+                    String nomR;
+                    String passR;
+                    System.out.println("Ha elegido: Registrar Usuario");
                     System.out.println("Introduzca un nombre: ");
-                    nom = sc.next();
+                    nomR = sc.next();
                     sc.nextLine();
                     System.out.println("Introduzca una constraseña: ");
-                    pass = sc.next();
+                    passR = sc.next();
                     sc.nextLine();
-                    prueba.registrarUsuario(nom, pass);
-                    
+                    prueba.registrarUsuario(nomR, passR);
                     break;
-//                case 2:
-//                    System.out.println("Ha elegido: GetPosicion");
-//                    Coordenada c2 = new Coordenada();
-//                    try {
-//                        c2 = prueba.getPosicion();
-//                        c2.printxy();
-//                    } catch (NullPointerException e) {
-//                        System.out.println("ERROR: Es necesario crear la clase");
-//                    }
-//                    System.out.println("La posicion de una ficha peon cualquiera es: ");
-//                    c2.printxy();
-//                    break;
-//                case 3: 
-//                    System.out.println("Ha elegido: GetColor");
-//                    Peon prueba3 = new Peon(false,new Coordenada(1,1));
-//                    Boolean c3 = prueba3.getColor();
-//                    System.out.println("El color de una ficha cualquiera es: " + c3);
-//                    break;
-//                case 4:
-//                    System.out.println("Ha elegido: SetColor");
-//                    Peon prueba4 = new Peon(false,new Coordenada(1,1));
-//                    System.out.println("Introduzca un color (false = negro /blanco = true) : ");
-//                    Boolean c4 = sc.nextBoolean();
-//                    System.out.println("Se ha obtenido correctamente");
-//                    break;
-//                case 5:
-//                    System.out.println("Ha elegido: SetPosicion");
-//                    Peon prueba5 = new Peon(false,new Coordenada(1,1));
-//                    System.out.println("Introduzca un coordenada(x): ");
-//                    int res5 = sc.nextInt();
-//                    Coordenada c5 = new Coordenada();
-//                    c5.setX(res5);
-//                    System.out.println("Introduzca un coordenada(y): ");
-//                    int res6 = sc.nextInt();
-//                    c5.setY(res6);
-//                    prueba5.setPosicion(c5);
-//                    System.out.println("Se ha obtenido correctamente");
-//                    break;
-                case 4: 
-                    fin = 4;
+                case 2:
+                    String nomLI;
+                    String passLI;
+                    System.out.println("Ha elegido: Logear Usuario");
+                    System.out.println("Introduzca un nombre: ");
+                    nomLI = sc.next();
+                    sc.nextLine();
+                    System.out.println("Introduzca una constraseña: ");
+                    passLI = sc.next();
+                    sc.nextLine();
+                    prueba.loginUsuario(nomLI, passLI);
+                    System.out.println("Sesión iniciada satisfactoriamente");
+                    break;
+                case 3: 
+                    String nomLO;
+                    System.out.println("Ha elegido: Cerrar sesión");
+                    System.out.println("Introduzca un nombre: ");
+                    nomLO = sc.next();
+                    sc.nextLine();
+                    prueba.logoutUsuario(nomLO);
+                    System.out.println("Se ha cerrado la sesión");
+                    break;
+                case 4:
+                    String nomMP;
+                    String passMP;
+                    System.out.println("Ha elegido: Modificar contraseña");
+                    System.out.println("Introduzca un nombre: ");
+                    nomMP = sc.next();
+                    sc.nextLine();
+                    System.out.println("Introduzca una nueva constraseña: ");
+                    passMP = sc.next();
+                    sc.nextLine();
+                    prueba.modificarPassword(nomMP, passMP);
+                    System.out.println("La contraseña ha sido cambiada satisfactoriamente");
+                    break;
+                case 5:
+                    prueba.printUsuarios();
+                    break;
+                case 6: 
+                    fin = 5;
                     System.out.println("Gracias. Que tenga un buen día.");
                     break;
             }
