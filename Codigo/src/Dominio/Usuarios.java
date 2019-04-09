@@ -1,6 +1,6 @@
 package Dominio;
 import java.util.*;
-//import Dominio.Usuario;
+import Dominio.Usuario;
 
 /**
  *
@@ -11,12 +11,47 @@ public class Usuarios {
     private ArrayList<Usuario> Users = new ArrayList<Usuario>();
     
     public Usuarios() {}
-         
-    public void addUser(Usuario u) {
-        Users.add(u);
+    
+    public void registrarUsuario(String nom, String pass) {
+        if (!existUser(nom)) {
+            Usuario u = new Usuario(nom,pass,false);
+            Users.add(u);
+        }
+        else System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
     }
     
+    public void loginUsuario(String nom, String pass) {
+        Usuario u = new Usuario();
+        u = consultarUsuario(nom);
+        if (pass == u.getPassword()) u.setLog(true);
+        else System.out.println("La contraseña es incorrecta.");
+    }
     
+    public void logoutUsuario(String nom) {
+        Usuario u = new Usuario();
+        u = consultarUsuario(nom);
+        u.setLog(false);
+    }
+    
+    public void modificarPassword(String nom, String newpassword) {
+        Usuario u = new Usuario();
+        u = consultarUsuario(nom);
+        u.setPassword(newpassword);
+    }
+    
+    public Usuario consultarUsuario (String nom) {
+        Usuario u = new Usuario();
+        Boolean find = false;
+        for (int i = 0; i < Users.size() && !find; i++) {
+            u = Users.get(i);
+            String n = u.getNombre();
+            if (nom == n) {
+                find = true;
+            }
+        }
+        if (!find) throw new IllegalArgumentException("No existe un usuario con ese nombre.");
+        else return u;
+    }
     
     public Boolean existUser(String nom) {
         for (int i = 0; i < Users.size(); i++) {
@@ -25,29 +60,5 @@ public class Usuarios {
             if (nom == n) return true;
         }
         return false;
-    }
-    
-//    public void changePass(String nom, String newpassword) {
-//        if (existUser(nom) && correctPass(newpassword)) {
-//            Users.put(nom, newpassword);
-//        }
-//        else if (existUser(nom)) System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
-//        else if (!correctPass(newpassword)) System.out.println("La nueva contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
-//    }
-    
-    public void printMap() {
-//    Iterator it = Users.entrySet().iterator();
-//    while (it.hasNext()) {
-//        Map.Entry pair = (Map.Entry)it.next();
-//        System.out.println(pair.getKey() + " = " + pair.getValue());
-//        it.remove(); // avoids a ConcurrentModificationException
-//        for ( String key : Users.keySet() ) {
-//            System.out.println( key );
-//        }
-    }
-
-    
-    public Boolean isEmpty() {
-        return Users.isEmpty();
     }
 }
