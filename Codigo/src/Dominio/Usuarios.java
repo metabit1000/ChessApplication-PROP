@@ -23,7 +23,7 @@ public class Usuarios {
     public void loginUsuario(String nom, String pass) {
         Usuario u = new Usuario();
         u = consultarUsuario(nom);
-        if (pass == u.getPassword()) u.setLog(true);
+        if (pass.equals(u.getPassword())) u.setLog(true);
         else System.out.println("La contraseña es incorrecta.");
     }
     
@@ -36,7 +36,7 @@ public class Usuarios {
     public void modificarPassword(String nom, String newpassword) {
         Usuario u = new Usuario();
         u = consultarUsuario(nom);
-        u.setPassword(newpassword);
+        if (u.correctPass(newpassword)) u.setPassword(newpassword);
     }
     
     public Usuario consultarUsuario (String nom) {
@@ -45,20 +45,29 @@ public class Usuarios {
         for (int i = 0; i < Users.size() && !find; i++) {
             u = Users.get(i);
             String n = u.getNombre();
-            if (nom == n) {
+            if (nom.equals(n)) {
                 find = true;
             }
         }
-        if (!find) throw new IllegalArgumentException("No existe un usuario con ese nombre.");
-        else return u;
+        return u;
     }
     
     public Boolean existUser(String nom) {
         for (int i = 0; i < Users.size(); i++) {
             Usuario u = Users.get(i);
             String n = u.getNombre();
-            if (nom == n) return true;
+            if (nom.equals(n)) return true;
         }
         return false;
+    }
+    
+    public void printUsuarios() {
+        for (int i = 0; i < Users.size(); i++) {
+            Usuario u = Users.get(i);
+            String n = u.getNombre();
+            String p = u.getPassword();
+            System.out.println(n);
+            System.out.println(p);
+        }
     }
 }
