@@ -18,8 +18,8 @@ public class Usuario {
     private String nom;
     private String pass;
     private Boolean log;
-    private ArrayList<Problema> ProblemasSuperados = new ArrayList();
-    private ArrayList<Problema> ProblemasCreados = new ArrayList();
+    private ArrayList<Problema> ProblemasSuperados;// = new ArrayList();
+    private ArrayList<Problema> ProblemasCreados;// = new ArrayList();
     
     //Constructoras
     
@@ -27,11 +27,11 @@ public class Usuario {
     
     public Usuario(String nombre, String password, Boolean login) {
         //Comprobar que el nombre de usuario existe???????????????????????????
-        if (!correctPass(pass)) throw new IllegalArgumentException("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+        if (!correctPass(pass)) System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         nom = nombre;
         pass = password;
         log = login;
-        listasUsuario = new CjtListado();
+        //Añadir new ArrayLists de ProblemasSuperados y ProblemasCreados cuando tengamos la clase problemas
     }
     
     public String getNombre() {  
@@ -42,20 +42,16 @@ public class Usuario {
     }
     public Boolean isLog() {  
         return this.log;
+    }      
+    public void setPassword(String password) {
+        if (!correctPass(pass)) System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+        pass = password;
     }
-    public String setNombre() {  
-        return this.nom;
-    }            
-    public String modificarPassword() {
-        return this.pass;
-    }
-    public Boolean setLog() {  
-        return this.log;
+    public void setLog(Boolean login) {  
+        log = login;
     }
     
-    
-    
-    public Boolean correctPass(String pass) {
+    public Boolean correctPass(String pass) {//esta clase va aqui o en Usuarios??????????????????????
         boolean n = false;
         boolean m = false;
         boolean M = false;
