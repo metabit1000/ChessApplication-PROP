@@ -1,19 +1,19 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
+import Dominio.Tablero;
 import java.util.ArrayList;
 
 /**
  *
  * @author Àlex
  */
-public class Torre extends Ficha {
-    public Torre(boolean color,Coordenada posicion) {
-        super(color,posicion);
+public class Rook extends Ficha {
+    public Rook(boolean color,Coordenada posicion, char c) {
+        super(color,posicion, c);
     }
      @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Problema p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
         ArrayList<Coordenada> res = new ArrayList();
         Coordenada c;
         int x = posicion.getX();
