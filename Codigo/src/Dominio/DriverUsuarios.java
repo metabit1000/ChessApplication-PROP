@@ -1,5 +1,5 @@
 package Dominio;
-import Dominio.Usuarios;
+import Dominio.ConjuntoUsuarios;
 import Dominio.Usuario;
 
 import java.util.*;
@@ -18,7 +18,7 @@ public class DriverUsuarios {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        Usuarios prueba = new Usuarios();
+        ConjuntoUsuarios prueba = new ConjuntoUsuarios();
 
         while (estado != fin) {
             System.out.println("Usuarios:");
