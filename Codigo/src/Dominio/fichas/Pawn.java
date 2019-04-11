@@ -1,23 +1,23 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
+import Dominio.Tablero;
 import java.util.*;
 
 /**
  *
  * @author Àlex
  */
-public class Peon extends Ficha{
+public class Pawn extends Ficha{
     
-    public Peon() {}
+    public Pawn() {}
     
-    public Peon(boolean color,Coordenada posicion) {
-        super(color,posicion);
+    public Pawn(boolean color,Coordenada posicion, Character c) {
+        super(color,posicion, c);
     }
     
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Problema p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
         ArrayList<Coordenada> res = new ArrayList();
         Coordenada c;
         int x = posicion.getX();
