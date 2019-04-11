@@ -1,20 +1,20 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
+import Dominio.Tablero;
 import java.util.ArrayList;
 
 /**
  *
  * @author Àlex
  */
-public class Alfil extends Ficha{
-    public Alfil(boolean color,Coordenada posicion) {
-        super(color,posicion);
+public class Bishop extends Ficha{
+    public Bishop(boolean color,Coordenada posicion, char c) {
+        super(color,posicion, c);
     }
     
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Problema p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
         ArrayList<Coordenada> res = new ArrayList();
         int x = posicion.getX();
         int y = posicion.getY();
