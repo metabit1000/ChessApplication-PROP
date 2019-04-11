@@ -6,11 +6,11 @@ import Dominio.Usuario;
  *
  * @author joan
  */
-public class Usuarios {
+public class ConjuntoUsuarios {
     
     private ArrayList<Usuario> Users = new ArrayList<Usuario>();
     
-    public Usuarios() {}
+    public ConjuntoUsuarios() {}
     
     public void registrarUsuario(String nom, String pass) {
         if (!existUser(nom)) {
