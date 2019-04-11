@@ -18,8 +18,8 @@ public class Usuario {
     private String nom;
     private String pass;
     private Boolean log;
-    private ArrayList<Problema> ProblemasSuperados;// = new ArrayList();
-    private ArrayList<Problema> ProblemasCreados;// = new ArrayList();
+    private ArrayList<Tablero> ProblemasSuperados;// = new ArrayList();
+    private ArrayList<Tablero> ProblemasCreados;// = new ArrayList();
     
     //Constructoras
     
@@ -51,7 +51,7 @@ public class Usuario {
         log = login;
     }
     
-    public Boolean correctPass(String pass) {//esta clase va aqui o en Usuarios??????????????????????
+    public Boolean correctPass(String pass) {//esta clase va aqui o en ConjuntoUsuarios??????????????????????
         boolean n = false;
         boolean m = false;
         boolean M = false;
