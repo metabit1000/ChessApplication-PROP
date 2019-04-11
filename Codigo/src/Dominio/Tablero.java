@@ -8,13 +8,13 @@ import java.util.*;
  *
  * @author Àlex
  */
-public class Tablero {
+public final class Tablero {
     private static Ficha[][] board = new Ficha[8][8];
      
     public Tablero() {}
      
     public Tablero(String fen) {
-        board = fenToMatrix(fen);
+        fenToMatrix(fen);
     }
      
     public Ficha getFicha(Coordenada c) {
@@ -37,25 +37,25 @@ public class Tablero {
     }
     
     public void printTablero() {
-        System.out.println("-----------------------");
-        
-        System.out.println("| ");
-        System.out.println("-----------------------");
-        System.out.println("a b c d e f g h");
-        System.out.println("a b c d e f g h");
-        System.out.println("a b c d e f g h");
+        for (int x=0; x < board.length; x++) {
+            System.out.print("|");
+            for (int y=0; y < board[x].length; y++) {
+                System.out.print (board[x][y]);
+                if (y != board[x].length-1) System.out.print("\t");
+            }
+            System.out.println("|");
+        }
     }
      
-    public Tablero fenToMatrix(String fen) {
-        Tablero f;//C0MO LLAMO A ESTOOOOOOOOOOOOO??
+    public void fenToMatrix(String fen) {
         int j = 0;
         int i = 0;
         for (int m = 0; m < fen.length(); ++m) {
             if (fen.charAt(m) == '1' ||fen.charAt(m) == '2' ||fen.charAt(m) == '3' || fen.charAt(m) == '4' ||fen.charAt(m) == '5' ||fen.charAt(m) == '6' ||fen.charAt(m) == '7' ||fen.charAt(m) == '8') {
                 for (int n = i; n < fen.charAt(m); n++) {
-                    f[n][j] = null;
+                    board[n][j] = null;
                 }
-                i = fen.charAt(m);
+                i = fen.charAt(m) - 1; //MODIFICADO
             }
             else if (fen.charAt(m) == '/') {
                 ++j;
@@ -72,44 +72,43 @@ public class Tablero {
                 switch(fen.charAt(m)) {
                     case 'R':
                         Rook R = new Rook(true, c, fen.charAt(m));
-                        f[i][j] = R;
+                        board[i][j] = R;
                     case 'P':
                         Pawn P = new Pawn(true, c, fen.charAt(m));
-                        f[i][j] = P;
+                        board[i][j] = P;
                     case 'N':
                         Knigth N = new Knigth(true, c, fen.charAt(m));
-                        f[i][j] = N;
+                        board[i][j] = N;
                     case 'B':
                         Bishop B = new Bishop(true, c, fen.charAt(m));
-                        f[i][j] = B;
+                        board[i][j] = B;
                     case 'Q':
                         Queen Q = new Queen(true, c, fen.charAt(m));
-                        f[i][j] = Q;
+                        board[i][j] = Q;
                     case 'K':
                         King K = new King(true, c, fen.charAt(m));
-                        f[i][j] = K;
+                        board[i][j] = K;
                     case 'r':
                         Rook r = new Rook(true, c, fen.charAt(m));
-                        f[i][j] = r;
+                        board[i][j] = r;
                     case 'p':
                         Pawn p = new Pawn(true, c, fen.charAt(m));
-                        f[i][j] = p;
+                        board[i][j] = p;
                     case 'n':
                         Knigth n = new Knigth(true, c, fen.charAt(m));
-                        f[i][j] = n;
+                        board[i][j] = n;
                     case 'b':
                         Bishop b = new Bishop(true, c, fen.charAt(m));
-                        f[i][j] = b;
+                        board[i][j] = b;
                     case 'q':
                         Queen q = new Queen(true, c, fen.charAt(m));
-                        f[i][j] = q;
+                        board[i][j] = q;
                     case 'k':
                         King k = new King(true, c, fen.charAt(m));
-                        f[i][j] = k;
+                        board[i][j] = k;
                 }
             }
         }
-        return f;
     }
     //Cambio de Coordenada a Problema
     public Boolean esValid(Coordenada c) {
