@@ -27,7 +27,7 @@ public class DriverFicha {
             System.out.println("6. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
-            Peon prueba = new Peon();
+            Pawn prueba = new Pawn();
             switch (estado) {
                 case 1:
                     Boolean color;
@@ -43,7 +43,7 @@ public class DriverFicha {
                     System.out.println("Introduzca un coordenada(y): ");
                     res2 = sc.nextInt();
                     c.setY(res2);
-                    prueba = new Peon(color,c); //como ejemplo peon, por ser abstracta
+                    prueba = new Pawn(color,c); //como ejemplo peon, por ser abstracta
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
@@ -60,20 +60,20 @@ public class DriverFicha {
                     break;
                 case 3: 
                     System.out.println("Ha elegido: GetColor");
-                    Peon prueba3 = new Peon(false,new Coordenada(1,1));
+                    Pawn prueba3 = new Pawn(false,new Coordenada(1,1));
                     Boolean c3 = prueba3.getColor();
                     System.out.println("El color de una ficha cualquiera es: " + c3);
                     break;
                 case 4:
                     System.out.println("Ha elegido: SetColor");
-                    Peon prueba4 = new Peon(false,new Coordenada(1,1));
+                    Pawn prueba4 = new Pawn(false,new Coordenada(1,1));
                     System.out.println("Introduzca un color (false = negro /blanco = true) : ");
                     Boolean c4 = sc.nextBoolean();
                     System.out.println("Se ha obtenido correctamente");
                     break;
                 case 5:
                     System.out.println("Ha elegido: SetPosicion");
-                    Peon prueba5 = new Peon(false,new Coordenada(1,1));
+                    Pawn prueba5 = new Pawn(false,new Coordenada(1,1));
                     System.out.println("Introduzca un coordenada(x): ");
                     int res5 = sc.nextInt();
                     Coordenada c5 = new Coordenada();
