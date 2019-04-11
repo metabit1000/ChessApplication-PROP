@@ -1,20 +1,20 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
+import Dominio.Tablero;
 import java.util.ArrayList;
 
 /**
  *
  * @author Àlex
  */
-public class Caballo extends Ficha{
+public class Knigth extends Ficha{
     
-    public Caballo(boolean color,Coordenada posicion) {
-        super(color,posicion);
+    public Knigth(boolean color,Coordenada posicion, Character c) {
+        super(color,posicion, c);
     }
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Problema p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
         ArrayList<Coordenada> res = new ArrayList();
         int x = posicion.getX();
         int y = posicion.getY();
