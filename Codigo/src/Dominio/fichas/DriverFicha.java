@@ -1,7 +1,6 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Excepciones.*;
 import java.util.Scanner;
 
 /**
