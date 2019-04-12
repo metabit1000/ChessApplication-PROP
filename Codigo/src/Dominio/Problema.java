@@ -37,29 +37,45 @@ public final class Problema {
         
         Ficha f1 = getFicha(c1);
         setFicha(c2, f1);
+        removeFicha(c1);
         
     }
     
+    
+    public void removeFicha(Coordenada c) {
+        int x = c.getX();
+        int y = c.getY();
+        board[x][y] = null;
+    }
+    
     public void printTablero() {
-        for (int x=0; x < board.length; x++) {
+        Ficha j;
+        for (int x=0; x < 8; x++) {
             System.out.print("|");
-            for (int y=0; y < board[x].length; y++) {
-                System.out.print (board[x][y].getCfen());
-                if (y != board[x].length-1) System.out.print("\t");
+            for (int y=0; y < 8; y++) {
+                if (board[y][x] == null) System.out.print("-");
+                else System.out.print(board[y][x].getCfen());
             }
+            
             System.out.println("|");
+            if (x == 7) System.out.println("\n");
+            
         }
     }
      
     public void fenToMatrix(String fen) {
         int j = 0;
         int i = 0;
-        for (int m = 0; m < fen.length(); ++m) {
+        for (int m = 0; m < fen.length() && j < 8; ++m) { //"1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w"
             if (fen.charAt(m) == '1' ||fen.charAt(m) == '2' ||fen.charAt(m) == '3' || fen.charAt(m) == '4' ||fen.charAt(m) == '5' ||fen.charAt(m) == '6' ||fen.charAt(m) == '7' ||fen.charAt(m) == '8') {
-                for (int n = i; n < fen.charAt(m); n++) {
-                    board[n][j] = null;
+                char c = fen.charAt(m);
+                int p = c - '0';
+                for (int n = 0; n < p; n++) {
+
+                    board[i][j] = null;
+                    ++i;
+
                 }
-                i = fen.charAt(m) - 1; //MODIFICADO
             }
             else if (fen.charAt(m) == '/') {
                 ++j;
@@ -67,50 +83,62 @@ public final class Problema {
             }
             else if (fen.charAt(m) == ' ') {
                 ++m;
-                if (fen.charAt(m) == 'w' ) {}//TURNO DE LOS WHITES
-                else {}  //TURNO DE LOS BLACKS
+                System.out.println(j);
+                if (fen.charAt(m) == 'w' ) System.out.println("salen blancas");
+                else System.out.println("salen negras");
             }
             else {
-                ++i;
-                Coordenada c = new Coordenada(i,j);
                 switch(fen.charAt(m)) {
                     case 'R':
                         Rook R = new Rook(true, fen.charAt(m));
                         board[i][j] = R;
+                        break;
                     case 'P':
                         Pawn P = new Pawn(true, fen.charAt(m));
                         board[i][j] = P;
+                        break;
                     case 'N':
                         Knigth N = new Knigth(true, fen.charAt(m));
                         board[i][j] = N;
+                        break;
                     case 'B':
                         Bishop B = new Bishop(true, fen.charAt(m));
                         board[i][j] = B;
+                        break;
                     case 'Q':
                         Queen Q = new Queen(true, fen.charAt(m));
                         board[i][j] = Q;
+                        break;
                     case 'K':
                         King K = new King(true, fen.charAt(m));
                         board[i][j] = K;
+                        break;
                     case 'r':
-                        Rook r = new Rook(true, fen.charAt(m));
+                        Rook r = new Rook(false, fen.charAt(m));
                         board[i][j] = r;
+                        break;
                     case 'p':
-                        Pawn p = new Pawn(true, fen.charAt(m));
+                        Pawn p = new Pawn(false, fen.charAt(m));
                         board[i][j] = p;
+                        break;
                     case 'n':
-                        Knigth n = new Knigth(true,fen.charAt(m));
+                        Knigth n = new Knigth(false,fen.charAt(m));
                         board[i][j] = n;
+                        break;
                     case 'b':
-                        Bishop b = new Bishop(true,fen.charAt(m));
+                        Bishop b = new Bishop(false,fen.charAt(m));
                         board[i][j] = b;
+                        break;
                     case 'q':
-                        Queen q = new Queen(true,fen.charAt(m));
+                        Queen q = new Queen(false,fen.charAt(m));
                         board[i][j] = q;
+                        break;
                     case 'k':
-                        King k = new King(true,fen.charAt(m));
+                        King k = new King(false,fen.charAt(m));
                         board[i][j] = k;
+                        break;
                 }
+                ++i;
             }
         }
     }

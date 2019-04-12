@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Queen extends Ficha{
-    public Queen(boolean color,Character c) {
+    public Queen(boolean color,char c) {
         super(color,c);
     }
     

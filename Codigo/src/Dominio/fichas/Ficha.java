@@ -13,7 +13,7 @@ public abstract class Ficha {
     
     public Ficha() {}
     
-    public Ficha(Boolean color,char cfen) {
+    public Ficha(Boolean color, char cfen) {
         this.color = color;
         this.c = cfen;
     }

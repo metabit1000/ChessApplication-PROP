@@ -12,7 +12,7 @@ public class Pawn extends Ficha{
     
     public Pawn() {}
     
-    public Pawn(boolean color,Character c) {
+    public Pawn(boolean color,char c) {
         super(color,c);
     }
     

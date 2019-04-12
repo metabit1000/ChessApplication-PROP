@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class King extends Ficha{
-    public King(boolean color,Character c) {
+    public King(boolean color,char c) {
         super(color,c);
     }
     

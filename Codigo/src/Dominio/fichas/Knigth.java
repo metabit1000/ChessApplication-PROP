@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Knigth extends Ficha{
     
-    public Knigth(boolean color, Character c) {
+    public Knigth(boolean color, char c) {
         super(color,c);
     }
     @Override
