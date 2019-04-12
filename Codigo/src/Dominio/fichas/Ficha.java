@@ -9,7 +9,7 @@ import Dominio.Problema;
  */
 public abstract class Ficha {
     protected Boolean color; //white = true, black = false
-    protected Character c; //Mayus = blancas, minus = negras(para el fen)
+    protected Character c; //se usa para pintar la matriz por pantalla
     
     public Ficha() {}
     
@@ -26,9 +26,11 @@ public abstract class Ficha {
         color = c;
     }
        
-    public Character getCfen() {
+    public Character getID() {
         return c;
     }
     
+    /* Dado un problema y una coordenada cualquiera dentro del tablero del problema, 
+    devuelve todos los posibles movimientos que puede hacer una ficha según que tipo sea*/
     public abstract ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c);  
 }

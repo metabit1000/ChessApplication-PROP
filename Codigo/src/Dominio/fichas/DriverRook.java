@@ -13,9 +13,11 @@ public class DriverRook {
      public void testPosiblesMovimientos() {}
      
      public static void main (String [] args) { 
-        Rook t = new Rook(true,'T');
-        Rook t2 = new Rook(false,'t'); 
-        Problema probl = new Problema(t,t2);
+        Rook t = new Rook(true,'R');
+        Rook t2 = new Rook(false,'r'); 
+        Problema probl = new Problema();
+        probl.setFicha(new Coordenada(1,0),t);
+        probl.setFicha(new Coordenada(0,2),t2);
         ArrayList<Coordenada> res = t.posiblesMovimientos(probl, new Coordenada(1,0));
         
         for(int x=0;x<res.size();x++) {

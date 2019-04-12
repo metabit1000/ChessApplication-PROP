@@ -18,41 +18,45 @@ public class Rook extends Ficha {
         int x = c.getX();
         int y = c.getY();
         
+        if (p.esValid(c) && p.getFicha(c) != null) { //condicion para que cualquier posicion donde no haya ficha no sea valida 
         /* ARRIBA (pensando en las blancas) */
-        for (int i = 1; i <= x; ++i) {
-            c = new Coordenada(x - i, y);
-            if (p.esValid(c)) {
-                if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
-                    res.add(c);
-            } 
+            for (int i = 1; i <= x; ++i) {
+                c = new Coordenada(x - i, y);
+                if (p.esValid(c)) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
+                        res.add(c);
+                } 
+            }
+
+            /* ABAJO */
+            for (int i = 1; i <= 7; ++i) {
+                c = new Coordenada(x + i, y);
+                if (p.esValid(c)) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
+                        res.add(c);
+                } 
+            }
+
+            /* DERECHA */
+            for (int i = 1; i <= 7; ++i) {
+                c = new Coordenada(x, y + i);
+                if (p.esValid(c)) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
+                        res.add(c);
+                } 
+            }
+
+            /* IZQUIERDA */
+            for (int i = 1; i <= y; ++i) {
+                c = new Coordenada(x, y - 1);
+                if (p.esValid(c)) {
+                    if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
+                        res.add(c);
+                } 
+            }
         }
         
-        /* ABAJO */
-        for (int i = 1; i <= 7; ++i) {
-            c = new Coordenada(x + i, y);
-            if (p.esValid(c)) {
-                if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
-                    res.add(c);
-            } 
-        }
         
-        /* DERECHA */
-        for (int i = 1; i <= 7; ++i) {
-            c = new Coordenada(x, y + i);
-            if (p.esValid(c)) {
-                if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
-                    res.add(c);
-            } 
-        }
-        
-        /* IZQUIERDA */
-        for (int i = 1; i <= y; ++i) {
-            c = new Coordenada(x, y - 1);
-            if (p.esValid(c)) {
-                if (p.getFicha(c) == null || (p.getFicha(c) != null && p.getFicha(c).getColor() != color)) 
-                    res.add(c);
-            } 
-        }
         return res;
     }
 }

@@ -41,7 +41,6 @@ public final class Problema {
         
     }
     
-    
     public void removeFicha(Coordenada c) {
         int x = c.getX();
         int y = c.getY();
@@ -54,7 +53,7 @@ public final class Problema {
             System.out.print("|");
             for (int y=0; y < 8; y++) {
                 if (board[y][x] == null) System.out.print("-");
-                else System.out.print(board[y][x].getCfen());
+                else System.out.print(board[y][x].getID());
             }
             
             System.out.println("|");
