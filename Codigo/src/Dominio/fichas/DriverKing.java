@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class DriverRey {
+public class DriverKing {
     public void testConstructor() {}
     
     public void testPosiblesMovimientos() {}

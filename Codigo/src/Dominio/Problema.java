@@ -8,12 +8,12 @@ import java.util.*;
  *
  * @author Àlex
  */
-public final class Tablero {
+public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
      
-    public Tablero() {}
+    public Problema() {}
      
-    public Tablero(String fen) {
+    public Problema(String fen) {
         fenToMatrix(fen);
     }
      
@@ -25,13 +25,17 @@ public final class Tablero {
         board[c.getX()][c.getY()] = f;
     }
     
+    public Coordenada getPosicion(Ficha f) {
+        Coordenada c = new Coordenada();
+        return c;
+    }
+    
     public void moveFicha(Coordenada c1, Coordenada c2) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
         
         Ficha f1 = getFicha(c1);
-        f1.setPosicion(c2);
         setFicha(c2, f1);
         
     }
@@ -40,7 +44,7 @@ public final class Tablero {
         for (int x=0; x < board.length; x++) {
             System.out.print("|");
             for (int y=0; y < board[x].length; y++) {
-                System.out.print (board[x][y]);
+                System.out.print (board[x][y].getCfen());
                 if (y != board[x].length-1) System.out.print("\t");
             }
             System.out.println("|");
@@ -71,40 +75,40 @@ public final class Tablero {
                 Coordenada c = new Coordenada(i,j);
                 switch(fen.charAt(m)) {
                     case 'R':
-                        Rook R = new Rook(true, c, fen.charAt(m));
+                        Rook R = new Rook(true, fen.charAt(m));
                         board[i][j] = R;
                     case 'P':
-                        Pawn P = new Pawn(true, c, fen.charAt(m));
+                        Pawn P = new Pawn(true, fen.charAt(m));
                         board[i][j] = P;
                     case 'N':
-                        Knigth N = new Knigth(true, c, fen.charAt(m));
+                        Knigth N = new Knigth(true, fen.charAt(m));
                         board[i][j] = N;
                     case 'B':
-                        Bishop B = new Bishop(true, c, fen.charAt(m));
+                        Bishop B = new Bishop(true, fen.charAt(m));
                         board[i][j] = B;
                     case 'Q':
-                        Queen Q = new Queen(true, c, fen.charAt(m));
+                        Queen Q = new Queen(true, fen.charAt(m));
                         board[i][j] = Q;
                     case 'K':
-                        King K = new King(true, c, fen.charAt(m));
+                        King K = new King(true, fen.charAt(m));
                         board[i][j] = K;
                     case 'r':
-                        Rook r = new Rook(true, c, fen.charAt(m));
+                        Rook r = new Rook(true, fen.charAt(m));
                         board[i][j] = r;
                     case 'p':
-                        Pawn p = new Pawn(true, c, fen.charAt(m));
+                        Pawn p = new Pawn(true, fen.charAt(m));
                         board[i][j] = p;
                     case 'n':
-                        Knigth n = new Knigth(true, c, fen.charAt(m));
+                        Knigth n = new Knigth(true,fen.charAt(m));
                         board[i][j] = n;
                     case 'b':
-                        Bishop b = new Bishop(true, c, fen.charAt(m));
+                        Bishop b = new Bishop(true,fen.charAt(m));
                         board[i][j] = b;
                     case 'q':
-                        Queen q = new Queen(true, c, fen.charAt(m));
+                        Queen q = new Queen(true,fen.charAt(m));
                         board[i][j] = q;
                     case 'k':
-                        King k = new King(true, c, fen.charAt(m));
+                        King k = new King(true,fen.charAt(m));
                         board[i][j] = k;
                 }
             }

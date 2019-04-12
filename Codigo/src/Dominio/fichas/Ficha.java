@@ -2,28 +2,22 @@ package Dominio.fichas;
 
 import java.util.*;
 import ClasesExtra.Coordenada;
-import Dominio.Tablero;
+import Dominio.Problema;
 /**
  *
  * @author Àlex
  */
 public abstract class Ficha {
-    protected Coordenada posicion;
     protected Boolean color; //white = true, black = false
-    protected Character c; //white = true, black = false
+    protected Character c; //Mayus = blancas, minus = negras(para el fen)
     
     public Ficha() {}
     
-    public Ficha(Boolean color,Coordenada posicion, char cfen) {
+    public Ficha(Boolean color,char cfen) {
         this.color = color;
-        this.posicion = posicion;
         this.c = cfen;
     }
-    
-    public Coordenada getPosicion()  {
-        return posicion;
-    }
-    
+     
     public Boolean getColor() {
         return color;
     }
@@ -31,12 +25,10 @@ public abstract class Ficha {
     public void setColor(Boolean c) {
         color = c;
     }
-    
-    
-    
-    public void setPosicion(Coordenada p) {
-        posicion = p;
+       
+    public Character getCfen() {
+        return c;
     }
     
-    public abstract ArrayList<Coordenada> posiblesMovimientos(Tablero p);  
+    public abstract ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c);  
 }

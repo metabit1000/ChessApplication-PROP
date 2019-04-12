@@ -8,7 +8,7 @@ import java.util.*;
  *
  * @author Àlex
  */
-public class DriverCaballo {
+public class DriverKnigth {
     public void testConstructor() {}
     
     public void testPosiblesMovimientos() {}

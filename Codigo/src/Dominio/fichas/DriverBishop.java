@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class DriverAlfil {
+public class DriverBishop {
     public void testConstructor() {//que pongo?
     }
     

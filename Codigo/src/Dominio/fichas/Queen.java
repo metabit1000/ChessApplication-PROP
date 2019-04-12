@@ -1,7 +1,7 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Tablero;
+import Dominio.Problema;
 import java.util.ArrayList;
 
 /**
@@ -9,16 +9,16 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Queen extends Ficha{
-    public Queen(boolean color,Coordenada posicion, Character c) {
-        super(color,posicion, c);
+    public Queen(boolean color,Character c) {
+        super(color,c);
     }
     
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
-        Rook t = new Rook(color,posicion, c);
-        Bishop a = new Bishop(color,posicion, c);
-        ArrayList<Coordenada> res = t.posiblesMovimientos(p);
-        res.addAll(a.posiblesMovimientos(p));
+    public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada cor) {
+        Rook t = new Rook(color,c);
+        Bishop a = new Bishop(color,c);
+        ArrayList<Coordenada> res = t.posiblesMovimientos(p,cor);
+        res.addAll(a.posiblesMovimientos(p,cor));
         return res;
     }
 }

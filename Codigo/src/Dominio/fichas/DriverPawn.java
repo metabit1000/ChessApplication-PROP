@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class DriverPeon {
+public class DriverPawn {
     public void testConstructor() {
         Peon p = new Peon(true,new Coordenada(7,4));
     }

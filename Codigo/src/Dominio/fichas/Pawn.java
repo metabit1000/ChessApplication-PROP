@@ -1,7 +1,7 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Tablero;
+import Dominio.Problema;
 import java.util.*;
 
 /**
@@ -12,16 +12,15 @@ public class Pawn extends Ficha{
     
     public Pawn() {}
     
-    public Pawn(boolean color,Coordenada posicion, Character c) {
-        super(color,posicion, c);
+    public Pawn(boolean color,Character c) {
+        super(color,c);
     }
     
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c) {
         ArrayList<Coordenada> res = new ArrayList();
-        Coordenada c;
-        int x = posicion.getX();
-        int y = posicion.getY();
+        int x = c.getX();
+        int y = c.getY();
         
         if (!color) { //negras
             /* MOVERSE */

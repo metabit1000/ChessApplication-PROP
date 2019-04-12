@@ -1,7 +1,7 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Tablero;
+import Dominio.Problema;
 import java.util.ArrayList;
 
 /**
@@ -10,16 +10,15 @@ import java.util.ArrayList;
  */
 public class Knigth extends Ficha{
     
-    public Knigth(boolean color,Coordenada posicion, Character c) {
-        super(color,posicion, c);
+    public Knigth(boolean color, Character c) {
+        super(color,c);
     }
     @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c) {
         ArrayList<Coordenada> res = new ArrayList();
-        int x = posicion.getX();
-        int y = posicion.getY();
-        Coordenada c;
-        
+        int x = c.getX();
+        int y = c.getY();
+
         /* ABAJO */
         c = new Coordenada(x + 2, y + 1);
         if (p.esValid(c) && (p.getFicha(c) == null || 

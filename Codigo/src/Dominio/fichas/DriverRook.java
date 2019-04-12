@@ -8,15 +8,15 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class DriverTorre {
+public class DriverRook {
      public void testConstructor() {}
      public void testPosiblesMovimientos() {}
      
      public static void main (String [] args) { 
-        Torre t = new Torre(true,new Coordenada(0,0));
-        Torre t2 = new Torre(false,new Coordenada(1,0)); 
+        Rook t = new Rook(true,'T');
+        Rook t2 = new Rook(false,'t'); 
         Problema probl = new Problema(t,t2);
-        ArrayList<Coordenada> res = t.posiblesMovimientos(probl);
+        ArrayList<Coordenada> res = t.posiblesMovimientos(probl, new Coordenada(1,0));
         
         for(int x=0;x<res.size();x++) {
             res.get(x).printxy();

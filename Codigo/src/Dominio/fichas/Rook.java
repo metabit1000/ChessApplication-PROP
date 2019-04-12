@@ -1,7 +1,7 @@
 package Dominio.fichas;
 
 import ClasesExtra.Coordenada;
-import Dominio.Tablero;
+import Dominio.Problema;
 import java.util.ArrayList;
 
 /**
@@ -9,15 +9,14 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Rook extends Ficha {
-    public Rook(boolean color,Coordenada posicion, char c) {
-        super(color,posicion, c);
+    public Rook(boolean color,char c) {
+        super(color,c);
     }
      @Override
-    public ArrayList<Coordenada> posiblesMovimientos(Tablero p) {
+    public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c) {
         ArrayList<Coordenada> res = new ArrayList();
-        Coordenada c;
-        int x = posicion.getX();
-        int y = posicion.getY();
+        int x = c.getX();
+        int y = c.getY();
         
         /* ARRIBA (pensando en las blancas) */
         for (int i = 1; i <= x; ++i) {

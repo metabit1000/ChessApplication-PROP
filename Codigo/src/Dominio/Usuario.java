@@ -18,8 +18,8 @@ public class Usuario {
     private String nom;
     private String pass;
     private Boolean log;
-    private ArrayList<Tablero> ProblemasSuperados;// = new ArrayList();
-    private ArrayList<Tablero> ProblemasCreados;// = new ArrayList();
+    private ArrayList<Problema> ProblemasSuperados;// = new ArrayList();
+    private ArrayList<Problema> ProblemasCreados;// = new ArrayList();
     
     //Constructoras
     
