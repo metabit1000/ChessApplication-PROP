@@ -126,11 +126,21 @@ public final class Problema {
         Coordenada c1 = stringToCoord(s1);
         Coordenada c2 = stringToCoord(s2);
         Ficha f1 = getFicha(c1);
-        if (f1.posiblesMovimientos(board,c2)) {
-            setFicha(c2, f1);
-            removeFicha(c1);
+        if (f1 != null) {
+            ArrayList<Coordenada> pM = new ArrayList<>(); 
+            pM = f1.posiblesMovimientos(this,c1);
+            Boolean find = false;
+            for (int i = 0; i < pM.size() && !find; i++) {
+                Coordenada x = pM.get(i);
+                if (x.getX() == c2.getX() && x.getY() == c2.getY()) find = true;
+            }
+            if (find) {
+                setFicha(c2, f1);
+                removeFicha(c1);
+            }
+            else System.out.println("La coordenada de destino no es correcta.");
         }
-       // else System.out.println("Error");
+        else System.out.println("En la coordenada de origen no hay ficha.");
     }
     
     public void removeFicha(Coordenada c) {
