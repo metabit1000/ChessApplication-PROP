@@ -42,35 +42,35 @@ public final class Problema {
                 switch (s.charAt(i)) {
                     case 'a':
                         o = 0;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'b':
                         o = 1;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'c':
                         o = 2;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'd':
                         o = 3;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'e':
                         o = 4;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'f':
                         o = 5;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'g':
                         o = 6;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                     case 'h':
                         o = 7;
-                        c.setX(o);
+                        c.setY(o);
                         break;
                 }
             }
@@ -82,40 +82,49 @@ public final class Problema {
                 switch (h) {
                     case 1:
                         u = 8;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 2:
                         u = 7;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 3:
                         u = 6;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 4:
                         u = 5;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 5:
                         u = 4;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 6:
                         u = 3;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 7:
                         u = 2;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     case 8:
                         u = 1;
-                        c.setY(u);
+                        c.setX(u);
                         break;
                     
                 }
             }
+            
         }
+        Ficha q = getFicha(c);
+        if (q != null) {
+            Character y = q.getID();
+            System.out.println(y);
+        }
+        
+        System.out.println(c.getX());
+            System.out.println(c.getY());
         return c;
     }
     
