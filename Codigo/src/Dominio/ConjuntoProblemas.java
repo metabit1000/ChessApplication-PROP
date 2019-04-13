@@ -29,30 +29,20 @@ public class ConjuntoProblemas {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B b";
+                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w";
                     prueba.fenToMatrix(fen);
                     prueba.printTablero();
                     break;
                 case 2:
-                    Integer x1;
-                    Integer y1;
-                    Integer x2;
-                    Integer y2;
+                    String c1;
+                    String c2;
                     System.out.println("Ha elegido: Mover ficha");
-                    System.out.println("Introduzca un Coordenada x1: ");
-                    x1 = sc.nextInt();
+                    System.out.println("Introduzca un Coordenada de origen: ");
+                    c1 = sc.next();
                     sc.nextLine();
-                    System.out.println("Introduzca un Coordenada y1: ");
-                    y1 = sc.nextInt();
+                    System.out.println("Introduzca un Coordenada de destino: ");
+                    c2 = sc.next();
                     sc.nextLine();
-                    System.out.println("Introduzca un Coordenada x2: ");
-                    x2 = sc.nextInt();
-                    sc.nextLine();
-                    System.out.println("Introduzca un Coordenada y2: ");
-                    y2 = sc.nextInt();
-                    sc.nextLine();
-                    Coordenada c1 = new Coordenada(x1,y1);
-                    Coordenada c2 = new Coordenada(x2,y2);
                     prueba.moveFicha(c1,c2);
                     prueba.printTablero();
                     break;
