@@ -14,9 +14,9 @@ public class DriverFicha {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Pawn prueba = new Pawn();
-        String color;
+        char color;
         String res;
-        Boolean col;
+
         while (estado != fin) {
             System.out.println("Menú:");
             System.out.println("1. Constructor");
@@ -29,11 +29,15 @@ public class DriverFicha {
             switch (estado) {
                 case 1:
                     System.out.println("Ha elegido: Constructor");
-                    System.out.println("Introduzca un color (negro /blanco): ");
-                    color = sc.next();
+                    System.out.println("Introduzca un color (n /b): ");
+                    color = sc.next().charAt(0);
                     sc.nextLine();
-                    col = color != "negro";
-                    prueba = new Pawn(col,'p'); //da igual el valor
+                    if (color == 'n') prueba = new Pawn(false,'p');
+                    else if (color == 'b') prueba = new Pawn(true,'P'); 
+                    else {
+                        System.out.println("Error, vuelva a intentarlo");
+                        break;
+                    }
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
@@ -47,18 +51,22 @@ public class DriverFicha {
                     break;
                 case 3: 
                     System.out.println("Ha elegido: SetColor");
-                    System.out.println("Introduzca un color(negro /blanco: ");
-                    color = sc.next();
+                    System.out.println("Introduzca un color(n /b: ");
+                    color = sc.next().charAt(0);
                     sc.nextLine();
-                    col = color != "negro";
-                    prueba.setColor(col);
+                    if (color == 'n') prueba.setColor(false);
+                    else if (color == 'b') prueba.setColor(true); 
+                    else {
+                        System.out.println("Error, vuelva a intentarlo");
+                        break;
+                    }
                     System.out.println("Introducido correctamente, introduzca 2 para comprobarlo");
                     break;
                 case 4:
                     System.out.println("Ha elegido: getID");
                     try {
                         char res2 = prueba.getID();
-                        System.out.println("El ID aleatorio de la ficha es: "+res2);
+                        System.out.println("El ID de la ficha es: "+res2);
                     } catch (NullPointerException e) {
                         System.out.println("Debe crear antes la ficha, vuelva a intentarlo");
                     }

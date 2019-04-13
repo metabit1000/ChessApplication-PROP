@@ -18,8 +18,7 @@ public class DriverKnight {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Knight prueba = new Knight();
-        String color;
-        Boolean col;
+        char color;
         Problema p = new Problema();
         while (estado != fin) {
             System.out.println("Menú:");
@@ -32,11 +31,14 @@ public class DriverKnight {
                 case 1:
                     System.out.println("Ha elegido: Constructor");
                     System.out.println("Introduzca un color (negro /blanco): ");
-                    color = sc.next();
+                    color = sc.next().charAt(0);
                     sc.nextLine();
-                    col = color != "negro";
-                    if (col == false) prueba = new Knight(col,'n'); 
-                    else prueba = new Knight(col,'N'); 
+                    if (color == 'n') prueba = new Knight(false,'n');
+                    else if (color == 'b') prueba = new Knight(true,'N'); 
+                    else {
+                        System.out.println("Error, vuelva a intentarlo");
+                        break;
+                    } 
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:

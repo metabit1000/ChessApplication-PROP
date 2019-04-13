@@ -9,6 +9,9 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Rook extends Ficha {
+    
+    public Rook() {}
+    
     public Rook(boolean color,char c) {
         super(color,c);
     }

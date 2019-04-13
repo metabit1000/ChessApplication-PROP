@@ -16,8 +16,7 @@ public class DriverQueen {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Queen prueba = new Queen();
-        String color;
-        Boolean col;
+        char color;
         Problema p = new Problema();
         while (estado != fin) {
             System.out.println("Menú:");
@@ -30,11 +29,14 @@ public class DriverQueen {
                 case 1:
                     System.out.println("Ha elegido: Constructor");
                     System.out.println("Introduzca un color (negro /blanco): ");
-                    color = sc.next();
+                    color = sc.next().charAt(0);
                     sc.nextLine();
-                    col = color != "negro";
-                    if (col == false) prueba = new Queen(col,'q'); 
-                    else prueba = new Queen(col,'Q'); 
+                    if (color == 'n') prueba = new Queen(false,'q');
+                    else if (color == 'b') prueba = new Queen(true,'Q'); 
+                    else {
+                        System.out.println("Error, vuelva a intentarlo");
+                        break;
+                    } 
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:

@@ -16,8 +16,7 @@ public class DriverPawn {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Pawn prueba = new Pawn();
-        String color;
-        Boolean col;
+        char color;
         Problema p = new Problema();
         while (estado != fin) {
             System.out.println("Menú:");
@@ -30,11 +29,14 @@ public class DriverPawn {
                 case 1:
                     System.out.println("Ha elegido: Constructor");
                     System.out.println("Introduzca un color (negro /blanco): ");
-                    color = sc.next();
+                    color = sc.next().charAt(0);
                     sc.nextLine();
-                    col = color != "negro";
-                    if (col == false) prueba = new Pawn(col,'p'); 
-                    else prueba = new Pawn(col,'P'); 
+                    if (color == 'n') prueba = new Pawn(false,'p');
+                    else if (color == 'b') prueba = new Pawn(true,'P'); 
+                    else {
+                        System.out.println("Error, vuelva a intentarlo");
+                        break;
+                    }
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:

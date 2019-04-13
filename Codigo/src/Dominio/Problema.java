@@ -156,8 +156,8 @@ public final class Problema {
         for (int x=0; x < 8; x++) {
             System.out.print(count + " |");
             for (int y=0; y < 8; y++) {
-                if (board[y][x] == null) System.out.print(" ·");
-                else System.out.print(" " + board[y][x].getID());
+                if (board[x][y] == null) System.out.print(" ·");
+                else System.out.print(" " + board[x][y].getID());
             }
             System.out.println(" |");
             
@@ -170,22 +170,22 @@ public final class Problema {
     }
      
     public void fenToMatrix(String fen) {
-        int j = 0;
-        int i = 0;
-        for (int m = 0; m < fen.length() && j < 8; ++m) { //"1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w"
+        int j = 0; //y
+        int i = 0; //x
+        for (int m = 0; m < fen.length() && i < 8; ++m) { //"1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w"
             if (fen.charAt(m) == '1' ||fen.charAt(m) == '2' ||fen.charAt(m) == '3' || fen.charAt(m) == '4' ||fen.charAt(m) == '5' ||fen.charAt(m) == '6' ||fen.charAt(m) == '7' ||fen.charAt(m) == '8') {
                 char c = fen.charAt(m);
                 int p = c - '0';
                 for (int n = 0; n < p; n++) {
 
                     board[i][j] = null;
-                    ++i;
+                    ++j;
 
                 }
             }
             else if (fen.charAt(m) == '/') {
-                ++j;
-                i = 0;           
+                ++i;
+                j = 0;           
             }
             else if (fen.charAt(m) == ' ') {
                 ++m;
@@ -249,7 +249,7 @@ public final class Problema {
                         board[i][j] = k;
                         break;
                 }
-                ++i;
+                ++j;
             }
         }
     }
