@@ -10,7 +10,8 @@ import java.util.*;
  */
 public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
-     
+    private Boolean turnoInicial; //blanco = true, negro = false
+    
     public Problema() {}
      
     public Problema(String fen) {
@@ -125,10 +126,10 @@ public final class Problema {
         Coordenada c1 = stringToCoord(s1);
         Coordenada c2 = stringToCoord(s2);
         Ficha f1 = getFicha(c1);
-        //if (f1.posiblesMovimientos(board,c2) ) {
+        if (f1.posiblesMovimientos(board,c2)) {
             setFicha(c2, f1);
             removeFicha(c1);
-        //}
+        }
        // else System.out.println("Error");
     }
     
@@ -178,8 +179,14 @@ public final class Problema {
             }
             else if (fen.charAt(m) == ' ') {
                 ++m;
-                if (fen.charAt(m) == 'w' ) System.out.println("salen blancas");
-                else System.out.println("salen negras");
+                if (fen.charAt(m) == 'w' ) {
+                    System.out.println("salen blancas");
+                    turnoInicial = true;
+                }
+                else {
+                    System.out.println("salen negras");
+                    turnoInicial = false;
+                }
             }
             else {
                 switch(fen.charAt(m)) {

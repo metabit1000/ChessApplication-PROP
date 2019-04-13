@@ -8,11 +8,7 @@ import java.util.*;
  * @author joan
  */
 public class ConjuntoProblemas {
-//    public void testCofnstructor() {}
-//    public void testGetCoordenada() {}
-//    public void testGetColor() {}
-//    public void testsetPosicion() {}
-//    testPosiblesMovimientos en cada subclase
+
     public static void main (String [] args) throws Exception {
         int estado = 0;
         int fin = 1000; //por poner algo...
@@ -36,6 +32,7 @@ public class ConjuntoProblemas {
                 case 2:
                     String c1;
                     String c2;
+                    Coordenada c;
                     System.out.println("Ha elegido: Mover ficha");
                     System.out.println("Introduzca un Coordenada de origen: ");
                     c1 = sc.next();
