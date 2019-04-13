@@ -18,6 +18,7 @@ public class DriverBishop {
         Bishop prueba = new Bishop();
         String color;
         Boolean col;
+        Problema p = new Problema();
         while (estado != fin) {
             System.out.println("Menú:");
             System.out.println("1. Constructor");
@@ -32,12 +33,13 @@ public class DriverBishop {
                     color = sc.next();
                     sc.nextLine();
                     col = color != "negro";
-                    prueba = new Bishop(col,'b'); //valor aleatorio
+                    if (col == false) prueba = new Bishop(col,'b'); 
+                    else prueba = new Bishop(col,'B'); 
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
                     Integer x,y;
-                    Problema p = new Problema();
+                    p = new Problema();
                     System.out.println("Ha elegido: PosiblesMovimientos");
                     try {
                         if (prueba.getColor()) System.out.println("Se usará la ficha anterior"); //hago que salte excepcion!

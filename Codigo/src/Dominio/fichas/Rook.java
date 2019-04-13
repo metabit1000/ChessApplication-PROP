@@ -18,7 +18,7 @@ public class Rook extends Ficha {
         int x = c.getX();
         int y = c.getY();
         
-        if (p.esValid(c) && p.getFicha(c) != null) { //condicion para que cualquier posicion donde no haya ficha no sea valida 
+        if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).getColor() == color) { //para comprobar que es una ficha "buena"
         /* ARRIBA (pensando en las blancas) */
             for (int i = 1; i <= x; ++i) {
                 c = new Coordenada(x - i, y);

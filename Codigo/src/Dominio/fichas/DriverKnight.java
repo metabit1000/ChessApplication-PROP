@@ -1,21 +1,23 @@
 package Dominio.fichas;
 
-import ClasesExtra.Coordenada;
 import Dominio.Problema;
-import java.util.ArrayList;
-import java.util.Scanner;
+import ClasesExtra.Coordenada;
+import java.util.*;
 
 /**
  *
  * @author Àlex
  */
-public class DriverKing {
+public class DriverKnight {
+    public void testConstructor() {}
+    
+    public void testPosiblesMovimientos() {}
     
     public static void main (String [] args) { 
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        King prueba = new King();
+        Knight prueba = new Knight();
         String color;
         Boolean col;
         Problema p = new Problema();
@@ -33,8 +35,8 @@ public class DriverKing {
                     color = sc.next();
                     sc.nextLine();
                     col = color != "negro";
-                    if (col == false) prueba = new King(col,'k'); 
-                    else prueba = new King(col,'K'); 
+                    if (col == false) prueba = new Knight(col,'n'); 
+                    else prueba = new Knight(col,'N'); 
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
@@ -42,7 +44,7 @@ public class DriverKing {
                     p = new Problema();
                     System.out.println("Ha elegido: PosiblesMovimientos");
                     try {
-                        if (prueba.getColor()) System.out.println("Se usará la ficha anterior"); //hago que salte excepcion!
+                        if (prueba.getColor()) System.out.println("Puede usar cualquier coordenada del tablero"); //hago que salte excepcion!
                     } catch (NullPointerException e) {
                         System.out.println("Debe crear antes la ficha que quiere introducir en el tablero");
                         break; //para que no siga el codigo
@@ -54,6 +56,7 @@ public class DriverKing {
                     Coordenada c = new Coordenada(x,y);
                     try {
                         p.setFicha(c,prueba);
+                        p.printTablero();
                     } catch (ArrayIndexOutOfBoundsException e2){
                         System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
                     }
@@ -68,5 +71,6 @@ public class DriverKing {
                     break;
             }
         }
+
     }
 }

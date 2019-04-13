@@ -21,7 +21,7 @@ public class Bishop extends Ficha{
         int x = c.getX();
         int y = c.getY();
         
-        if (p.esValid(c) && p.getFicha(c) != null) {
+        if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).getColor() == color) {
             /* ARRIBA/IZQUIERDA (pensando en las blancas) */
             for (int i = 1; i <= 7; ++i) {
                 c = new Coordenada(x - i,y - i);
