@@ -209,7 +209,7 @@ public final class Problema {
                         board[i][j] = P;
                         break;
                     case 'N':
-                        Knigth N = new Knigth(true, fen.charAt(m));
+                        Knight N = new Knight(true, fen.charAt(m));
                         board[i][j] = N;
                         break;
                     case 'B':
@@ -233,7 +233,7 @@ public final class Problema {
                         board[i][j] = p;
                         break;
                     case 'n':
-                        Knigth n = new Knigth(false,fen.charAt(m));
+                        Knight n = new Knight(false,fen.charAt(m));
                         board[i][j] = n;
                         break;
                     case 'b':
