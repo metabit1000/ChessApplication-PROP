@@ -37,9 +37,7 @@ public class Ranking {
     }
     public void setActualizar(String nombre,double tiempo ){
         //comprobar que esté dentro de Rank
-        Iterator iterator=rank.keySet().iterator();
-        Object key = iterator.next();
-        double n = rank.get(key);
+      double n = rank.get(nombre);
         if (tiempo < n ){
             eliminarUsuario(nombre);
             setelemento(nombre,tiempo);  
