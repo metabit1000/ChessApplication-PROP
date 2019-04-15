@@ -21,7 +21,7 @@ public class King extends Ficha{
         int x = c.getX();
         int y = c.getY();
         
-        if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).getColor() == color) {
+        if (p.esValid(c) && p.getFicha(c) != null) {
             for (int i = -1; i <= 1; i++) { 
                 for (int j = -1; j <= 1; j++) {
                     c = new Coordenada(x + i,y + j);

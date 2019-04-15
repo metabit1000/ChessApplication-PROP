@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author joan
  */
-public class Usuario {
+public class Usuario extends Jugador {
     
     //Atributos
     

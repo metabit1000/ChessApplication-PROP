@@ -21,7 +21,7 @@ public class Knight extends Ficha{
         int x = c.getX();
         int y = c.getY();
 
-        if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).getColor() == color) {
+        if (p.esValid(c) && p.getFicha(c) != null) {
             /* ABAJO */
             c = new Coordenada(x + 2, y + 1);
             if (p.esValid(c) && (p.getFicha(c) == null || 

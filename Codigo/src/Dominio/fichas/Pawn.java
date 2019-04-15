@@ -22,12 +22,12 @@ public class Pawn extends Ficha{
         int x = c.getX();
         int y = c.getY();
         
-        if (p.esValid(c) && p.getFicha(c) != null && p.getFicha(c).getColor() == color) {
+        if (p.esValid(c) && p.getFicha(c) != null) {
             if (!color) { //negras
                 /* MOVERSE */
                 c = new Coordenada(x + 1, y);
                 if (p.esValid(c) && p.getFicha(c) == null) res.add(c); //avanzar para delante 
-                if (x == 1 && p.esValid(c)) {  //avanzar casillas para delante; solo en el inicio es posible!
+                if (x == 1 && p.esValid(c) && p.getFicha(c) == null) {  //avanzar casillas para delante; solo en el inicio es posible!
                     c = new Coordenada(x + 2 ,y);
                     if (p.esValid(c) && p.getFicha(c) == null) res.add(c);
                 }
@@ -42,7 +42,7 @@ public class Pawn extends Ficha{
                 /* MOVERSE */
                 c = new Coordenada(x - 1, y);
                 if (p.esValid(c) && p.getFicha(c) == null) res.add(c); //avanzar para delante 
-                if (x == 6 && p.esValid(c)) {  //avanzar casillas para delante; solo en el inicio es posible!
+                if (x == 6 && p.esValid(c) && p.getFicha(c) == null) {  //avanzar casillas para delante; solo en el inicio es posible!
                     c = new Coordenada(x - 2 ,y);
                     if (p.esValid(c) && p.getFicha(c) == null) res.add(c);
                 }

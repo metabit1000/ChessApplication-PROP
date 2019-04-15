@@ -21,7 +21,7 @@ public class Queen extends Ficha{
         Rook t = new Rook(color,c);
         Bishop a = new Bishop(color,c);
         ArrayList<Coordenada> res = new ArrayList();
-        if (p.esValid(cor) && p.getFicha(cor) != null && p.getFicha(cor).getColor() == color) {
+        if (p.esValid(cor) && p.getFicha(cor) != null) {
             res = t.posiblesMovimientos(p,cor);
             res.addAll(a.posiblesMovimientos(p,cor));
         }

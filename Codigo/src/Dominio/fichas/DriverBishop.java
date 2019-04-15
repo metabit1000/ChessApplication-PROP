@@ -55,15 +55,27 @@ public class DriverBishop {
                     System.out.println("Ficha creada correctamente");
                     break;
                 case 2:
+                    Bishop bueno = new Bishop();
+                    ArrayList<Coordenada> res = new ArrayList();
                     System.out.println("Ha elegido: PosiblesMovimientos");
                     System.out.println("Introduzca una coordenada del tablero(x): ");
                     x = sc.nextInt();
                     System.out.println("Introduzca una coordenada del tablero(y): ");
                     y = sc.nextInt();
                     c2 = new Coordenada(x,y);
-                    Bishop bueno = (Bishop)p.getFicha(c2);
+                    try {
+                        bueno = (Bishop)p.getFicha(c2);
+                    } catch (ArrayIndexOutOfBoundsException e3) {
+                        System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
+                        break;
+                    }
                     p.printTablero();
-                    ArrayList<Coordenada> res = bueno.posiblesMovimientos(p,c2);
+                    try {
+                        res = bueno.posiblesMovimientos(p,c2);
+                    } catch (NullPointerException e4) {
+                        System.out.println("No hay ficha en esa posicion del tablero, vuelva a intentarlo");
+                        break;
+                    }
                     for(int i=0;i<res.size();i++) {
                         res.get(i).printxy();
                     }
