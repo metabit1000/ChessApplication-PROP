@@ -20,6 +20,7 @@ public class DriverQueen {
         Coordenada c1 = new Coordenada();
         Coordenada c2 = new Coordenada();
         Queen prueba = new Queen();
+        String coordenada;
         while (estado != fin) {
             System.out.println("Menú:");
             System.out.println("1. Constructor");
@@ -40,11 +41,11 @@ public class DriverQueen {
                         System.out.println("Error, vuelva a intentarlo");
                         break;
                     }
-                    System.out.println("Introduzca una coordenada del tablero(x): ");
-                    x = sc.nextInt();
-                    System.out.println("Introduzca una coordenada del tablero(y): ");
-                    y = sc.nextInt();
-                    c1 = new Coordenada(x,y);
+                    p.printTablero();
+                    System.out.println("Introduzca coordenada, ex e4: ");
+                    coordenada = sc.next();
+                    sc.nextLine();
+                    c1.stringToCoord(coordenada);
                     try {
                         p.setFicha(c1,prueba);
                         p.printTablero();
@@ -58,11 +59,10 @@ public class DriverQueen {
                     Queen bueno = new Queen();
                     ArrayList<Coordenada> res = new ArrayList();
                     System.out.println("Ha elegido: PosiblesMovimientos");
-                    System.out.println("Introduzca una coordenada del tablero(x): ");
-                    x = sc.nextInt();
-                    System.out.println("Introduzca una coordenada del tablero(y): ");
-                    y = sc.nextInt();
-                    c2 = new Coordenada(x,y);
+                    System.out.println("Introduzca coordenada, ex e4: ");
+                    coordenada = sc.next();
+                    sc.nextLine();
+                    c2.stringToCoord(coordenada);
                     try {
                         bueno = (Queen)p.getFicha(c2);
                     } catch (ArrayIndexOutOfBoundsException e3) {

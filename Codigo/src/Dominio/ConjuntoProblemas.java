@@ -19,6 +19,8 @@ public class ConjuntoProblemas {
             System.out.println("Usuarios:");
             System.out.println("1. Registrar Usuario");
             System.out.println("2. Mover ficha");
+            System.out.println("3. MatrixToFen");
+            System.out.println("4. Exit");
             
             //faltaria logout y hacer booleano en usuarios que diga si un usuario está logeado
             System.out.println("Introduzca un número: ");
@@ -47,27 +49,11 @@ public class ConjuntoProblemas {
                     String lol = prueba.matrixToFen();
                     prueba.fenToMatrix(lol);
                     prueba.printTablero();
+                    break;   
+                case 4: 
+                    fin = 4;
+                    System.out.println("Gracias. Que tenga un buen día.");
                     break;
-//                case 4:
-//                    String nomMP;
-//                    String passMP;
-//                    System.out.println("Ha elegido: Modificar contraseña");
-//                    System.out.println("Introduzca un nombre: ");
-//                    nomMP = sc.next();
-//                    sc.nextLine();
-//                    System.out.println("Introduzca una nueva constraseña: ");
-//                    passMP = sc.next();
-//                    sc.nextLine();
-//                    prueba.modificarPassword(nomMP, passMP);
-//                    System.out.println("La contraseña ha sido cambiada satisfactoriamente");
-//                    break;
-//                case 5:
-//                    prueba.printUsuarios();
-//                    break;
-//                case 6: 
-//                    fin = 5;
-//                    System.out.println("Gracias. Que tenga un buen día.");
-//                    break;
             }
         }
     }

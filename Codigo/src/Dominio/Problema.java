@@ -31,99 +31,14 @@ public final class Problema {
         return c;
     }
     
-    public Coordenada stringToCoord(String s) {
-        Coordenada c = new Coordenada();
-        Boolean first = true;
-        if (s.length() != 2) System.out.println("No es una coordenada válida.");
-        for (int i = 0; i < s.length(); i++) {
-            int o;
-            if (first) {
-                first = false;
-                switch (s.charAt(i)) {
-                    case 'a':
-                        o = 0;
-                        c.setY(o);
-                        break;
-                    case 'b':
-                        o = 1;
-                        c.setY(o);
-                        break;
-                    case 'c':
-                        o = 2;
-                        c.setY(o);
-                        break;
-                    case 'd':
-                        o = 3;
-                        c.setY(o);
-                        break;
-                    case 'e':
-                        o = 4;
-                        c.setY(o);
-                        break;
-                    case 'f':
-                        o = 5;
-                        c.setY(o);
-                        break;
-                    case 'g':
-                        o = 6;
-                        c.setY(o);
-                        break;
-                    case 'h':
-                        o = 7;
-                        c.setY(o);
-                        break;
-                }
-            }
-            else {
-                char j = s.charAt(i);
-                int p = j - '0';
-                int h = p+1;
-                int u;
-                switch (h) {
-                    case 1:
-                        u = 8;
-                        c.setX(u);
-                        break;
-                    case 2:
-                        u = 7;
-                        c.setX(u);
-                        break;
-                    case 3:
-                        u = 6;
-                        c.setX(u);
-                        break;
-                    case 4:
-                        u = 5;
-                        c.setX(u);
-                        break;
-                    case 5:
-                        u = 4;
-                        c.setX(u);
-                        break;
-                    case 6:
-                        u = 3;
-                        c.setX(u);
-                        break;
-                    case 7:
-                        u = 2;
-                        c.setX(u);
-                        break;
-                    case 8:
-                        u = 1;
-                        c.setX(u);
-                        break;
-                }
-            }
-        }
-        return c;
-    }
-    
     public void moveFicha(String s1, String s2) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
-        Coordenada c1 = stringToCoord(s1);
-        Coordenada c2 = stringToCoord(s2);
+        Coordenada c1 = new Coordenada();
+        c1.stringToCoord(s1);
+        Coordenada c2 = new Coordenada();
+        c2.stringToCoord(s2);
         Ficha f1 = getFicha(c1);
         if (f1 != null) {
             ArrayList<Coordenada> pM = new ArrayList<>(); 
