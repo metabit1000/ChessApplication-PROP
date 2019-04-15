@@ -32,7 +32,7 @@ public class Coordenada {
     }
     
     public void printxy() {  //para pruebas de fichas
-        System.out.println(x+" "+y);
+        System.out.println(coordToString());
     }
     
     public void stringToCoord(String s) {
@@ -118,5 +118,62 @@ public class Coordenada {
                 }
             }
         }
+    }
+    
+    public String coordToString() {
+        String s = "";
+        switch(this.getY()) {
+            case 0:
+                s += "8";
+                break;
+            case 1:
+                s += "b";
+                break;
+            case 2:
+                s += "c";
+                break;
+            case 3:
+                s += "d";
+                break;
+            case 4:
+                s += "e";
+                break;
+            case 5:
+                s += "f";
+                break;
+            case 6:
+                s += "g";
+                break;
+            case 7:
+                s += "h";
+                break;
+        }
+        switch(this.getX()) {
+            case 0:
+                s += "8";
+                break;
+            case 1:
+                s += "7";
+                break;
+            case 2:
+                s += "6";
+                break;
+            case 3:
+                s += "5";
+                break;
+            case 4:
+                s += "4";
+                break;
+            case 5:
+                s += "3";
+                break;
+            case 6:
+                s += "2";
+                break;
+            case 7:
+                s += "1";
+                break;
+        }
+        return s;
     }
 }
