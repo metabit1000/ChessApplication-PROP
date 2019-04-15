@@ -25,7 +25,7 @@ public class ConjuntoProblemas {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w";
+                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B b";
                     prueba.fenToMatrix(fen);
                     prueba.printTablero();
                     break;
@@ -43,15 +43,11 @@ public class ConjuntoProblemas {
                     prueba.moveFicha(c1,c2);
                     prueba.printTablero();
                     break;
-//                case 3: 
-//                    String nomLO;
-//                    System.out.println("Ha elegido: Cerrar sesión");
-//                    System.out.println("Introduzca un nombre: ");
-//                    nomLO = sc.next();
-//                    sc.nextLine();
-//                    prueba.logoutUsuario(nomLO);
-//                    System.out.println("Se ha cerrado la sesión");
-//                    break;
+                case 3: 
+                    String lol = prueba.matrixToFen();
+                    prueba.fenToMatrix(lol);
+                    prueba.printTablero();
+                    break;
 //                case 4:
 //                    String nomMP;
 //                    String passMP;
@@ -76,3 +72,4 @@ public class ConjuntoProblemas {
         }
     }
 }
+
