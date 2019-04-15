@@ -112,19 +112,9 @@ public final class Problema {
                         u = 1;
                         c.setX(u);
                         break;
-                    
                 }
             }
-            
         }
-        Ficha q = getFicha(c);
-        if (q != null) {
-            Character y = q.getID();
-            System.out.println(y);
-        }
-        
-        System.out.println(c.getX());
-            System.out.println(c.getY());
         return c;
     }
     
@@ -176,6 +166,35 @@ public final class Problema {
             }
             --count;
         }
+    }
+    
+    public String matrixToFen(/*Ficha[][] f*/) {
+        Ficha[][] f = board;
+        String fen = "";
+        for (int i = 0; i < 8; i++) {
+            int count = 0;
+            for (int j = 0; j < 8; j++) {
+                if (f[i][j] == null && j == 7){
+                    ++count;
+                    String num = Integer.toString(count);
+                    if (count > 0) fen += num;
+                    count = 0;
+                }
+                else if (f[i][j] == null) ++count;
+                
+                else {
+                    String num = Integer.toString(count);
+                    if (count > 0) fen += num;
+                    fen += f[i][j].getID();
+                    count = 0;
+                }
+            }
+            fen += "/";
+        }
+        fen += " ";
+        if (turnoInicial) fen += "w";
+        else fen += "b";
+        return fen;
     }
      
     public void fenToMatrix(String fen) {
@@ -268,5 +287,4 @@ public final class Problema {
         int y = c.getY();
         return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
     }    
-    
 }
