@@ -17,7 +17,7 @@ public class DriverUsuarios {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        ConjuntoUsuarios prueba = new ConjuntoUsuarios();
+        CtrlUsuarios prueba = new CtrlUsuarios();
 
         while (estado != fin) {
             System.out.println("Usuarios:");

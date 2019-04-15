@@ -18,8 +18,8 @@ public class Usuario extends Jugador {
     private String nom;
     private String pass;
     private Boolean log;
-    private ArrayList<Problema> ProblemasSuperados;// = new ArrayList();
-    private ArrayList<Problema> ProblemasCreados;// = new ArrayList();
+    private ArrayList<String> ProblemasSuperados;
+    private ArrayList<String> ProblemasCreados;
     
     //Constructoras
     

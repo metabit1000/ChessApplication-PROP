@@ -6,11 +6,11 @@ import Dominio.Usuario;
  *
  * @author joan
  */
-public class ConjuntoUsuarios {
+public class CtrlUsuarios {
     
-    private ArrayList<Usuario> Users = new ArrayList<Usuario>();
+    private ArrayList<Usuario> Users = new ArrayList<Usuario>(); //hacer un map con key = nombre//valor = password
     
-    public ConjuntoUsuarios() {}
+    public CtrlUsuarios() {}
     
     public void registrarUsuario(String nom, String pass) {
         if (!existUser(nom)) {
