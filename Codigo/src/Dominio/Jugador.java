@@ -11,10 +11,9 @@ import java.util.*;
  * @author Jordi
  */
 public class Jugador {
+    Boolean color; //negro = false, blanco = true
     
-    public Jugador() {}
-    
-    
-   
-     
+    public Jugador(Boolean color) {
+        this.color = color;
+    }    
 }
