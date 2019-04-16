@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Jordi
  */
-public class CtrlPartida {
+public class DriverPartida {
     
     public static void main (String [] args) throws Exception {
         int estado = 0;
@@ -24,8 +24,8 @@ public class CtrlPartida {
         Jugador jugador2 =new Jugador();
         while (estado != fin) {
             System.out.println("Usuarios:");
+                        System.out.println("1. Tablero");
             System.out.println("2. Mover ficha");
-            System.out.println("3. MatrixToFen");
             System.out.println("4. Exit");
             
             //faltaria logout y hacer booleano en usuarios que diga si un usuario está logeado
