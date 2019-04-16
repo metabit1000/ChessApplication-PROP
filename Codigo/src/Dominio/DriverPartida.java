@@ -20,8 +20,7 @@ public class DriverPartida {
         Scanner sc = new Scanner(System.in);
         Partida prueba = new Partida();
         Problema prueba2=new Problema();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 =new Jugador();
+   
         while (estado != fin) {
             System.out.println("Usuarios:");
                         System.out.println("1. Tablero");
@@ -48,8 +47,9 @@ public class DriverPartida {
                      System.out.println("Jugador1 introduzca color :true->Blancas , false->Negras");
                        b1=sc.nextBoolean();
                        sc.nextLine();
-                       jugador1.color=b1;
-                       jugador2.color = !b1;
+                       Jugador jugador1= new Jugador(b1);
+                       Jugador jugador2= new Jugador(!b1);
+
                        System.out.println("Blancas mayúsculas ");
                        System.out.println("Negras minúsculas ");
                        while (contador > 0) {
@@ -64,7 +64,7 @@ public class DriverPartida {
                     c.stringToCoord(c1);
                     Integer x =c.getX();
                     Integer y =c.getY();
-                    boolean col=prueba2.board[x][y].getColor();
+                    boolean col=prueba2.color(x, y);
                     if(col == jugador1.color){
                     prueba.moveFicha(c1,c2);
                     prueba2.printTablero();
@@ -81,7 +81,7 @@ public class DriverPartida {
                     c.stringToCoord(c1);
                      Integer x1 =c.getX();
                     Integer y1 =c.getY();
-                    boolean col1=prueba2.board[x1][y1].getColor();
+                    boolean col1=prueba2.color(x1, y1);
                     if(col1 == jugador2.color){
                     prueba.moveFicha(c1,c2);
                     prueba2.printTablero();
