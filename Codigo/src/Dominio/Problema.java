@@ -6,7 +6,7 @@ import Dominio.fichas.*;
 import java.util.*;
 /**
  *
- * @author Àlex
+ * @author Joan
  */
 public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
@@ -24,6 +24,14 @@ public final class Problema {
     
     public void setFicha(Coordenada c, Ficha f) {
         board[c.getX()][c.getY()] = f;
+    }
+    
+    public void setTurno(Boolean f) {
+        turnoInicial = f;
+    }
+    
+    public Boolean getTurno() {
+        return turnoInicial;
     }
     
     public Coordenada getPosicion(Ficha f) {
