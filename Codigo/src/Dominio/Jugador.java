@@ -1,4 +1,4 @@
-package Dominio;
+ackage Dominio;
 import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +13,11 @@ import java.util.*;
 public class Jugador {
     Boolean color; //negro = false, blanco = true
     
-    public Jugador(Boolean color) {
-        this.color = color;
-    }    
+    public Jugador() { }    
+    
+    
+    public Jugador(boolean color ) {
+        this.color = color ;
+    }  
+   
 }
