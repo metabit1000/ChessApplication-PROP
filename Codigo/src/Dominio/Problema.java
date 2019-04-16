@@ -14,10 +14,19 @@ public final class Problema {
     
     public Problema() {}
      
+    
+      
+
     public Problema(String fen) {
         fenToMatrix(fen);
     }
-     
+    
+    public void putnull (Integer x , Integer y  ) {
+            board[x][y] = null;
+        }
+       public boolean color (Integer x , Integer y  ) {
+           return  board[x][y].getColor();
+        }
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }
@@ -39,37 +48,7 @@ public final class Problema {
         return c;
     }
     
-    public void moveFicha(String s1, String s2) {
-        //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
-        //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
-        //en c2, nos la comemos
-        Coordenada c1 = new Coordenada();
-        c1.stringToCoord(s1);
-        Coordenada c2 = new Coordenada();
-        c2.stringToCoord(s2);
-        Ficha f1 = getFicha(c1);
-        if (f1 != null) {
-            ArrayList<Coordenada> pM = new ArrayList<>(); 
-            pM = f1.posiblesMovimientos(this,c1);
-            Boolean find = false;
-            for (int i = 0; i < pM.size() && !find; i++) {
-                Coordenada x = pM.get(i);
-                if (x.getX() == c2.getX() && x.getY() == c2.getY()) find = true;
-            }
-            if (find) {
-                setFicha(c2, f1);
-                removeFicha(c1);
-            }
-            else System.out.println("La coordenada de destino no es correcta.");
-        }
-        else System.out.println("En la coordenada de origen no hay ficha.");
-    }
     
-    public void removeFicha(Coordenada c) {
-        int x = c.getX();
-        int y = c.getY();
-        board[x][y] = null;
-    }
     
     public void printTablero() {
         Ficha j;
@@ -210,4 +189,5 @@ public final class Problema {
         int y = c.getY();
         return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
     }    
+   
 }
