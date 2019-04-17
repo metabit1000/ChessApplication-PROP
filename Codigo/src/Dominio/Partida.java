@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author 
  */
 public class Partida {
-    private Problema p = new Problema();
+    private Problema p;
     private double time ;
     private boolean turno  ;
     
@@ -41,7 +41,7 @@ public class Partida {
             if (find) {
                 p.setFicha(c2, f1);
                 removeFicha(c1);
-                         boolean mat = mate(color) ;
+                boolean mat = mate(color) ;
                if (mat) System.out.println("mate");
             }
             
@@ -53,35 +53,36 @@ public class Partida {
     public void removeFicha(Coordenada c) {
         int x = c.getX();
         int y = c.getY();
-        p.putnull(x,y);
+        p.setFicha(c,null);
     }
-  public Boolean mate (Boolean color ){
-    Boolean  mate = false;
-    Ficha f1;
+    
+    public Boolean mate (Boolean color ){
+        Boolean  mate = false;
+        Ficha f1;
         for (int i = 0; i < 8 ; i++) {
-              for (int j = 0; j < 8; j++) {
-                  Coordenada z = new Coordenada();
-                  z.setX(i);
-                  z.setY(j);
-                   if (p.getFicha(z)!= null && color == p.color(i, j)) {
-                       f1 = p.getFicha(z);
-                       ArrayList<Coordenada> pM1 = new ArrayList<>(); 
-                       pM1 = f1.posiblesMovimientos(p,z);
-                        for (int w = 0; w < pM1.size() ; w++) {
-                              Coordenada x = pM1.get(w);
-                              if (p.getFicha(x) != null ){
-                                  char f = p.getFicha(x).getID();
-                                  if (f == 'k' &&  color ) mate = true ; 
-                                  if (f == 'K' && !color) mate =true;
-                              }
-                             
-        }         
-      }
-     
-   }
-
-  }
-                return mate ; 
-
+            for (int j = 0; j < 8; j++) {
+                Coordenada z = new Coordenada();
+                z.setX(i);
+                z.setY(j);
+                if (p.getFicha(z)!= null && color == p.getFicha(new Coordenada(i,j)).getColor()) {
+                    f1 = p.getFicha(z);
+                    ArrayList<Coordenada> pM1 = new ArrayList<>(); 
+                    pM1 = f1.posiblesMovimientos(p,z);
+                    for (int w = 0; w < pM1.size() ; w++) {
+                        Coordenada x = pM1.get(w);
+                        if (p.getFicha(x) != null ){
+                            char f = p.getFicha(x).getID();
+                            if (f == 'k' &&  color ) mate = true ; 
+                            if (f == 'K' && !color) mate =true;
+                        }                       
+                    }         
+                }
+            }
+        }
+        return mate ; 
+    }
 }
-}
+
+    
+  
+
