@@ -11,22 +11,15 @@ import java.util.*;
 public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
     private Boolean turnoInicial; //blanco = true, negro = false
+    private Coordenada lastMoveC1;
+    private Coordenada lastMoveC2;
     
     public Problema() {}
      
-    
-      
-
     public Problema(String fen) {
         fenToMatrix(fen);
     }
     
-    public void putnull (Integer x , Integer y  ) {
-            board[x][y] = null;
-        }
-       public boolean color (Integer x , Integer y  ) {
-           return  board[x][y].getColor();
-        }
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }
@@ -47,8 +40,6 @@ public final class Problema {
         Coordenada c = new Coordenada();
         return c;
     }
-    
-    
     
     public void printTablero() {
         Ficha j;
@@ -183,6 +174,47 @@ public final class Problema {
             }
         }
     }
+    
+    public void moveFicha(String s1, String s2) {
+        //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
+        //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
+        //en c2, nos la comemos
+        Coordenada c1 = new Coordenada();
+        c1.stringToCoord(s1);
+        Coordenada c2 = new Coordenada();
+        c2.stringToCoord(s2);
+        Ficha f1 =getFicha(c1);
+        if (f1 != null) {
+            ArrayList<Coordenada> pM = new ArrayList<>(); 
+            pM = f1.posiblesMovimientos(this,c1);
+            Boolean find = false;
+            for (int i = 0; i < pM.size() && !find; i++) {
+                Coordenada x = pM.get(i);
+                if (x.getX() == c2.getX() && x.getY() == c2.getY()) find = true;
+            }
+            if (find) {
+                setFicha(c2, f1);
+                lastMoveC1 = c1;
+                lastMoveC2 = c2;
+                removeFicha(c1);
+            }
+            else System.out.println("La coordenada de destino no es correcta.");
+        }
+        else System.out.println("En la coordenada de origen no hay ficha.");
+    }
+    
+    public void removeFicha(Coordenada c) {
+        int x = c.getX();
+        int y = c.getY();
+        board[x][y] = null;
+    }
+    
+    public void undoMove() {
+        Ficha f = getFicha(lastMoveC2);
+        setFicha(lastMoveC1,f);
+        removeFicha(lastMoveC2);
+    }
+    
     //Cambio de Coordenada a Problema
     public Boolean esValid(Coordenada c) {
         int x = c.getX();
@@ -190,4 +222,29 @@ public final class Problema {
         return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
     }    
    
+     public Boolean mate(Boolean color){
+        Boolean  mate = false;
+        Ficha f1;
+        for (int i = 0; i < 8 ; i++) {
+            for (int j = 0; j < 8; j++) {
+                Coordenada z = new Coordenada();
+                z.setX(i);
+                z.setY(j);
+                if (getFicha(z)!= null && color == board[i][j].getColor()) {
+                    f1 = getFicha(z);
+                    ArrayList<Coordenada> pM1 = new ArrayList<>(); 
+                    pM1 = f1.posiblesMovimientos(this,z);
+                    for (int w = 0; w < pM1.size() ; w++) {
+                        Coordenada x = pM1.get(w);
+                        if (getFicha(x) != null ){
+                            char f = getFicha(x).getID();
+                            if (f == 'k' &&  color) mate = true ; 
+                            if (f == 'K' && !color) mate = true;
+                        }                       
+                    }         
+                }
+            }
+        }
+        return mate ; 
+    }
 }
