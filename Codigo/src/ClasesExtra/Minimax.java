@@ -90,14 +90,16 @@ public class Minimax {
         int util = winVal;
         int curr;
         Coordenada currMove;
-        ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
-        for (int i = 0; i < moves.size(); i++) {
-            currMove = moves.get(i);
-            p.moveFicha(c.coordToString(),currMove.coordToString());
-            curr = maxValue(p,c,currDepth);
-            p.undoMove();
-            if (curr < util) 
-                util = curr;
+        if (p.getFicha(c) != null) {
+            ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
+            for (int i = 0; i < moves.size(); i++) {
+                currMove = moves.get(i);
+                p.moveFicha(c.coordToString(),currMove.coordToString());
+                curr = maxValue(p,c,currDepth);
+                p.undoMove();
+                if (curr < util) 
+                    util = curr;
+            }
         }
         return util;
     }
@@ -241,11 +243,11 @@ public class Minimax {
             }
             
             if (bestUtil == winVal) {
-                return moves.get(bestUtil);
+                return moves.get(bestId);
             }
                 
             if ((IDdepth+1) == maxDepth) {
-                return moves.get(bestUtil);
+                return moves.get(bestId);
             }
         }
         }
