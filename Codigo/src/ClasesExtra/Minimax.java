@@ -36,7 +36,7 @@ public class Minimax {
           -40,-20,  0,  5,  5,  0,-20,-40,
           -50,-40,-30,-30,-30,-30,-40,-50 };
 
-      protected static int [] bishopPrecedence = {
+      protected static int [] bishopTable = {
           -20,-10,-10,-10,-10,-10,-10,-20,
           -10,  0,  0,  0,  0,  0,  0,-10,
           -10,  0,  5, 10, 10,  5,  0,-10,
@@ -82,57 +82,65 @@ public class Minimax {
     }
     
     public int minValue(Problema p,Coordenada c, int currDepth) {
-        if (p.getFicha(c) != null) {
-            if (cutOffTest(p,c,currDepth)) {
-                return utility(p,c,currDepth);
-            }
+                    //System.out.println(currDepth);
+
+        if (cutOffTest(p,c,currDepth)) {
+            System.out.println("cutofftest");
+            return utility(p,c,currDepth);
         }
+        //System.out.println("no llega aqui");
         int util = winVal;
         int curr;
         Coordenada currMove;
-        if (p.getFicha(c) != null) {
-            ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
+        ArrayList<Coordenada> moves =new ArrayList();
+        moves = p.getFicha(c).posiblesMovimientos(p,c);
             for (int i = 0; i < moves.size(); i++) {
                 currMove = moves.get(i);
                 p.moveFicha(c.coordToString(),currMove.coordToString());
-                curr = maxValue(p,c,currDepth);
-                p.undoMove();
+                p.printTablero();
+                curr = maxValue(p,currMove,currDepth);
+                p.undoFicha(currMove.coordToString(),c.coordToString());
                 if (curr < util) 
                     util = curr;
             }
-        }
         return util;
     }
     
     public int maxValue(Problema p,Coordenada c, int currDepth) {
-        if (p.getFicha(c) != null) {
+     
             if (cutOffTest(p,c,currDepth)) {
                 return utility(p,c,currDepth);
             }
-        }
+        
         
         int util = loseVal;
         int curr;
         Coordenada currMove;
-        ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
+        ArrayList<Coordenada> moves =new ArrayList();
+        moves = p.getFicha(c).posiblesMovimientos(p,c);
         for (int i = 0; i < moves.size(); i++) {
             currMove = moves.get(i);
             p.moveFicha(c.coordToString(),currMove.coordToString());
-            curr = minValue(p,c,currDepth+1);
-            p.undoMove();
+            p.printTablero();
+            curr = minValue(p,currMove,currDepth+1);
+            p.undoFicha(currMove.coordToString(),c.coordToString());
             if (curr > util) 
                 util = curr;
         }
         return util;
     }
     
-    public Boolean cutOffTest(Problema p,Coordenada c, int currDepth) {
-        return (p.mate(p.getFicha(c).getColor()) || currDepth > this.tempDepth);
+    public boolean cutOffTest(Problema p,Coordenada c, int currDepth) {
+        boolean haceMate = p.mate(p.getFicha(c).getColor());
+        boolean porDepth = currDepth > this.tempDepth;
+        boolean ENTRA = haceMate || porDepth;
+        if (ENTRA) return true;
+        else return false;
     }
     
     public int utility(Problema p, Coordenada c, int d) {        
         if (p.mate(p.getFicha(c).getColor())) {
-            if (p.getFicha(c).getColor() == this.player) return loseVal;
+            if (p.getFicha(c).getColor() != this.player) return loseVal;
             else {
                 if (d <= this.tempDepth) {
                     this.tempDepth = d;
@@ -141,7 +149,11 @@ public class Minimax {
                 else return loseVal;
             } 
         }
-        else return getMaterials(p,c);  
+        else {
+            int materials = getMaterials(p,c);
+
+                return materials;
+                }  
     }
     
     public int getMaterials(Problema p, Coordenada c) {
@@ -167,93 +179,93 @@ public class Minimax {
                     switch(currStone) {
                         case 'P':
                             ++numP;
-                            val += 100;
+                            val += 100 + (pawnTable[8 * (7 - i) + j]);
                             break;
                         case 'p':
                             ++nump;
-                            val -= 100;
+                            val -= 100 + (pawnTable[8 + (8 * i) - (1 + j)]);
                             break;
                         case 'R':
                             ++numR;
-                            val += 500;
+                            val += 500 + (rookTable[8 * (7 - i) + j]);
                             break;
                         case 'r':
                             ++numr;
-                            val -= 500;
+                            val -= 500 + (rookTable[8 + (8 * i) - (1 + j)]);
                             break;
                         case 'B':
                             ++numB;
-                            val += 330;
+                            val += 330 + (bishopTable[8 * (7 - i) + j]);
                             break;
                         case 'b':
                             ++numb;
-                            val -= 330;
+                            val -= 330 + (bishopTable[8 + (8 * i) - (1 + j)]);
                             break;
                         case 'N':
                             ++numN;
-                            val += 320;
+                            val += 320  + (knightTable[8 * (7 - i) + j]);
                             break;
                         case 'n':
                             ++numn;
-                            val -= 320;
+                            val -= 320 + (knightTable[8 + (8 * i) - (1 + j)]);
                             break;
                         case 'Q':
                             ++numQ;
-                            val += 900;
+                            val += 900 + (queenTable[8 * (7 - i) + j]);
                             break;
                         case 'q':
                             ++numq;
-                            val -= 900;
+                            val -= 900 + (queenTable[8 + (8 * i) - (1 + j)]);
                             break;
                         case 'K':
                             ++numK;
-                            val += 20000;
+                            val += 20000 + (kingTable[8 * (7 - i) + j]);
                             break;
                         case 'k':
                             ++numk;
-                            val -= 20000;
+                            val -= 20000 + (kingTable[8 + (8 * i) - (1 + j)]);;
                             break;
                     }
-            } 
-        }
+                }
+                
+            }
         }
         if (p.getFicha(c).getColor()) return val;
-        else return -val;
+        else return -1 * val;
     }
     
     public Coordenada decisionMinimax(Problema p,Coordenada c) {
         if (p.getFicha(c) != null) {
-        for (IDdepth = 1; IDdepth < maxDepth; IDdepth++) {
-            ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
-            int currUtil = loseVal;
-            int bestUtil = loseVal;
-            int bestId = 0;
-            Coordenada currMove;
-            
-            this.tempDepth = this.IDdepth;
-            for (int i = 0; i < moves.size(); ++i) {
-                currMove = moves.get(i);
-                p.moveFicha(c.coordToString(),currMove.coordToString());
-                currUtil = minValue(p,c,1);
-                p.undoMove();
-                if (bestUtil <= currUtil) {
-                    bestUtil = currUtil;
-                    bestId = i;
+            for (IDdepth = 1; IDdepth < maxDepth; IDdepth++) {
+                ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
+                int currUtil = loseVal;
+                int bestUtil = loseVal;
+                int bestId = 0;
+                Coordenada currMove;
+                this.tempDepth = this.IDdepth;
+                for (int i = 0; i < moves.size(); ++i) {
+                    
+                    currMove = moves.get(i);
+                    p.moveFicha(c.coordToString(),currMove.coordToString());
+                    currUtil = minValue(p,currMove,1);
+                    System.out.println(currUtil);
+                    p.undoFicha(currMove.coordToString(),c.coordToString());
+                    if (bestUtil <= currUtil) {
+                        bestUtil = currUtil;
+                        bestId = i;
+                    }
+                }
+
+                if (bestUtil == winVal) {
+                    return moves.get(bestId);
+                }
+
+                if ((IDdepth+1) == maxDepth) {
+                    return moves.get(bestId);
                 }
             }
-            
-            if (bestUtil == winVal) {
-                return moves.get(bestId);
-            }
-                
-            if ((IDdepth+1) == maxDepth) {
-                return moves.get(bestId);
-            }
         }
-        }
-        Coordenada fail = new Coordenada();
-        fail.setX(-1);
-        fail.setY(-1);
+        Coordenada fail = new Coordenada(-1,-1);
         return fail;
     }
 }
