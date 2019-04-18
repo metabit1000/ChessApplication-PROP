@@ -200,13 +200,30 @@ public final class Problema {
             }
             else System.out.println("La coordenada de destino no es correcta.");
         }
-        else System.out.println("En la coordenada de origen no hay ficha.");
+        else {
+            System.out.println(lastMoveC1.getX() + " " + lastMoveC1.getY());
+            System.out.println(lastMoveC2.getX() + " " + lastMoveC2.getY());
+            System.out.println("En la coordenada de origen no hay ficha.");
+        }
     }
     
     public void removeFicha(Coordenada c) {
         int x = c.getX();
         int y = c.getY();
         board[x][y] = null;
+    }
+    
+    public void undoFicha(String s1, String s2) {
+        //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
+        //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
+        //en c2, nos la comemos
+        Coordenada c1 = new Coordenada();
+        c1.stringToCoord(s1);
+        Coordenada c2 = new Coordenada();
+        c2.stringToCoord(s2);
+        Ficha f1 = getFicha(c1);
+        setFicha(c2, f1);
+        removeFicha(c1);
     }
     
     public void undoMove() {
