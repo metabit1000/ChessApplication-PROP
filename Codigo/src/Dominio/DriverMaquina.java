@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 
 import ClasesExtra.Coordenada;
@@ -21,7 +16,7 @@ public class DriverMaquina {
         char color;
         Problema p = new Problema();
         String coordenada;
-        Maquina m = new Maquina(true,1);
+        Maquina m = new Maquina();
         while (estado != fin) {
             System.out.println("Menú:");
             System.out.println("1. Constructor");
@@ -31,16 +26,22 @@ public class DriverMaquina {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B b";
+                    String fen = "8/PPPR3/PPk5/Pp5r/K5qR/8/4PQ2/1B5B w";
                     p.fenToMatrix(fen);
                     p.printTablero();
                     break;
                 case 2:
                     Coordenada c = new Coordenada();
-                    String g = "a1";
+                    String g = "b1";
                     c.stringToCoord(g);
+                    m = new Maquina(p.getFicha(c).getColor(),1);
                     Coordenada h = m.getNextMove(p,c);
-                    System.out.println(h.getX() +" "+h.getY());
+                    System.out.println(h.getX() + " " + h.getY());
+                    String j = h.coordToString();
+                    System.out.println(j);
+                    Coordenada k = new Coordenada();
+                    k.stringToCoord(j);
+                    System.out.println(h.getX() + " " + h.getY());
                     break;
                 case 3: 
                     estado = 1000;
