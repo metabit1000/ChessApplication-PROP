@@ -124,7 +124,7 @@ public class Coordenada {
         String s = "";
         switch(this.getY()) {
             case 0:
-                s += "8";
+                s += "a";
                 break;
             case 1:
                 s += "b";
