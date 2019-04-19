@@ -7,27 +7,24 @@ import java.util.*;
  *
  * @author joan
  */
-public class DriverUsuarios {
-//    public void testCofnstructor() {}
-//    public void testGetCoordenada() {}
-//    public void testGetColor() {}
-//    public void testsetPosicion() {}
-//    testPosiblesMovimientos en cada subclase
+public class DriverCtrlUsuarios {
     public static void main (String [] args) throws Exception {
         int estado = 0;
-        int fin = 1000; //por poner algo...
+        int fin = 1000;
         Scanner sc = new Scanner(System.in);
         CtrlUsuarios prueba = new CtrlUsuarios();
 
         while (estado != fin) {
             System.out.println("Usuarios:");
             System.out.println("1. Registrar Usuario");
-            System.out.println("2. Login");
-            System.out.println("3. Cerrar sesión");
-            System.out.println("4. Modificar contraseña");
-            System.out.println("5. Print Usuarios");
-            System.out.println("6. Salir");
-            //faltaria logout y hacer booleano en usuarios que diga si un usuario está logeado
+            System.out.println("2. Login usuario");
+            System.out.println("3. Login guest");
+            System.out.println("4. Usuario logeado");
+            System.out.println("5. Guest logeado");
+            System.out.println("6. Cerrar sesión usuario");
+            System.out.println("7. Cerrar sesión guest");
+            System.out.println("8. Usuarios registrados");
+            System.out.println("9. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
@@ -54,35 +51,39 @@ public class DriverUsuarios {
                     passLI = sc.next();
                     sc.nextLine();
                     prueba.loginUsuario(nomLI, passLI);
-                    System.out.println("Sesión iniciada satisfactoriamente");
                     break;
-                case 3: 
-                    String nomLO;
-                    System.out.println("Ha elegido: Cerrar sesión");
+                case 3:
+                    String nomLG;
+                    String passLG;
+                    System.out.println("Ha elegido: Logear Usuario");
                     System.out.println("Introduzca un nombre: ");
-                    nomLO = sc.next();
+                    nomLG = sc.next();
                     sc.nextLine();
-                    prueba.logoutUsuario(nomLO);
-                    System.out.println("Se ha cerrado la sesión");
+                    System.out.println("Introduzca una constraseña: ");
+                    passLG = sc.next();
+                    sc.nextLine();
+                    prueba.loginGuest(nomLG, passLG);
                     break;
+                    
                 case 4:
-                    String nomMP;
-                    String passMP;
-                    System.out.println("Ha elegido: Modificar contraseña");
-                    System.out.println("Introduzca un nombre: ");
-                    nomMP = sc.next();
-                    sc.nextLine();
-                    System.out.println("Introduzca una nueva constraseña: ");
-                    passMP = sc.next();
-                    sc.nextLine();
-                    prueba.modificarPassword(nomMP, passMP);
-                    System.out.println("La contraseña ha sido cambiada satisfactoriamente");
+                    System.out.println("El usuario logeado: " + prueba.getUserLogged() +".");
                     break;
                 case 5:
-                    prueba.printUsuarios();
+                    System.out.println("El guest logeado: " + prueba.getGuest() +".");
                     break;
                 case 6: 
-                    fin = 5;
+                    prueba.logoutUsuario();
+                    System.out.println("Se ha cerrado la sesión del usuario");
+                    break;
+                case 7:
+                    prueba.logoutGuest();
+                    System.out.println("Se ha cerrado la sesión del guest");
+                    break;
+                case 8: 
+                    prueba.printUsuarios();
+                    break;
+                case 9:
+                    fin = 9;
                     System.out.println("Gracias. Que tenga un buen día.");
                     break;
             }
