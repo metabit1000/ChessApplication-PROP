@@ -135,7 +135,9 @@ public class Minimax {
     }
     
     public Coordenada decisionMinimax(Problema p,Coordenada c, int depth, boolean col) {
-  	int bestMove = -9999;
+  	int bestMove;
+        if (col) bestMove = 9999;
+        else bestMove = -9999;
         int IDbestMoveFound = 0;
         Coordenada currMove;
         ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
@@ -145,11 +147,19 @@ public class Minimax {
             p.moveFicha(c.coordToString(),currMove.coordToString());
             int val = minimax(p,currMove,depth-1,!col);
             p.undoFicha(currMove.coordToString(),c.coordToString(),o);
-            if(val >= bestMove) {
-                bestMove = val;
-                IDbestMoveFound = i;
-            } 
-            System.out.println(bestMove);
+            if (col) {
+                if(val <= bestMove) {
+                    bestMove = val;
+                    IDbestMoveFound = i;
+                } 
+            } else {
+                if(val >= bestMove) {
+                    bestMove = val;
+                    IDbestMoveFound = i;
+                } 
+            }
+            System.out.println("VAL: "+val);
+            System.out.println("bestMove: "+bestMove);
         }
         return moves.get(IDbestMoveFound);
     }
