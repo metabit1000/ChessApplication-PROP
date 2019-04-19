@@ -31,16 +31,8 @@ public class DriverMaquina {
                     p.printTablero();
                     break;
                 case 2:
-                    Coordenada c = new Coordenada();
-                    String g = "b1";
-                    c.stringToCoord(g);
-                    m = new Maquina(p.getFicha(c).getColor(),1);
-                    Coordenada h = m.getNextMove(p,c);
-                    System.out.println(h.getX() + " " + h.getY());
-                    String j = h.coordToString();
-                    System.out.println(j);
-                    Coordenada k = new Coordenada();
-                    k.stringToCoord(j);
+                    m = new Maquina(true,1); //juega con blancas
+                    Coordenada h = m.getNextMove(p); //prueba del minimax
                     System.out.println(h.getX() + " " + h.getY());
                     break;
                 case 3: 
