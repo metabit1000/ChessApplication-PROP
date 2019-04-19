@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class MinimaxV2 {   
+    private Partida partida ; 
+    
     int [][] pawnEvalWhite =
     {
         {0,  0,  0,  0,  0,  0,  0,  0},
@@ -91,6 +93,10 @@ public class MinimaxV2 {
 
     public MinimaxV2() {}
     
+    public MinimaxV2(Partida p) {
+        this.partida = p;   
+    }
+
     public int [][] reverseArray(int [][] array) {
         int xn = 8;
         int yn = 8;
@@ -134,13 +140,14 @@ public class MinimaxV2 {
         }
     }
     
-    public Coordenada decisionMinimax(Problema p,Coordenada c, int depth, boolean col) {
+    public Coordenada decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove = 9999;
         else bestMove = -9999;
         int IDbestMoveFound = 0;
         Coordenada currMove;
-        ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
+        
+        ArrayList<Coordenada> moves = posiciones(p,col);
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
             Ficha o = p.getFicha(currMove);
@@ -209,5 +216,17 @@ public class MinimaxV2 {
                 return (-1)*900 + (kingEvalBlack[y][x]);
         } 
         return -1;
+    }
+    
+    public ArrayList<Coordenada> posiciones(Problema p,boolean color) {
+        ArrayList<Coordenada> moves = new ArrayList();
+        for (int i = 0; i< 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (p.getFicha(new Coordenada(i,j))!= null && p.getFicha(new Coordenada(i,j)).getColor() == color){
+                    moves.add(new Coordenada(i,j));
+                }
+            }
+        }
+        return moves;
     }
 }
