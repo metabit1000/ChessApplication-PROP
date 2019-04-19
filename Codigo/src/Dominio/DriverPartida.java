@@ -48,9 +48,10 @@ public class DriverPartida {
 
                        System.out.println("Blancas mayúsculas ");
                        System.out.println("Negras minúsculas ");
-                       while (contador>0 ) {
-                           if(jugador1.getcolor() == true )  System.out.println("Juega el jugador1 Blancas " );
-                           else System.out.println("Juega el jugador1 Negras " );
+                       boolean mate = false;
+                       while (!mate ) {
+                           if(b1 == true )  System.out.println("Juega el jugador Blancas " );
+                           else System.out.println("Juega el jugador Negras " );
                     System.out.println("Introduzca un Coordenada de origen: " );
                     c1 = sc.next();
                     sc.nextLine();
@@ -59,21 +60,13 @@ public class DriverPartida {
                     sc.nextLine();
                     prueba.setcosas(c1, c2);
                     prueba.jugar(b1);
-                      if(jugador2.color ==true )  System.out.println("Juega el jugador2  Blancas" );
-                           else System.out.println("Juega el jugador2 Negras  " );
-                     System.out.println("Introduzca un Coordenada de origen: ");
-                    c1 = sc.next();
-                    sc.nextLine();
-                    System.out.println("Introduzca un Coordenada de destino: ");
-                    c2 = sc.next();
-                    sc.nextLine();
-                    c.stringToCoord(c1);
-                       prueba.setcosas(c1, c2);
-                    prueba.jugar(!b1);
-                      --contador ; 
+                    if(prueba.checkmate(b1)) {
+                        mate=true;
+                    }                    
+                    b1 = !b1;
                        }
                     break;
-                 
+                  
                 case 4: 
                     fin = 4;
                     System.out.println("Gracias. Que tenga un buen día.");
