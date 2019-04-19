@@ -11,6 +11,10 @@ public class Usuario extends Jugador {
 
     public Usuario() {}
     
+    public Usuario(boolean color) {
+        super(color);
+    }
+    
     public Usuario(String nombre, String password) {
         nom = nombre;
         pass = password;
