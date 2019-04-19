@@ -12,15 +12,51 @@ public class Partida {
     private Problema p = new Problema();
     private double time ;
     private boolean turno  ;
+    private Jugador jugador1;
+    private Jugador jugador2;
+    private Maquina m;
+     private Problema p1 ;
+     private String cord1;
+     private String cord2;
     
     public Partida() {
         turno = false ; 
     }
+      public Partida(Jugador j1 , Jugador j2 , Problema  p ) {
+        turno = false ; 
+        jugador1=j1;
+        jugador2=j2;
+        p1=p;
+        
+    }
+      public Partida(Jugador j1 , Maquina m , Problema  p ) {
+        turno = false ; 
+        jugador1=j1;
+        this.m = m ; 
+        p1=p;
+        
+    }
+      
     
+  public void jugar(Boolean color ){
+      Coordenada c = new Coordenada();
+      c.stringToCoord(cord1);
+      if(color == p.getFicha(c).getColor()){
+          moveFicha(cord1,cord2);
+          p.printTablero();
+          
+      }
+        else  System.out.println("Incorrecto "); 
+  }
+  
+
+  
+  public void setcosas(String c1 , String c2){
+      cord1=c1;
+      cord2=c2;
+      
+  }
     
-     public void setEstado(){
-         turno =!turno ; 
-     }
     
 //    public void moveFicha(String s1, String s2) {
 //        //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
