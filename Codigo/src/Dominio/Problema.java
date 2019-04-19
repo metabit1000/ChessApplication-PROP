@@ -10,6 +10,7 @@ import java.util.*;
 public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
     private Boolean turnoInicial; //blanco = true, negro = false
+    private int numMovimientos;
     
     public Problema() {}
      
@@ -36,6 +37,14 @@ public final class Problema {
     public Coordenada getPosicion(Ficha f) {
         Coordenada c = new Coordenada();
         return c;
+    }
+    
+    public int getNumMovimientos() {
+        return numMovimientos;
+    }
+    
+    public void setNumMovimientos(int num) {
+        numMovimientos = num;
     }
     
     public void printTablero() {
@@ -264,3 +273,4 @@ public final class Problema {
         return (x >= 0 && y <= 7 && x <= 7 && y >= 0);
     }    
 }
+    
