@@ -8,7 +8,8 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class Minimax {    
+public class MinimaxV2 {   
+    private Partida p1 ; 
     int [][] pawnEvalWhite =
     {
         {0,  0,  0,  0,  0,  0,  0,  0},
@@ -89,7 +90,12 @@ public class Minimax {
 
     int [][] kingEvalBlack = reverseArray(kingEvalWhite);
 
-    public Minimax() {}
+    public MinimaxV2() {}
+    public MinimaxV2(Partida p  ) {
+        this.p1=p;
+        
+    }
+
     
     public int [][] reverseArray(int [][] array) {
         int xn = 8;
@@ -106,7 +112,8 @@ public class Minimax {
         return res;
     }
     
-    public int minimax(Problema p, Coordenada c,int depth, boolean col) {
+    public int minimax( Coordenada c,int depth, boolean col) {
+        Problema p = p1.getProblema();
         if (depth == 0) return -evaluationBoard(p);
         ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
         Coordenada currMove;
@@ -115,9 +122,9 @@ public class Minimax {
             for (int i = 0; i < moves.size(); ++i) { 
                 currMove = moves.get(i);
                 Ficha o = p.getFicha(currMove);
-                p.moveFicha(c.coordToString(),currMove.coordToString());
-                bestMove = Math.max(bestMove, minimax(p,currMove,depth-1,!col));
-                p.undoFicha(currMove.coordToString(),c.coordToString(),o);   
+                p1.moveFicha(c.coordToString(),currMove.coordToString());
+                bestMove = Math.max(bestMove, minimax(currMove,depth-1,!col));
+                p1.undoFicha(currMove.coordToString(),c.coordToString(),o);   
             }
             return bestMove;
         }
@@ -126,9 +133,9 @@ public class Minimax {
             for (int i = 0; i < moves.size(); ++i) { 
                 currMove = moves.get(i);
                 Ficha o = p.getFicha(currMove);
-                p.moveFicha(c.coordToString(),currMove.coordToString());
-                bestMove = Math.min(bestMove, minimax(p,currMove,depth-1,!col));
-                p.undoFicha(currMove.coordToString(),c.coordToString(),o);   
+                p1.moveFicha(c.coordToString(),currMove.coordToString());
+                bestMove = Math.min(bestMove, minimax(currMove,depth-1,!col));
+                p1.undoFicha(currMove.coordToString(),c.coordToString(),o);   
             }
             return bestMove;    
         }
@@ -144,9 +151,9 @@ public class Minimax {
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
             Ficha o = p.getFicha(currMove);
-            p.moveFicha(c.coordToString(),currMove.coordToString());
-            int val = minimax(p,currMove,depth-1,!col);
-            p.undoFicha(currMove.coordToString(),c.coordToString(),o);
+            p1.moveFicha(c.coordToString(),currMove.coordToString());
+            int val = minimax(currMove,depth-1,!col);
+            p1.undoFicha(currMove.coordToString(),c.coordToString(),o);
             if (col) {
                 if(val <= bestMove) {
                     bestMove = val;
