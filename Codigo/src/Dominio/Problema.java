@@ -11,9 +11,6 @@ import java.util.*;
 public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
     private Boolean turnoInicial; //blanco = true, negro = false
-    private Coordenada lastMoveC1;
-    private Coordenada lastMoveC2;
-    
     public Problema() {}
      
     public Problema(String fen) {
@@ -194,15 +191,11 @@ public final class Problema {
             }
             if (find) {
                 setFicha(c2, f1);
-                lastMoveC1 = c1;
-                lastMoveC2 = c2;
                 removeFicha(c1);
             }
             else System.out.println("La coordenada de destino no es correcta.");
         }
         else {
-            System.out.println(lastMoveC1.getX() + " " + lastMoveC1.getY());
-            System.out.println(lastMoveC2.getX() + " " + lastMoveC2.getY());
             System.out.println("En la coordenada de origen no hay ficha.");
         }
     }
@@ -213,7 +206,7 @@ public final class Problema {
         board[x][y] = null;
     }
     
-    public void undoFicha(String s1, String s2) {
+    public void undoFicha(String s1, String s2, Ficha j) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
@@ -224,12 +217,9 @@ public final class Problema {
         Ficha f1 = getFicha(c1);
         setFicha(c2, f1);
         removeFicha(c1);
-    }
-    
-    public void undoMove() {
-        Ficha f = getFicha(lastMoveC2);
-        setFicha(lastMoveC1,f);
-        removeFicha(lastMoveC2);
+        if (j != null) {
+            setFicha(c1,j);
+        }
     }
     
     //Cambio de Coordenada a Problema
