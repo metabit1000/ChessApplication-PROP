@@ -5,12 +5,14 @@ import Dominio.Problema;
 
 /**
  *
- * @author Àlex
+ * @author Jordi
  */
 public class Maquina extends Jugador {
-    int dificultad = 1; //1 facil, 2 dificil
-    Minimax minimax1 = new Minimax(3,color);
+    int dificultad; //1 facil, 2 dificil
+    MinimaxV2 minimax1 = new MinimaxV2();
     //MinimaxAlphaBeta minimax2;
+    
+    public Maquina() {}
     
     public Maquina(Boolean color,int dificultad) {
         super(color);
@@ -19,8 +21,8 @@ public class Maquina extends Jugador {
     
     public Coordenada getNextMove(Problema p, Coordenada c) {
         Coordenada move = new Coordenada();
-        if(dificultad == 1) move = minimax1.decisionMinimax(p,c);
-        //else if (dificultad == 2) minimax2.decisionMinimax(p);
+        if (dificultad == 1) move = minimax1.decisionMinimax(p,c,3,color); //profundidad 3
+        //else if (dificultad == 2) minimax2.decisionMinimax(p); //alphaBeta...siguiente entrega
         return move;
     }
 }
