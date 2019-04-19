@@ -9,27 +9,37 @@ import java.util.Scanner;
  */
 public class Partida {
     private Problema p = new Problema();
-    private double time ;
+    private double time;
     private Jugador player1;
     private Jugador player2;
 
-    public Partida() {
-    }
+    public Partida() {}
     
-    public Partida(Jugador j1,Jugador j2,Problema  p) {
+    public Partida(Usuario j1,Usuario j2,Problema  p) {
         player1 = j1;
         player2 = j2;
         this.p = p;
-        
     }
     
-    public Partida(Jugador j1,Maquina m,Problema  p ) {
+    public Partida(Usuario j1,Maquina m,Problema  p ) {
         player1 = j1;
         player2 = m ; 
         this.p = p;
     }
-
-    public void jugar(Boolean color,String cord1 ,String cord2 ){//Jugador no maquina 
+    
+    public Partida(Maquina m1, Maquina m2, Problema p) {
+        player1 = m1;
+        player2 = m2;
+        this.p = p;
+    }
+    
+    public void play() {
+        while () {
+        
+        }
+    }
+    
+    public void mover(Boolean color,String cord1,String cord2 ){
         Scanner sc = new Scanner(System.in);
         Coordenada c = new Coordenada();
         c.stringToCoord(cord1);
