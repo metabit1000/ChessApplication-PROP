@@ -137,25 +137,14 @@ public class MinimaxV2 {
         else bestMove = 9999;
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
-            if (col) {
-                ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
-                for (int x = 0; x < movesPosibles.size(); ++x) { 
-                    movePosible = moves.get(x);
-                    Ficha o = p.getFicha(movePosible);
-                    p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                    bestMove = Math.max(bestMove, minimax(p,depth-1,!col));
-                    p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);   
-                }
-            }
-            else {
-                ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
-                for (int x = 0; x < movesPosibles.size(); ++x) { 
-                    movePosible = moves.get(x);
-                    Ficha o = p.getFicha(movePosible);
-                    p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                    bestMove = Math.min(bestMove, minimax(p,depth-1,!col));
-                    p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);  
-                }
+            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+            for (int x = 0; x < movesPosibles.size(); ++x) { 
+                movePosible = movesPosibles.get(x);
+                Ficha o = p.getFicha(movePosible);
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                if (col) bestMove = Math.max(bestMove, minimax(p,depth-1,!col));
+                else bestMove = Math.min(bestMove, minimax(p,depth-1,!col));
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);   
             }
         }
         return bestMove;
@@ -208,34 +197,34 @@ public class MinimaxV2 {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
-                return 10;// + pawnEvalWhite[y][x];
+                return 10 + pawnEvalWhite[y][x];
             case 'p':
-                return (-1)*10; //+ pawnEvalBlack[y][x];
+                return (-1)*10 + pawnEvalBlack[y][x];
             case 'R':
-                return 50;// + rookEvalWhite[y][x];
+                return 50 + rookEvalWhite[y][x];
             case 'r':
-                return (-1)*50;// + rookEvalBlack[y][x];
+                return (-1)*50 + rookEvalBlack[y][x];
             case 'N':
-                return 30;// + knightEval[y][x];
+                return 30 + knightEval[y][x];
             case 'n':
-                return (-1)*30;// + knightEval[y][x];
+                return (-1)*30 + knightEval[y][x];
             case 'B':
-                return 30;// + bishopEvalWhite[y][x];
+                return 30 + bishopEvalWhite[y][x];
             case 'b':
-                return (-1)*30;// + bishopEvalBlack[y][x];
+                return (-1)*30 + bishopEvalBlack[y][x];
             case 'Q':
-                return 90;// + evalQueen[y][x];
+                return 90 + evalQueen[y][x];
             case 'q':
-                return (-1)*90;// + evalQueen[y][x];
+                return (-1)*90 + evalQueen[y][x];
             case 'K':
-                return 900;// + (kingEvalWhite[y][x]);
+                return 900 + (kingEvalWhite[y][x]);
             case 'k':
-                return (-1)*900;// + (kingEvalBlack[y][x]);
+                return (-1)*900 + (kingEvalBlack[y][x]);
         } 
         return -1;
     }
     
-    public ArrayList<Coordenada> posiciones(Problema p,boolean color) {
+    public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
