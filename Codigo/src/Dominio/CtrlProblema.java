@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author jota
  */
-public class CtrlProblemas {
+public class CtrlProblema {
     private Map<String, String> Problems = new HashMap<>();
     private static int numr = 2;
     private static int numR = 2;
@@ -27,7 +27,7 @@ public class CtrlProblemas {
     private static int numq = 1;
     private static int numQ = 1;
     
-    public CtrlProblemas() {
+    public CtrlProblema() {
             Problems.put("Problema 1. Mate en 2.", "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
             Problems.put("Problema 2. Mate en 3.", "3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w");
             Problems.put("Problema 3. Mate en 3.", "1rb4r/p1q2pnk/4pBpp/2p1P3/2P2QP1/3BR3/P4P1P/3R2K1 w");
@@ -296,13 +296,25 @@ public class CtrlProblemas {
         }
     }
     
-    public void printProblemas() {
+    public String seleccionProblema(int n) {
+        int index = 1;
+        String fen = "";
         for(String key : Problems.keySet()) {
-            System.out.println(key);
+            if (n == index) fen = Problems.get(key);
+            ++index;
+        }
+        return fen;
+    }
+    
+    public void printProblemas() {
+        int index = 1;
+        for(String key : Problems.keySet()) {
+            System.out.println(index + ". " +key);
             String fen = Problems.get(key);
             Problema p = new Problema();
             p.fenToMatrix(fen);
             p.printTablero();
+            ++index;
         }
     }
 }
