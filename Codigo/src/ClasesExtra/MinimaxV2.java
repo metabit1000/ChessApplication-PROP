@@ -3,6 +3,7 @@ package ClasesExtra;
 import Dominio.*;
 import Dominio.fichas.Ficha;
 import java.util.ArrayList;
+import javafx.util.Pair;
 
 /**
  *
@@ -10,6 +11,20 @@ import java.util.ArrayList;
  */
 public class MinimaxV2 {   
     private Partida partida ; 
+    
+    class linea {  //necesario para guardar todo para el minimax
+        public Coordenada cinicial;
+        public Coordenada cfinal;
+        public int valor;
+        
+        public linea() {}
+        
+        public linea(Coordenada c1,Coordenada c2,int valor) {
+            cinicial = c1;
+            cfinal = c2;
+            this.valor = valor;
+        }
+    };
     
     int [][] pawnEvalWhite =
     {
@@ -112,63 +127,65 @@ public class MinimaxV2 {
         return res;
     }
     
-    public int minimax(Problema p,Coordenada c,int depth, boolean col) {
+    public int minimax(Problema p,int depth, boolean col) {
         if (depth == 0) return -evaluationBoard(p);
-        ArrayList<Coordenada> moves = p.getFicha(c).posiblesMovimientos(p,c);
-        Coordenada currMove;
-        if (col) {
-            int bestMove = -9999;
-            for (int i = 0; i < moves.size(); ++i) { 
-                currMove = moves.get(i);
-                Ficha o = p.getFicha(currMove);
-                p.moveFicha(c.coordToString(),currMove.coordToString());
-                bestMove = Math.max(bestMove, minimax(p,currMove,depth-1,!col));
-                p.undoFicha(currMove.coordToString(),c.coordToString(),o);   
+        
+        ArrayList<Coordenada> moves = posiciones(p,col);
+        Coordenada currMove,movePosible;
+        int bestMove;
+        if (col) bestMove = -9999;
+        else bestMove = 9999;
+        for (int i = 0; i < moves.size(); ++i) {
+            currMove = moves.get(i);
+            if (col) {
+                ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+                for (int x = 0; x < movesPosibles.size(); ++x) { 
+                    movePosible = moves.get(x);
+                    Ficha o = p.getFicha(movePosible);
+                    p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                    bestMove = Math.max(bestMove, minimax(p,depth-1,!col));
+                    p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);   
+                }
             }
-            return bestMove;
-        }
-        else {
-            int bestMove = 9999;
-            for (int i = 0; i < moves.size(); ++i) { 
-                currMove = moves.get(i);
-                Ficha o = p.getFicha(currMove);
-                p.moveFicha(c.coordToString(),currMove.coordToString());
-                bestMove = Math.min(bestMove, minimax(p,currMove,depth-1,!col));
-                p.undoFicha(currMove.coordToString(),c.coordToString(),o);   
+            else {
+                ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+                for (int x = 0; x < movesPosibles.size(); ++x) { 
+                    movePosible = moves.get(x);
+                    Ficha o = p.getFicha(movePosible);
+                    p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                    bestMove = Math.min(bestMove, minimax(p,depth-1,!col));
+                    p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);  
+                }
             }
-            return bestMove;    
         }
+        return bestMove;
     }
     
-    public Coordenada decisionMinimax(Problema p, int depth, boolean col) {
-  	int bestMove;
-        if (col) bestMove = 9999;
-        else bestMove = -9999;
-        int IDbestMoveFound = 0;
-        Coordenada currMove;
-        
+    public Pair<Coordenada,Coordenada> decisionMinimax(Problema p, int depth, boolean col) {
+  	int bestMove = -9999;  //las blancas van a moverse antes
+        Coordenada currMove,movePosible;
+        ArrayList<linea> datos = new ArrayList();
         ArrayList<Coordenada> moves = posiciones(p,col);
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
-            Ficha o = p.getFicha(currMove);
-            p.moveFicha(c.coordToString(),currMove.coordToString());
-            int val = minimax(p,currMove,depth-1,!col);
-            p.undoFicha(currMove.coordToString(),c.coordToString(),o);
-            if (col) {
-                if(val <= bestMove) {
-                    bestMove = val;
-                    IDbestMoveFound = i;
-                } 
-            } else {
-                if(val >= bestMove) {
-                    bestMove = val;
-                    IDbestMoveFound = i;
-                } 
+            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+            for (int x = 0; x < movesPosibles.size(); ++x) {
+                movePosible = movesPosibles.get(x);
+                Ficha o = p.getFicha(movePosible);
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                int val = minimax(p,depth - 1,!col); //cambio al oponente
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                datos.add(new linea(currMove,movePosible,val));
             }
-            System.out.println("VAL: "+val);
-            System.out.println("bestMove: "+bestMove);
         }
-        return moves.get(IDbestMoveFound);
+        linea mejor = new linea();
+        for (int z = 0; z < datos.size(); ++z) {
+            if (datos.get(z).valor >= bestMove) {
+                bestMove = datos.get(z).valor;
+                mejor = datos.get(z);
+            } 
+        }
+        return new Pair <> (mejor.cinicial,mejor.cfinal);
     }
     
     public int evaluationBoard(Problema p) {
@@ -191,29 +208,29 @@ public class MinimaxV2 {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
-                return 10 + pawnEvalWhite[y][x];
+                return 10;// + pawnEvalWhite[y][x];
             case 'p':
-                return (-1)*10 + pawnEvalBlack[y][x];
+                return (-1)*10; //+ pawnEvalBlack[y][x];
             case 'R':
-                return 50 + rookEvalWhite[y][x];
+                return 50;// + rookEvalWhite[y][x];
             case 'r':
-                return (-1)*50 + rookEvalBlack[y][x];
+                return (-1)*50;// + rookEvalBlack[y][x];
             case 'N':
-                return 30 + knightEval[y][x];
+                return 30;// + knightEval[y][x];
             case 'n':
-                return (-1)*30 + knightEval[y][x];
+                return (-1)*30;// + knightEval[y][x];
             case 'B':
-                return 30 + bishopEvalWhite[y][x];
+                return 30;// + bishopEvalWhite[y][x];
             case 'b':
-                return (-1)*30 + bishopEvalBlack[y][x];
+                return (-1)*30;// + bishopEvalBlack[y][x];
             case 'Q':
-                return 90 + evalQueen[y][x];
+                return 90;// + evalQueen[y][x];
             case 'q':
-                return (-1)*90 + evalQueen[y][x];
+                return (-1)*90;// + evalQueen[y][x];
             case 'K':
-                return 900 + (kingEvalWhite[y][x]);
+                return 900;// + (kingEvalWhite[y][x]);
             case 'k':
-                return (-1)*900 + (kingEvalBlack[y][x]);
+                return (-1)*900;// + (kingEvalBlack[y][x]);
         } 
         return -1;
     }
