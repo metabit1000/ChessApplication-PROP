@@ -27,7 +27,7 @@ public class DriverMaquina {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w";
+                    String fen = "8/8/8/R4R2/8/2pkp3/8/8 w";
                     p.fenToMatrix(fen);
                     p.printTablero();
                     break;
