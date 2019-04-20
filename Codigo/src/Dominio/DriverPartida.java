@@ -13,7 +13,7 @@ public class DriverPartida {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        Problema prueba = new Problema();
+        Problema prueba = new Problema(2);
    
         while (estado != fin) {
             System.out.println("Usuarios:");
@@ -27,7 +27,7 @@ public class DriverPartida {
             char color;
             switch (estado) {
                  case 1:
-                    String fen = "1r6/8/2r5/8/3k4/8/P7/K7 b";
+                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w";
                     prueba.fenToMatrix(fen);
                     prueba.printTablero();
                     break;
@@ -40,7 +40,7 @@ public class DriverPartida {
                     System.out.println("1. JugadorVsJugador"); //faltaria loguearse
                     System.out.println("2. JugadorVsMaquina1");
                     System.out.println("3. JugadorVsMaquina2");
-                    System.out.println("3. Maquina1VsMaquina2");
+                    System.out.println("4. Maquina1VsMaquina2");
                     int opcion = sc.nextInt();
                     switch (opcion) {
                         case 1:
@@ -61,7 +61,7 @@ public class DriverPartida {
                             }
                             partida = new Partida(us1,us2,prueba);
                             System.out.println("Partida creada, jugador2 juega con; "+ us2.getcolor());
-                            partida.play();
+                            partida.playJugadores();
                             break;
                     }
                     break;
