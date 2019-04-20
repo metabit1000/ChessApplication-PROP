@@ -13,7 +13,11 @@ public final class Problema {
     private int numMovimientos;
     
     public Problema() {}
-     
+    
+    public Problema(int numMov) {
+        numMovimientos = numMov;
+    }
+    
     public Problema(String fen) {
         fenToMatrix(fen);
     }
