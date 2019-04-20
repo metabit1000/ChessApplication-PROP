@@ -183,7 +183,7 @@ public final class Problema {
             }
         }
     }
-    public void moveFicha(String s1, String s2) {
+    public boolean moveFicha(String s1, String s2) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
@@ -202,10 +202,17 @@ public final class Problema {
             if (find) {
                 setFicha(c2, f1);               
                 removeFicha(c1);
+                return true;
             }
-            else System.out.println("La coordenada de destino no es correcta.");
+            else {
+                System.out.println("La coordenada de destino no es correcta.");
+                return false;
+            }
         }
-        else System.out.println("En la coordenada de origen no hay ficha.");
+        else {
+            System.out.println("En la coordenada de origen no hay ficha.");
+            return false;
+        }
     }
     
     
@@ -215,8 +222,8 @@ public final class Problema {
         board[i][j] = null;
     }
     
-    public Boolean mate (Boolean color ){
-        Boolean  mate = false;
+    public boolean mate (boolean color ){
+        boolean  mate = false;
         for (int i = 0; i < 8 ; i++) {
             for (int j = 0; j < 8; j++) {
                 if (board[i][j] != null && color == board[i][j].getColor()) {
@@ -235,17 +242,18 @@ public final class Problema {
         return mate ; 
     }
     
-    public Boolean checkmate(Boolean color) {
-        Boolean checkmate = true;
+    public boolean checkmate(Boolean color) {
+        boolean checkmate = true;
         for (int i = 0; i < 8 ; i++) {
             for (int j = 0; j < 8 ; j++) {
                 Coordenada z = new Coordenada(i,j);
                 if (board[i][j] != null && color != board[i][j].getColor()) {
                     ArrayList<Coordenada> pM1 = board[i][j].posiblesMovimientos(this,z);
                     for (int w = 0; w < pM1.size() ; w++) {
-                        moveFicha(z.coordToString(),pM1.get(w).coordToString());
-                        if (!mate(color)) checkmate = false  ; 
-                        undoFicha(pM1.get(w).coordToString(),z.coordToString(), board[i][j]);
+                        Ficha o = this.getFicha(pM1.get(w));
+                        boolean u = moveFicha(z.coordToString(),pM1.get(w).coordToString());
+                        if (!mate(color)) checkmate = false; 
+                        undoFicha(pM1.get(w).coordToString(),z.coordToString(), o);
                     }
                 }
             }
