@@ -3,6 +3,7 @@ package Dominio;
 import ClasesExtra.Coordenada;
 import Dominio.fichas.Bishop;
 import java.util.Scanner;
+import javafx.util.Pair;
 
 /**
  *
@@ -26,14 +27,14 @@ public class DriverMaquina {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    String fen = "8/PPPR3/PPk5/Pp5r/K5qR/8/4PQ2/1B5B w";
+                    String fen = "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w";
                     p.fenToMatrix(fen);
                     p.printTablero();
                     break;
                 case 2:
                     m = new Maquina(true,1); //juega con blancas
-                    Coordenada h = m.getNextMove(p); //prueba del minimax
-                    System.out.println(h.getX() + " " + h.getY());
+                    Pair<Coordenada,Coordenada> moves = m.getNextMove(p); //prueba del minimax
+                    System.out.println(moves.getKey().coordToString()+" "+moves.getValue().coordToString());
                     break;
                 case 3: 
                     estado = 1000;
