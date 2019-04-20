@@ -2,6 +2,7 @@ package Dominio;
 
 import ClasesExtra.*;
 import Dominio.Problema;
+import javafx.util.Pair;
 
 /**
  *
@@ -19,10 +20,10 @@ public class Maquina extends Jugador {
         this.dificultad = dificultad;
     }
     
-    public Coordenada getNextMove(Problema p) {
-        Coordenada move = new Coordenada();
-        if(dificultad == 1) move = minimax1.decisionMinimax(p,3,color); //profundidad 3
+    public Pair<Coordenada,Coordenada> getNextMove(Problema p) {
+        Pair<Coordenada,Coordenada> moves = new Pair<>(null,null);
+        if(dificultad == 1) moves = minimax1.decisionMinimax(p,3,color); //profundidad 3
         //else if (dificultad == 2) minimax2.decisionMinimax(p); //alphaBeta...siguiente entrega
-        return move;
+        return moves;
     }
 }
