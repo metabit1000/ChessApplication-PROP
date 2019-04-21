@@ -1,4 +1,5 @@
 package Dominio;
+import ClasesExtra.*;
 import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,7 +11,7 @@ import java.util.*;
  *
  * @author Jordi
  */
-public class Jugador {
+public abstract class Jugador {
    protected Boolean color; //negro = false, blanco = true
     
     public Jugador() { }    
@@ -22,5 +23,6 @@ public class Jugador {
     public boolean getcolor(){
         return color;
     }
-   
+    
+    public abstract Pair getNextMove(Problema p);
 }
