@@ -123,11 +123,8 @@ public class MinimaxV2 {
     }
     
     public int minimax(Problema p,int depth, boolean col) {
-        if (depth == 0) {
-            int s = evaluationBoard(p);
-            return s;
-        }
-        
+        if (depth == 0) return evaluationBoard(p);
+
         ArrayList<Coordenada> moves = posiciones(p,col);
         Coordenada currMove,movePosible;
         int bestMove;
@@ -149,7 +146,9 @@ public class MinimaxV2 {
     }
     
     public Pair<Coordenada,Coordenada> decisionMinimax(Problema p, int depth, boolean col) {
-  	int bestMove = 9999;  //las blancas van a moverse antes
+  	int bestMove;
+        if (col) bestMove= -9999;
+        else bestMove = 9999;
         Coordenada currMove,movePosible;
         ArrayList<linea> datos = new ArrayList();
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -168,10 +167,18 @@ public class MinimaxV2 {
         }
         linea mejor = new linea();
         for (int z = 0; z < datos.size(); ++z) {
-            if (datos.get(z).valor < bestMove) {
-                bestMove = datos.get(z).valor;
-                mejor = datos.get(z);
-            } 
+            if (col) {
+                if (datos.get(z).valor > bestMove) {
+                    bestMove = datos.get(z).valor;
+                    mejor = datos.get(z);
+                } 
+            }
+            else {
+                if (datos.get(z).valor < bestMove) {
+                    bestMove = datos.get(z).valor;
+                    mejor = datos.get(z);
+                } 
+            }   
         }
         return new Pair <> (mejor.cinicial,mejor.cfinal);
     }
