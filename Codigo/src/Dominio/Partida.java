@@ -1,6 +1,6 @@
 package Dominio;
 
-import ClasesExtra.Coordenada;
+import ClasesExtra.*;
 import Dominio.fichas.Ficha;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -68,6 +68,50 @@ public class Partida {
                 }
                 turno = !turno;
                 ++cont;
+            }
+        }
+    }
+    
+    public void playJugadorVSMaquina() {
+        int cont = 0;
+        String coordenada1,coordenada2;
+        Scanner sc = new Scanner(System.in);
+        String c;
+        boolean win = false;
+        if (p.getTurno()) c = "blancas.";
+        else c = "negras.";
+        System.out.println("En este problema, empiezan las "+c);
+        turno = p.getTurno();
+        
+        while (cont < (p.getNumMovimientos()*2) && !win) {
+            String t;
+            if (turno) t = "blancas.";
+            else t = "negras.";
+            System.out.println("El turno es de las "+ t);
+            boolean T = player2.getcolor();
+            if (T == turno) {
+                Pair moves = player2.getNextMove(p);
+                p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
+                turno = !turno;
+            }
+            else {
+                System.out.println("Por favor, haga su movimiento");
+                p.printTablero();
+                System.out.println("Introduzca coordenada origen, ex e4: ");
+                coordenada1 = sc.next();
+                sc.nextLine();
+                System.out.println("Introduzca coordenada final, ex e4: ");
+                coordenada2 = sc.next();
+                sc.nextLine();
+                int res = mover(turno,coordenada1,coordenada2);
+                if (res == 0) {
+                    if (p.checkmate(turno)){
+                        win = true;
+                        System.out.println("Fin del juego. Ganan las "+t);//DECIR LOS MOVIMIENTOS? Y EL TIEMPO
+                    }
+                    turno = !turno;
+                    ++cont;
+                }
             }
         }
     }
