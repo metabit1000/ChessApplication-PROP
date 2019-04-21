@@ -26,6 +26,10 @@ public class Ranking {
             System.out.println("Clave : " + key + "  Valor : "+ rank.get(key));
         }
     }
+    public Boolean existeix(String nom ){
+        if(rank.containsKey(nom))return true ;
+        else return false ; 
+    }
     
     public void setelemento(String nombre,double tiempo){
         rank.put(nombre,tiempo );
