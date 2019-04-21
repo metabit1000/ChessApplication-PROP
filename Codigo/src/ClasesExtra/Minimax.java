@@ -9,7 +9,7 @@ import javafx.util.Pair;
  *
  * @author Àlex
  */
-public class MinimaxV2 {   
+public class Minimax {   
     
     class linea {  //necesario para guardar todo para el minimax
         public Coordenada cinicial;
@@ -25,87 +25,7 @@ public class MinimaxV2 {
         }
     };
     
-    int [][] pawnEvalWhite =
-    {
-        {0,  0,  0,  0,  0,  0,  0,  0},
-        {50,  50,  50,  50,  50,  50,  50,  50},
-        {10,  10,  20,  30,  30,  20,  10,  10},
-        {5,  5,  10,  25,  25,  10,  5,  5},
-        {0,  0,  0,  20,  20,  0,  0,  0},
-        {5, -5, -10,  0,  0, -10, -5,  5},
-        {5,  10, 10,  -20, -20,  10,  10,  5},
-        {0,  0,  0,  0,  0,  0,  0,  0}
-    };
-
-    int [][] pawnEvalBlack = reverseArray(pawnEvalWhite);
-    
-    int [][] knightEval =
-    {
-        {-50, -40, -30, -30, -30, -30, -40, -50},
-        {-40, -20,  0,  0,  0,  0, -20, -40},
-        {-30,  0,  10,  15,  15,  10,  0, -30},
-        {-30,  5,  15,  20,  20,  15,  5, -30},
-        {-30,  0,  15,  20,  20,  15,  0, -30},
-        {-30,  5,  10,  15,  15,  10,  5, -30},
-        {-40, -20,  0,  5,  5,  0, -20, -40},
-        {-50, -40, -30, -30, -30, -30, -40, -50}
-    };
-
-    int [][] bishopEvalWhite = 
-    {
-        { -20, -10, -10, -10, -10, -10, -10, -20},
-        { -10,  0,  0,  0,  0,  0,  0, -10},
-        { -10,  0,  5,  10,  10,  5,  0, -10},
-        { -10,  5,  5,  10,  10,  5,  5, -10},
-        { -10,  0,  10,  10,  10,  10,  00, -10},
-        { -10,  10,  10,  10,  10,  10,  10, -10},
-        { -10,  5,  0,  0,  0,  0,  5, -10},
-        { -20, -10, -10, -10, -10, -10, -10, -20}
-    };
-
-    int [][] bishopEvalBlack = reverseArray(bishopEvalWhite);
-
-    int [][] rookEvalWhite = 
-    {
-        {  0,  0,  0,  0,  0,  0,  0,  0},
-        {  5,  10,  10,  10,  10,  10,  10,  5},
-        { -5,  0,  0,  0,  0,  0,  0, -5},
-        { -5,  0,  0,  0,  0,  0,  0, -5},
-        { -5,  0,  0,  0,  0,  0,  0, -5},
-        { -5,  0,  0,  0,  0,  0,  0, -5},
-        { -5,  0,  0,  0,  0,  0,  0, -5},
-        {  0,   0, 0,  5,  5,  0,  0,  0}
-    };
-
-    int [][] rookEvalBlack = reverseArray(rookEvalWhite);
-
-    int [][] evalQueen = 
-    {
-        { -20, -10, -10, -5, -5, -10, -10, -20},
-        { -10,  0,  0,  0,  0,  00,  0, -10},
-        { -10,  0,  5,  5,  5,  5,  0, -10},
-        { -5,  0,  5,  5,  5,  5,  0, -5},
-        {  0,  0,  5,  5,  5,  5,  0, -5},
-        { -10,  5,  5,  5,  5,  5,  0, -10},
-        { -10,  0,  5,  0,  0,  0,  0, -10},
-        { -20, -10, -10, -5, -5, -10, -10, -20}
-    };
-
-    int [][] kingEvalWhite = 
-    {
-        { -30, -40, -40, -50, -50, -40, -40, -30},
-        { -30, -40, -40, -50, -50, -40, -40, -30},
-        { -30, -40, -40, -50, -50, -40, -40, -30},
-        { -30, -40, -40, -50, -50, -40, -40, -30},
-        { -20, -30, -30, -40, -40, -30, -30, -20},
-        { -10, -20, -20, -20, -20, -20, -20, -10},
-        {  20,  20,  0,  0,  0,  0,  20,  20},
-        {  20,  30,  10,  0,  0,  10,  30,  20}
-    };
-
-    int [][] kingEvalBlack = reverseArray(kingEvalWhite);
-
-    public MinimaxV2() {}
+    public Minimax() {}
     
     public int [][] reverseArray(int [][] array) {
         int xn = 8;
@@ -203,29 +123,29 @@ public class MinimaxV2 {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
-                return 10;// + pawnEvalWhite[y][x];
+                return 10;
             case 'p':
-                return (-1)*10;// + pawnEvalBlack[y][x];
+                return (-1)*10;
             case 'R':
-                return 50;// + rookEvalWhite[y][x];
+                return 50;
             case 'r':
-                return (-1)*50;// + rookEvalBlack[y][x];
+                return (-1)*50;
             case 'N':
-                return 30;// + knightEval[y][x];
+                return 30;
             case 'n':
-                return (-1)*30;// + knightEval[y][x];
+                return (-1)*30;
             case 'B':
-                return 30;// + bishopEvalWhite[y][x];
+                return 30;
             case 'b':
-                return (-1)*30;// + bishopEvalBlack[y][x];
+                return (-1)*30;
             case 'Q':
-                return 150;// + evalQueen[y][x];
+                return 150;
             case 'q':
-                return (-1)*150;// + evalQueen[y][x];
+                return (-1)*150;
             case 'K':
-                return 900;// + (kingEvalWhite[y][x]);
+                return 900;
             case 'k':
-                return (-1)*900;// + (kingEvalBlack[y][x]);
+                return (-1)*900;
         } 
         return -1;
     }
