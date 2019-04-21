@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 
 import java.io.IOException;
@@ -30,13 +25,9 @@ public class DriverJugador {
                     System.out.println("Ha elegido: Constructor");
                   
                    
-                      Prueba = new Jugador (); 
+//                      Prueba = new Jugador (); 
                     System.out.println("Jugador creado correctamente ");
-                    break;
-    
-    
-    
-    
+                    break;    
             }
 
  
