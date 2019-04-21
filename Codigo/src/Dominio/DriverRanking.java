@@ -23,6 +23,8 @@ public class DriverRanking {
             System.out.println("Introduzca un número: ");
                     
             estado = sc.nextInt();
+            if (estado < 0 || estado > 5)  System.out.println("Introduzca un valor entre el 1-5");
+
             switch (estado) {
                 case 1:
                     System.out.println("Ha elegido: Constructor");
@@ -30,14 +32,21 @@ public class DriverRanking {
                     System.out.println("Ranking creado correctamente ");
                     break;
                 case 2:
+                    
+                    
                     sc = new Scanner(System.in);
                     String  nombre ; 
                     double tiempo ;                  
                     System.out.println("Ha elegido: Añadir Usuario Ranking");
                     System.out.println("El ranking es  ");
                     Prueba.getclasificacion();
-                    System.out.println("Intro1duzca un nombre ");
+                    System.out.println("Introduzca un nombre ");
                     nombre  = sc.nextLine();
+                   
+                        if (Prueba.existeix(nombre)){
+                            System.out.println("Actualize el tiempo");
+                        break;
+                        }
                     System.out.println("Introduzca un tiempo  ");
                     tiempo = sc.nextDouble();
                     sc.nextLine();
@@ -49,6 +58,10 @@ public class DriverRanking {
                     System.out.println("Introduzca un nombre ");
                     nombre  = sc.next();
                     sc.nextLine();
+                      if (!Prueba.existeix(nombre)){
+                            System.out.println("No existe el usuario en el Ranking");
+                        break;
+                        }
                     System.out.println("Introduzca un tiempo  ");
                     tiempo = sc.nextDouble();
                     Prueba.setActualizar(nombre, tiempo);
@@ -59,6 +72,10 @@ public class DriverRanking {
                     System.out.println("Introduzca un nombre ");
                     nombre  = sc.next(); 
                     sc.nextLine();
+                     if (!Prueba.existeix(nombre)){
+                            System.out.println("No existe el usuario en el Ranking");
+                        break;
+                        }
                     Prueba.eliminarUsuario(nombre);
                     Prueba.getclasificacion();
                     System.out.println("Se ha obtenido correctamente");
