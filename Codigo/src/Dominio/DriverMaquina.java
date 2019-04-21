@@ -1,9 +1,8 @@
 package Dominio;
 
-import ClasesExtra.Coordenada;
+import ClasesExtra.*;
 import Dominio.fichas.Bishop;
 import java.util.Scanner;
-import javafx.util.Pair;
 
 /**
  *
@@ -33,8 +32,8 @@ public class DriverMaquina {
                     break;
                 case 2:
                     m = new Maquina(true,1); //juega con blancas
-                    Pair<Coordenada,Coordenada> moves = m.getNextMove(p); //prueba del minimax
-                    System.out.println(moves.getKey().coordToString()+" "+moves.getValue().coordToString());
+                    Pair move = m.getNextMove(p); //prueba del minimax
+                    System.out.println(move.getKey().coordToString()+" "+move.getValue().coordToString());
                     break;
                 case 3: 
                     estado = 1000;
