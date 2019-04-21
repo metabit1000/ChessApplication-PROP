@@ -3,7 +3,6 @@ package ClasesExtra;
 import Dominio.*;
 import Dominio.fichas.Ficha;
 import java.util.ArrayList;
-import javafx.util.Pair;
 
 /**
  *
@@ -65,7 +64,7 @@ public class Minimax {
         return bestMove;
     }
     
-    public Pair<Coordenada,Coordenada> decisionMinimax(Problema p, int depth, boolean col) {
+    public Pair decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove= -9999;
         else bestMove = 9999;
@@ -80,9 +79,11 @@ public class Minimax {
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
                 int val = minimax(p,depth-1,!col); //cambio al oponente
-                System.out.println(currMove.coordToString()+" a "+movePosible.coordToString()+" valor: "+val);
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
-                datos.add(new linea(currMove,movePosible,val));
+                
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                if (!p.mate(!col)) datos.add(new linea(currMove,movePosible,val));
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
             }
         }
         linea mejor = new linea();
@@ -100,7 +101,7 @@ public class Minimax {
                 } 
             }   
         }
-        return new Pair <> (mejor.cinicial,mejor.cfinal);
+        return new Pair(mejor.cinicial,mejor.cfinal);
     }
     
     public int evaluationBoard(Problema p) {
