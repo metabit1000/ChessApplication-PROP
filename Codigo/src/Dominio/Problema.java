@@ -21,7 +21,9 @@ public final class Problema {
     public Problema(String fen) {
         fenToMatrix(fen);
     }
-    
+    public Problema(Boolean turno) {
+        turnoInicial=turno;
+    }
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }
@@ -32,6 +34,11 @@ public final class Problema {
     
     public void setTurno(Boolean f) {
         turnoInicial = f;
+    }
+    
+    public  Boolean isnull( int i , int j ) {
+        if(board[i][j]==null) return true;
+        else return false;
     }
     
     public Boolean getTurno() {

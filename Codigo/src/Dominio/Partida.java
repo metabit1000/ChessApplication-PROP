@@ -2,7 +2,6 @@ package Dominio;
 
 import ClasesExtra.*;
 import Dominio.fichas.Ficha;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

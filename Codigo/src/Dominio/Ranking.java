@@ -27,6 +27,11 @@ public class Ranking {
         }
     }
     
+    public Boolean existeix(String nom) {
+        if (rank.containsKey(nom)) return true;
+        else return false;
+    } 
+    
     public void setelemento(String nombre,double tiempo){
         rank.put(nombre,tiempo );
         ordenar();
