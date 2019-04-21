@@ -10,8 +10,8 @@ import javafx.util.Pair;
  */
 public class Maquina extends Jugador {
     int dificultad; //1 facil, 2 dificil
-    MinimaxV2 minimax1 = new MinimaxV2();
-    //MinimaxAlphaBeta minimax2;
+    Minimax minimax1 = new Minimax();
+    MinimaxAlphaBeta minimax2;
     
     public Maquina() {}
     
@@ -23,7 +23,7 @@ public class Maquina extends Jugador {
     public Pair<Coordenada,Coordenada> getNextMove(Problema p) {
         Pair<Coordenada,Coordenada> moves = new Pair<>(null,null);
         if(dificultad == 1) moves = minimax1.decisionMinimax(p,3,color); //profundidad 3
-        //else if (dificultad == 2) minimax2.decisionMinimax(p); //alphaBeta...siguiente entrega
+        else if (dificultad == 2) minimax2.decisionMinimax(p,3,color); //alphaBeta...siguiente entrega. NO esta implementado
         return moves;
     }
 }
