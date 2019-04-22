@@ -1,7 +1,6 @@
 package Dominio;
 
 import ClasesExtra.*;
-import Dominio.fichas.Bishop;
 import java.util.Scanner;
 
 /**

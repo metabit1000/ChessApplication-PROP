@@ -11,6 +11,7 @@ public final class Problema {
     private static Ficha[][] board = new Ficha[8][8];
     private Boolean turnoInicial; //blanco = true, negro = false
     private int numMovimientos;
+    private Ranking rank = new Ranking(); //Ranking por problema
     
     public Problema() {}
     
@@ -46,6 +47,19 @@ public final class Problema {
     
     public void setNumMovimientos(int num) {
         numMovimientos = num;
+    }
+    
+    //Métodos para el ranking
+    public void actualizarRanking(String nombre,double tiempo) {
+        rank.setActualizar(nombre,tiempo);
+    }
+    
+    public void introducirElemento(String nombre,double tiempo) {
+        rank.setElemento(nombre, tiempo);
+    }
+    
+    public void eliminarUsuario(String nombre){
+        rank.eliminarUsuario(nombre);
     }
     
     public void printTablero() {
@@ -104,10 +118,8 @@ public final class Problema {
                 char c = fen.charAt(m);
                 int p = c - '0';
                 for (int n = 0; n < p; n++) {
-
                     board[i][j] = null;
                     ++j;
-
                 }
             }
             else if (fen.charAt(m) == '/') {

@@ -50,7 +50,7 @@ public class DriverRanking {
                     System.out.println("Introduzca un tiempo  ");
                     tiempo = sc.nextDouble();
                     sc.nextLine();
-                    Prueba.setelemento(nombre, tiempo);
+                    Prueba.setElemento(nombre, tiempo);
                     Prueba.getclasificacion();  
                     break;
                 case 3: 

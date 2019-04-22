@@ -31,7 +31,7 @@ public class Ranking {
         else return false ; 
     }
     
-    public void setelemento(String nombre,double tiempo){
+    public void setElemento(String nombre,double tiempo){
         rank.put(nombre,tiempo );
         ordenar();
     }
@@ -39,12 +39,12 @@ public class Ranking {
     public void eliminarUsuario(String  nombre){
         rank.remove(nombre);
     }
-    public void setActualizar(String nombre,double tiempo ){
+    public void setActualizar(String nombre,double tiempo){
         //comprobar que esté dentro de Rank
       double n = rank.get(nombre);
         if (tiempo < n ){
             eliminarUsuario(nombre);
-            setelemento(nombre,tiempo);  
+            setElemento(nombre,tiempo);  
         }
     }
 }
