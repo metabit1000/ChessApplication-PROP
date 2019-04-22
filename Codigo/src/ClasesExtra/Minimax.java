@@ -26,21 +26,6 @@ public class Minimax {
     
     public Minimax() {}
     
-    public int [][] reverseArray(int [][] array) {
-        int xn = 8;
-        int yn = 8;
-        int res [][] = new int[xn][yn];
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                res[xn-1][yn-1] = array[i][j];
-                --yn;
-            }
-            yn = 8;
-            --xn;
-        }
-        return res;
-    }
-    
     public int minimax(Problema p,int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
 
