@@ -4,13 +4,13 @@ package ClasesExtra;
  *
  * @author Joan
  */
-public class Pair { //clase java pair implementada al no poder usar javafx
+public class PairCoordenadas { //clase java pair implementada al no poder usar javafx
     private Coordenada key;
     private Coordenada value;
     
-    public Pair() {}
+    public PairCoordenadas() {}
     
-    public Pair(Coordenada key,Coordenada value) {
+    public PairCoordenadas(Coordenada key,Coordenada value) {
         this.key = key;
         this.value = value;
     }

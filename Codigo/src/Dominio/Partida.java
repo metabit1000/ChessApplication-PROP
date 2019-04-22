@@ -54,7 +54,7 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             System.out.println("Por favor, haga su movimiento");
             p.printTablero();
-            Pair moves = new Pair();
+            PairCoordenadas moves = new PairCoordenadas();
             if (turno) moves = player1.getNextMove(p);
             else moves = player2.getNextMove(p);
             int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
@@ -88,12 +88,12 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             boolean T = player2.getColor();
             if (T == turno) {
-                Pair moves = player2.getNextMove(p);
+                PairCoordenadas moves = player2.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 turno = !turno;
             }
             else {
-                Pair moves = new Pair();
+                PairCoordenadas moves = new PairCoordenadas();
                 if (turno) moves = player1.getNextMove(p);
                 else moves = player2.getNextMove(p);
                 int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
@@ -128,7 +128,7 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             boolean T = player1.getColor();
             if (T == turno) {
-                Pair moves = player1.getNextMove(p);
+                PairCoordenadas moves = player1.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){
@@ -138,7 +138,7 @@ public class Partida {
                 turno = !turno;
             }
             else {
-                Pair moves = player2.getNextMove(p);
+                PairCoordenadas moves = player2.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){

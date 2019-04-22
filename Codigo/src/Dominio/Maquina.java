@@ -23,8 +23,8 @@ public class Maquina extends Jugador {
         return dificultad;
     }
     
-    public Pair getNextMove(Problema p) {
-        Pair moves = new Pair();
+    public PairCoordenadas getNextMove(Problema p) {
+        PairCoordenadas moves = new PairCoordenadas();
         if(dificultad == 1) moves = minimax1.decisionMinimax(p,3,color); //profundidad 3
         //else if (dificultad == 2) minimax2.decisionMinimax(p); //alphaBeta...siguiente entrega
         return moves;

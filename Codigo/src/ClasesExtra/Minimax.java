@@ -49,7 +49,7 @@ public class Minimax {
         return bestMove;
     }
     
-    public Pair decisionMinimax(Problema p, int depth, boolean col) {
+    public PairCoordenadas decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove= -9999;
         else bestMove = 9999;
@@ -86,7 +86,7 @@ public class Minimax {
                 } 
             }   
         }
-        return new Pair(mejor.cinicial,mejor.cfinal);
+        return new PairCoordenadas(mejor.cinicial,mejor.cfinal);
     }
     
     public int evaluationBoard(Problema p) {

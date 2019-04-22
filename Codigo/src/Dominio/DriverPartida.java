@@ -1,6 +1,5 @@
 package Dominio;
 
-import ClasesExtra.Coordenada;
 import java.util.Scanner;
 
 /**
@@ -53,11 +52,11 @@ public class DriverPartida {
                             color = sc.next().charAt(0);
                             sc.nextLine();
                             if (color == 'n') {
-                                us1 = new Usuario(false,"Jose");
-                                us2 = new Usuario(true,"Maria");
+                                us1 = new Usuario(false,"Jose","password");
+                                us2 = new Usuario(true,"Maria","password");
                             } else if (color == 'b') {
-                                us1 = new Usuario(true,"Jose");
-                                us2 = new Usuario(false,"Maria");
+                                us1 = new Usuario(true,"Jose","password");
+                                us2 = new Usuario(false,"Maria","password");
                             } else {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
@@ -80,10 +79,10 @@ public class DriverPartida {
                             color = sc.next().charAt(0);
                             sc.nextLine();
                             if (color == 'n') {
-                                usjm = new Usuario(false,"Jose");
+                                usjm = new Usuario(false,"Jose","password");
                                 m = new Maquina(true, "m1",1);
                             } else if (color == 'b') {
-                                usjm = new Usuario(true,"Jose");
+                                usjm = new Usuario(true,"Jose","password");
                                 m = new Maquina(false,"m1", 1);
                             } else {
                                 System.out.println("Error, vuelva a intentarlo");

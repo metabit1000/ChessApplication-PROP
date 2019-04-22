@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Jordi
  */
 public class DriverJugador {
-     public static void main (String [] args) throws IOException {
+     public static void main (String [] args) {
         int estado = 0;
         Jugador prueba = new Usuario();
         char color;
@@ -33,8 +33,8 @@ public class DriverJugador {
                     System.out.println("Introduzca un nombre para el jugador: ");
                     nombre = sc.next();
                     sc.nextLine();
-                    if (color == 'n') prueba = new Usuario(false,nombre);
-                    else if (color == 'b') prueba = new Usuario(true,nombre);
+                    if (color == 'n') prueba = new Usuario(false,nombre,"password");
+                    else if (color == 'b') prueba = new Usuario(true,nombre,"password");
                     else {
                         System.out.println("Error, vuelva a intentarlo");
                         break;

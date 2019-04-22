@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class MinimaxAlphaBeta {   
+public class MinimaxAlphaBeta {    //EN PROCESO...
     
     class linea {  //necesario para guardar todo para el minimax
         public Coordenada cinicial;
@@ -144,7 +144,7 @@ public class MinimaxAlphaBeta {
         return bestMove;
     }
     
-    public Pair decisionMinimax(Problema p, int depth, boolean col) {
+    public PairCoordenadas decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove= -9999;
         else bestMove = 9999;
@@ -179,7 +179,7 @@ public class MinimaxAlphaBeta {
                 } 
             }   
         }
-        return new Pair (mejor.cinicial,mejor.cfinal);
+        return new PairCoordenadas (mejor.cinicial,mejor.cfinal);
     }
     
     public int evaluationBoard(Problema p) {
