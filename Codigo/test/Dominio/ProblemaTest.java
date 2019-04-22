@@ -208,7 +208,7 @@ public class ProblemaTest {
         instance.removeFicha(c);
         int i =c.getX();
         int j =c.getY();
-        assertEquals(instance.isnull(i,j), true);
+        assertEquals(null==instance.getFicha(c), true);
 
         // TODO review the generated test code and remove the default call to fail.
     }
