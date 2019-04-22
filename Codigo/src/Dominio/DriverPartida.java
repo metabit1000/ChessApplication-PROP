@@ -14,7 +14,7 @@ public class DriverPartida {
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
         Problema prueba = new Problema(2);
-        CtrlProblema cp = new CtrlProblema();
+        CtrlProblemas cp = new CtrlProblemas();
         while (estado != fin) {
             System.out.println("Partida:");
             System.out.println("1. Jugar");
@@ -64,7 +64,7 @@ public class DriverPartida {
                             }
                             partida = new Partida(us1, us2, prueba);
                             String c;
-                            if (us2.getcolor()) {
+                            if (us2.getColor()) {
                                 c = "blancas.";
                             } else {
                                 c = "negras";
@@ -91,7 +91,7 @@ public class DriverPartida {
                             }
                             partida = new Partida(usjm, m, prueba);
                             String c2;
-                            if (usjm.getcolor()) {
+                            if (usjm.getColor()) {
                                 c2 = "blancas.";
                             } else {
                                 c2 = "negras";

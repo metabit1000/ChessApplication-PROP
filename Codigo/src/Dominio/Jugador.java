@@ -11,13 +11,12 @@ public abstract class Jugador {
     
     public Jugador() { }    
     
-    
     public Jugador(boolean color, String nombre) {
         this.color = color;
         this.nombre = nombre;
     }  
     
-    public boolean getcolor(){
+    public boolean getColor(){
         return color;
     }
     

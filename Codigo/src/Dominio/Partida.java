@@ -86,7 +86,7 @@ public class Partida {
             if (turno) t = "blancas.";
             else t = "negras.";
             System.out.println("El turno es de las "+ t);
-            boolean T = player2.getcolor();
+            boolean T = player2.getColor();
             if (T == turno) {
                 Pair moves = player2.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
@@ -126,7 +126,7 @@ public class Partida {
             if (turno) t = "blancas.";
             else t = "negras.";
             System.out.println("El turno es de las "+ t);
-            boolean T = player1.getcolor();
+            boolean T = player1.getColor();
             if (T == turno) {
                 Pair moves = player1.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());

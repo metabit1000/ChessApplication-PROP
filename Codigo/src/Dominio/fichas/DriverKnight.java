@@ -30,6 +30,7 @@ public class DriverKnight {
             System.out.println("3. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
+            if (estado < 0 || estado > 3) System.out.println("Introduzca una opción valida");
             switch (estado) {
                 case 1:
                     Integer x,y;

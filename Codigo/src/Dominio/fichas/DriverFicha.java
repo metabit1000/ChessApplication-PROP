@@ -26,6 +26,7 @@ public class DriverFicha {
             System.out.println("5. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
+            if (estado < 0 || estado > 5) System.out.println("Introduzca una opción valida");
             switch (estado) {
                 case 1:
                     System.out.println("Ha elegido: Constructora");

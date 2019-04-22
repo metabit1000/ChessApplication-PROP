@@ -19,6 +19,10 @@ public class Maquina extends Jugador {
         this.dificultad = dificultad;
     }
     
+    public int getDificultad() {
+        return dificultad;
+    }
+    
     public Pair getNextMove(Problema p) {
         Pair moves = new Pair();
         if(dificultad == 1) moves = minimax1.decisionMinimax(p,3,color); //profundidad 3

@@ -10,24 +10,24 @@ import java.util.*;
 
 /**
  *
- * @author jota
+ * @author Joan
  */
-public class CtrlProblema {
+public class CtrlProblemas {
     private Map<String, String> Problems = new HashMap<>();
-    private static int numr = 2;
-    private static int numR = 2;
-    private static int numb = 2;
-    private static int numB = 2;
-    private static int numn = 2;
-    private static int numN = 2;
-    private static int nump = 8;
-    private static int numP = 8;
-    private static int numk = 1;
-    private static int numK = 1;
-    private static int numq = 1;
-    private static int numQ = 1;
+    private static final int numr = 2;
+    private static final int numR = 2;
+    private static final int numb = 2;
+    private static final int numB = 2;
+    private static final int numn = 2;
+    private static final int numN = 2;
+    private static final int nump = 8;
+    private static final int numP = 8;
+    private static final int numk = 1;
+    private static final int numK = 1;
+    private static final int numq = 1;
+    private static final int numQ = 1;
     
-    public CtrlProblema() {
+    public CtrlProblemas() {
             Problems.put("Problema 1. Mate en 2.", "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
             Problems.put("Problema 2. Mate en 3.", "3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w");
             Problems.put("Problema 3. Mate en 3.", "1rb4r/p1q2pnk/4pBpp/2p1P3/2P2QP1/3BR3/P4P1P/3R2K1 w");

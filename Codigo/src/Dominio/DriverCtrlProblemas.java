@@ -14,7 +14,7 @@ public class DriverCtrlProblemas {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        CtrlProblema cp = new CtrlProblema();
+        CtrlProblemas cp = new CtrlProblemas();
         while (estado != fin) {
             System.out.println("Controlador de Problema:");
             System.out.println("1. Crear problema");
