@@ -23,14 +23,14 @@ public class DriverBishop {
         String coordenada;
         while (estado != fin) {
             System.out.println("Menú:");
-            System.out.println("1. Constructor");
+            System.out.println("1. Constructora");
             System.out.println("2. PosiblesMovimientos");
             System.out.println("3. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    System.out.println("Ha elegido: Constructor");
+                    System.out.println("Ha elegido: Constructora");
                     System.out.println("Introduzca un color (n /b): ");
                     color = sc.next().charAt(0);
                     sc.nextLine();

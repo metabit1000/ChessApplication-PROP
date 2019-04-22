@@ -30,7 +30,7 @@ public class DriverMaquina {
                     p.printTablero();
                     break;
                 case 2:
-                    m = new Maquina(true,1); //juega con blancas
+                    m = new Maquina(true,"m1",1); //juega con blancas
                     Pair move = m.getNextMove(p); //prueba del minimax
                     System.out.println(move.getKey().coordToString()+" "+move.getValue().coordToString());
                     break;

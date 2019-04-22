@@ -14,8 +14,8 @@ public class Maquina extends Jugador {
     
     public Maquina() {}
     
-    public Maquina(Boolean color,int dificultad) {
-        super(color);
+    public Maquina(Boolean color,String nombre,int dificultad) {
+        super(color,nombre);
         this.dificultad = dificultad;
     }
     

@@ -3,6 +3,7 @@ package Dominio;
 import ClasesExtra.*;
 import Dominio.fichas.Ficha;
 import java.util.Scanner;
+import java.lang.System; //para nanotime()
 
 /**
  *
@@ -10,7 +11,7 @@ import java.util.Scanner;
  */
 public class Partida {
     private Problema p = new Problema();
-    private double time;
+    private long time;
     private Jugador player1;
     private Jugador player2;
     private boolean turno;
@@ -23,7 +24,7 @@ public class Partida {
         this.p = p;
     }
     
-    public Partida(Usuario j1,Maquina m,Problema  p ) {
+    public Partida(Usuario j1,Maquina m,Problema  p) {
         player1 = j1;
         player2 = m ; 
         this.p = p;
@@ -45,7 +46,7 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        
+        //No se si aqui hay que introducir a los usuarios en el ranking
         while (cont < (p.getNumMovimientos()*2) && !win) {
             String t;
             if (turno) t = "blancas.";
@@ -53,17 +54,14 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             System.out.println("Por favor, haga su movimiento");
             p.printTablero();
-            System.out.println("Introduzca coordenada origen, ex e4: ");
-            coordenada1 = sc.next();
-            sc.nextLine();
-            System.out.println("Introduzca coordenada final, ex e4: ");
-            coordenada2 = sc.next();
-            sc.nextLine();
-            int res = mover(turno,coordenada1,coordenada2);
+            Pair moves = new Pair();
+            if (turno) moves = player1.getNextMove(p);
+            else moves = player2.getNextMove(p);
+            int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
             if (res == 0) {
                 if (p.checkmate(turno)){
                     win = true;
-                    System.out.println("Fin del juego. Ganan las "+t);//DECIR LOS MOVIMIENTOS? Y EL TIEMPO
+                    System.out.println("Fin del juego. Ganan las "+t);
                 }
                 turno = !turno;
                 ++cont;
@@ -81,7 +79,8 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        
+        //introducir en el ranking al usuario
+        p.introducirElemento(player1.getNombre(), 0);
         while (cont < (p.getNumMovimientos()*2) && !win) {
             String t;
             if (turno) t = "blancas.";
@@ -94,25 +93,64 @@ public class Partida {
                 turno = !turno;
             }
             else {
-                System.out.println("Por favor, haga su movimiento");
-                p.printTablero();
-                System.out.println("Introduzca coordenada origen, ex e4: ");
-                coordenada1 = sc.next();
-                sc.nextLine();
-                System.out.println("Introduzca coordenada final, ex e4: ");
-                coordenada2 = sc.next();
-                sc.nextLine();
-                int res = mover(turno,coordenada1,coordenada2);
+                Pair moves = new Pair();
+                if (turno) moves = player1.getNextMove(p);
+                else moves = player2.getNextMove(p);
+                int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
                 if (res == 0) {
                     if (p.checkmate(turno)){
                         win = true;
-                        System.out.println("Fin del juego. Ganan las "+t);//DECIR LOS MOVIMIENTOS? Y EL TIEMPO
+                        System.out.println("Fin del juego. Ganan las "+t);
                     }
                     turno = !turno;
                     ++cont;
                 }
             }
         }
+        time = System.nanoTime();
+        System.out.println("Tiempo: "+(time/1000000000)/60); //Esto no va muy fino
+        p.actualizarRanking(player1.getNombre(), time);
+    }
+    
+    public void playMaquinaVSMaquina() {
+        int cont = 0;
+        String c;
+        boolean win = false;
+        if (p.getTurno()) c = "blancas.";
+        else c = "negras.";
+        System.out.println("En este problema, empiezan las "+c);
+        turno = p.getTurno();
+        
+        while (cont < (p.getNumMovimientos()*2) && !win) {
+            String t;
+            if (turno) t = "blancas.";
+            else t = "negras.";
+            System.out.println("El turno es de las "+ t);
+            boolean T = player1.getcolor();
+            if (T == turno) {
+                Pair moves = player1.getNextMove(p);
+                p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
+                p.printTablero();
+                if (p.checkmate(turno)){
+                        win = true;
+                        System.out.println("Fin del juego. Ganan las "+t);
+                }
+                turno = !turno;
+            }
+            else {
+                Pair moves = player2.getNextMove(p);
+                p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
+                p.printTablero();
+                if (p.checkmate(turno)){
+                        win = true;
+                        System.out.println("Fin del juego. Ganan las "+t);
+                }
+                turno = !turno;
+            }
+            ++cont;
+        }
+        time = System.nanoTime();
+        System.out.println("Tiempo: "+(time/1000000000)/60); //Esto no va muy fino
     }
     
     public int mover(boolean color,String cord1,String cord2 ){

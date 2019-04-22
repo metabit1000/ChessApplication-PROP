@@ -10,27 +10,19 @@ import java.util.Scanner;
  */
 public class Usuario extends Jugador {
     
-    private String nom;
+    //nombre en jugador
     private String pass;
     
     public Usuario() {}
     
-    public Usuario(boolean color) {
-        super(color);
+    public Usuario(boolean color, String nombre) {
+        super(color,nombre);
     }
     
-    public Usuario(String nombre, String password) {
-        nom = nombre;
+    public Usuario(String password) {
         pass = password;
     }
-    
-    public void setNombre(String nombre) {  
-        nom = nombre;
-    } 
-    
-    public String getNombre() {  
-        return this.nom;
-    }            
+               
     public String getPassword() {
         return this.pass;
     }

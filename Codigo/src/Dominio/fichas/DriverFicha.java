@@ -19,7 +19,7 @@ public class DriverFicha {
 
         while (estado != fin) {
             System.out.println("Menú:");
-            System.out.println("1. Constructor");
+            System.out.println("1. Constructora");
             System.out.println("2. GetColor");
             System.out.println("3. SetColor");
             System.out.println("4. GetId");
@@ -28,7 +28,7 @@ public class DriverFicha {
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
-                    System.out.println("Ha elegido: Constructor");
+                    System.out.println("Ha elegido: Constructora");
                     System.out.println("Introduzca un color (n /b): ");
                     color = sc.next().charAt(0);
                     sc.nextLine();
