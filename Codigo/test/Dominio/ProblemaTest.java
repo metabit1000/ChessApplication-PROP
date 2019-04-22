@@ -274,20 +274,5 @@ public class ProblemaTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
-
-    /**
-     * Test of getPosicion method, of class Problema.
-     */
-    @Test
-    public void testGetPosicion() {
-        System.out.println("getPosicion");
-        Ficha f = null;
-        Problema instance = new Problema();
-        Coordenada expResult = null;
-        Coordenada result = instance.getPosicion(f);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

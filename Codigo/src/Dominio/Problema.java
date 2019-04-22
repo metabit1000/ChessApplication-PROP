@@ -40,11 +40,6 @@ public final class Problema {
         return turnoInicial;
     }
     
-    public Coordenada getPosicion(Ficha f) {
-        Coordenada c = new Coordenada();
-        return c;
-    }
-    
     public int getNumMovimientos() {
         return numMovimientos;
     }
