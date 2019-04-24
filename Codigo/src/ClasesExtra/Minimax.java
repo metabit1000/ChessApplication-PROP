@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Minimax {   
-    class linea {  //"struct" creada para introducir valores para calcular el resultado del minimax
+    private class linea {  //"struct" creada para introducir valores para calcular el resultado del minimax
         public Coordenada cinicial;
         public Coordenada cfinal;
         public int valor;
@@ -25,6 +25,9 @@ public class Minimax {
     
     public Minimax() {}
     
+    /* Función para el minimax, te retorna de una posible posicion de una ficha en el tablero, el mejor 
+       valor mirando sus posibles movimientos y siempre teniendo en cuenta los movimientos del contrincante. Parte recursiva. 
+       Se ha optado por usar math.max y math.min para tenerlo todo en una misma función y ahorrar código que hace lo mismo*/
     public int minimax(Problema p,int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
 
@@ -48,6 +51,8 @@ public class Minimax {
         return bestMove;
     }
     
+    /* Dado un problema, una profundidad y un color para la máquina, devuelve el mejor movimiento 
+       de todos sus posibles teniendo en cuenta el color */
     public PairCoordenadas decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove= -9999;
@@ -88,6 +93,7 @@ public class Minimax {
         return new PairCoordenadas(mejor.cinicial,mejor.cfinal);
     }
     
+    /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
     public int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
@@ -104,6 +110,8 @@ public class Minimax {
         return getAbsoluteValue(piece,x,y);
     }
     
+    /* Dada una ficha del tablero, te da su valor según su tipo y color. 
+       El valor se ha escogido según la importancia de la ficha en el ajedrez*/
     public int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
