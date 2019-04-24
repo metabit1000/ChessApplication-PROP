@@ -7,7 +7,7 @@ import java.lang.System; //para nanotime()
 
 /**
  *
- * @author Jordi
+ * @author Joan
  */
 public class Partida {
     private Problema p = new Problema();
@@ -79,31 +79,54 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        //introducir en el ranking al usuario
         p.introducirElemento(player1.getNombre(), 0);
         while (cont < (p.getNumMovimientos()*2) && !win) {
             String t;
             if (turno) t = "blancas.";
             else t = "negras.";
             System.out.println("El turno es de las "+ t);
+            System.out.println("Por favor, haga su movimiento");
+            p.printTablero();
+            Pair <Coordenada,Coordenada> moves  = new Pair();
             boolean T = player2.getColor();
-            if (T == turno) {
-                Pair <Coordenada,Coordenada> moves = player2.getNextMove(p);
-                p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
-                turno = !turno;
+            if (player1.getColor()) {
+                if (T == turno) {
+                    moves = player2.getNextMove(p);
+                    p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
+                    turno = !turno;
+                }
+                else {
+                    if (turno) moves = player1.getNextMove(p);
+                    else moves = player2.getNextMove(p);
+                    int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
+                    if (res == 0) {
+                        if (p.checkmate(turno)){
+                            win = true;
+                            System.out.println("Fin del juego. Ganan las "+t);
+                        }
+                        turno = !turno;
+                        ++cont;
+                    }
+                }
             }
             else {
-                Pair <Coordenada,Coordenada> moves = new Pair();
-                if (turno) moves = player1.getNextMove(p);
-                else moves = player2.getNextMove(p);
-                int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
-                if (res == 0) {
-                    if (p.checkmate(turno)){
-                        win = true;
-                        System.out.println("Fin del juego. Ganan las "+t);
+                if (T == !turno) {
+                    if (!turno) moves = player1.getNextMove(p);
+                    else moves = player2.getNextMove(p);
+                    int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
+                    if (res == 0) {
+                        if (p.checkmate(turno)){
+                            win = true;
+                            System.out.println("Fin del juego. Ganan las "+t);
+                        }
+                        turno = !turno;
+                        ++cont;
                     }
+                }
+                else {
+                    moves = player2.getNextMove(p);
+                    p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                     turno = !turno;
-                    ++cont;
                 }
             }
         }
