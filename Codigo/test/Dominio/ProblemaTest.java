@@ -43,7 +43,7 @@ public class ProblemaTest {
     public void testGetFicha() {
         System.out.println("getFicha");
         Coordenada c = new Coordenada();
-        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
+        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2);
         c.stringToCoord("a1");
         char result = instance.getFicha(c).getID();
         assertEquals(result, 'B');
@@ -58,7 +58,7 @@ public class ProblemaTest {
         System.out.println("setFicha");
         Coordenada c = new Coordenada();
         Rook f = new Rook(true,'R');
-        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
+        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2);
         c.stringToCoord("a3");
         instance.setFicha(c, f);
         String a = instance.matrixToFen();
@@ -132,7 +132,7 @@ public class ProblemaTest {
     @Test
     public void testPrintTablero() {
         System.out.println("printTablero");
-        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
+        Problema instance = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2);
         instance.printTablero();
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -143,7 +143,7 @@ public class ProblemaTest {
     @Test
     public void testMatrixToFen() {
         System.out.println("matrixToFen");
-        Problema instance = new Problema(" w");
+        Problema instance = new Problema(" w",2);
         Rook R1 = new Rook(true ,'R');
         Rook R2 = new Rook(true ,'R');
         King k = new King(true ,'k');
@@ -184,7 +184,7 @@ public class ProblemaTest {
         System.out.println("moveFicha");
         String s1 = "a8";
         String s2 = "h8";
-        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w");
+        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w",2);
         boolean expResult = true;
         boolean result = instance.moveFicha(s1, s2);
         assertEquals(expResult, result);
@@ -198,7 +198,7 @@ public class ProblemaTest {
     public void testRemoveFicha() {
         System.out.println("removeFicha");
         Coordenada c = new Coordenada();
-        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w");
+        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w",2);
         c.stringToCoord("a8");
         instance.removeFicha(c);
         int i =c.getX();
@@ -215,7 +215,7 @@ public class ProblemaTest {
     public void testMate() {
         System.out.println("mate");
         boolean color = true;
-        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w");
+        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w",2);
         boolean expResult = true;
         boolean result = instance.mate(color);
         assertEquals(expResult, result);
@@ -229,7 +229,7 @@ public class ProblemaTest {
     public void testCheckmate() {
         System.out.println("checkmate");
         Boolean color = true;
-        Problema instance = new Problema("3R4/7Q/2pkp3/2ppp3/8/8/8 w");
+        Problema instance = new Problema("3R4/7Q/2pkp3/2ppp3/8/8/8 w",2);
         boolean expResult = true;
         boolean result = instance.checkmate(color);
         assertEquals(expResult, result);
@@ -244,7 +244,7 @@ public class ProblemaTest {
         System.out.println("undoFicha");
         String s1 = "a7";
         String s2 = "g7";
-        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w");
+        Problema instance = new Problema("R7/8/8/8/8/8/8/k7 w",2);
         Coordenada c = new Coordenada();
         c.stringToCoord(s1);
          Ficha f = instance.getFicha(c);

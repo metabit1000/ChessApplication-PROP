@@ -128,7 +128,7 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             boolean T = player1.getColor();
             if (T == turno) {
-                PairCoordenadas <Coordenada,Coordenada> moves = player1.getNextMove(p);
+                Pair <Coordenada,Coordenada> moves = player1.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){
@@ -138,7 +138,7 @@ public class Partida {
                 turno = !turno;
             }
             else {
-                PairCoordenadas <Coordenada,Coordenada> moves = player2.getNextMove(p);
+                Pair <Coordenada,Coordenada> moves = player2.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){
@@ -169,7 +169,7 @@ public class Partida {
             System.out.println("El turno es de las "+ t);
             boolean T = player1.getColor();
             if (T == turno) {
-                PairCoordenadas <Coordenada,Coordenada> moves = player1.getNextMove(p);
+                Pair <Coordenada,Coordenada> moves = player1.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){
@@ -179,7 +179,7 @@ public class Partida {
                 turno = !turno;
             }
             else {
-                PairCoordenadas <Coordenada,Coordenada> moves = player2.getNextMove(p);
+                Pair <Coordenada,Coordenada> moves = player2.getNextMove(p);
                 p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                 p.printTablero();
                 if (p.checkmate(turno)){
@@ -190,8 +190,8 @@ public class Partida {
             }
             ++cont;
         }
-        time = System.nanoTime();
-        System.out.println("Tiempo: "+(time/1000000000)/60); //Esto no va muy fino
+
+        return 0; //lo pongo para que no se queje
     }
     
     public int mover(boolean color,String cord1,String cord2 ){
