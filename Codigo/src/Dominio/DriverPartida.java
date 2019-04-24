@@ -36,6 +36,7 @@ public class DriverPartida {
                     sc.nextLine();
                     Pair <String, Integer> o = cp.seleccionProblema(problema);
                     Problema p = new Problema(o.getKey(), o.getValue());
+                    p.setNumMovimientos(o.getValue());
                     p.fenToMatrix(o.getKey());
                     p.printTablero();
                     System.out.println("Introduzca opción que desea jugar: ");
@@ -83,15 +84,15 @@ public class DriverPartida {
                             sc.nextLine();
                             if (color == 'n') {
                                 usjm = new Usuario(false,"Jose","password");
-                                m = new Maquina(true, "m1",1,prueba.getNumMovimientos());
+                                m = new Maquina(true, "m1",1,p.getNumMovimientos());
                             } else if (color == 'b') {
                                 usjm = new Usuario(true,"Jose","password");
-                                m = new Maquina(false,"m1", 1, prueba.getNumMovimientos());
+                                m = new Maquina(false,"m1", 1, p.getNumMovimientos());
                             } else {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
                             }
-                            partida = new Partida(usjm, m, prueba);
+                            partida = new Partida(usjm, m, p);
                             String c2;
                             if (usjm.getColor()) {
                                 c2 = "blancas.";
