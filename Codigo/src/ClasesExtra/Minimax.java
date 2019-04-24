@@ -9,8 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Minimax {   
-    
-    class linea {  //necesario para guardar todo para el minimax
+    class linea {  //"struct" creada para introducir valores para calcular el resultado del minimax
         public Coordenada cinicial;
         public Coordenada cfinal;
         public int valor;

@@ -4,7 +4,9 @@ package ClasesExtra;
  *
  * @author Joan
  */
-public class PairCoordenadas { //clase java pair implementada al no poder usar javafx
+
+/* Clase java pair de coordenadas implementada al no poder usar javafx */
+public class PairCoordenadas { 
     private Coordenada key;
     private Coordenada value;
     
