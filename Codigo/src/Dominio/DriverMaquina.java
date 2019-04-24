@@ -40,8 +40,8 @@ public class DriverMaquina {
                         System.out.println("No ha introducido bien la dificultad, vuelva a intentarlo.");
                         break;
                     }
-                    if (color == 'n') prueba = new Maquina(false,nombre,dif);
-                    else if (color == 'b') prueba = new Maquina(true,nombre,dif);
+                    if (color == 'n') prueba = new Maquina(false,nombre,dif, 2);
+                    else if (color == 'b') prueba = new Maquina(true,nombre,dif, 2);
                     else {
                         System.out.println("Error, vuelva a intentarlo");
                         break;
@@ -56,8 +56,8 @@ public class DriverMaquina {
                 case 3: 
                     System.out.println("Ha elegido: GetNextMove");
                     System.out.println("Se introduce el fen del enunciado para ver algún resultado");
-                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
-                    PairCoordenadas move = prueba.getNextMove(p);
+                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 100, false);
+                    Pair <Coordenada,Coordenada> move = prueba.getNextMove(p);
                     p.printTablero();
                     try {
                         System.out.println(move.getKey().coordToString()+" "+move.getValue().coordToString());

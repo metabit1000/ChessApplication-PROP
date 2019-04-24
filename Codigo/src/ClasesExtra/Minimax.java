@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Minimax {   
-    private class linea {  //"struct" creada para introducir valores para calcular el resultado del minimax
+    private class linea {  //"struct" creada para introducir valores con el objetivo de calcular el resultado del minimax
         public Coordenada cinicial;
         public Coordenada cfinal;
         public int valor;
@@ -53,7 +53,7 @@ public class Minimax {
     
     /* Dado un problema, una profundidad y un color para la máquina, devuelve el mejor movimiento 
        de todos sus posibles teniendo en cuenta el color */
-    public PairCoordenadas decisionMinimax(Problema p, int depth, boolean col) {
+    public Pair decisionMinimax(Problema p, int depth, boolean col) {
   	int bestMove;
         if (col) bestMove= -9999;
         else bestMove = 9999;
@@ -90,7 +90,7 @@ public class Minimax {
                 } 
             }   
         }
-        return new PairCoordenadas(mejor.cinicial,mejor.cfinal);
+        return new Pair(mejor.cinicial,mejor.cfinal);
     }
     
     /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
@@ -143,6 +143,7 @@ public class Minimax {
         return -1;
     }
     
+    /* Retorna las posiciones de las fichas del mismo color de todo un tablero */
     public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {

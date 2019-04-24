@@ -15,16 +15,15 @@ public final class Problema {
     
     public Problema() {}
     
-    public Problema(int numMov) {
+    public Problema(String fen, int numMov) {
+        fenToMatrix(fen);
         numMovimientos = numMov;
     }
     
-    public Problema(String fen) {
-        fenToMatrix(fen);
-    }
-    public Problema(Boolean turno) {
+    public Problema(boolean turno) {
         turnoInicial=turno;
     }
+    
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }
@@ -37,7 +36,7 @@ public final class Problema {
         turnoInicial = f;
     }
         
-    public Boolean getTurno() {
+    public boolean getTurno() {
         return turnoInicial;
     }
     

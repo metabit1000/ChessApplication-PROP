@@ -1,7 +1,7 @@
 package Dominio;
 
 import ClasesExtra.Coordenada;
-import ClasesExtra.PairCoordenadas;
+import ClasesExtra.Pair;
 import java.util.Scanner;
 
 /**
@@ -28,7 +28,7 @@ public class Usuario extends Jugador {
         this.password = password;
     }
     
-    public PairCoordenadas getNextMove(Problema p) {
+    public Pair getNextMove(Problema p) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca coordenada origen, ex e4: ");
         String c1 = sc.next();
@@ -40,7 +40,7 @@ public class Usuario extends Jugador {
         s1.stringToCoord(c1);
         Coordenada s2 = new Coordenada();
         s2.stringToCoord(c2);
-        PairCoordenadas moves = new PairCoordenadas(s1,s2);
+        Pair moves = new Pair(s1,s2);
         return moves;
     }
 }

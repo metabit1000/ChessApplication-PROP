@@ -1,5 +1,5 @@
 package Dominio;
-import ClasesExtra.Coordenada;
+import ClasesExtra.*;
 import Dominio.fichas.Bishop;
 import Dominio.fichas.King;
 import Dominio.fichas.Knight;
@@ -13,7 +13,7 @@ import java.util.*;
  * @author Joan
  */
 public class CtrlProblemas {
-    private Map<String, String> Problems = new HashMap<>();
+    private Map<String, Pair <String, Integer> > Problems = new HashMap<>();
     private static final int numr = 2;
     private static final int numR = 2;
     private static final int numb = 2;
@@ -28,17 +28,21 @@ public class CtrlProblemas {
     private static final int numQ = 1;
     
     public CtrlProblemas() {
-            Problems.put("Problema 1. Mate en 2.", "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
-            Problems.put("Problema 2. Mate en 3.", "3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w");
-            Problems.put("Problema 3. Mate en 3.", "1rb4r/p1q2pnk/4pBpp/2p1P3/2P2QP1/3BR3/P4P1P/3R2K1 w");
-            Problems.put("Inicial", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w");
+        Pair p1 = new Pair ("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 2);
+        Pair p2 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
+        Pair p3 = new Pair ("1rb4r/p1q2pnk/4pBpp/2p1P3/2P2QP1/3BR3/P4P1P/3R2K1 w", 3);
+        
+        Problems.put("Problema 1.", p1);
+        Problems.put("Problema 2.", p2);
+        Problems.put("Problema 3.", p3);
             
     }
     
-    public void addProblema(String id, String fen) {
+    public void addProblema(String id, String fen, int numM) {
         if (!existProblem(id)) {
             if (!existFEN(fen)) {
-                Problems.put(id, fen);
+                Pair x = new Pair(fen,numM);
+                Problems.put(id, x);
             }
             else System.out.println("Este problema ya está registrado.");
         }
@@ -149,17 +153,17 @@ public class CtrlProblemas {
                             
                             break;
                     }
-                    if (K != numK) {
-                                System.out.println("Tiene que haber 1 rey blanco");
-                                return false;
-                            }
-                    if (k != numk) {
-                        System.out.println("Tiene que haber 1 rey negro");
-                        return false;
-                    }
+                    
                 }
             }
-            
+        }
+        if (K != numK) {
+            System.out.println("Tiene que haber 1 rey blanco");
+            return false;
+        }
+        if (k != numk) {
+            System.out.println("Tiene que haber 1 rey negro");
+            return false;
         }
         return true;
     }
@@ -298,24 +302,30 @@ public class CtrlProblemas {
         }
     }
     
-    public String seleccionProblema(int n) {
+    public Pair <String, Integer> seleccionProblema(int n) {
         int index = 1;
-        String fen = "";
+        Pair r = new Pair();
         for(String key : Problems.keySet()) {
-            if (n == index) fen = Problems.get(key);
+            if (n == index) {
+                String fen = Problems.get(key).getKey();
+                Integer nm = Problems.get(key).getValue();
+                Pair f = new Pair(fen, nm);
+                r = f;
+            }
             ++index;
         }
-        return fen;
+        return r;
     }
-    
     public void printProblemas() {
         int index = 1;
         for(String key : Problems.keySet()) {
             System.out.println(index + ". " +key);
-            String fen = Problems.get(key);
+            String fen = Problems.get(key).getKey();
             Problema p = new Problema();
             p.fenToMatrix(fen);
             p.printTablero();
+            int nM = Problems.get(key).getValue();
+            System.out.println("Se supera en "+ nM +" movimientos.");
             ++index;
         }
     }

@@ -6,12 +6,12 @@ import java.util.Scanner;
  *
  * @author Joan
  */
-public class DriverPairCoordenadas {
+public class DriverPair {
     public static void main (String [] args){
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        PairCoordenadas prueba = new PairCoordenadas();
+        Pair <Coordenada,Coordenada> prueba = new Pair();
         String cor1,cor2;
         Coordenada pr1 = new Coordenada();
         Coordenada pr2 = new Coordenada();
@@ -37,7 +37,7 @@ public class DriverPairCoordenadas {
                     cor2 = sc.next();
                     sc.nextLine();
                     pr2.stringToCoord(cor2);
-                    prueba = new PairCoordenadas(pr1,pr2);
+                    prueba = new Pair <Coordenada,Coordenada> (pr1,pr2);
                     System.out.println("Pair de Coordenadas creado correctamente.");
                     break;
                 case 2:

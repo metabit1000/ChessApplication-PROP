@@ -24,5 +24,5 @@ public abstract class Jugador {
         return nombre;
     }
     
-    public abstract PairCoordenadas getNextMove(Problema p);
+    public abstract Pair getNextMove(Problema p);
 }

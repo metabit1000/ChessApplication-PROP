@@ -1,6 +1,6 @@
 package Dominio;
 
-import ClasesExtra.PairCoordenadas;
+import ClasesExtra.*;
 import java.util.Scanner;
 
 /**
@@ -59,9 +59,9 @@ public class DriverUsuario {
                     break;
                 case 4: 
                     System.out.println("Ha elegido: GetNextMove");
-                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
+                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 3, false);
                     System.out.println("Puede introducir cualquier coordenada: ");
-                    PairCoordenadas move = prueba.getNextMove(p);
+                    Pair <Coordenada,Coordenada> move = prueba.getNextMove(p);
                     System.out.println("Ha introducido: "+move.getKey().coordToString()+" "+move.getValue().coordToString());
                     break;
                 case 5:

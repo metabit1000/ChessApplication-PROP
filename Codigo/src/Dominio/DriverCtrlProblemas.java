@@ -19,15 +19,14 @@ public class DriverCtrlProblemas {
             System.out.println("Controlador de Problema:");
             System.out.println("1. Crear problema");
             System.out.println("2. Mostrar problemas");
-            System.out.println("4. ");
-            System.out.println("5. Exit");
+            System.out.println("3. Exit");
             Problema prueba = new Problema();
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
                 case 1:
                     System.out.println("Ha escogido: Crear problema.");
-                    Problema crear = new Problema("8/8/8/8/8/8/8/8/ w");
+                    Problema crear = new Problema("8/8/8/8/8/8/8/8/ w", 100);
                     crear.printTablero();
                     System.out.println("Desea insertar fichas? (y/n)");
                     String resp = sc.next();
@@ -51,18 +50,28 @@ public class DriverCtrlProblemas {
                         sc.nextLine();
                         if (!resp1.equals("y")) masFicha = false;
                     }
+                    if (!cp.cumpleRestriccionFichas(crear)) {
+                        break;
+                    }
                     System.out.println("Quien empieza el turno? (n/b)");
                     String t = sc.next();
                     sc.nextLine();
-                    if (t.equals("n")) crear.setTurno(false);
-                    else crear.setTurno(true);
-                    //>Problema creado. Se Juega una partida contra la máquina
+                    boolean tp;
+                    if (t.equals("n")) tp = false;
+                    else tp = true;
+                    crear.setTurno(tp);
+                    System.out.println("En cuántos movimientos gana?");
+                    int x = sc.nextInt();
+                    sc.nextLine();
+                    Partida h = new Partida();
+                    Maquina m1 = new Maquina(tp,"m1",1, x);
+                    Maquina m2 = new Maquina(!tp,"m2",1, x);
                     System.out.println("Problema superado en X movimientos");
                     String p = crear.matrixToFen();
                     System.out.println("Nombre del problema:");
                     String id = sc.next();
                     sc.nextLine();
-                    if (cp.cumpleRestriccionFichas(crear)) cp.addProblema(id,p);
+                    cp.addProblema(id,p,x);
                     System.out.println("Problema añadido.");
                     break;
                 case 2:

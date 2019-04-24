@@ -1,7 +1,6 @@
 package ClasesExtra;
 
 import Dominio.Problema;
-import ClasesExtra.PairCoordenadas;
 import java.util.Scanner;
 
 /**
@@ -32,14 +31,14 @@ public class DriverMinimax {
                 case 1:
                     System.out.println("Ha elegido: Ejemplo de funcionamiento");
                     System.out.println("Se introduce problema del enunciado del proyecto");
-                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w");
+                    Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2);
                     p.printTablero();
                     System.out.println("Introduzca profundida de busqueda del algoritmo (valores no muy altos, ej 3): ");
                     depth = sc.nextInt();
                     System.out.println("Introduzca el color que tendrá la máquina: (n/b)");
                     color = sc.next().charAt(0);
                     sc.nextLine();
-                    PairCoordenadas par = new PairCoordenadas();
+                    Pair <Coordenada,Coordenada> par = new Pair();
                     if (color == 'n') par = prueba.decisionMinimax(p,depth,false);
                     else if (color == 'b') par =  prueba.decisionMinimax(p,depth,true); 
                     else {

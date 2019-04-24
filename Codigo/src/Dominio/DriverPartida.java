@@ -2,9 +2,11 @@ package Dominio;
 
 import java.util.Scanner;
 
+import ClasesExtra.*;
+
 /**
  *
- * @author Jordi
+ * @author Joan
  */
 public class DriverPartida {
 
@@ -12,7 +14,7 @@ public class DriverPartida {
         int estado = 0;
         int fin = 1000; //por poner algo...
         Scanner sc = new Scanner(System.in);
-        Problema prueba = new Problema(2);
+        Problema prueba = new Problema();
         CtrlProblemas cp = new CtrlProblemas();
         while (estado != fin) {
             System.out.println("Partida:");
@@ -32,9 +34,10 @@ public class DriverPartida {
                     System.out.println("Introduzca el índice del problema que desea jugar: ");
                     int problema = sc.nextInt();
                     sc.nextLine();
-                    String f = cp.seleccionProblema(problema);
-                    prueba.fenToMatrix(f);
-                    prueba.printTablero();
+                    Pair <String, Integer> o = cp.seleccionProblema(problema);
+                    Problema p = new Problema(o.getKey(), o.getValue());
+                    p.fenToMatrix(o.getKey());
+                    p.printTablero();
                     System.out.println("Introduzca opción que desea jugar: ");
                     System.out.println("1. JugadorVsJugador"); 
                     System.out.println("2. JugadorVsMaquina1");
@@ -61,7 +64,7 @@ public class DriverPartida {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
                             }
-                            partida = new Partida(us1, us2, prueba);
+                            partida = new Partida(us1, us2, p);
                             String c;
                             if (us2.getColor()) {
                                 c = "blancas.";
@@ -80,10 +83,10 @@ public class DriverPartida {
                             sc.nextLine();
                             if (color == 'n') {
                                 usjm = new Usuario(false,"Jose","password");
-                                m = new Maquina(true, "m1",1);
+                                m = new Maquina(true, "m1",1,prueba.getNumMovimientos());
                             } else if (color == 'b') {
                                 usjm = new Usuario(true,"Jose","password");
-                                m = new Maquina(false,"m1", 1);
+                                m = new Maquina(false,"m1", 1, prueba.getNumMovimientos());
                             } else {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
