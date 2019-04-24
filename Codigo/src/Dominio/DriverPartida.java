@@ -104,10 +104,10 @@ public class DriverPartida {
                             break;
                         case 3: 
                             System.out.println("Maquina1VsMaquina1");
-                            Maquina m1 = new Maquina(true,"m1",1,3);
-                            Maquina m2 = new Maquina(false,"m2",1,3); //dificultad 1 y profundidad minimax 3
+                            Maquina m1 = new Maquina(true,"m1",1,p.getNumMovimientos());
+                            Maquina m2 = new Maquina(false,"m2",1,p.getNumMovimientos()); //dificultad 1 y profundidad minimax 3
                             System.out.println("Color de cada maquina escogido aleatoriamente");
-                            partida = new Partida(m1, m2, prueba);
+                            partida = new Partida(m1, m2, p);
                             System.out.println("Partida creada correctamente");
                             partida.playMaquinaVSMaquina();
                             break;
