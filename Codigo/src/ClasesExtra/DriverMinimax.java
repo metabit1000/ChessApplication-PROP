@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /* No he tenido en cuenta todas las funciones de la clase Minimax, sino un ejemplo con un problema para
 para ver el correcto funcionamiento del algoritmo y para ir probando en el momento de programarlo. 
-Tiene varias funciones triviales como evaluationBoard, getPieceValue y getAbsoluteValue*/
+Tiene varias funciones "triviales" como evaluationBoard, getPieceValue y getAbsoluteValue que se explican en la clase*/
 
 public class DriverMinimax {
     public static void main (String [] args){
@@ -21,12 +21,12 @@ public class DriverMinimax {
         int depth;
         char color;
         while (estado != fin) {
-            System.out.println("Menú:"); 
+            System.out.println("Menu:"); 
             System.out.println("1. Ejemplo de funcionamiento de minimax");
             System.out.println("2. Exit");
-            System.out.println("Introduzca un número: ");
+            System.out.println("Introduzca un numero: ");
             estado = sc.nextInt();
-            if (estado < 0 || estado > 2) System.out.println("Introduzca una opción valida");
+            if (estado < 0 || estado > 2) System.out.println("Introduzca una opcion valida");
             switch (estado) {
                 case 1:
                     System.out.println("Ha elegido: Ejemplo de funcionamiento");
@@ -35,7 +35,7 @@ public class DriverMinimax {
                     p.printTablero();
                     System.out.println("Introduzca profundida de busqueda del algoritmo (valores no muy altos, ej 3): ");
                     depth = sc.nextInt();
-                    System.out.println("Introduzca el color que tendrá la máquina: (n/b)");
+                    System.out.println("Introduzca el color que tendra la maquina: (n/b)");
                     color = sc.next().charAt(0);
                     sc.nextLine();
                     Pair <Coordenada,Coordenada> par = new Pair();
@@ -51,7 +51,7 @@ public class DriverMinimax {
                     break;      
                 case 2: 
                     estado = 1000;
-                    System.out.println("Gracias. Que tenga un buen día.");
+                    System.out.println("Gracias. Que tenga un buen dia.");
                     break;
             }
         }
