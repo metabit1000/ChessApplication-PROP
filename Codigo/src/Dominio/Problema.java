@@ -53,12 +53,13 @@ public final class Problema {
         rank.setActualizar(nombre,tiempo);
     }
     
-    public void introducirElemento(String nombre,double tiempo) {
-        rank.setElemento(nombre, tiempo);
+    public boolean existeix(String nom){
+        if(rank.existeix(nom))return true ;
+        else return false ; 
     }
     
-    public void eliminarUsuario(String nombre){
-        rank.eliminarUsuario(nombre);
+    public void introducirElemento(String nombre,double tiempo) {
+        rank.setElemento(nombre, tiempo);
     }
     
     public void printTablero() {
@@ -67,7 +68,7 @@ public final class Problema {
         for (int x=0; x < 8; x++) {
             System.out.print(count + " |");
             for (int y=0; y < 8; y++) {
-                if (board[x][y] == null) System.out.print(" ·");
+                if (board[x][y] == null) System.out.print(" +");
                 else System.out.print(" " + board[x][y].getID());
             }
             System.out.println(" |");
