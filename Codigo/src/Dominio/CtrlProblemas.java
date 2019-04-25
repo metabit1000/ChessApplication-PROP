@@ -28,14 +28,20 @@ public class CtrlProblemas {
     private static final int numQ = 1;
     
     public CtrlProblemas() {
-        Pair p1 = new Pair ("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 2);
-        Pair p2 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
-        Pair p3 = new Pair ("1rb4r/p1q2pnk/4pBpp/2p1P3/2P2QP1/3BR3/P4P1P/3R2K1 w", 3);
+        Pair p1 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
+        Pair p3 = new Pair("2R3rk/3N4/7K/3N4/8/8/r4p2/8 w", 3);
+        Pair p4 = new Pair ("4n1bk/8/6PK/8/7N/8/8/8 w", 2);
+        Pair p5 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
+        Pair p6 = new Pair ("1r6/5qpk/1b1R3B/3PpP2/8/6QP/5P2/6K1 w", 3);
+        Pair p7 = new Pair ("6RK/8/8/7Q/pkp5/ppp5/8/8 w", 1);
         
-        Problems.put("Problema 1.", p1);
-        Problems.put("Problema 2.", p2);
-        Problems.put("Problema 3.", p3);
-            
+        
+        Problems.put("Jaque dificil en tres movimientos", p1);
+        Problems.put("Jaque facil en tres movimientos", p3);
+        Problems.put("Jaque facil en dos movimientos", p4);
+        Problems.put("Jaque chungo en tres movimientos", p5);
+        Problems.put("aaaaaaaadaaa", p6);
+        Problems.put("aaaaaaaaaaa", p7);
     }
     
     public void addProblema(String id, String fen, int numM) {
