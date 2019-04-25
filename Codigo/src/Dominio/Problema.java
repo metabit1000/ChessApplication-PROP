@@ -129,11 +129,9 @@ public final class Problema {
             else if (fen.charAt(m) == ' ') {
                 ++m;
                 if (fen.charAt(m) == 'w' ) {
-                    System.out.println("salen blancas");
                     turnoInicial = true;
                 }
                 else {
-                    System.out.println("salen negras");
                     turnoInicial = false;
                 }
             }
