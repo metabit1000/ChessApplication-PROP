@@ -42,25 +42,32 @@ public class CtrlProblemas {
     }
     
     public void addProblema(String id, String fen, int numM) {
+        //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)
+        //y numM como numero de movimientos en los que se puede resolver el problema.
+        //en el caso de que el id ya exista en el map o ya exista un problema con un mismo fen, no se añadirá.
         if (!existProblem(id)) {
             if (!existFEN(fen)) {
                 Pair x = new Pair(fen,numM);
                 Problems.put(id, x);
             }
-            else System.out.println("Este problema ya está registrado.");
+            else System.out.println("Este problema ya esta registrado.");
         }
         else System.out.println("El ID ya está siendo utilizado. Pruebe con otro.");
     }
     
     public boolean existProblem(String id) {
+        //retorna true si el problema con id id existe en el mapa de Problemas
         return Problems.containsKey(id);
     }
     
     public boolean existFEN(String fen) {
+       //retorna true si el problema con fen fen existe en el mapa de Problemas
         return Problems.containsValue(fen);
     }
     
     public boolean cumpleRestriccionFichas(Problema crear) {
+        //devuelve falso si viola algunas de las restricciones basicas de un tablero de ajedrez: es decir, retornará falso en el caso de que
+        //existan mas de 2 alfiles, caballos, torres, mas de 8 peones, mas de 1 reina y no haya un rey. Estas restricciones se miran por color.
         int r = 0; 
         int n = 0; 
         int k = 0;
@@ -172,6 +179,7 @@ public class CtrlProblemas {
     }
     
     public void anadirFicha(Problema crear, String ficha, String color, String pos) {
+        //añade la ficha ficha con color color y posicion pos al tablero del problema crear
         switch(ficha) {
             case "r":
                 Rook r;
@@ -306,6 +314,7 @@ public class CtrlProblemas {
     }
     
     public Pair <String, Integer> seleccionProblema(int n) {
+        //recorre el map de Problemas y devuelve el fen y el numero de movimientos del problema del map con indice n
         int index = 1;
         Pair r = new Pair();
         for(String key : Problems.keySet()) {
@@ -320,6 +329,7 @@ public class CtrlProblemas {
         return r;
     }
     public void printProblemas() {
+        //printea todos los problemas del map Problemas, su tablero en una matriz y su numero de movimientos
         int index = 1;
         for(String key : Problems.keySet()) {
             System.out.println(index + ". " +key);
