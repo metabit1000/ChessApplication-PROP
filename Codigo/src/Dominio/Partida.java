@@ -205,28 +205,35 @@ public class Partida {
         int compare;
         if (!validar) compare = p.getNumMovimientos();
         else compare = 50;
+        p.printTablero();
         while (cont < compare && !win) {
             String t;
             if (turno) t = "blancas.";
             else t = "negras.";
             System.out.println("El turno es de las "+ t);
             System.out.println("Por favor, haga su movimiento");
-            p.printTablero();
             Pair <Coordenada,Coordenada> moves  = new Pair();
             if (turno) {
                 moves = player1.getNextMove(p);
-                if (turno == pt) ++cont;
+                if (turno == pt) {
+                    System.out.println("subo este");
+                    ++cont;
+                }
+                
             }
-            else{
+            else {
                 moves = player2.getNextMove(p);
-                if (turno == pt) ++cont;
+                if (turno == pt) {
+                    System.out.println("subo el otro");
+                    ++cont;
+                }
             }
             p.moveFicha(moves.getKey().coordToString(),moves.getValue().coordToString());
             if (p.checkmate(turno)){
                 win = true;
-                p.printTablero();
                 System.out.println("Fin del juego. Ganan las "+t);
             }
+            p.printTablero();
             turno = !turno;
             System.out.println(cont);
         }
