@@ -35,7 +35,6 @@ public class DriverPartida {
                     Pair <String, Integer> o = cp.seleccionProblema(problema);
                     Problema p = new Problema(o.getKey(), o.getValue());
                     p.setNumMovimientos(o.getValue());
-                    System.out.println(o.getValue());
                     p.fenToMatrix(o.getKey());
                     p.printTablero();
                     System.out.println("Introduzca opción que desea jugar: ");
