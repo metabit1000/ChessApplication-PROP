@@ -35,6 +35,7 @@ public class DriverPartida {
                     Pair <String, Integer> o = cp.seleccionProblema(problema);
                     Problema p = new Problema(o.getKey(), o.getValue());
                     p.setNumMovimientos(o.getValue());
+                    System.out.println(o.getValue());
                     p.fenToMatrix(o.getKey());
                     p.printTablero();
                     System.out.println("Introduzca opción que desea jugar: ");
@@ -118,18 +119,20 @@ public class DriverPartida {
                                 System.out.println("Introduzca el índice del problema que desea jugar: ");
                                 int problemaK = sc.nextInt();
                                 sc.nextLine();
-                                Pair <String, Integer> oK = cp.seleccionProblema(problema);
+                                Pair <String, Integer> oK = cp.seleccionProblema(problemaK);
                                 Problema pK = new Problema(oK.getKey(), oK.getValue());
-                                pK.setNumMovimientos(o.getValue());
-                                pK.fenToMatrix(o.getKey());
+                                pK.setNumMovimientos(oK.getValue());
+                                
+                                
+                                pK.fenToMatrix(oK.getKey());
                                 pK.printTablero();
                                 System.out.println("Maquina1VsMaquina1");
                                 Maquina m1K = new Maquina(true,"m1",1,pK.getNumMovimientos());
                                 Maquina m2K = new Maquina(false,"m2",1,pK.getNumMovimientos());
                                 System.out.println("Color de cada maquina escogido aleatoriamente");
-                                partida = new Partida(m1, m2, p);
+                                Partida partidaK = new Partida(m1K, m2K, pK);
                                 System.out.println("Partida creada correctamente");
-                                partida.playMaquinaVSMaquina(true);
+                                partidaK.playMaquinaVSMaquina(true);
                                 System.out.println("Añadir otro problema? (y/n)");
                                 char K = sc.next().charAt(0);
                                 sc.nextLine();
