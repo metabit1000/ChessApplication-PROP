@@ -5,18 +5,18 @@ import java.util.Scanner;
 
 /**
  *
- * @author Àlex
+ * @author Jordi
  */
 public class DriverCoordenada {
     public static void main (String [] args){
         int estado = 0;
-        int fin = 1000; //por poner algo...
+        int fin = 1000; //por poner un numero..
         Scanner sc = new Scanner(System.in);
         Coordenada prueba = new Coordenada();
         int x,y;
         String coordenada;
         while (estado != fin) {
-            System.out.println("Menú:");
+            System.out.println("Menu:");
             System.out.println("1. Constructora");
             System.out.println("2. GetX");
             System.out.println("3. SetX");
@@ -25,9 +25,9 @@ public class DriverCoordenada {
             System.out.println("6. StringToCoordenada");
             System.out.println("7. CoordenadaToString");
             System.out.println("8. Exit");
-            System.out.println("Introduzca un número: ");
+            System.out.println("Introduzca un numero: ");
             estado = sc.nextInt();
-            if (estado < 0 || estado > 8) System.out.println("Introduzca una opción valida");
+            if (estado < 0 || estado > 8) System.out.println("Introduzca una opcion valida");
             switch (estado) {
                 case 1:
                     System.out.println("Ha elegido: Constructora");
@@ -81,7 +81,7 @@ public class DriverCoordenada {
                     break;
                 case 8: 
                     estado = 1000;
-                    System.out.println("Gracias. Que tenga un buen día.");
+                    System.out.println("Gracias. Que tenga un buen dia.");
                     break;
             }
         }
