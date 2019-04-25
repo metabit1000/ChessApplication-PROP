@@ -19,24 +19,31 @@ public class Partida {
     public Partida() {}
     
     public Partida(Usuario j1,Usuario j2,Problema p) {
+        //creadora de partida para dos jugadores usuarios
         player1 = j1;
         player2 = j2;
         this.p = p;
     }
     
     public Partida(Usuario j1,Maquina m,Problema  p) {
+        //creadora de partida para dos jugadores: un usuario y una maquina
         player1 = j1;
         player2 = m ; 
         this.p = p;
     }
     
     public Partida(Maquina m1, Maquina m2, Problema p) {
+        //creadora de partida para dos jugadores maquina
         player1 = m1;
         player2 = m2;
         this.p = p;
     }
     
     public void playJugadores() {
+        //juegan dos jugadores usuario, para ello, cada vez que el jugador con color igual al color al que empieza el problema mueve una ficha correctamente, 
+        //incrementa cont (se cuenta como un movimiento gastado dentro de numero de movimientos de dicho problema). Si el jugador no logra ganar al otro jugador 
+        //con ese numero de movimientos, se considerará que no ha ganado la partida, en caso contrario, ganará la partida y se subirá al ranking 
+        //junto con el tiempo empleado en cada uno de sus movimientos.
         int cont = 0;
         String coordenada1,coordenada2;
         Scanner sc = new Scanner(System.in);
@@ -94,6 +101,10 @@ public class Partida {
     }
     
     public void playJugadorVSMaquina() {
+        //juega un usuario contra la maquina (minimax), para ello, cada vez que elusuario mueve una ficha correctamente, 
+        //incrementa cont (se cuenta como un movimiento gastado dentro de numero de movimientos de dicho problema). Si el jugador no logra ganar al algoritmo
+        //con ese numero de movimientos, se considerará que no ha ganado la partida, en caso contrario, ganará la partida y se subirá al ranking 
+        //junto con el tiempo empleado en cada uno de sus movimientos.
         int cont = 0;
         String coordenada1,coordenada2;
         Scanner sc = new Scanner(System.in);
@@ -189,6 +200,9 @@ public class Partida {
     }
     
     public int playMaquinaVSMaquina(boolean validar) {
+        //juegan dos maquinas, para ello, cada vez que la maquina con color igual al color al que empieza el problema mueve una ficha, 
+        //incrementa cont (se cuenta como un movimiento gastado dentro de numero de movimientos de dicho problema). Si la maquina no logra ganar al otro jugador 
+        //con ese numero de movimientos, se considerará que no ha ganado la partida, en caso contrario, ganará la partida
         int cont = 0;
         String coordenada1, coordenada2;
         Scanner sc = new Scanner(System.in);
@@ -239,6 +253,8 @@ public class Partida {
     }
     
     public int mover(boolean color,String cord1,String cord2 ){
+        //para la ficha con color color (true = blanco, false = negro), en coordenada de origen cord1 y coordenada de destino cord2,
+        //devuelve -1 si al mover esa ficha el jugador está en jaque o si esa posición es inválida. devolverá 0 en caso de ser una posicion correcta.
         Coordenada c1 = new Coordenada();
         c1.stringToCoord(cord1);
         Coordenada c2 = new Coordenada();
