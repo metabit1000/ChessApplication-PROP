@@ -63,16 +63,19 @@ public class DriverCtrlProblemas {
                     System.out.println("En cuántos movimientos gana?");
                     int x = sc.nextInt();
                     sc.nextLine();
-                    Partida h = new Partida();
-                    Maquina m1 = new Maquina(tp,"m1",1, x);
-                    Maquina m2 = new Maquina(!tp,"m2",1, x);
-                    System.out.println("Problema superado en X movimientos");
-                    String p = crear.matrixToFen();
-                    System.out.println("Nombre del problema:");
-                    String id = sc.next();
-                    sc.nextLine();
-                    cp.addProblema(id,p,x);
-                    System.out.println("Problema añadido.");
+                    Maquina m1 = new Maquina(tp,"m1",1, x+1);
+                    Maquina m2 = new Maquina(!tp,"m2",1, x+1);
+                    Partida h = new Partida(m1,m2,crear);
+                    if (x == h.playMaquinaVSMaquina(true)) {
+                        System.out.println("Problema superado en "+ x +" movimientos");
+                        String p = crear.matrixToFen();
+                        System.out.println("Nombre del problema:");
+                        String id = sc.next();
+                        sc.nextLine();
+                        cp.addProblema(id,p,x);
+                        System.out.println("Problema añadido.");
+                    } 
+                    else System.out.println("El problema no se resuelve en "+x+" movimientos.");
                     break;
                 case 2:
                     cp.printProblemas();
