@@ -135,8 +135,7 @@ public class DriverPartida {
                                 System.out.println("Añadir otro problema? (y/n)");
                                 char K = sc.next().charAt(0);
                                 sc.nextLine();
-                                if (k == 'y') masProblems = true;
-                                else masProblems = false;
+                                if (k != 'y') masProblems = false;
                             }
                             break;
                         case 4: 
