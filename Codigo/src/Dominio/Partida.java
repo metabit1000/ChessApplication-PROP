@@ -48,8 +48,8 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        //No se si aqui hay que introducir a los usuarios en el ranking
-        while (cont < (p.getNumMovimientos()*2) && !win) {
+        boolean pt = p.getTurno();
+        while (cont < (p.getNumMovimientos()) && !win) {
             String t;
             if (turno) t = "blancas.";
             else t = "negras.";
@@ -61,11 +61,13 @@ public class Partida {
                 long startTime1 = System.nanoTime();    
                 moves = player1.getNextMove(p);
                 t1 += (System.nanoTime() - startTime1);
+                if (turno == pt) ++cont;
             }
             else {
                 long startTime2 = System.nanoTime();   
                 moves = player2.getNextMove(p);
                 t2 = (System.nanoTime() - startTime2);
+                if (turno == pt) ++cont;
             }
             int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
             if (res == 0) {
@@ -76,12 +78,14 @@ public class Partida {
                     if (turno) k = t1;
                     else k = t2;
                     System.out.println("Fin del juego. Ganan las "+t+" En un tiempo de "+k/1000000000+" segundos.");
-                    p.actualizarRanking(player1.getNombre(), k);
+                    String winner;
+                    if (turno == player1.getColor()) winner = player1.getNombre();
+                    else winner = player2.getNombre();
+                    if (!p.existeix(winner)) p.introducirElemento(winner, k);
+                    else p.actualizarRanking(player1.getNombre(), k);
                 }
                 turno = !turno;
-                
             }
-            ++cont;
         }
         if (!win) {
             p.printTablero();
@@ -101,8 +105,8 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        p.introducirElemento(player1.getNombre(), 0);
-        while (cont < (p.getNumMovimientos()*2) && !win) {
+        boolean pt = p.getTurno();
+        while (cont < p.getNumMovimientos() && !win) {
             String t;
             if (turno) t = "blancas.";
             else t = "negras.";
@@ -116,16 +120,22 @@ public class Partida {
                     moves = player2.getNextMove(p);
                     p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                     turno = !turno;
+                    //if (turno == pt) ++cont;
+                    System.out.println(cont);
                 }
                 else {
                     if (turno) {
                         long startTime1 = System.nanoTime();
                         moves = player1.getNextMove(p);
                         t1 += (System.nanoTime() - startTime1);
+                        if (turno == pt) ++cont;
+                        System.out.println(cont);
                     }
                     else moves = player2.getNextMove(p);
                     int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
                     if (res == 0) {
+                        //if (turno == pt) ++cont;
+                        //System.out.println(cont);
                         if (p.checkmate(turno)){
                             p.printTablero();
                             win = true;
@@ -133,7 +143,11 @@ public class Partida {
                             if (turno) k = t1;
                             else k = t2;
                             System.out.println("Fin del juego. Ganan las "+t+" En un tiempo de "+k/1000000000+" segundos.");
-                            p.actualizarRanking(player1.getNombre(), k);
+                            String winner;
+                            if (turno == player1.getColor()) winner = player1.getNombre();
+                            else winner = player2.getNombre();
+                            if (!p.existeix(winner)) p.introducirElemento(winner, k);
+                            else p.actualizarRanking(player1.getNombre(), k);
                         }
                         turno = !turno;
                     }
@@ -145,10 +159,12 @@ public class Partida {
                         long startTime1 = System.nanoTime();
                         moves = player1.getNextMove(p);
                         t1 += (System.nanoTime() - startTime1);
+                        if (turno == pt) ++cont;
                     }
                     else moves = player2.getNextMove(p);
                     int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
                     if (res == 0) {
+                        if (turno == pt) ++cont;
                         if (p.checkmate(turno)){
                             p.printTablero();
                             win = true;
@@ -164,10 +180,10 @@ public class Partida {
                 else {
                     moves = player2.getNextMove(p);
                     p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
+                    if (turno == pt) ++cont;
                     turno = !turno;
                 }
             }
-            ++cont;
         }
         if (!win) {
             p.printTablero();
@@ -175,9 +191,9 @@ public class Partida {
         }
     }
     
-    public void playMaquinaVSMaquina() {
+    public int playMaquinaVSMaquina(boolean validar) {
         int cont = 0;
-        String coordenada1,coordenada2;
+        String coordenada1, coordenada2;
         Scanner sc = new Scanner(System.in);
         String c;
         boolean win = false;
@@ -185,7 +201,11 @@ public class Partida {
         else c = "negras.";
         System.out.println("En este problema, empiezan las "+c);
         turno = p.getTurno();
-        while (cont < (p.getNumMovimientos()*42) && !win) {
+        boolean pt = p.getTurno();
+        int compare;
+        if (!validar) compare = p.getNumMovimientos();
+        else compare = 50;
+        while (cont < compare && !win) {
             String t;
             if (turno) t = "blancas.";
             else t = "negras.";
@@ -194,19 +214,27 @@ public class Partida {
             p.printTablero();
             Pair <Coordenada,Coordenada> moves  = new Pair();
             if (turno) {
-                ++cont;
                 moves = player1.getNextMove(p);
+                if (turno == pt) ++cont;
             }
-            else moves = player2.getNextMove(p);
+            else{
+                moves = player2.getNextMove(p);
+                if (turno == pt) ++cont;
+            }
             p.moveFicha(moves.getKey().coordToString(),moves.getValue().coordToString());
             if (p.checkmate(turno)){
                 win = true;
+                p.printTablero();
                 System.out.println("Fin del juego. Ganan las "+t);
             }
             turno = !turno;
-            
             System.out.println(cont);
         }
+        if (!win) {
+            p.printTablero();
+            System.out.println("Se ha excedido el número de movimientos del problema.");
+        }
+        return cont;
     }
     
     public int mover(boolean color,String cord1,String cord2 ){
