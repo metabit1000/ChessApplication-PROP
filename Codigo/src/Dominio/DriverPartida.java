@@ -20,8 +20,6 @@ public class DriverPartida {
             System.out.println("Partida:");
             System.out.println("1. Jugar");
             System.out.println("2. Exit");
-            
-            //faltaria logout y hacer booleano en usuarios que diga si un usuario está logeado..de cara a la segunda entrega
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
@@ -105,11 +103,39 @@ public class DriverPartida {
                         case 3: 
                             System.out.println("Maquina1VsMaquina1");
                             Maquina m1 = new Maquina(true,"m1",1,p.getNumMovimientos());
-                            Maquina m2 = new Maquina(false,"m2",1,p.getNumMovimientos()); //dificultad 1 y profundidad minimax 3
+                            Maquina m2 = new Maquina(false,"m2",1,p.getNumMovimientos());
                             System.out.println("Color de cada maquina escogido aleatoriamente");
                             partida = new Partida(m1, m2, p);
                             System.out.println("Partida creada correctamente");
-                            partida.playMaquinaVSMaquina();
+                            partida.playMaquinaVSMaquina(true);
+                            System.out.println("Añadir otro problema? (y/n)");
+                            char k = sc.next().charAt(0);
+                            sc.nextLine();
+                            boolean masProblems = false;
+                            if (k == 'y') masProblems = true;
+                            while (masProblems) {
+                                cp.printProblemas();
+                                System.out.println("Introduzca el índice del problema que desea jugar: ");
+                                int problemaK = sc.nextInt();
+                                sc.nextLine();
+                                Pair <String, Integer> oK = cp.seleccionProblema(problema);
+                                Problema pK = new Problema(oK.getKey(), oK.getValue());
+                                pK.setNumMovimientos(o.getValue());
+                                pK.fenToMatrix(o.getKey());
+                                pK.printTablero();
+                                System.out.println("Maquina1VsMaquina1");
+                                Maquina m1K = new Maquina(true,"m1",1,pK.getNumMovimientos());
+                                Maquina m2K = new Maquina(false,"m2",1,pK.getNumMovimientos());
+                                System.out.println("Color de cada maquina escogido aleatoriamente");
+                                partida = new Partida(m1, m2, p);
+                                System.out.println("Partida creada correctamente");
+                                partida.playMaquinaVSMaquina(true);
+                                System.out.println("Añadir otro problema? (y/n)");
+                                char K = sc.next().charAt(0);
+                                sc.nextLine();
+                                if (k == 'y') masProblems = true;
+                                else masProblems = false;
+                            }
                             break;
                         case 4: 
                             System.out.println("Maquina1VsMaquina2");
