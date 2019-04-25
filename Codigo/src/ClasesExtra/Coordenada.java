@@ -2,7 +2,7 @@ package ClasesExtra;
 
 /**
  *
- * @author Àlex
+ * @author Jordi
  */
 public class Coordenada {
     private int x;
@@ -31,13 +31,14 @@ public class Coordenada {
         return y;
     }
     
-    public void printxy() {  //para pruebas de fichas
+    public void printxy() {  
         System.out.println(coordToString());
     }
     
     public void stringToCoord(String s) {
+        //Dado un string, se convierte a coordenada (de la clase)
         Boolean first = true;
-        if (s.length() != 2) System.out.println("No es una coordenada válida.");
+        if (s.length() != 2) System.out.println("No es una coordenada valida.");
         for (int i = 0; i < s.length(); i++) {
             int o;
             if (first) {
@@ -121,6 +122,7 @@ public class Coordenada {
     }
     
     public String coordToString() {
+        //Dada una coordenada, se convierte en String para facilitar la comprensión del tablero
         String s = "";
         switch(this.getY()) {
             case 0:
