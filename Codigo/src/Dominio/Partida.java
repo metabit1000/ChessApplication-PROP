@@ -120,8 +120,6 @@ public class Partida {
                     moves = player2.getNextMove(p);
                     p.moveFicha(moves.getKey().coordToString(), moves.getValue().coordToString());
                     turno = !turno;
-                    //if (turno == pt) ++cont;
-                    System.out.println(cont);
                 }
                 else {
                     if (turno) {
@@ -129,7 +127,6 @@ public class Partida {
                         moves = player1.getNextMove(p);
                         t1 += (System.nanoTime() - startTime1);
                         if (turno == pt) ++cont;
-                        System.out.println(cont);
                     }
                     else moves = player2.getNextMove(p);
                     int res = mover(turno,moves.getKey().coordToString(),moves.getValue().coordToString());
@@ -216,7 +213,6 @@ public class Partida {
             if (turno) {
                 moves = player1.getNextMove(p);
                 if (turno == pt) {
-                    System.out.println("subo este");
                     ++cont;
                 }
                 
@@ -224,7 +220,6 @@ public class Partida {
             else {
                 moves = player2.getNextMove(p);
                 if (turno == pt) {
-                    System.out.println("subo el otro");
                     ++cont;
                 }
             }
@@ -235,7 +230,6 @@ public class Partida {
             }
             p.printTablero();
             turno = !turno;
-            System.out.println(cont);
         }
         if (!win) {
             p.printTablero();
