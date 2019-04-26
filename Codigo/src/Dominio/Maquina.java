@@ -1,7 +1,6 @@
 package Dominio;
 
 import ClasesExtra.*;
-import Dominio.Problema;
 
 /**
  *
@@ -18,7 +17,7 @@ public class Maquina extends Jugador {
     public Maquina(Boolean color,String nombre,int dificultad, int profundidad) {
         super(color,nombre);
         this.dificultad = dificultad;
-        this.d = profundidad;
+        d = profundidad;
     }
     
     public int getDificultad() {
