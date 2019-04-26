@@ -27,7 +27,7 @@ public class Maquina extends Jugador {
     public Pair getNextMove(Problema p) {
         Pair moves = new Pair();
         if(dificultad == 1){
-            if (d == 1) moves = minimax1.decisionMinimax(p,3,color); //se queda corto de movimientos...y no lo hace bien con 2d-1
+            if (d == 1) moves = minimax1.decisionMinimax(p,3,color); //se queda corto de movimientos...y no lo hace bien con 2d-1. Se mejorará en la siguiente entrega
             else moves = minimax1.decisionMinimax(p,2*d-1,color); 
         } 
         //else if (dificultad == 2) minimax2.decisionMinimax(p); //alphaBeta...siguiente entrega
