@@ -21,14 +21,17 @@ public class Usuario extends Jugador {
     }
        
     public String getPassword() {
+        // devulve la contraseña del usuario
         return this.password;
     }
     
     public void setPassword(String password) {
+        //esta función pone la contraseña password a la contraseña del usuario
         this.password = password;
     }
     
     public Pair getNextMove(Problema p) {
+        // operación que devuelve un Pair de dos coordenadas
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca coordenada origen, ex e4: ");
         String c1 = sc.next();
