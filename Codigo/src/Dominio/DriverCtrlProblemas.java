@@ -63,8 +63,8 @@ public class DriverCtrlProblemas {
                     System.out.println("En cuántos movimientos gana?");
                     int x = sc.nextInt();
                     sc.nextLine();
-                    Maquina m1 = new Maquina(tp,"m1",1, x);
-                    Maquina m2 = new Maquina(!tp,"m2",1, x);
+                    Maquina m1 = new MaquinaEasy(tp,"m1",x);
+                    Maquina m2 = new MaquinaEasy(!tp,"m2", x);
                     Partida h = new Partida(m1,m2,crear);
                     if (x == h.playMaquinaVSMaquina(true)) {
                         System.out.println("Problema superado en "+ x +" movimientos");

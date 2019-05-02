@@ -76,16 +76,16 @@ public class DriverPartida {
                         case 2:
                             System.out.println("JugadorVsMaquina1");
                             Usuario usjm = new Usuario();
-                            Maquina m = new Maquina();
+                            Maquina m = new MaquinaEasy();
                             System.out.println("Jugador, ¿color? (n/b)");
                             color = sc.next().charAt(0);
                             sc.nextLine();
                             if (color == 'n') {
                                 usjm = new Usuario(false,"Jose","password");
-                                m = new Maquina(true, "m1",1,p.getNumMovimientos());
+                                m = new MaquinaEasy(true, "m1",p.getNumMovimientos());
                             } else if (color == 'b') {
                                 usjm = new Usuario(true,"Jose","password");
-                                m = new Maquina(false,"m1", 1, p.getNumMovimientos());
+                                m = new MaquinaEasy(false,"m1",p.getNumMovimientos());
                             } else {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
@@ -102,8 +102,8 @@ public class DriverPartida {
                             break;
                         case 3: 
                             System.out.println("Maquina1VsMaquina1");
-                            Maquina m1 = new Maquina(true,"m1",1,p.getNumMovimientos());
-                            Maquina m2 = new Maquina(false,"m2",1,p.getNumMovimientos());
+                            Maquina m1 = new MaquinaEasy(true,"m1",p.getNumMovimientos());
+                            Maquina m2 = new MaquinaEasy(false,"m2",p.getNumMovimientos());
                             System.out.println("Color de cada maquina escogido aleatoriamente");
                             partida = new Partida(m1, m2, p);
                             System.out.println("Partida creada correctamente");
@@ -126,8 +126,8 @@ public class DriverPartida {
                                 pK.fenToMatrix(oK.getKey());
                                 pK.printTablero();
                                 System.out.println("Maquina1VsMaquina1");
-                                Maquina m1K = new Maquina(true,"m1",1,pK.getNumMovimientos());
-                                Maquina m2K = new Maquina(false,"m2",1,pK.getNumMovimientos());
+                                Maquina m1K = new MaquinaEasy(true,"m1",pK.getNumMovimientos());
+                                Maquina m2K = new MaquinaEasy(false,"m2",pK.getNumMovimientos());
                                 System.out.println("Color de cada maquina escogido aleatoriamente");
                                 Partida partidaK = new Partida(m1K, m2K, pK);
                                 System.out.println("Partida creada correctamente");

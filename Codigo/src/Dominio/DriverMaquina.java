@@ -12,16 +12,15 @@ public class DriverMaquina {
         int estado = 0;
         int fin = 1000; 
         Scanner sc = new Scanner(System.in);
-        Maquina prueba = new Maquina();
+        Maquina prueba = new MaquinaEasy();
         char color;
         String nombre;
         int dif;
         while (estado != fin) {
             System.out.println("Menú:");
             System.out.println("1. Constructora");
-            System.out.println("2. GetDificultad");
-            System.out.println("3. GetNextMove");
-            System.out.println("4. Salir");
+            System.out.println("2. GetNextMove");
+            System.out.println("3. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             if (estado < 0 || estado > 4) System.out.println("Introduzca una opción valida");
@@ -40,20 +39,15 @@ public class DriverMaquina {
                         System.out.println("No ha introducido bien la dificultad, vuelva a intentarlo.");
                         break;
                     }
-                    if (color == 'n') prueba = new Maquina(false,nombre,dif, 2);
-                    else if (color == 'b') prueba = new Maquina(true,nombre,dif, 2);
+                    if (color == 'n') prueba = new MaquinaEasy(false,nombre, 2);
+                    else if (color == 'b') prueba = new MaquinaEasy(true,nombre, 2);
                     else {
                         System.out.println("Error, vuelva a intentarlo");
                         break;
                     }
                     System.out.println("Maquina creada correctamente.");
                     break;
-                case 2:
-                    System.out.println("Ha elegido: GetDificultad");
-                    if (prueba.getDificultad() != 0) System.out.println(prueba.getDificultad());
-                    else System.out.println("Debe crear antes la máquina, vuelva a intentarlo.");
-                    break;
-                case 3: 
+                case 2: 
                     System.out.println("Ha elegido: GetNextMove");
                     System.out.println("Se introduce el fen del enunciado para ver algún resultado");
                     Problema p = new Problema("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 2);
@@ -66,7 +60,7 @@ public class DriverMaquina {
                         break;
                     }
                     break;
-                case 4: 
+                case 3: 
                     estado = 1000;
                     break;
             }
