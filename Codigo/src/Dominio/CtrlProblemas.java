@@ -30,15 +30,17 @@ public class CtrlProblemas {
     public CtrlProblemas() {
         Pair p1 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
         Pair p2 = new Pair("2R3rk/3N4/7K/3N4/8/8/r4p2/8 w", 3);
-//        Pair p3 = new Pair ("4n1bk/8/6PK/8/7N/8/8/8 w", 2);
+         Pair p3 = new Pair ("4n1bk/8/6PK/8/7N/8/8/8 w", 2);
 //        Pair p4 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
 //        Pair p5 = new Pair ("1r6/5qpk/1b1R3B/3PpP2/8/6QP/5P2/6K1 w", 3);
+    Pair p6 = new Pair ("6RK/7Q/pkp5/ppp5/8/8/8/8 w",1);
         
         Problems.put("Jaque dificil en tres movimientos", p1);
         Problems.put("Jaque facil en tres movimientos", p2);
-//        Problems.put("Jaque facil en dos movimientos", p3);
+          Problems.put("Jaque facil en dos movimientos", p3);
 //        Problems.put("Jaque chungo en tres movimientos", p4);
 //        Problems.put("Jaque sencillo en tres movimientos", p5);
+    Problems.put("Jaque en 1 mov", p6);
     }
     
     public void addProblema(String id, String fen, int numM) {
