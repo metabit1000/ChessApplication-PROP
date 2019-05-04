@@ -16,7 +16,7 @@ public class MaquinaEasy extends Maquina {
     public Pair getNextMove(Problema p) {
         Minimax m = new Minimax();
         Pair move = new Pair();
-        move = m.decisionMinimax(p, d, color);
+        move = m.decisionMinimax(p, 2*d-1, color);
         return move;
     }
 }
