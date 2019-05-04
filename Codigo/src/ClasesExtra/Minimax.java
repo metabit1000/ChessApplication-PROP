@@ -9,33 +9,14 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class Minimax {   
-    private class linea {  //"struct" creada para introducir valores con el objetivo de calcular el resultado del minimax
-        public Coordenada cinicial;
-        public Coordenada cfinal;
-        public int valor;
-        
-        public linea() {}
-        
-        public linea(Coordenada c1,Coordenada c2,int valor) {
-            cinicial = c1;
-            cfinal = c2;
-            this.valor = valor;
-        }
-    };
-    
     public Minimax() {}
-    
-    /* Función para el minimax, te retorna de una posible posicion de una ficha en el tablero, el mejor 
-       valor mirando sus posibles movimientos y siempre teniendo en cuenta los movimientos del contrincante. Parte recursiva. 
-       Se ha optado por usar math.max y math.min para tenerlo todo en una misma función y ahorrar código que hace lo mismo*/
-    public int minimax(Problema p,int depth, boolean col) {
+   
+    public int min(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
-
+        
         ArrayList<Coordenada> moves = posiciones(p,col);
         Coordenada currMove,movePosible;
-        int bestMove;
-        if (col) bestMove = -9999;
-        else bestMove = 9999;
+        int lowestSeenValue = 9999;
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
             ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
@@ -43,22 +24,42 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                if (col) bestMove = Math.max(bestMove, minimax(p,depth-1,!col));
-                else bestMove = Math.min(bestMove, minimax(p,depth-1,!col));
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);   
+                int val = max(p,depth-1,!col);
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                if (val < lowestSeenValue) lowestSeenValue = val;
             }
         }
-        return bestMove;
+        return lowestSeenValue;
+    }
+    
+    public int max(Problema p, int depth, boolean col) {
+        if (depth == 0) return evaluationBoard(p);
+        
+        ArrayList<Coordenada> moves = posiciones(p,col);
+        Coordenada currMove,movePosible;
+        int highestSeenValue = -9999;
+        for (int i = 0; i < moves.size(); ++i) {
+            currMove = moves.get(i);
+            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+            for (int x = 0; x < movesPosibles.size(); ++x) { 
+                movePosible = movesPosibles.get(x);
+                Ficha o = p.getFicha(movePosible);
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                int val = min(p,depth-1,!col);
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                if (val > highestSeenValue) highestSeenValue = val;
+            }
+        }
+        return highestSeenValue;
     }
     
     /* Dado un problema, una profundidad y un color para la máquina, devuelve el mejor movimiento 
        de todos sus posibles teniendo en cuenta el color */
     public Pair decisionMinimax(Problema p, int depth, boolean col) {
-  	int bestMove;
-        if (col) bestMove= -9999;
-        else bestMove = 9999;
+        int highestSeenValue = -9999;
+        int lowestSeenValue = 9999;
         Coordenada currMove,movePosible;
-        ArrayList<linea> datos = new ArrayList();
+        Coordenada bestCurrMove = new Coordenada(), bestMovePosible = new Coordenada();
         ArrayList<Coordenada> moves = posiciones(p,col);
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
@@ -67,30 +68,24 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                int val = minimax(p,depth-1,!col); //cambio al oponente
+                if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
+                int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
+                if (!p.mate(!col)) {
+                    if (col & val > highestSeenValue) {
+                        highestSeenValue = val;
+                        bestCurrMove = currMove; //coordenada origin
+                        bestMovePosible = movePosible; //coordenada destino
+                    } else if (!col & val < lowestSeenValue) {
+                        lowestSeenValue = val;
+                        bestCurrMove = currMove; 
+                        bestMovePosible = movePosible; 
+                    }
+                }
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
-                
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                if (!p.mate(!col)) datos.add(new linea(currMove,movePosible,val));
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
-        linea mejor = new linea();
-        for (int z = 0; z < datos.size(); ++z) {
-            if (col) {
-                if (datos.get(z).valor > bestMove) {
-                    bestMove = datos.get(z).valor;
-                    mejor = datos.get(z);
-                } 
-            }
-            else {
-                if (datos.get(z).valor < bestMove) {
-                    bestMove = datos.get(z).valor;
-                    mejor = datos.get(z);
-                } 
-            }   
-        }
-        return new Pair(mejor.cinicial,mejor.cfinal);
+        return new Pair(bestCurrMove,bestMovePosible);
     }
     
     /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
