@@ -9,21 +9,6 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class MinimaxAlphaBeta {    //EN PROCESO...
-    
-    class linea {  //necesario para guardar todo para el minimax
-        public Coordenada cinicial;
-        public Coordenada cfinal;
-        public int valor;
-        
-        public linea() {}
-        
-        public linea(Coordenada c1,Coordenada c2,int valor) {
-            cinicial = c1;
-            cfinal = c2;
-            this.valor = valor;
-        }
-    };
-    
     int [][] pawnEvalWhite =
     {
         {0,  0,  0,  0,  0,  0,  0,  0},
@@ -106,50 +91,13 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
 
     public MinimaxAlphaBeta() {}
     
-    public int [][] reverseArray(int [][] array) {
-        int xn = 8;
-        int yn = 8;
-        int res [][] = new int[xn][yn];
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                res[xn-1][yn-1] = array[i][j];
-                --yn;
-            }
-            yn = 8;
-            --xn;
-        }
-        return res;
-    }
-    
-    public int minimax(Problema p,int depth, boolean col) {
-        if (depth == 0) return evaluationBoard(p);
-
-        ArrayList<Coordenada> moves = posiciones(p,col);
-        Coordenada currMove,movePosible;
-        int bestMove;
-        if (col) bestMove = -9999;
-        else bestMove = 9999;
-        for (int i = 0; i < moves.size(); ++i) {
-            currMove = moves.get(i);
-            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
-            for (int x = 0; x < movesPosibles.size(); ++x) { 
-                movePosible = movesPosibles.get(x);
-                Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                if (col) bestMove = Math.max(bestMove, minimax(p,depth-1,!col));
-                else bestMove = Math.min(bestMove, minimax(p,depth-1,!col));
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);   
-            }
-        }
-        return bestMove;
-    }
-    
+    /* Dado un problema, una profundidad y un color para la máquina, devuelve el mejor movimiento 
+       de todos sus posibles teniendo en cuenta el color */
     public Pair decisionMinimax(Problema p, int depth, boolean col) {
-  	int bestMove;
-        if (col) bestMove= -9999;
-        else bestMove = 9999;
+        int highestSeenValue = -9999;
+        int lowestSeenValue = 9999;
         Coordenada currMove,movePosible;
-        ArrayList<linea> datos = new ArrayList();
+        Coordenada bestCurrMove = new Coordenada(), bestMovePosible = new Coordenada();
         ArrayList<Coordenada> moves = posiciones(p,col);
         for (int i = 0; i < moves.size(); ++i) {
             currMove = moves.get(i);
@@ -158,30 +106,69 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                int val = minimax(p,depth-1,!col); //cambio al oponente
-                System.out.println(currMove.coordToString()+" a "+movePosible.coordToString()+" valor: "+val);
+                if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
+                int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
+                if (!p.mate(!col)) {
+                    if (col & val > highestSeenValue) {
+                        highestSeenValue = val;
+                        bestCurrMove = currMove; //coordenada origin
+                        bestMovePosible = movePosible; //coordenada destino
+                    } else if (!col & val < lowestSeenValue) {
+                        lowestSeenValue = val;
+                        bestCurrMove = currMove; 
+                        bestMovePosible = movePosible; 
+                    }
+                }
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
-                datos.add(new linea(currMove,movePosible,val));
+                System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
-        linea mejor = new linea();
-        for (int z = 0; z < datos.size(); ++z) {
-            if (col) {
-                if (datos.get(z).valor > bestMove) {
-                    bestMove = datos.get(z).valor;
-                    mejor = datos.get(z);
-                } 
-            }
-            else {
-                if (datos.get(z).valor < bestMove) {
-                    bestMove = datos.get(z).valor;
-                    mejor = datos.get(z);
-                } 
-            }   
-        }
-        return new Pair (mejor.cinicial,mejor.cfinal);
+        return new Pair(bestCurrMove,bestMovePosible);
     }
     
+    public int min(Problema p, int depth, boolean col) {
+        if (depth == 0) return evaluationBoard(p);
+        
+        ArrayList<Coordenada> moves = posiciones(p,col);
+        Coordenada currMove,movePosible;
+        int lowestSeenValue = 9999;
+        for (int i = 0; i < moves.size(); ++i) {
+            currMove = moves.get(i);
+            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+            for (int x = 0; x < movesPosibles.size(); ++x) { 
+                movePosible = movesPosibles.get(x);
+                Ficha o = p.getFicha(movePosible);
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                int val = max(p,depth-1,!col);
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                if (val < lowestSeenValue) lowestSeenValue = val;
+            }
+        }
+        return lowestSeenValue;
+    }
+    
+    public int max(Problema p, int depth, boolean col) {
+        if (depth == 0) return evaluationBoard(p);
+        
+        ArrayList<Coordenada> moves = posiciones(p,col);
+        Coordenada currMove,movePosible;
+        int highestSeenValue = -9999;
+        for (int i = 0; i < moves.size(); ++i) {
+            currMove = moves.get(i);
+            ArrayList<Coordenada> movesPosibles = p.getFicha(currMove).posiblesMovimientos(p, currMove);
+            for (int x = 0; x < movesPosibles.size(); ++x) { 
+                movePosible = movesPosibles.get(x);
+                Ficha o = p.getFicha(movePosible);
+                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                int val = min(p,depth-1,!col);
+                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                if (val > highestSeenValue) highestSeenValue = val;
+            }
+        }
+        return highestSeenValue;
+    }
+    
+    /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
     public int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
@@ -198,6 +185,8 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
         return getAbsoluteValue(piece,x,y);
     }
     
+    /* Dada una ficha del tablero, te da su valor según su tipo y color. 
+       El valor se ha escogido según la importancia de la ficha en el ajedrez*/
     public int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
@@ -220,15 +209,16 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
             case 'Q':
                 return 150 + evalQueen[y][x];
             case 'q':
-                return (-1)*150 + evalQueen[y][x];
+                return (-1)*150  + evalQueen[y][x];
             case 'K':
-                return 900 + (kingEvalWhite[y][x]);
+                return 900 + kingEvalWhite[y][x];
             case 'k':
-                return (-1)*900 + (kingEvalBlack[y][x]);
+                return (-1)*900 + kingEvalBlack[y][x];
         } 
         return -1;
     }
     
+    /* Retorna las posiciones de las fichas del mismo color de todo un tablero */
     public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
@@ -239,5 +229,20 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
             }
         }
         return moves;
+    }
+    
+    public int [][] reverseArray(int [][] array) {
+        int xn = 8;
+        int yn = 8;
+        int res [][] = new int[xn][yn];
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                res[xn-1][yn-1] = array[i][j];
+                --yn;
+            }
+            yn = 8;
+            --xn;
+        }
+        return res;
     }
 }
