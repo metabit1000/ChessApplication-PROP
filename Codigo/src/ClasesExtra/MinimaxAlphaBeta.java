@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Àlex
  */
-public class MinimaxAlphaBeta {    //EN PROCESO...
+public class MinimaxAlphaBeta {    
     int [][] pawnEvalWhite =
     {
         {0,  0,  0,  0,  0,  0,  0,  0},
@@ -106,8 +106,8 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
-                int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
+                //if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  
+                int val = col ? min(p,depth-1,-10000,10000,!col): max(p,depth-1,-10000,10000,!col);
                 if (!p.mate(!col)) {
                     if (col & val > highestSeenValue) {
                         highestSeenValue = val;
@@ -120,13 +120,13 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
                     }
                 }
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
-                System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
+                //System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
         return new Pair(bestCurrMove,bestMovePosible);
     }
     
-    public int min(Problema p, int depth, boolean col) {
+    public int min(Problema p, int depth, int alpha, int beta, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -139,15 +139,17 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                int val = max(p,depth-1,!col);
+                int val = max(p,depth-1,alpha,beta,!col);
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
                 if (val < lowestSeenValue) lowestSeenValue = val;
+                beta = Math.min(beta, val);
+                if (beta <= alpha) return lowestSeenValue; //rompo poda
             }
         }
         return lowestSeenValue;
     }
     
-    public int max(Problema p, int depth, boolean col) {
+    public int max(Problema p, int depth, int alpha, int beta, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -160,9 +162,11 @@ public class MinimaxAlphaBeta {    //EN PROCESO...
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                int val = min(p,depth-1,!col);
+                int val = min(p,depth-1,alpha,beta,!col);
                 p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
                 if (val > highestSeenValue) highestSeenValue = val;
+                alpha = Math.max(alpha,val);
+                if (beta <= alpha) return highestSeenValue; //rompo poda
             }
         }
         return highestSeenValue;
