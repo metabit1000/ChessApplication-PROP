@@ -68,7 +68,7 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
+                if (p.checkmate(col)) return new Pair(currMove,movePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
                 int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
                 if (!p.mate(!col)) {
                     if (col & val > highestSeenValue) {
