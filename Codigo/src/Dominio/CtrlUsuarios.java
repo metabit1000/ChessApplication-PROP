@@ -1,12 +1,13 @@
 package Dominio;
-import java.util.*;
+import Persistencia.CtrlDatosUsuarios;
+import java.io.IOException;
 
 /**
  *
  * @author joan
  */
 public class CtrlUsuarios {    
-    private final Map<String,String> Users = new HashMap<>();  //usuarios registrados 
+    CtrlDatosUsuarios cj = new CtrlDatosUsuarios();
     private String UserLogged;
     private String Guest;
     
@@ -24,39 +25,53 @@ public class CtrlUsuarios {
         else return "No hay guest disponible";
     }
     
-    public void registrarUsuario(String nom, String pass) {
+    public void registrarUsuario(String nom, String pass) throws IOException {
         //da de alta un usuario con nombre nom y contraseña pass. en el caso de que ya exista un usuario con nombre nom, no se dará de alta
         //y en el caso de que la contraseña no cumpla las condiciones tampoco se dará de alta.
-        if (!existUser(nom)) {
+        Usuario usIntroducido;
+        usIntroducido = new Usuario(false,nom,pass); //color aleatorio
+        if (!existUser(usIntroducido)) {
             if (correctPass(pass)) {
-                Users.put(nom, pass);
-                System.out.println("Usuario registrado correctamente.");
+                try {
+                    cj.escribirUsuario(usIntroducido);
+                    System.out.println("Usuario registrado correctamente.");
+                } catch(IOException e) {
+                    System.out.println("Error al introducir el usuario");
+                }
             }
             else System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         }
         else System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
     }
     
-    public void loginUsuario(String nom, String pass) {
-        //el usuario con nombre nom y contraseñas pass hace login en el caso de que el nombre de usuario y contraseña coincidan con un usuario
-        //dado de alta previamente
-        if (!Users.containsKey(nom)) System.out.println("El nombre de usuario es incorrecto");
-        else {
-            if (Users.get(nom).equals(pass)) {
-                UserLogged = nom;
-                System.out.println("Sesión iniciada satisfactoriamente");
-            }
-            else System.out.println("La contraseña es incorrecta.");
+    public void modificarPassword(Usuario usRegistrado, String passCambiar) throws IOException {
+        try{
+            cj.modificarPassword(usRegistrado, passCambiar);
+            System.out.println("Contraseña modificada correctamente");
+        } catch (IOException e) {
+            System.out.println("No se ha modificado correctamente");
         }
     }
     
-    public void loginGuest(String nom, String pass) {
+    public void loginUsuario(String nom, String pass) throws IOException {
+        //el usuario con nombre nom y contraseñas pass hace login en el caso de que el nombre de usuario y contraseña coincidan con un usuario
+        //dado de alta previamente
+        Usuario usIntroducido = new Usuario(false,nom,pass); 
+        if (!existUser(usIntroducido)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
+        else {
+            UserLogged = nom;
+            System.out.println("Sesión iniciada satisfactoriamente");
+        }
+    }
+    
+    public void loginGuest(String nom, String pass) throws IOException {
        //el usuario con nombre nom y contraseñas pass inicia sesión como invitado en el caso de que el nombre de usuario y contraseña coincidan con un usuario
         //dado de alta previamente
-        if (!Users.containsKey(nom)) System.out.println("El nombre de usuario es incorrecto");
+        Usuario usIntroducido = new Usuario(false,nom,pass); 
+        if (!existUser(usIntroducido)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
         else {
-            if (Users.get(nom).equals(pass)) Guest = nom;
-            else System.out.println("La contraseña es incorrecta.");
+            Guest = nom;
+            System.out.println("Sesión iniciada satisfactoriamente");
         }
     }
     
@@ -92,16 +107,9 @@ public class CtrlUsuarios {
         return pass.length() > 5 && n && m && M;
     }
     
-    public Boolean existUser(String nom) {
-        //devuelve true si el usuario con nombre nom existe en el map de usuarios. false en caso contrario
-        return Users.containsKey(nom);
-    }
-    
-    public void printUsuarios() {
-        //printea el nombre de todos los usuarios que se han dado de alta hasta el momento
-        for(String key : Users.keySet()) {
-            System.out.println(key);
-        }
+    public Boolean existUser(Usuario u) throws IOException {
+        //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
+        return cj.usuarioRegistrado(u);
     }
 }
 
