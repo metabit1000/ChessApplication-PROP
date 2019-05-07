@@ -6,7 +6,7 @@ import java.util.*;
  * @author joan
  */
 public class CtrlUsuarios {    
-    private final Map<String,String> Users = new HashMap<>();
+    private final Map<String,String> Users = new HashMap<>();  //usuarios registrados 
     private String UserLogged;
     private String Guest;
     
