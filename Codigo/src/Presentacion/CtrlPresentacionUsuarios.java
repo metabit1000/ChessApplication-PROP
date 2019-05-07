@@ -14,16 +14,16 @@ public class CtrlPresentacionUsuarios {
         return ctrlU.existUser(u);
     }
   
-    public Boolean LogIn(String nom , String password) throws IOException{
+    public Boolean LogIn(String nom,String password) throws IOException{
         Usuario u = new Usuario(false,nom,password);
         if(UsuarioRegistrado(u)) {
             ctrlU.loginUsuario(nom, password);
             return true; 
         }
         else return false; 
-     
-  }
-    public Boolean Registro(String nom , String password) throws IOException{
+    }
+    
+    public Boolean Registro(String nom,String password) throws IOException{
         Usuario u = new Usuario(false,nom,password);
         if(!UsuarioRegistrado(u)){
             ctrlU.registrarUsuario(nom, password);

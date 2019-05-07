@@ -80,24 +80,6 @@ public class ProblemaTest {
     }
 
     /**
-     * Test of getTurno method, of class Problema.
-     */
-    @Test
-    public void testGetTurno() {
-        System.out.println("getTurno");
-        Problema instance = new Problema(true);
-        Boolean expResult = true;
-  
-        Boolean result = instance.getTurno();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-   
-     
- 
-
-    /**
      * Test of getNumMovimientos method, of class Problema.
      */
     @Test

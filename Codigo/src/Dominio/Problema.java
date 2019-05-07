@@ -12,6 +12,7 @@ public final class Problema {
     private Boolean turnoInicial; //blanco = true, negro = false
     private int numMovimientos;
     private Ranking rank = new Ranking(); //Ranking por problema
+    private int id;
     
     public Problema() {}
     
@@ -19,11 +20,7 @@ public final class Problema {
         fenToMatrix(fen);
         numMovimientos = numMov;
     }
-    
-    public Problema(boolean turno) {
-        turnoInicial=turno;
-    }
-    
+     
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }

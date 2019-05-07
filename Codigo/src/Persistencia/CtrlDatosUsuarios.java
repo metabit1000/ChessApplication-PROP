@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -26,20 +28,16 @@ public class CtrlDatosUsuarios {
         archivo = null;
         fr = null;
         br = null;
-        try {
-            abrirArchivo();
-        } catch (IOException ex) {
-            System.out.println("Error al abrir el archivo");
-        }
+        abrirArchivo();
     }
     
-    /**
-     * Función que abre el archivo
-     * @throws java.io.IOException
-     */
-    public void abrirArchivo() throws IOException {
+    public void abrirArchivo() {
         archivo = new File(path);
-        if (!archivo.exists()) archivo.createNewFile();
+        if (!archivo.exists()) try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -53,53 +51,64 @@ public class CtrlDatosUsuarios {
 
     }
     
-    public void escribirUsuario(Usuario u) throws IOException {
+    public void escribirUsuario(String nombre, String password) {
         if (archivo == null) {
             throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
         }
-        fw = new FileWriter(archivo,true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter out = new PrintWriter(bw);
-        if (archivo.length() == 0) out.write(u.getNombre()+" "+ u.getPassword()); //en caso de estar vacio...
-        else {
-            bw.newLine(); //salto de linea en fichero
-            out.append(u.getNombre()+" "+ u.getPassword());
+        try {
+            fw = new FileWriter(archivo,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            if (archivo.length() == 0) out.write(nombre+" "+ password); //en caso de estar vacio...
+            else {
+                bw.newLine(); //salto de linea en fichero
+                out.append(nombre +" "+ password);
+            }
+            out.close();
+            bw.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        out.close();
-        bw.close();
     }
     
-
-    public boolean usuarioRegistrado(Usuario u) throws FileNotFoundException, IOException {
-        String cadena = u.getNombre()+" "+ u.getPassword();
+    public boolean usuarioRegistrado(String nombre, String password)  {
+        String cadena = nombre+" "+ password;
         boolean b = false;
-        if (archivo.exists()) {
-            br = new BufferedReader(new FileReader(archivo));
-            String linea;
-            while((linea = br.readLine()) != null) {
-               if(linea.equals(cadena)) b = true;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                   if(linea.equals(cadena)) b = true;
+                }
             }
+        } catch (IOException e) {
+            System.out.println(e);
         }
         return b;
     }
     
-    public void modificarPassword(Usuario u, String newPassword) throws FileNotFoundException, IOException {
-        String cadenaCambiar= u.getNombre()+" "+ u.getPassword();
-        String cadenaNueva = u.getNombre()+" "+ newPassword;
+    public void modificarPassword(String nombre, String password, String newPassword) {
+        String cadenaCambiar = nombre+" "+password;
+        String cadenaNueva = nombre+" "+newPassword;
         File nuevo = new File("random.txt"); //fichero auxiliar
         BufferedWriter bw;
-        if (archivo.exists()) {
-            br = new BufferedReader(new FileReader(archivo));
-            String linea;
-            while((linea = br.readLine()) != null) {
-                if(linea.equals(cadenaCambiar)) Escribir(nuevo,cadenaNueva);
-                else Escribir(nuevo,linea);
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    if(linea.equals(cadenaCambiar)) Escribir(nuevo,cadenaNueva);
+                    else Escribir(nuevo,linea);    
+                }
+                br.close(); 
+                borrar(archivo); //borro archivo anterior
+                nuevo.renameTo(archivo); //Renombro el arvhico con el anterior
             }
-            br.close(); 
-            borrar(archivo); //borro archivo anterior
-            nuevo.renameTo(archivo); //Renombro el arvhico con el anterior
+            else System.out.println("No existe el fichero");
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        else System.out.println("No existe el fichero");
     }
     
     private void borrar (File Ffichero){
@@ -116,7 +125,6 @@ public class CtrlDatosUsuarios {
     {
         // Declaramos un buffer de escritura
         BufferedWriter bw;
-
         try
         {
             // Comprobamos si el archivo no existe y si es asi creamos uno nuevo.
@@ -124,7 +132,6 @@ public class CtrlDatosUsuarios {
          {
              fFichero.createNewFile();
          }
-
            // Luego de haber creado el archivo procedemos a escribir dentro de el.
             bw = new BufferedWriter(new FileWriter(fFichero,true));
             if (fFichero.length() == 0) bw.write(cadena);

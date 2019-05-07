@@ -13,7 +13,7 @@ import java.util.*;
  * @author Joan
  */
 public class CtrlProblemas {
-    private Map<String, Pair <String, Integer> > Problems = new HashMap<>();
+    private Map<String, Pair <String, Integer> > Problems = new HashMap<>(); //va a desaparecer por el CtrlDatosProblemas
     private static final int numr = 2;
     private static final int numR = 2;
     private static final int numb = 2;
@@ -43,18 +43,18 @@ public class CtrlProblemas {
     Problems.put("Jaque en 1 mov", p6);
     }
     
-    public void addProblema(String id, String fen, int numM) {
+    public void addProblema(Problema p) {
         //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)
         //y numM como numero de movimientos en los que se puede resolver el problema.
         //en el caso de que el id ya exista en el map o ya exista un problema con un mismo fen, no se añadirá.
-        if (!existProblem(id)) {
+        /*if (!existProblem(p.getId())) {
             if (!existFEN(fen)) {
                 Pair x = new Pair(fen,numM);
                 Problems.put(id, x);
             }
             else System.out.println("Este problema ya esta registrado.");
         }
-        else System.out.println("El ID ya está siendo utilizado. Pruebe con otro.");
+        else System.out.println("El ID ya está siendo utilizado. Pruebe con otro.");*/
     }
     
     public boolean existProblem(String id) {
@@ -62,10 +62,10 @@ public class CtrlProblemas {
         return Problems.containsKey(id);
     }
     
-    public boolean existFEN(String fen) {
+    /*public boolean existFEN(String fen) {
        //retorna true si el problema con fen fen existe en el mapa de Problemas
         return Problems.containsValue(fen);
-    }
+    } */ //POCO TONTERIA..si existe el id..existe el fen
     
     public boolean cumpleRestriccionFichas(Problema crear) {
         //devuelve falso si viola algunas de las restricciones basicas de un tablero de ajedrez: es decir, retornará falso en el caso de que
@@ -162,7 +162,6 @@ public class CtrlProblemas {
                             break;
                         case 'K':
                             ++K;
-                            
                             break;
                     }
                     
@@ -330,18 +329,5 @@ public class CtrlProblemas {
         }
         return r;
     }
-    public void printProblemas() {
-        //printea todos los problemas del map Problemas, su tablero en una matriz y su numero de movimientos
-        int index = 1;
-        for(String key : Problems.keySet()) {
-            System.out.println(index + ". " +key);
-            String fen = Problems.get(key).getKey();
-            Problema p = new Problema();
-            p.fenToMatrix(fen);
-            p.printTablero();
-            int nM = Problems.get(key).getValue();
-            System.out.println("Se supera en "+ nM +" movimientos.");
-            ++index;
-        }
-    }
+    //No necesito printProblemas aqui
 }
