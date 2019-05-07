@@ -106,7 +106,7 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove.coordToString(),movePosible.coordToString());
-                //if (p.checkmate(col)) return new Pair(bestCurrMove,bestMovePosible);  
+                //if (p.checkmate(col)) return new Pair(currMove,movePosible);  
                 int val = col ? min(p,depth-1,-10000,10000,!col): max(p,depth-1,-10000,10000,!col);
                 if (!p.mate(!col)) {
                     if (col & val > highestSeenValue) {
