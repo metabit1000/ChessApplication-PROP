@@ -16,9 +16,9 @@ public class DriverParaProbar {
             System.out.println("Cree antes el fichero");
         }
         
-        Usuario u = new Usuario(false,"us1","asasdfa");
+        Usuario u = new Usuario(false,"us1","funcionaXD");
         try {
-            cj.modificarPassword(u, "funcionaXD");
+            System.out.println(cj.usuarioRegistrado(u));
         } catch (IOException e) {
             System.out.println(e);
         }
