@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
+
 /**
  *
  * @author Àlex
@@ -21,10 +22,15 @@ public class CtrlDatosUsuarios {
     BufferedReader br;
     String path = "UsuariosRegistrados.txt";
     
-    public CtrlDatosUsuarios() {
+    public CtrlDatosUsuarios(){
         archivo = null;
         fr = null;
         br = null;
+        try {
+            abrirArchivo();
+        } catch (IOException ex) {
+            System.out.println("Error al abrir el archivo");
+        }
     }
     
     /**
@@ -63,6 +69,7 @@ public class CtrlDatosUsuarios {
         bw.close();
     }
     
+
     public boolean usuarioRegistrado(Usuario u) throws FileNotFoundException, IOException {
         String cadena = u.getNombre()+" "+ u.getPassword();
         boolean b = false;
@@ -131,6 +138,5 @@ public class CtrlDatosUsuarios {
         {
             System.out.println(e);
         }
-
     }
 }
