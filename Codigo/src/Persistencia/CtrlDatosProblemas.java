@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,19 +24,22 @@ public class CtrlDatosProblemas {
     BufferedReader br;
     String path = "ProblemasGuardados.txt";
     
-    /**
-     * Función que abre el archivo
-     * @throws java.io.IOException
-     */
-    public void abrirArchivo() throws IOException {
+    public CtrlDatosProblemas(){
+        archivo = null;
+        fr = null;
+        br = null;
+        abrirArchivo();
+    }
+    
+    public void abrirArchivo()  {
         archivo = new File(path);
-        if (!archivo.exists()) archivo.createNewFile();
+        if (!archivo.exists()) try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
-    /**
-     * Función que cierra el archivo
-     * @throws java.io.IOException
-     */
     public void cerrarArchivo() throws IOException {
         archivo = null;
         if (null != fr) fr.close();
@@ -54,8 +59,20 @@ public class CtrlDatosProblemas {
         return new Ranking();
     }
     
-    private void escribirRanking(Ranking r) {
-        
+    public void escribirRanking(Ranking r) {
+        if (archivo == null) {
+            throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
+        }
+        try {
+            fw = new FileWriter(archivo,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.write(r.toString());
+            out.close();
+            bw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
     public boolean existeProblema(int id) {

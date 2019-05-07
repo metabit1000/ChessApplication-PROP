@@ -47,4 +47,14 @@ public class Ranking {
             setElemento(nombre,tiempo);  
         }
     }
+    
+    public String toString() {  //necesaria de cara a pasarlo al fichero
+        String res = new String();
+        Iterator iterator=rank.keySet().iterator();
+        while(iterator.hasNext()){
+            Object key = iterator.next();
+            res = key + " "+ rank.get(key) +"/n";
+        }
+        return res;
+    }
 }

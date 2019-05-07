@@ -330,7 +330,7 @@ public class CtrlProblemas {
         return r;
     }
     
-    public void printProblemas() {
+    public void printProblemas() {  //NO HARÁ FALTA...AL MENOS AQUI EN LA CAPA DE PRESENTACIÓN QUIZAS
         //printea todos los problemas del map Problemas, su tablero en una matriz y su numero de movimientos
         int index = 1;
         for(String key : Problems.keySet()) {
