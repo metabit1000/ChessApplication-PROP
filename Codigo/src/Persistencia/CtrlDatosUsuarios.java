@@ -4,11 +4,11 @@ import Dominio.Usuario;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  *
@@ -47,7 +47,7 @@ public class CtrlDatosUsuarios {
 
     }
     
-    public void anadirUsuario(Usuario u) throws IOException {
+    public void escribirUsuario(Usuario u) throws IOException {
         if (archivo == null) {
             throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
         }
@@ -63,7 +63,20 @@ public class CtrlDatosUsuarios {
         bw.close();
     }
     
-    public void modificarPassword(Usuario u, String newPassword) throws IOException {
+    public boolean UsuarioRegistrado(Usuario u) throws FileNotFoundException, IOException {
+        String cadena = u.getNombre()+" "+ u.getPassword();
+        boolean b = false;
+        if (archivo.exists()) {
+            br = new BufferedReader(new FileReader(archivo));
+            String linea;
+            while((linea = br.readLine()) != null) {
+               if(linea.equals(cadena)) b = true;
+            }
+        }
+        return b;
+    }
+    
+    public void modificarPassword(Usuario u, String newPassword) throws FileNotFoundException, IOException {
         String cadenaCambiar= u.getNombre()+" "+ u.getPassword();
         String cadenaNueva = u.getNombre()+" "+ newPassword;
         File nuevo = new File("random.txt"); //fichero auxiliar
