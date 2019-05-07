@@ -329,5 +329,19 @@ public class CtrlProblemas {
         }
         return r;
     }
-    //No necesito printProblemas aqui
+    
+    public void printProblemas() {
+        //printea todos los problemas del map Problemas, su tablero en una matriz y su numero de movimientos
+        int index = 1;
+        for(String key : Problems.keySet()) {
+            System.out.println(index + ". " +key);
+            String fen = Problems.get(key).getKey();
+            Problema p = new Problema();
+            p.fenToMatrix(fen);
+            p.printTablero();
+            int nM = Problems.get(key).getValue();
+            System.out.println("Se supera en "+ nM +" movimientos.");
+            ++index;
+        }
+    }
 }
