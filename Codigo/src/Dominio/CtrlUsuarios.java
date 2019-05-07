@@ -77,12 +77,14 @@ public class CtrlUsuarios {
     
     public void logoutUsuario() {
         //el usuario que habia logeado previamente pasa a no estarlo y por lo tanto el numbre del usuario loggeado pasa a ser null.
-        UserLogged = null;
+        if (UserLogged != null)UserLogged = null;
+        else System.out.println("No esta logueado");
     }
     
     public void logoutGuest() {
         //el usuario que habia logeado como invitado previamente pasa a no estarlo y por lo tanto el numbre del usuario loggeado pasa a ser null.
-        Guest = null;
+        if (UserLogged != null) Guest = null;
+        else System.out.println("No esta logueado");
     }
     
     public Boolean correctPass(String pass) {

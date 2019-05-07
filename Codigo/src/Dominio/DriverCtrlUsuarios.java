@@ -72,11 +72,11 @@ public class DriverCtrlUsuarios {
                     break;
                 case 6: 
                     prueba.logoutUsuario();
-                    System.out.println("Se ha cerrado la sesión del usuario");
+                    //System.out.println("Se ha cerrado la sesión del usuario");
                     break;
                 case 7:
                     prueba.logoutGuest();
-                    System.out.println("Se ha cerrado la sesión del guest");
+                    //System.out.println("Se ha cerrado la sesión del guest");
                     break;
                 case 8:
                     fin = 8;
