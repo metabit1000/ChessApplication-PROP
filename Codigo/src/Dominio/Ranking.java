@@ -48,12 +48,13 @@ public class Ranking {
         }
     }
     
-    public String toString() {  //necesaria de cara a pasarlo al fichero
-        String res = new String();
+    public ArrayList<String> toArrayDeStrings() {  //necesaria de cara a pasarlo al fichero de Problemas
+        ArrayList<String> res = new ArrayList();
         Iterator iterator=rank.keySet().iterator();
+        int i = 0;
         while(iterator.hasNext()){
             Object key = iterator.next();
-            res = key + " "+ rank.get(key) +"/n";
+            res.add(key + " "+ rank.get(key));
         }
         return res;
     }

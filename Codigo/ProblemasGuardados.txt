@@ -1,1 +1,4 @@
-jordi 80.0/n
+pablito 10.0
+alex 20.0
+joan 30.0
+jordi 80.0

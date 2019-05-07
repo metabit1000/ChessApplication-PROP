@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,7 +68,11 @@ public class CtrlDatosProblemas {
             fw = new FileWriter(archivo,true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
-            out.write(r.toString());
+            ArrayList<String> s = r.toArrayDeStrings();
+            for (int i = 0; i < s.size(); ++i) {
+                out.write(s.get(i));
+                if (i != s.size()-1) bw.newLine();
+            }
             out.close();
             bw.close();
         } catch (Exception e) {
