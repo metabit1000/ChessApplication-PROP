@@ -63,7 +63,7 @@ public class CtrlDatosUsuarios {
         bw.close();
     }
     
-    public boolean UsuarioRegistrado(Usuario u) throws FileNotFoundException, IOException {
+    public boolean usuarioRegistrado(Usuario u) throws FileNotFoundException, IOException {
         String cadena = u.getNombre()+" "+ u.getPassword();
         boolean b = false;
         if (archivo.exists()) {
