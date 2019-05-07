@@ -23,8 +23,7 @@ public class DriverCtrlUsuarios {
             System.out.println("5. Guest logeado");
             System.out.println("6. Cerrar sesión usuario");
             System.out.println("7. Cerrar sesión guest");
-            System.out.println("8. Usuarios registrados");
-            System.out.println("9. Salir");
+            System.out.println("8. Salir");
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
             switch (estado) {
@@ -79,11 +78,8 @@ public class DriverCtrlUsuarios {
                     prueba.logoutGuest();
                     System.out.println("Se ha cerrado la sesión del guest");
                     break;
-                case 8: 
-                    prueba.printUsuarios();
-                    break;
-                case 9:
-                    fin = 9;
+                case 8:
+                    fin = 8;
                     System.out.println("Gracias. Que tenga un buen día.");
                     break;
             }
