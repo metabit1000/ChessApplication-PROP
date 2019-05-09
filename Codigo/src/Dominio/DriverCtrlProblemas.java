@@ -26,7 +26,7 @@ public class DriverCtrlProblemas {
             switch (estado) {
                 case 1:
                     System.out.println("Ha escogido: Crear problema.");
-                    Problema crear = new Problema("8/8/8/8/8/8/8/8/ w", 100);
+                    Problema crear = new Problema(1,"8/8/8/8/8/8/8/8/ w", 100);
                     crear.printTablero();
                     System.out.println("Desea insertar fichas? (y/n)");
                     String resp = sc.next();

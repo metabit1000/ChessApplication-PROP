@@ -33,7 +33,7 @@ public class DriverPartida {
                     int problema = sc.nextInt();
                     sc.nextLine();
                     Pair <String, Integer> o = cp.seleccionProblema(problema);
-                    Problema p = new Problema(o.getKey(), o.getValue());
+                    Problema p = new Problema(1,o.getKey(), o.getValue());
                     p.setNumMovimientos(o.getValue());
                     p.fenToMatrix(o.getKey());
                     p.printTablero();
@@ -119,7 +119,7 @@ public class DriverPartida {
                                 int problemaK = sc.nextInt();
                                 sc.nextLine();
                                 Pair <String, Integer> oK = cp.seleccionProblema(problemaK);
-                                Problema pK = new Problema(oK.getKey(), oK.getValue());
+                                Problema pK = new Problema(1,oK.getKey(), oK.getValue());
                                 pK.setNumMovimientos(oK.getValue());
                                 
                                 

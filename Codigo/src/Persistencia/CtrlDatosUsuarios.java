@@ -62,7 +62,7 @@ public class CtrlDatosUsuarios {
             }
             out.close();
             bw.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
@@ -107,7 +107,7 @@ public class CtrlDatosUsuarios {
         }
     }
     
-    private void borrar (File Ffichero){
+    private void borrar(File Ffichero){
         try {
             if(Ffichero.exists()){
                 Ffichero.delete();
@@ -137,7 +137,7 @@ public class CtrlDatosUsuarios {
             }
             bw.close();
 
-        }catch(Exception e)
+        }catch(IOException e)
         {
             System.out.println(e);
         }

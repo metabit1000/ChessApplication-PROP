@@ -8,7 +8,7 @@ import java.util.*;
  * @author Joan
  */
 public final class Problema {
-    private static Ficha[][] board = new Ficha[8][8];
+    private static Ficha[][] board = new Ficha[8][8]; // a partir del fen
     private Boolean turnoInicial; //blanco = true, negro = false
     private int numMovimientos;
     private Ranking rank = new Ranking(); //Ranking por problema
@@ -16,7 +16,8 @@ public final class Problema {
     
     public Problema() {}
     
-    public Problema(String fen, int numMov) {
+    public Problema(int id,String fen, int numMov) {
+        this.id = id;
         fenToMatrix(fen);
         numMovimientos = numMov;
     }
@@ -27,6 +28,10 @@ public final class Problema {
     
     public void setFicha(Coordenada c, Ficha f) {
         board[c.getX()][c.getY()] = f;
+    }
+    
+    public int getId() {
+        return id;
     }
     
     public void setTurno(Boolean f) {
