@@ -31,8 +31,8 @@ public class Ranking {
         else return false ; 
     }
     
-    public void setElemento(String nombre,double tiempo){
-        rank.put(nombre,tiempo );
+    public void setElemento(String nombre,Double tiempo){
+        rank.put(nombre,tiempo);
         ordenar();
     }
     

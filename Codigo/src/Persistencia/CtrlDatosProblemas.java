@@ -53,23 +53,25 @@ public class CtrlDatosProblemas {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             if (archivo.length() == 0) {
-                out.write(id+" "+ fen+" "+numM); 
+                out.write(id+" "+ fen+" "+numM); //escribo fen y otros
                 bw.newLine(); //salto de linea en fichero                
-                ArrayList<String> s = r.toArrayDeStrings();
-                for (int i = 0; i < s.size(); ++i) {
+                ArrayList<String> s = r.toArrayDeStrings(); 
+                for (int i = 0; i < s.size(); ++i) { //escribo ranking
                     out.write(s.get(i));
-                    if (i != s.size()-1) bw.newLine();
+                    bw.newLine();
                 }
+                out.write("."); //para saber que finaliza el ranking ahi
             } 
             else {
                 bw.newLine(); //salto de linea en fichero
-                out.write(id+" "+ fen+" "+numM); 
+                out.write(id+" "+ fen+" "+numM); //escribo fen y otros
                 bw.newLine(); 
                 ArrayList<String> s = r.toArrayDeStrings();
-                for (int i = 0; i < s.size(); ++i) {
+                for (int i = 0; i < s.size(); ++i) {  //escribo ranking
                     out.write(s.get(i));
-                    if (i != s.size()-1) bw.newLine();
+                    bw.newLine(); 
                 }
+                out.write("."); //para saber que finaliza el ranking ahi
             }
             out.close();
             bw.close();
@@ -83,11 +85,48 @@ public class CtrlDatosProblemas {
     }
     
     public Ranking obtenerRanking(int id) {
-        return new Ranking();
+        String numId= String.valueOf(id); //para convertir a string el id
+        Ranking res = new Ranking();
+        boolean b = false;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" "); 
+                    if(lineaDivididaId[0].equals(numId)) {
+                        String linea2 = null;
+                        while (!b && (linea2 = br.readLine()) != null) {
+                            String[] lineaDivididaRank = linea2.split(" "); 
+                            if (lineaDivididaRank[0].equals(".")) b = true; 
+                            else res.setElemento(lineaDivididaRank[0], Double.parseDouble(lineaDivididaRank[1]));
+                        }
+                        break; //para que no continue buscando en el fichero
+                   }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return res;
     }
     
     public boolean existeProblema(int id) {
-        return false;
+        String numId= String.valueOf(id); //para convertir a string el id
+        boolean b = false;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                   String[] lineaDividida = linea.split(" "); //para dividir la linea
+                   if(lineaDividida[0].equals(numId)) b = true; //obtengo el primer valor que es el ID
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return b;
     }
     
     public Problema seleccionarProblema(int id) {
