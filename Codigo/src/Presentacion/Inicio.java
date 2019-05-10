@@ -135,21 +135,19 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         password =new String(jPasswordField1.getPassword());;
-                    user =jTextField1.getText();
+        user =jTextField1.getText();
         boolean  logueado= u.LogIn(user, password);
         if (!logueado ){
             JOptionPane.showMessageDialog(null,"Registre al usuario");
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-                    user =jTextField1.getText();
-                    
+        user =jTextField1.getText();           
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-     password =new String(jPasswordField1.getPassword());;
+        password =new String(jPasswordField1.getPassword());;
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -157,19 +155,15 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Registro r = new Registro();
-       setVisible(false);
+        setVisible(false);
         r.setVisible(true); 
-
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-             password =new String(jPasswordField1.getPassword());;
-                    user =jTextField1.getText();
-
-       
-            u.LogIn(user, password);
-            setVisible(false);
-        
+        password =new String(jPasswordField1.getPassword());;
+        user =jTextField1.getText();
+        u.LogIn(user, password);
+        setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**

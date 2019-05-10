@@ -16,9 +16,10 @@ public class Registro extends javax.swing.JFrame {
     /**
      * Creates new form Registro
      */
-     private String user;
-      private String password;
-      private CtrlPresentacionUsuarios registrar = new CtrlPresentacionUsuarios() ; 
+    private String user;
+    private String password;
+    private CtrlPresentacionUsuarios registrar = new CtrlPresentacionUsuarios() ; 
+    
     public Registro() {
         initComponents();
             
@@ -113,32 +114,27 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-               user = jTextField1.getText();
-                     password =new String(jPasswordField1.getPassword());;
-
-        
-     if (!registrar.UsuarioRegistrado(user, password) ){
-         registrar.Registro(user, password);
+        user = jTextField1.getText();
+        password =new String(jPasswordField1.getPassword());       
+        if (!registrar.UsuarioRegistrado(user, password) ){
+            registrar.Registro(user, password);
             Inicio r = new Inicio();
-       setVisible(false);
-        r.setVisible(true); 
-         JOptionPane.showMessageDialog(null,"Usuario registrado correctamente ");
-     }
+            setVisible(false);
+            r.setVisible(true); 
+            JOptionPane.showMessageDialog(null,"Usuario registrado correctamente ");
+        }
      else             JOptionPane.showMessageDialog(null,"Usuario existente");     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-              JOptionPane.showMessageDialog(null,"Usuario existente");       
-
+        JOptionPane.showMessageDialog(null,"Usuario existente");       
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-         user = jTextField1.getText();
-
+        user = jTextField1.getText();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-     password =new String(jPasswordField1.getPassword());;
-
+        password =new String(jPasswordField1.getPassword());;
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
