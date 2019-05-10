@@ -1,6 +1,4 @@
 package Dominio;
-import ClasesExtra.Coordenada;
-import Dominio.fichas.*;
 
 import java.util.*;
 
@@ -18,8 +16,7 @@ public class DriverCtrlProblemas {
         while (estado != fin) {
             System.out.println("Controlador de Problema:");
             System.out.println("1. Crear problema");
-            System.out.println("2. Mostrar problemas");
-            System.out.println("3. Exit");
+            System.out.println("2. Exit");
             Problema prueba = new Problema();
             System.out.println("Introduzca un número: ");
             estado = sc.nextInt();
@@ -79,11 +76,7 @@ public class DriverCtrlProblemas {
                     else System.out.println("El problema no se resuelve en "+x+" movimientos.");
                     break;
                 case 2:
-                    cp.printProblemas();
-                    break;
-                    
-                case 3:
-                    fin = 3;
+                    fin = 2;
                     System.out.println("Gracias. Que tenga un buen día.");
                     break;
             }

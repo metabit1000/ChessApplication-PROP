@@ -8,7 +8,7 @@ import java.util.*;
  * @author Joan
  */
 public final class Problema {
-    private static Ficha[][] board = new Ficha[8][8]; // a partir del fen
+    private Ficha[][] board = new Ficha[8][8]; // a partir del fen
     private Boolean turnoInicial; //blanco = true, negro = false
     private int numMovimientos;
     private Ranking rank = new Ranking(); //Ranking por problema

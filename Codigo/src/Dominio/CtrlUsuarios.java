@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author joan
  */
 public class CtrlUsuarios {    
-    CtrlDatosUsuarios cj = new CtrlDatosUsuarios();
+    private CtrlDatosUsuarios cj = new CtrlDatosUsuarios();
     private String UserLogged;
     private String Guest;
     

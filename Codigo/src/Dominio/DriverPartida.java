@@ -2,7 +2,6 @@ package Dominio;
 
 import java.util.Scanner;
 
-import ClasesExtra.*;
 
 /**
  *
@@ -28,15 +27,13 @@ public class DriverPartida {
                     char color;
                     System.out.println("Ha elegido: Jugar");
                     System.out.println("Lista de los problemas registrados:");
-                    cp.printProblemas();
                     System.out.println("Introduzca el índice del problema que desea jugar: ");
                     int problema = sc.nextInt();
                     sc.nextLine();
-                    Pair <String, Integer> o = cp.seleccionProblema(problema);
+                    /*Pair <String, Integer> o = cp.seleccionProblema(problema);
                     Problema p = new Problema(1,o.getKey(), o.getValue(), new Ranking());
                     p.setNumMovimientos(o.getValue());
-                    p.fenToMatrix(o.getKey());
-                    p.printTablero();
+                    p.fenToMatrix(o.getKey());*/
                     System.out.println("Introduzca opción que desea jugar: ");
                     System.out.println("1. JugadorVsJugador"); 
                     System.out.println("2. JugadorVsMaquina1");
@@ -63,7 +60,7 @@ public class DriverPartida {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
                             }
-                            partida = new Partida(us1, us2, p);
+                            //partida = new Partida(us1, us2, p);
                             String c;
                             if (us2.getColor()) {
                                 c = "blancas.";
@@ -80,7 +77,7 @@ public class DriverPartida {
                             System.out.println("Jugador, ¿color? (n/b)");
                             color = sc.next().charAt(0);
                             sc.nextLine();
-                            if (color == 'n') {
+                            /*if (color == 'n') {
                                 usjm = new Usuario(false,"Jose","password");
                                 m = new MaquinaEasy(true, "m1",p.getNumMovimientos());
                             } else if (color == 'b') {
@@ -90,7 +87,7 @@ public class DriverPartida {
                                 System.out.println("Error, vuelva a intentarlo");
                                 break;
                             }
-                            partida = new Partida(usjm, m, p);
+                            partida = new Partida(usjm, m, p);*/
                             String c2;
                             if (usjm.getColor()) {
                                 c2 = "blancas.";
@@ -102,10 +99,10 @@ public class DriverPartida {
                             break;
                         case 3: 
                             System.out.println("Maquina1VsMaquina1");
-                            Maquina m1 = new MaquinaEasy(true,"m1",p.getNumMovimientos());
+                            /*Maquina m1 = new MaquinaEasy(true,"m1",p.getNumMovimientos());
                             Maquina m2 = new MaquinaEasy(false,"m2",p.getNumMovimientos());
                             System.out.println("Color de cada maquina escogido aleatoriamente");
-                            partida = new Partida(m1, m2, p);
+                            partida = new Partida(m1, m2, p);*/
                             System.out.println("Partida creada correctamente");
                             partida.playMaquinaVSMaquina(true);
                             System.out.println("Añadir otro problema? (y/n)");
@@ -114,11 +111,10 @@ public class DriverPartida {
                             boolean masProblems = false;
                             if (k == 'y') masProblems = true;
                             while (masProblems) {
-                                cp.printProblemas();
                                 System.out.println("Introduzca el índice del problema que desea jugar: ");
                                 int problemaK = sc.nextInt();
                                 sc.nextLine();
-                                Pair <String, Integer> oK = cp.seleccionProblema(problemaK);
+                                /*Pair <String, Integer> oK = cp.seleccionProblema(problemaK);
                                 Problema pK = new Problema(1,oK.getKey(), oK.getValue(), new Ranking());
                                 pK.setNumMovimientos(oK.getValue());
                                 
@@ -135,7 +131,7 @@ public class DriverPartida {
                                 System.out.println("Añadir otro problema? (y/n)");
                                 char K = sc.next().charAt(0);
                                 sc.nextLine();
-                                if (k != 'y') masProblems = false;
+                                if (k != 'y') masProblems = false;*/
                             }
                             break;
                         case 4: 

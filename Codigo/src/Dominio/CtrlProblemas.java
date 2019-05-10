@@ -6,14 +6,14 @@ import Dominio.fichas.Knight;
 import Dominio.fichas.Pawn;
 import Dominio.fichas.Queen;
 import Dominio.fichas.Rook;
-import java.util.*;
+import Persistencia.CtrlDatosProblemas;
 
 /**
  *
  * @author Joan
  */
 public class CtrlProblemas {
-    private Map<String, Pair <String, Integer> > Problems = new HashMap<>(); //va a desaparecer por el CtrlDatosProblemas
+    private CtrlDatosProblemas problems = new CtrlDatosProblemas();
     private static final int numr = 2;
     private static final int numR = 2;
     private static final int numb = 2;
@@ -27,39 +27,37 @@ public class CtrlProblemas {
     private static final int numq = 1;
     private static final int numQ = 1;
     
-    public CtrlProblemas() {
+    /*
         Pair p1 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
         Pair p2 = new Pair("2R3rk/3N4/7K/3N4/8/8/r4p2/8 w", 3);
          Pair p3 = new Pair ("4n1bk/8/6PK/8/7N/8/8/8 w", 2);
-//        Pair p4 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
-//        Pair p5 = new Pair ("1r6/5qpk/1b1R3B/3PpP2/8/6QP/5P2/6K1 w", 3);
-    Pair p6 = new Pair ("6RK/7Q/pkp5/ppp5/8/8/8/8 w",1);
+       Pair p4 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
+        Pair p5 = new Pair ("1r6/5qpk/1b1R3B/3PpP2/8/6QP/5P2/6K1 w", 3);
+        Pair p6 = new Pair ("6RK/7Q/pkp5/ppp5/8/8/8/8 w",1);
         
         Problems.put("Jaque dificil en tres movimientos", p1);
         Problems.put("Jaque facil en tres movimientos", p2);
           Problems.put("Jaque facil en dos movimientos", p3);
-//        Problems.put("Jaque chungo en tres movimientos", p4);
-//        Problems.put("Jaque sencillo en tres movimientos", p5);
+       Problems.put("Jaque chungo en tres movimientos", p4);
+        Problems.put("Jaque sencillo en tres movimientos", p5);
     Problems.put("Jaque en 1 mov", p6);
-    }
+    */
+    
+    public CtrlProblemas() {}
     
     public void addProblema(Problema p) {
         //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)
         //y numM como numero de movimientos en los que se puede resolver el problema.
         //en el caso de que el id ya exista en el map o ya exista un problema con un mismo fen, no se añadirá.
-        /*if (!existProblem(p.getId())) {
-            if (!existFEN(fen)) {
-                Pair x = new Pair(fen,numM);
-                Problems.put(id, x);
-            }
-            else System.out.println("Este problema ya esta registrado.");
+        if (!existProblem(p.getId())) {
+                problems.introducirProblema(p.getId(),p.getFen(), p.getNumMovimientos(),p.getRanking());
         }
-        else System.out.println("El ID ya está siendo utilizado. Pruebe con otro.");*/
+        else System.out.println("Este problema ya esta registrado.");
     }
     
-    public boolean existProblem(String id) {
+    public boolean existProblem(int id) {
         //retorna true si el problema con id id existe en el mapa de Problemas
-        return Problems.containsKey(id);
+        return problems.existeProblema(id);
     }
     
     /*public boolean existFEN(String fen) {
@@ -314,34 +312,18 @@ public class CtrlProblemas {
         }
     }
     
-    public Pair <String, Integer> seleccionProblema(int n) {
-        //recorre el map de Problemas y devuelve el fen y el numero de movimientos del problema del map con indice n
-        int index = 1;
-        Pair r = new Pair();
-        for(String key : Problems.keySet()) {
-            if (n == index) {
-                String fen = Problems.get(key).getKey();
-                Integer nm = Problems.get(key).getValue();
-                Pair f = new Pair(fen, nm);
-                r = f;
-            }
-            ++index;
-        }
-        return r;
+    public Problema seleccionProblema(int id) {
+        Problema res = new Problema();
+        if (existProblem(id)) {
+            res = problems.obtenerProblema(id);
+        } 
+        else System.out.println("No existe este problema");
+        return res;
     }
     
-    public void printProblemas() {  //NO HARÁ FALTA...AL MENOS AQUI EN LA CAPA DE PRESENTACIÓN QUIZAS
-        //printea todos los problemas del map Problemas, su tablero en una matriz y su numero de movimientos
-        int index = 1;
-        for(String key : Problems.keySet()) {
-            System.out.println(index + ". " +key);
-            String fen = Problems.get(key).getKey();
-            Problema p = new Problema();
-            p.fenToMatrix(fen);
-            p.printTablero();
-            int nM = Problems.get(key).getValue();
-            System.out.println("Se supera en "+ nM +" movimientos.");
-            ++index;
+    public void actualizarRanking(int id, Ranking newR) {
+        if (existProblem(id)) {
+            problems.modificarRanking(id, newR);
         }
     }
 }

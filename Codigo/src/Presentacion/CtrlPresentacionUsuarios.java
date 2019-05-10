@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author Jordi
  */
 public class CtrlPresentacionUsuarios {
-    CtrlUsuarios ctrlU = new CtrlUsuarios();
+    private CtrlUsuarios ctrlU = new CtrlUsuarios();
 
     public Boolean UsuarioRegistrado(Usuario u) throws IOException{
         return ctrlU.existUser(u);
