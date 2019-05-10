@@ -1,6 +1,7 @@
 package ClasesExtra;
 
 import Dominio.Problema;
+import Dominio.Ranking;
 import java.util.Scanner;
 
 /**
@@ -31,7 +32,7 @@ public class DriverMinimax {
                 case 1:
                     System.out.println("Ha elegido: Ejemplo de funcionamiento");
                     System.out.println("Se introduce problema del enunciado del proyecto");
-                    Problema p = new Problema(1,"/8/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2);
+                    Problema p = new Problema(1,"/8/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w",2, new Ranking());
                     p.printTablero();
                     System.out.println("Introduzca profundida de busqueda del algoritmo (valores no muy altos, ej 3): ");
                     depth = sc.nextInt();
