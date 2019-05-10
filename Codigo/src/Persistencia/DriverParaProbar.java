@@ -15,6 +15,6 @@ public class DriverParaProbar {
         r2.setElemento("carlos", 10.0);
         r2.setElemento("antonio", 100.0);
         r2.setElemento("sara", 5.0);
-        cj.modificarRanking(1,r2);
+        cj.modificarRanking(2,r2);
     }  
 }

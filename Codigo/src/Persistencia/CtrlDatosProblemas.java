@@ -187,6 +187,7 @@ public class CtrlDatosProblemas {
                     }    
                 }  
                 br.close(); 
+                bw.close();
                 borrar(archivo); //borro archivo anterior
                 nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. NO ME LO RENOMBRA!!
             }   
