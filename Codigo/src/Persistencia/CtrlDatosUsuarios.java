@@ -99,7 +99,7 @@ public class CtrlDatosUsuarios {
                 }
                 br.close(); 
                 borrar(archivo); //borro archivo anterior
-                nuevo.renameTo(archivo); //Renombro el arvhico con el anterior
+                nuevo.renameTo(archivo); //Renombro el archivo con el anterior
             }
             else System.out.println("No existe el fichero");
         } catch (IOException e) {

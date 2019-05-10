@@ -9,15 +9,12 @@ import Dominio.*;
 public class DriverParaProbar {
     public static void main(String[]args){
         CtrlDatosProblemas cj = new CtrlDatosProblemas();
-        Problema r = new Problema();
-        /*r.setElemento("pablito", 10.0);
-        r.setElemento("alex", 20.0);
-        r.setElemento("joan", 30.0);
-        r.setElemento("jordi", 80.0);
-        cj.introducirProblema(1,"3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w",3,r); */
-        r = cj.obtenerProblema(1);
-        System.out.println(r.getId()+ " "+ r.getFen()+ " "+ r.getNumMovimientos());
-        Ranking rank = r.getRanking();
-        rank.getclasificacion();
+        Ranking r2 = new Ranking();
+        r2.setElemento("jose", 40.0);
+        r2.setElemento("belen", 80.0);
+        r2.setElemento("carlos", 10.0);
+        r2.setElemento("antonio", 100.0);
+        r2.setElemento("sara", 5.0);
+        cj.modificarRanking(1,r2);
     }  
 }
