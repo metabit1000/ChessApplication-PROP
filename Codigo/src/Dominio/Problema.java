@@ -16,10 +16,11 @@ public final class Problema {
     
     public Problema() {}
     
-    public Problema(int id,String fen, int numMov) {
+    public Problema(int id,String fen, int numMov, Ranking r) {
         this.id = id;
         fenToMatrix(fen);
         numMovimientos = numMov;
+        rank = r;
     }
      
     public Ficha getFicha(Coordenada c) {
@@ -48,6 +49,14 @@ public final class Problema {
     
     public void setNumMovimientos(int num) {
         numMovimientos = num;
+    }
+    
+    public String getFen() {
+        return matrixToFen();
+    }
+    
+    public Ranking getRanking() {
+        return rank;
     }
     
     //Métodos para el ranking
@@ -83,7 +92,7 @@ public final class Problema {
         }
     }
     
-    public String matrixToFen(/*Ficha[][] f*/) {
+    public String matrixToFen() {
         Ficha[][] f = board;
         String fen = "";
         for (int i = 0; i < 8; i++) {
@@ -104,7 +113,7 @@ public final class Problema {
                     count = 0;
                 }
             }
-            fen += "/";
+            if (i != 7)fen += "/";
         }
         fen += " ";
         if (turnoInicial) fen += "w";

@@ -26,7 +26,7 @@ public class DriverCtrlProblemas {
             switch (estado) {
                 case 1:
                     System.out.println("Ha escogido: Crear problema.");
-                    Problema crear = new Problema(1,"8/8/8/8/8/8/8/8/ w", 100);
+                    Problema crear = new Problema(1,"8/8/8/8/8/8/8/8/ w", 100, new Ranking());
                     crear.printTablero();
                     System.out.println("Desea insertar fichas? (y/n)");
                     String resp = sc.next();
@@ -70,9 +70,10 @@ public class DriverCtrlProblemas {
                         System.out.println("Problema superado en "+ x +" movimientos");
                         String p = crear.matrixToFen();
                         System.out.println("Nombre del problema:");
-                        String id = sc.next();
+                        int id = sc.nextInt();
                         sc.nextLine();
-                        cp.addProblema(id,p,x);
+                        Problema probl = new Problema(id,p,x,new Ranking());
+                        cp.addProblema(probl);
                         System.out.println("Problema añadido.");
                     } 
                     else System.out.println("El problema no se resuelve en "+x+" movimientos.");

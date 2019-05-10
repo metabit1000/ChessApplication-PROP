@@ -50,7 +50,7 @@ public class DriverMaquina {
                 case 2: 
                     System.out.println("Ha elegido: GetNextMove");
                     System.out.println("Se introduce el fen del enunciado para ver algún resultado");
-                    Problema p = new Problema(1,"1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 2);
+                    Problema p = new Problema(1,"1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w", 2, new Ranking());
                     Pair <Coordenada,Coordenada> move = prueba.getNextMove(p);
                     p.printTablero();
                     try {

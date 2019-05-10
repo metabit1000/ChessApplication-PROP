@@ -80,10 +80,6 @@ public class CtrlDatosProblemas {
         }
     }
     
-    public void modificarRanking(Ranking r) {
-    
-    }
-    
     public Ranking obtenerRanking(int id) {
         String numId= String.valueOf(id); //para convertir a string el id
         Ranking res = new Ranking();
@@ -129,7 +125,78 @@ public class CtrlDatosProblemas {
         return b;
     }
     
-    public Problema seleccionarProblema(int id) {
-        return new Problema();
+    public Problema obtenerProblema(int id) {
+        String numId = String.valueOf(id); //para convertir a string el id
+        Problema res = new Problema();
+        String fen;
+        int numMovimientos;
+        Ranking aux = new Ranking();
+        boolean b = false;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" "); 
+                    if(lineaDivididaId[0].equals(numId)) {
+                        fen = lineaDivididaId[1]+" "+ lineaDivididaId[2];
+                        numMovimientos = Integer.parseInt(lineaDivididaId[3]);
+                        String linea2 = null;
+                        while (!b && (linea2 = br.readLine()) != null) {
+                            String[] lineaDivididaRank = linea2.split(" "); 
+                            if (lineaDivididaRank[0].equals(".")) b = true; 
+                            else aux.setElemento(lineaDivididaRank[0], Double.parseDouble(lineaDivididaRank[1]));
+                        }
+                        res = new Problema(id,fen,numMovimientos,aux);
+                        break; //para que no continue buscando en el fichero
+                   }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+    
+    public void modificarRanking(int id,Ranking newR) {
+        String numId = String.valueOf(id); //para convertir a string el id
+        File nuevo = new File("random.txt"); //fichero auxiliar que cambiara de nombre
+        BufferedWriter bw;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" "); 
+                    if(lineaDivididaId[0].equals(numId)) {
+                    
+                    }
+                    
+                    if(linea.equals(cadenaCambiar)){
+                    
+                    //Escribir(nuevo,cadenaNueva);
+                    } 
+                    else {
+                    //Escribir(nuevo,linea);   
+                    } 
+                }
+                br.close(); 
+                borrar(archivo); //borro archivo anterior
+                nuevo.renameTo(archivo); //Renombro el arvhico con el anterior
+            }
+            else System.out.println("No existe el fichero");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    private void borrar(File Ffichero){
+        try {
+            if(Ffichero.exists()){
+                Ffichero.delete();
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }
