@@ -44,7 +44,6 @@ public class CtrlUsuarios {
             cj.modificarPassword(usRegistrado.getNombre(),usRegistrado.getPassword(), passCambiar);
             System.out.println("Contraseña modificada correctamente");
         }
-        
     }
     
     public void loginUsuario(String nom, String pass) throws IOException {
