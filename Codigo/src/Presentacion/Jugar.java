@@ -1,3 +1,5 @@
+package Presentacion;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
@@ -53,16 +55,14 @@ public class Jugar {
         // fill the top row
         for (int ii = 0; ii < 8; ii++) {
             chessBoard.add(
-                    new JLabel(COLS.substring(ii, ii + 1),
-                    SwingConstants.CENTER));
+                    new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
         }
         // fill the black non-pawn piece row
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
                     case 0:
-                        chessBoard.add(new JLabel("" + (ii + 1),
-                                SwingConstants.CENTER));
+                        chessBoard.add(new JLabel("" + (8-ii),SwingConstants.CENTER));
                     default:
                         chessBoard.add(chessBoardSquares[jj][ii]);
                 }

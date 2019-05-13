@@ -11,7 +11,6 @@ import java.lang.System; //para nanotime()
  */
 public class Partida {
     private Problema p = new Problema();
-    private long time;
     private Jugador player1;
     private Jugador player2;
     private boolean turno;

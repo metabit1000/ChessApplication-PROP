@@ -8,7 +8,6 @@ import ClasesExtra.*;
  */
 public abstract class Maquina extends Jugador {
     int d;
-    //MinimaxAlphaBeta minimax2;
     
     public Maquina() {}
     

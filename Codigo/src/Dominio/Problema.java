@@ -9,10 +9,11 @@ import java.util.*;
  */
 public final class Problema {
     private Ficha[][] board = new Ficha[8][8]; // a partir del fen
-    private Boolean turnoInicial; //blanco = true, negro = false
+    private boolean turnoInicial; //blanco = true, negro = false
     private int numMovimientos;
     private Ranking rank = new Ranking(); //Ranking por problema
     private int id;
+    
     
     public Problema() {}
     
