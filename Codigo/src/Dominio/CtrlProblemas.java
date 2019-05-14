@@ -7,6 +7,7 @@ import Dominio.fichas.Pawn;
 import Dominio.fichas.Queen;
 import Dominio.fichas.Rook;
 import Persistencia.CtrlDatosProblemas;
+import java.util.ArrayList;
 
 /**
  *
@@ -60,10 +61,11 @@ public class CtrlProblemas {
         return problems.existeProblema(id);
     }
     
-    /*public boolean existFEN(String fen) {
-       //retorna true si el problema con fen fen existe en el mapa de Problemas
-        return Problems.containsValue(fen);
-    } */ //POCO TONTERIA..si existe el id..existe el fen
+    public ArrayList<Problema> getAllProblemasJuego() {
+        ArrayList<Problema> res = new ArrayList();
+        res = problems.getAllProblemas();
+        return res;
+    }
     
     public boolean cumpleRestriccionFichas(Problema crear) {
         //devuelve falso si viola algunas de las restricciones basicas de un tablero de ajedrez: es decir, retornará falso en el caso de que

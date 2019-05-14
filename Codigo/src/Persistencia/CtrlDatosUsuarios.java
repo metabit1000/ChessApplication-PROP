@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -66,6 +67,61 @@ public class CtrlDatosUsuarios {
             System.out.println(e);
         }
     }
+    
+    public void introducirProblemaCreado(String nombre, String password, int id) {
+        File nuevo = new File("random.txt"); //fichero auxiliar
+        BufferedWriter bw;
+        String cambiar = null;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" ");
+                    if(lineaDivididaId[0].equals(nombre) && lineaDivididaId[1].equals(password)) {
+                        for (int i = 0; i < lineaDivididaId.length; ++i) {
+                            if (i == 0) cambiar = lineaDivididaId[0];
+                            else cambiar = cambiar +" "+ lineaDivididaId[i];
+                        }
+                        cambiar = cambiar + " " + id;
+                        Escribir(nuevo,cambiar);
+                    }
+                    else Escribir(nuevo,linea);    
+                }
+                br.close(); 
+                borrar(archivo); //borro archivo anterior
+                nuevo.renameTo(archivo); //Renombro el archivo con el anterior
+            }
+            else System.out.println("No existe el fichero");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ArrayList<Integer> getProblemasCreados(String nombre, String password) {
+        ArrayList<Integer> res = new ArrayList();
+        if (archivo == null) {
+            throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
+        }
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" ");
+                    if(lineaDivididaId[0].equals(nombre) && lineaDivididaId[1].equals(password)) {
+                        for (int i = 2; i < lineaDivididaId.length; ++i) {
+                            res.add(Integer.parseInt(lineaDivididaId[i]));
+                        }
+                    }
+                    break; //me ahorro bucles
+                }
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        return res;
+    } 
     
     public boolean usuarioRegistrado(String nombre, String password)  {
         String cadena = nombre+" "+ password;

@@ -9,7 +9,6 @@ import java.util.Scanner;
  * @author joan
  */
 public class Usuario extends Jugador {
-    
     //nombre en jugador
     private String password;
     
@@ -30,6 +29,7 @@ public class Usuario extends Jugador {
         this.password = password;
     }
     
+    //ESTO DEBE DESAPARECER
     public Pair getNextMove(Problema p) {
         // operación que devuelve un Pair de dos coordenadas
         Scanner sc = new Scanner(System.in);

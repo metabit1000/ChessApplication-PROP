@@ -158,6 +158,41 @@ public class CtrlDatosProblemas {
         return res;
     }
     
+    public ArrayList<Problema> getAllProblemas() {
+        ArrayList<Problema> res = new ArrayList();
+        Problema probl = new Problema();
+        String fen;
+        int numMovimientos;
+        int id;
+        Ranking aux = new Ranking();
+        boolean b = false;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" ");
+                    id = Integer.parseInt(lineaDivididaId[0]);
+                    fen = lineaDivididaId[1]+" "+ lineaDivididaId[2];
+                    numMovimientos = Integer.parseInt(lineaDivididaId[3]);
+                    String linea2 = null;
+                    while (!b && (linea = br.readLine()) != null) { //el ranking
+                        String[] lineaDivididaRank = linea.split(" "); 
+                        if (lineaDivididaRank[0].equals(".")) b = true; 
+                        else aux.setElemento(lineaDivididaRank[0], Double.parseDouble(lineaDivididaRank[1])); 
+                    }
+                    b = false; //para el siguiente problema
+                    probl = new Problema(id,fen,numMovimientos,aux);
+                    aux = new Ranking();
+                    res.add(probl);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+    
     public void modificarRanking(int id,Ranking newR) {
         String numId = String.valueOf(id); //para convertir a string el id
         File nuevo = new File("random.txt"); //fichero auxiliar que cambiara de nombre

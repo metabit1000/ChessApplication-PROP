@@ -1,6 +1,7 @@
 package Dominio;
 import Persistencia.CtrlDatosUsuarios;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +38,22 @@ public class CtrlUsuarios {
             else System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         }
         else System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
+    }
+    
+    
+    /* Introduce a los usuarios registrados en el fichero UsuariosGuardados.txt un nuevo problema */
+    public void introducirProblemaCreado(String nom,String pass,int id) {
+        if (cj.usuarioRegistrado(nom,pass)) {
+            cj.introducirProblemaCreado(nom,pass,id);
+        }
+    }
+    
+    public ArrayList<Integer> getProblemasCreados(String nombre, String password) {
+        ArrayList<Integer> res = new ArrayList();
+        if (cj.usuarioRegistrado(nombre,password)) {
+            res = cj.getProblemasCreados(nombre,password);
+        }
+        return res;
     }
     
     public void modificarPassword(Usuario usRegistrado, String passCambiar) throws IOException {
