@@ -13,7 +13,7 @@ public class CtrlPresentacionUsuarios {
     CtrlUsuarios ctrlU = new CtrlUsuarios();
 
     public Boolean UsuarioRegistrado(String nom,String password) {
-                Usuario u = new Usuario(false,nom,password);
+        Usuario u = new Usuario(false,nom,password);
 
         try {
             return ctrlU.existUser(u);

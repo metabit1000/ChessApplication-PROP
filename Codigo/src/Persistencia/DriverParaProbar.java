@@ -10,6 +10,9 @@ import java.util.ArrayList;
 public class DriverParaProbar {
     public static void main(String[]args){
         CtrlDatosProblemas  cj= new CtrlDatosProblemas();
-        ArrayList<Problema> res = cj.getAllProblemas();
+        Ranking res = new Ranking();
+        res.setElemento("joan", 30.0);
+        res.setElemento("alex", 10.0);
+        cj.modificarRanking(2,res);
     }  
 }

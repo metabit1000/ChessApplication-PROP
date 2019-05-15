@@ -5,9 +5,6 @@ joan 30.0
 jordi 80.0
 .
 2 3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w 3
-sara 5.0
-carlos 10.0
-jose 40.0
-belen 80.0
-antonio 100.0
+alex 10.0
+joan 30.0
 .

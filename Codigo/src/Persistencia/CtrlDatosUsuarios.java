@@ -7,9 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-
 
 /**
  *
@@ -133,6 +131,7 @@ public class CtrlDatosUsuarios {
                    String[] lineaDividida = linea.split(" ");
                    if(lineaDividida[0].equals(nombre) && lineaDividida[1].equals(password)) b = true;
                 }
+                br.close();
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -140,7 +139,7 @@ public class CtrlDatosUsuarios {
         return b;
     }
     
-    public void modificarPassword(String nombre, String password, String newPassword) throws InterruptedException {
+    public void modificarPassword(String nombre, String password, String newPassword) {
         File nuevo = new File("random.txt"); //fichero auxiliar
         String cambiar = null;
         try {
@@ -169,12 +168,7 @@ public class CtrlDatosUsuarios {
                 }
                 br.close(); 
                 borrar(archivo); //borro archivo anterior
-                nuevo.renameTo(archivo); //Renombro el archivo con el anterior
-                try {
-                    Files.move(nuevo.toPath(), archivo.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException ex) {
-                    System.out.println("No va.");
-                }
+                nuevo.renameTo(archivo); //Renombro el archivo con el anterior                 
             }
             else System.out.println("No existe el fichero");
         } catch (IOException e) {
