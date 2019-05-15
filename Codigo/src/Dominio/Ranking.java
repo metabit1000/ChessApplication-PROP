@@ -32,7 +32,7 @@ public class Ranking {
     }
     
     public void setElemento(String nombre,Double tiempo){
-        rank.put(nombre,tiempo);
+      if (tiempo >= 0)  rank.put(nombre,tiempo);
         ordenar();
     }
     
@@ -42,7 +42,7 @@ public class Ranking {
     public void setActualizar(String nombre,double tiempo){
         //comprobar que esté dentro de Rank
       double n = rank.get(nombre);
-        if (tiempo < n ){
+        if (tiempo < n  && tiempo >= 0){
             eliminarUsuario(nombre);
             setElemento(nombre,tiempo);  
         }
