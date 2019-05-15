@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 
@@ -70,7 +71,6 @@ public class CtrlDatosUsuarios {
     
     public void introducirProblemaCreado(String nombre, String password, int id) {
         File nuevo = new File("random.txt"); //fichero auxiliar
-        BufferedWriter bw;
         String cambiar = null;
         try {
             if (archivo.exists()) {
@@ -117,21 +117,21 @@ public class CtrlDatosUsuarios {
                     break; //me ahorro bucles
                 }
             }
-        }catch(Exception e) {
+        }catch(IOException | NumberFormatException e) {
             System.out.println(e);
         }
         return res;
     } 
     
     public boolean usuarioRegistrado(String nombre, String password)  {
-        String cadena = nombre+" "+ password;
         boolean b = false;
         try {
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
                 String linea;
                 while((linea = br.readLine()) != null) {
-                   if(linea.equals(cadena)) b = true;
+                   String[] lineaDividida = linea.split(" ");
+                   if(lineaDividida[0].equals(nombre) && lineaDividida[1].equals(password)) b = true;
                 }
             }
         } catch (IOException e) {
@@ -140,22 +140,41 @@ public class CtrlDatosUsuarios {
         return b;
     }
     
-    public void modificarPassword(String nombre, String password, String newPassword) {
-        String cadenaCambiar = nombre+" "+password;
-        String cadenaNueva = nombre+" "+newPassword;
+    public void modificarPassword(String nombre, String password, String newPassword) throws InterruptedException {
         File nuevo = new File("random.txt"); //fichero auxiliar
-        BufferedWriter bw;
+        String cambiar = null;
         try {
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
                 String linea;
                 while((linea = br.readLine()) != null) {
-                    if(linea.equals(cadenaCambiar)) Escribir(nuevo,cadenaNueva);
+                    String[] lineaDividida = linea.split(" ");
+                    if(lineaDividida[0].equals(nombre) && lineaDividida[1].equals(password)) {
+                        for (int i = 0; i < lineaDividida.length; ++i) {
+                            switch (i) {
+                                case 0:
+                                    cambiar = lineaDividida[0];
+                                    break;
+                                case 1:
+                                    cambiar = cambiar + " " + newPassword;
+                                    break;
+                                default:
+                                    cambiar = cambiar + " " + lineaDividida[i];
+                                    break;
+                            }
+                        }
+                        Escribir(nuevo,cambiar);
+                    }
                     else Escribir(nuevo,linea);    
                 }
                 br.close(); 
                 borrar(archivo); //borro archivo anterior
                 nuevo.renameTo(archivo); //Renombro el archivo con el anterior
+                try {
+                    Files.move(nuevo.toPath(), archivo.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    System.out.println("No va.");
+                }
             }
             else System.out.println("No existe el fichero");
         } catch (IOException e) {

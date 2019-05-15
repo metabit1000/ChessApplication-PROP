@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Persistencia/CtrlDatosUsuarios.java</file>
-            <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Dominio/Jugador.java</file>
+            <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Presentacion/CambiarContraseña.java</file>
             <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Dominio/CtrlUsuarios.java</file>
-            <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Dominio/CtrlProblemas.java</file>
+            <file>file:/C:/Users/Àlex/Desktop/github/ProyectoPROP/Codigo/src/Presentacion/CtrlPresentacionUsuarios.java</file>
         </group>
     </open-files>
 </project-private>

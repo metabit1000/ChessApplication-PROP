@@ -200,7 +200,6 @@ public class CtrlDatosProblemas {
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(nuevo,true));
-                PrintWriter out = new PrintWriter(bw);
                 String linea;
                 while((linea = br.readLine()) != null) {
                     String[] lineaDivididaId = linea.split(" "); 

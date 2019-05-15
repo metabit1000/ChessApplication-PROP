@@ -18,8 +18,8 @@ public class CambiarContraseña extends javax.swing.JFrame {
      */
     private String pass1;
     private String pass2;
-    private String password; 
-    private String user ; 
+    private String passwordActual; 
+    private String user; 
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
     public CambiarContraseña() {
         initComponents();
@@ -130,12 +130,12 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        passwordActual = new String(jPasswordField3.getPassword());
         pass1 = new String(jPasswordField1.getPassword());
         pass2 = new String(jPasswordField2.getPassword());
-        password = new String(jPasswordField3.getPassword());
-        System.out.println(pass1+" "+pass2+ " "+password);
-        if (pass1.equals(pass2) && !password.equals(pass1)){
-            u.cambiarContraseña(pass1,"us1",password);
+        System.out.println(passwordActual+" "+pass1+" "+pass2);
+        if (pass1.equals(pass2) && !passwordActual.equals(pass1)){
+            u.cambiarContraseña("us1",passwordActual,pass1); //da igual si es pass1 o pass2
             Inicio r = new Inicio();
             setVisible(false);
             r.setVisible(true); 
