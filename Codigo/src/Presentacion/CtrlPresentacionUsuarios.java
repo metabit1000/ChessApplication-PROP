@@ -54,16 +54,13 @@ public class CtrlPresentacionUsuarios {
         return ctrlU.correctPass(pasword);
     }
     
-    public void cambiarContraseña(String user,String pass,String passwordCambiar){
+    public void cambiarContraseña(String pass,String passwordCambiar){
+        Usuario u = new Usuario();
         try {
-            Usuario u = new Usuario();
-            ctrlU.modificarPassword(user,pass,passwordCambiar);
+            ctrlU.modificarPassword(ctrlU.getUserLogged(),pass,passwordCambiar);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public String getUsuarioLogueado() {
-        return ctrlU.getUserLogged();
-    }
 }
