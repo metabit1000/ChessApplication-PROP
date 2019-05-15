@@ -54,9 +54,10 @@ public class CtrlPresentacionUsuarios {
         return ctrlU.correctPass(pasword);
     }
     
-    public void cambiarContraseña (String pass ,String user , String password  ){
+    public void cambiarContraseña(String user,String pass,String passwordCambiar){
         try {
-            ctrlU.modificarPassword (pass,user,password);
+            Usuario u = new Usuario();
+            ctrlU.modificarPassword(user,pass,passwordCambiar);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }

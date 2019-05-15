@@ -56,10 +56,10 @@ public class CtrlUsuarios {
         return res;
     }
     
-    public void modificarPassword(String password , String user , String passCambiar) throws IOException {
-        Usuario usRegistrado = new Usuario(false, user , password);
+    public void modificarPassword(String user,String password,String passCambiar) throws IOException {
+        Usuario usRegistrado = new Usuario(false,user,password);
         if (existUser(usRegistrado)) {
-            cj.modificarPassword(usRegistrado.getNombre(),usRegistrado.getPassword(), passCambiar);
+            cj.modificarPassword(user,password, passCambiar);
             System.out.println("Contraseña modificada correctamente");
         }
     }

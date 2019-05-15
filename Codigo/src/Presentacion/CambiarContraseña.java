@@ -5,7 +5,6 @@
  */
 package Presentacion;
 
-import Dominio.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +16,11 @@ public class CambiarContraseña extends javax.swing.JFrame {
     /**
      * Creates new form CambiarContraseña
      */
-     private String pass1;
-     private String pass2;
-     private String password; 
-     private String user ; 
-     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
+    private String pass1;
+    private String pass2;
+    private String password; 
+    private String user ; 
+    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
     public CambiarContraseña() {
         initComponents();
     }
@@ -131,20 +130,18 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-      pass1 =new String(jPasswordField1.getPassword());
-      pass2 =new String(jPasswordField2.getPassword());
-      password =new String(jPasswordField3.getPassword());
+        pass1 = new String(jPasswordField1.getPassword());
+        pass2 = new String(jPasswordField2.getPassword());
+        password = new String(jPasswordField3.getPassword());
         System.out.println(pass1+" "+pass2+ " "+password);
-      if (pass1.equals(pass2) && !password.equals(pass1)){
-        u.cambiarContraseña(pass1,"us1",password);
-        Inicio r = new Inicio();
-        setVisible(false);
-        r.setVisible(true); 
-        JOptionPane.showMessageDialog(null,"Contraseña cambiada");
-      }
-      else         JOptionPane.showMessageDialog(null,"Contraseña no cambiada");
-
-      
+        if (pass1.equals(pass2) && !password.equals(pass1)){
+            u.cambiarContraseña(pass1,"us1",password);
+            Inicio r = new Inicio();
+            setVisible(false);
+            r.setVisible(true); 
+            JOptionPane.showMessageDialog(null,"Contraseña cambiada");
+        }
+        else JOptionPane.showMessageDialog(null,"Contraseña no cambiada");
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
