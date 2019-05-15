@@ -49,4 +49,18 @@ public class CtrlPresentacionUsuarios {
         }
         else return false; 
     }
+    
+    public Boolean contraseñaok(String pasword){
+        return ctrlU.correctPass(pasword);
+    }
+    
+    public void cambiarContraseña (String pass ,String user , String password  ){
+        try {
+            ctrlU.modificarPassword (pass,user,password);
+        } catch (IOException ex) {
+            Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+   
 }
