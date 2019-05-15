@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class CtrlUsuarios {    
     private CtrlDatosUsuarios cj = new CtrlDatosUsuarios();
     private String UserLogged;
-    private String Guest;
+    private String GuestLogged;
     
     public CtrlUsuarios() {}
     
@@ -24,7 +24,7 @@ public class CtrlUsuarios {
     
     public String getGuest() {
         //devuelve el nombre del usuario que ha iniciado sesión como invitado si lo hay.
-        if (Guest != null ) return Guest;
+        if (GuestLogged != null ) return GuestLogged;
         else return "No hay guest disponible";
     }
     
@@ -83,7 +83,7 @@ public class CtrlUsuarios {
         Usuario usIntroducido = new Usuario(false,nom,pass); 
         if (!existUser(usIntroducido)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
         else {
-            Guest = nom;
+            GuestLogged = nom;
             System.out.println("Sesión iniciada satisfactoriamente");
         }
     }
@@ -96,7 +96,7 @@ public class CtrlUsuarios {
     
     public void logoutGuest() {
         //el usuario que habia logeado como invitado previamente pasa a no estarlo y por lo tanto el numbre del usuario loggeado pasa a ser null.
-        if (UserLogged != null) Guest = null;
+        if (UserLogged != null) GuestLogged = null;
         else System.out.println("No esta logueado");
     }
     

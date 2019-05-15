@@ -62,6 +62,8 @@ public class CtrlPresentacionUsuarios {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
+
+    public String getUsuarioLogueado() {
+        return ctrlU.getUserLogged();
+    }
 }
