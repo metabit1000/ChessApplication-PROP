@@ -8,6 +8,7 @@ import Dominio.fichas.Queen;
 import Dominio.fichas.Rook;
 import Persistencia.CtrlDatosProblemas;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -45,6 +46,12 @@ public class CtrlProblemas {
     */
     
     public CtrlProblemas() {}
+    
+    public Map<String,Double> getmap(int id ){
+        Ranking a = new Ranking();
+         a = problems.obtenerRanking(id);
+         return a.getmap(id);
+    }
     
     public void addProblema(Problema p) {
         //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)

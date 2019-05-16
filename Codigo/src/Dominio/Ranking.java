@@ -47,6 +47,9 @@ public class Ranking {
             setElemento(nombre,tiempo);  
         }
     }
+    public Map<String,Double> getmap(int id ){
+        return rank; 
+    }
     
     public ArrayList<String> toArrayDeStrings() {  //necesaria de cara a pasarlo al fichero de Problemas
         ArrayList<String> res = new ArrayList();
