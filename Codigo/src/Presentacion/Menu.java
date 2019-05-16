@@ -31,10 +31,9 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         Cancel = new javax.swing.JButton();
-        Dificil = new javax.swing.JButton();
+        Jugar = new javax.swing.JButton();
         Versus = new javax.swing.JButton();
         Competicion = new javax.swing.JButton();
-        Facil = new javax.swing.JButton();
         Problemas = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
@@ -50,16 +49,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        Dificil.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        Dificil.setText("Dificil");
-        Dificil.addActionListener(new java.awt.event.ActionListener() {
+        Jugar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        Jugar.setText("Jugar");
+        Jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DificilActionPerformed(evt);
+                JugarActionPerformed(evt);
             }
         });
 
         Versus.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        Versus.setText("Versus");
+        Versus.setText("1 VS 1");
         Versus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VersusActionPerformed(evt);
@@ -71,14 +70,6 @@ public class Menu extends javax.swing.JFrame {
         Competicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CompeticionActionPerformed(evt);
-            }
-        });
-
-        Facil.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        Facil.setText("Facil");
-        Facil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FacilActionPerformed(evt);
             }
         });
 
@@ -98,23 +89,24 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(Cancel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(199, 199, 199))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(Cancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Facil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Dificil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Jugar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Versus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Competicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Problemas, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(199, 199, 199))))
+                            .addComponent(Competicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(Problemas)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,17 +115,15 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(Facil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Dificil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(Jugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Versus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Competicion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Problemas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(Cancel)
                 .addGap(10, 10, 10))
         );
@@ -146,21 +136,21 @@ public class Menu extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_CancelActionPerformed
 
-    private void DificilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DificilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DificilActionPerformed
+    private void JugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarActionPerformed
+        ProblemasJug pj = new ProblemasJug();
+        setVisible(false);
+        pj.setVisible(true); 
+    }//GEN-LAST:event_JugarActionPerformed
 
     private void VersusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VersusActionPerformed
-        // TODO add your handling code here:
+        ProblemasVS pvs = new ProblemasJug();
+        setVisible(false);
+        pvs.setVisible(true);
     }//GEN-LAST:event_VersusActionPerformed
 
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CompeticionActionPerformed
-
-    private void FacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FacilActionPerformed
 
     private void ProblemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProblemasActionPerformed
         // TODO add your handling code here:
@@ -204,8 +194,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
     private javax.swing.JButton Competicion;
-    private javax.swing.JButton Dificil;
-    private javax.swing.JButton Facil;
+    private javax.swing.JButton Jugar;
     private javax.swing.JButton Problemas;
     private javax.swing.JButton Versus;
     private javax.swing.JLabel jLabel1;

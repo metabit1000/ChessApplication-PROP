@@ -5,37 +5,17 @@
  */
 package Presentacion;
 
-import Dominio.CtrlProblemas;
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JList;
-
 /**
  *
- * @author jota
+ * @author joan.manuel.ramos
  */
-public class ProblemasMaq extends javax.swing.JFrame {
-    private JList<String> problems;
-    public ProblemasMaq() {
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        CtrlProblemas cp = new CtrlProblemas();
-        String p = "";
-        for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
-            listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
-        }
- 
-        //create the list
-        problems = new JList<>(listModel);
-        add(problems);
-         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("JList Example");       
-        this.setSize(200,200);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true); 
-        
+public class ProblemasVS extends javax.swing.JFrame {
+
+    /**
+     * Creates new form ProblemasVS
+     */
+    public ProblemasVS() {
         initComponents();
-        setResizable(false);
     }
 
     /**
@@ -53,10 +33,10 @@ public class ProblemasMaq extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PROBLEMAS");
+        jLabel1.setText("Problemas VS");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "iu", "e", "kda", " " };
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -72,18 +52,18 @@ public class ProblemasMaq extends javax.swing.JFrame {
                         .addGap(163, 163, 163)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,21 +86,20 @@ public class ProblemasMaq extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProblemasMaq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProblemasVS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProblemasMaq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProblemasVS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProblemasMaq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProblemasVS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProblemasMaq.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProblemasVS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProblemasMaq().setVisible(true);
+                new ProblemasVS().setVisible(true);
             }
         });
     }
