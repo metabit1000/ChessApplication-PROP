@@ -37,6 +37,27 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
+    public Boolean LogInGuest(String nom,String password) {
+        Usuario u = new Usuario(false,nom,password);
+        if(UsuarioRegistrado(nom,password)) {
+            try {
+                ctrlU.loginGuest(nom, password);
+            } catch (IOException ex) {
+                Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return true; 
+        }
+        else return false; 
+    }
+    
+    public Boolean LogOutGuest() {
+        if(ctrlU.getGuest() != null) {
+            ctrlU.logoutGuest();
+            return true; 
+        }
+        else return false; 
+    }
+    
     public Boolean Registro(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
         if(!UsuarioRegistrado(nom,password)){
