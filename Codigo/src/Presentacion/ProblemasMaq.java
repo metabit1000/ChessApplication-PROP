@@ -16,6 +16,8 @@ public class ProblemasMaq extends javax.swing.JFrame {
      */
     public ProblemasMaq() {
         initComponents();
+        setResizable(false);
+
     }
 
     /**
