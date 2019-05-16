@@ -64,7 +64,8 @@ public final class Problema {
         char[][] res = new char[8][8];
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                res[i][j] = board[i][j].getID();
+                if (board[i][j] != null) res[i][j] = board[i][j].getID();
+                else res[i][j] = '.';
             }
         }
         return res;
