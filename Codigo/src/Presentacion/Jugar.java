@@ -1,6 +1,9 @@
 package Presentacion;
 
+import ClasesExtra.Coordenada;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -49,6 +52,17 @@ public class Jugar {
                 } else {
                     b.setBackground(Color.BLACK);
                 }
+                ActionListener a = new ActionListener(){
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //como saber que boton es?
+                        //moverFicha()
+                        //wait()
+                        System.out.println(getPosicionBoton(e).getX()+ " "+getPosicionBoton(e).getY());
+                    }
+                };
+                b.addActionListener(a);
                 chessBoardSquares[jj][ii] = b;
             }
         }
@@ -60,7 +74,7 @@ public class Jugar {
             chessBoard.add(
                     new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
         }
-        // fill the black non-pawn piece row
+        
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
@@ -71,7 +85,20 @@ public class Jugar {
                 }
             }
         }
-        introducirProblema();
+        introducirProblema(); //introduzco el problema a jugar al tablero
+    }
+    
+    private Coordenada getPosicionBoton(ActionEvent e) {
+        int resX = 0,resY = 0;
+        for (int ii = 0; ii < chessBoardSquares.length; ii++) {
+            for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
+                if (e.getSource().equals(chessBoardSquares[jj][ii])) {
+                    resX = ii;
+                    resY = jj;
+                } 
+            }        
+        } 
+        return new Coordenada(resX,resY);
     }
     
     private final void cargarImagenes() {
