@@ -10,7 +10,7 @@ import javax.swing.border.*;
 public class Jugar {
     private CtrlPresentacionJugar ctrlP = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado
-    private final JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private static JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
@@ -23,13 +23,11 @@ public class Jugar {
 
     private final void initializeGui() {
         // set up the main GUI
-        
-        introducirProblema();
+        cargarImagenes();
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
 
-        gui.add(new JLabel("?"), BorderLayout.LINE_START);
 
         chessBoard = new JPanel(new GridLayout(0, 9));
         chessBoard.setBorder(new LineBorder(Color.BLACK));
@@ -73,14 +71,7 @@ public class Jugar {
                 }
             }
         }
-    }
-
-    private final JComponent getChessBoard() {
-        return chessBoard;
-    }
-
-    private final JComponent getGui() {
-        return gui;
+        introducirProblema();
     }
     
     private final void cargarImagenes() {
@@ -97,19 +88,49 @@ public class Jugar {
     }
     
     private final void introducirProblema() {
-        //char[][] c = ctrlP.getTablero(2);
-        //cargarImagenes();
-        JButton b =  new JButton(); 
-        b.setIcon(new ImageIcon("prueba.png"));
-        chessBoardSquares[2][2] = b;
-        //chessBoardSquares[1][2].setIcon(new ImageIcon("prueba.png"));
+        char[][] c = ctrlP.getTablero(2);
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
-                //if (c[i][j] == 'N') {
-                    //chessBoardSquares[i][j].setIcon(new ImageIcon(chessPieceImages[1][3])); 
-                //}
-                    
-                
+                switch (c[i][j]) {
+                    case 'K':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][0]));
+                        break;
+                    case 'k':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][0]));
+                        break;
+                    case 'Q':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][1]));
+                        break;
+                    case 'q':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][1]));
+                        break;
+                    case 'T':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][2]));
+                        break;
+                    case 't':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][2]));
+                        break;
+                    case 'N':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][3]));
+                        break;
+                    case 'n':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][3]));
+                        break;
+                    case 'B':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][4]));
+                        break;
+                    case 'b':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][4]));
+                        break;
+                    case 'P':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][5]));
+                        break;
+                    case 'p': 
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][5]));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -122,7 +143,7 @@ public class Jugar {
                 Jugar cb = new Jugar(id); //esto no se si esta bien de cara a coger el id de la anterior vista
 
                 JFrame f = new JFrame("");
-                f.add(cb.getGui());
+                f.add(gui);
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 f.setLocationByPlatform(true);
 

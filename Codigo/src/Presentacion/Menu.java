@@ -143,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_JugarActionPerformed
 
     private void VersusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VersusActionPerformed
-        ProblemasVS pvs = new ProblemasJug();
+        ProblemasVS pvs = new ProblemasVS();
         setVisible(false);
         pvs.setVisible(true);
     }//GEN-LAST:event_VersusActionPerformed
