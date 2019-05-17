@@ -74,7 +74,7 @@ public class VistaJugar {
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }  
                             }
-                            else if (!casillaInicioPulsada && !casillaFinalPulsada){  //no se donde ponerlo xd...aqui tendria que picar dos veces el usuario
+                            else {  //no se donde ponerlo xd...aqui tendria que picar dos veces el usuario
                                 casillaInicioPulsada = false;
                                 casillaFinalPulsada = false;
                             }
