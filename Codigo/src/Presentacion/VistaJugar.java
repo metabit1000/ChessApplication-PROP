@@ -46,9 +46,9 @@ public class VistaJugar {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
                 if ((jj % 2 == 1 && ii % 2 == 1)|| (jj % 2 == 0 && ii % 2 == 0)) {
-                    b.setBackground(Color.WHITE);
+                    b.setBackground(Color.decode("#EFDAB7"));
                 } else {
-                    b.setBackground(Color.BLACK);
+                    b.setBackground(Color.decode("#B38865"));
                 }
                 ActionListener a = new ActionListener(){
                     
