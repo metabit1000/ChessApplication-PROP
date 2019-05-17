@@ -35,6 +35,11 @@ public class Coordenada {
         System.out.println(coordToString());
     }
     
+    public boolean equals(Object obj) {
+        Coordenada p= (Coordenada)obj;
+        return p.getX() == this.getX() && p.getY() == this.getY();
+    }
+    
     public void stringToCoord(String s) {
         //Dado un string, se convierte a coordenada (de la clase)
         Boolean first = true;

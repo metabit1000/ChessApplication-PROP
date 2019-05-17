@@ -63,7 +63,7 @@ public class DriverCtrlProblemas {
                     Maquina m1 = new MaquinaEasy(tp,"m1",x);
                     Maquina m2 = new MaquinaEasy(!tp,"m2", x);
                     Partida h = new Partida(m1,m2,crear);
-                    if (x == h.playMaquinaVSMaquina(true)) {
+                    /*if (x == h.playMaquinaVSMaquina(true)) {
                         System.out.println("Problema superado en "+ x +" movimientos");
                         String p = crear.matrixToFen();
                         System.out.println("Nombre del problema:");
@@ -72,8 +72,8 @@ public class DriverCtrlProblemas {
                         Problema probl = new Problema(id,p,x,new Ranking());
                         cp.addProblema(probl);
                         System.out.println("Problema añadido.");
-                    } 
-                    else System.out.println("El problema no se resuelve en "+x+" movimientos.");
+                    } */
+                    //else System.out.println("El problema no se resuelve en "+x+" movimientos.");
                     break;
                 case 2:
                     fin = 2;

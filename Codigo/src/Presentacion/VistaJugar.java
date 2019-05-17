@@ -6,20 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class Jugar {
-    private CtrlPresentacionJugar ctrlP = new CtrlPresentacionJugar();
+public class VistaJugar {
+    private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado
     private static JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private static final String COLS = "ABCDEFGH";
+    private Coordenada posicionInicio,posicionFinal;
+    private boolean casillaInicioPulsada = false,casillaFinalPulsada = false;
 
-    Jugar(int id) {
+    VistaJugar(int id) {
         this.id = id;
         initializeGui();
     }
@@ -42,11 +45,6 @@ public class Jugar {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
-                // our chess pieces are 64x64 px in size, so we'll
-                // 'fill this in' using a transparent icon..
-                ImageIcon icon = new ImageIcon(
-                        new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
-                b.setIcon(icon);
                 if ((jj % 2 == 1 && ii % 2 == 1)|| (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.WHITE);
                 } else {
@@ -56,10 +54,29 @@ public class Jugar {
                     
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //como saber que boton es?
-                        //moverFicha()
-                        //wait()
-                        System.out.println(getPosicionBoton(e).getX()+ " "+getPosicionBoton(e).getY());
+                        //if jugador contra jugador
+                        if (ctrlJ.getTurnoInicial()) {
+                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                                posicionInicio = getPosicionBoton(e);
+                                casillaInicioPulsada = true;
+                            }
+                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                                posicionFinal = getPosicionBoton(e);
+                                if (movimientoPosibleOk()) {
+                                    casillaFinalPulsada = true; 
+                                    moverFicha(); //en presentacion
+                                    //moverFicha(posicionInicio,posicionFinal); //en dominio
+                                } 
+                                else {
+                                    casillaFinalPulsada = false; //para que vuelva a probar
+                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                                }  
+                            }
+                            else if (!casillaInicioPulsada && !casillaFinalPulsada){  //no se donde ponerlo xd...aqui tendria que picar dos veces el usuario
+                                casillaInicioPulsada = false;
+                                casillaFinalPulsada = false;
+                            }
+                        } 
                     }
                 };
                 b.addActionListener(a);
@@ -101,6 +118,19 @@ public class Jugar {
         return new Coordenada(resX,resY);
     }
     
+    private void moverFicha() {
+        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
+        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar
+    }
+    
+    private boolean movimientoPosibleOk() {
+        boolean b  = false;
+        ArrayList<Coordenada> res = ctrlJ.posiblesMovimientos(posicionInicio);
+        for (int i = 0; i < res.size(); ++i)
+            if (res.get(i).equals(posicionFinal)) b = true;
+        return b;
+    }
+    
     private final void cargarImagenes() {
         try {
             BufferedImage bi = ImageIO.read(new File("fichas.png"));
@@ -114,8 +144,9 @@ public class Jugar {
         }
     }
     
+    
     private final void introducirProblema() {
-        char[][] c = ctrlP.getTablero(2);
+        char[][] c = ctrlJ.getTablero(2); //id 2 para probar
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {
@@ -167,8 +198,7 @@ public class Jugar {
 
             @Override
             public void run() {
-                Jugar cb = new Jugar(id); //esto no se si esta bien de cara a coger el id de la anterior vista
-
+                VistaJugar cb = new VistaJugar(id); //esto no se si esta bien de cara a coger el id de la anterior vista
                 JFrame f = new JFrame("");
                 f.add(gui);
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -180,6 +210,10 @@ public class Jugar {
                 // ensures the minimum size is enforced.
                 f.setMinimumSize(f.getSize());
                 f.setVisible(true);
+                String turno;
+                if (ctrlJ.getTurnoInicial()) turno = "blancas.";
+                else turno = "negras.";
+                JOptionPane.showMessageDialog(null, "El turno es de las " + turno);
             }
         };
         SwingUtilities.invokeLater(r);

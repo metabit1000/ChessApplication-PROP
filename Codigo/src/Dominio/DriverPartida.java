@@ -68,7 +68,7 @@ public class DriverPartida {
                                 c = "negras";
                             }
                             System.out.println("Partida creada, jugador2 juega con " + c);
-                            partida.playJugadores();
+                            //partida.playJugadores();
                             break;
                         case 2:
                             System.out.println("JugadorVsMaquina1");
@@ -95,7 +95,7 @@ public class DriverPartida {
                                 c2 = "negras";
                             }
                             System.out.println("Partida creada, Jugador1 juega con " + c2);
-                            partida.playJugadorVSMaquina();
+                            //partida.playJugadorVSMaquina();
                             break;
                         case 3: 
                             System.out.println("Maquina1VsMaquina1");
@@ -104,7 +104,7 @@ public class DriverPartida {
                             System.out.println("Color de cada maquina escogido aleatoriamente");
                             partida = new Partida(m1, m2, p);*/
                             System.out.println("Partida creada correctamente");
-                            partida.playMaquinaVSMaquina(true);
+                            //partida.playMaquinaVSMaquina(true);
                             System.out.println("Añadir otro problema? (y/n)");
                             char k = sc.next().charAt(0);
                             sc.nextLine();
