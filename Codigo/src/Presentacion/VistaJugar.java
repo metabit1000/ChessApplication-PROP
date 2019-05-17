@@ -153,34 +153,34 @@ public class VistaJugar {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {
                     case 'K':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][0]));
-                        break;
-                    case 'k':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][0]));
-                        break;
-                    case 'Q':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][1]));
-                        break;
-                    case 'q':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][1]));
-                        break;
-                    case 'T':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][2]));
-                        break;
-                    case 't':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][2]));
-                        break;
-                    case 'N':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][3]));
                         break;
-                    case 'n':
+                    case 'k':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][3]));
                         break;
-                    case 'B':
+                    case 'Q':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][2]));
+                        break;
+                    case 'q':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][2]));
+                        break;
+                    case 'T':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][0]));
+                        break;
+                    case 't':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][0]));
+                        break;
+                    case 'N':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][4]));
                         break;
-                    case 'b':
+                    case 'n':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][4]));
+                        break;
+                    case 'B':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][1]));
+                        break;
+                    case 'b':
+                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][1]));
                         break;
                     case 'P':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][5]));
