@@ -64,8 +64,9 @@ public class VistaJugar {
                                 posicionFinal = getPosicionBoton(e);
                                 if (movimientoPosibleOk()) {
                                     casillaFinalPulsada = true; 
-                                    moverFicha(); //en presentacion
-                                    moverFicha(posicionInicio,posicionFinal); //en dominio
+                                    int res = ctrlJ.moverFicha(true,posicionInicio,posicionFinal); //en dominio
+                                    if (res == -1) JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                    else moverFicha(); //en presentacion
                                 } 
                                 else {
                                     casillaFinalPulsada = false; 

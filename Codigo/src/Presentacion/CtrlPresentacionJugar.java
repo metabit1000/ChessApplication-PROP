@@ -28,6 +28,10 @@ public class CtrlPresentacionJugar {
         return ctrlP.getTurnoInicial();
     }
     
+    public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
+        return ctrlP.moverFicha(color, cordInicio, cordFinal);
+    }
+    
     /*public void playJugadores() {
         int cont = 0;
         String coordenada1,coordenada2;

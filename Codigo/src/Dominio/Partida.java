@@ -57,20 +57,14 @@ public class Partida {
     
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal){ //color es el turno
         Ficha o = p.getFicha(cordFinal);
+        int res = 0; //todo correcto
         if(color == p.getFicha(cordInicio).getColor() && p.moveFicha(cordInicio,cordFinal)){
             if (p.mate(!p.getFicha(cordFinal).getColor())) {
-                System.out.println("Estás en jaque. Vuelve a intentarlo.");
                 p.undoFicha(cordFinal,cordInicio,o);
-                return -1;
+                res = -1; //"Estás en jaque. Vuelve a intentarlo."
             }
-            else {
-                return 0;
-            }
-        }
-        else {
-            System.out.println("Vuelva a intentarlo");
-            return -1;
-        }  
+        } 
+        return res;
     }
     
    /* public void playJugadorVSMaquina() {

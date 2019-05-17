@@ -44,4 +44,8 @@ public class CtrlPartida {
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return game.posiblesMovimientos(c);
     }
+    
+    public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
+        return game.moverFicha(color, cordInicio, cordFinal);
+    }
 }
