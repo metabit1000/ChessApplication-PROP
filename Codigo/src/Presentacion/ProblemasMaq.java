@@ -9,6 +9,8 @@ import Dominio.CtrlProblemas;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -19,19 +21,20 @@ public class ProblemasMaq extends javax.swing.JFrame {
     public ProblemasMaq() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         CtrlProblemas cp = new CtrlProblemas();
-        String p = "";
         for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
             listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
         }
- 
-        //create the list
+        
         problems = new JList<>(listModel);
         add(problems);
          
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("JList Example");       
-        this.setSize(200,200);
-        this.setLocationRelativeTo(null);
+        this.setTitle("Problemas");  
+        this.setBounds(200, 200, 213, 200);
+        problems.setVisibleRowCount(10);
+        problems.setFixedCellWidth(70);
+        problems.setFixedCellHeight(40);
+        problems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        add(new JScrollPane(problems));
         this.setVisible(true); 
         
         initComponents();
@@ -48,32 +51,18 @@ public class ProblemasMaq extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("PROBLEMAS");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "iu", "e", "kda", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(163, 163, 163)
+                .addComponent(jLabel1)
                 .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -81,9 +70,7 @@ public class ProblemasMaq extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,7 +114,5 @@ public class ProblemasMaq extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

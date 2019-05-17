@@ -24,7 +24,7 @@ public class CtrlPresentacionUsuarios {
         
     }
   
-    public Boolean LogIn(String nom,String password) {
+    public boolean LogIn(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
         if(UsuarioRegistrado(nom,password)) {
             try {
@@ -37,7 +37,15 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public Boolean LogInGuest(String nom,String password) {
+    public boolean LogOutUser() {
+        if(ctrlU.getUserLogged() != null) {
+            ctrlU.logoutUsuario();
+            return true; 
+        }
+        else return false; 
+    }
+    
+    public boolean LogInGuest(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
         if(UsuarioRegistrado(nom,password)) {
             try {
@@ -50,7 +58,7 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public Boolean LogOutGuest() {
+    public boolean LogOutGuest() {
         if(ctrlU.getGuest() != null) {
             ctrlU.logoutGuest();
             return true; 
@@ -58,7 +66,7 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public Boolean Registro(String nom,String password) {
+    public boolean Registro(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
         if(!UsuarioRegistrado(nom,password)){
             try {
@@ -71,8 +79,15 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public Boolean contraseñaok(String pasword){
+    public boolean contraseñaok(String pasword){
         return ctrlU.correctPass(pasword);
+    }
+    
+    public String getUL(){
+        return ctrlU.getUserLogged();
+    }
+    public String getGL(){
+        return ctrlU.getGuest();
     }
     
     public void cambiarContraseña(String pass,String passwordCambiar){

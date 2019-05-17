@@ -31,7 +31,7 @@ public class ProblemasJug extends javax.swing.JFrame {
 
         Dificultad = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listProblems = new javax.swing.JList<>();
+        listProblems = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         Dificil = new javax.swing.JRadioButton();
         Facil = new javax.swing.JRadioButton();
@@ -41,10 +41,10 @@ public class ProblemasJug extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listProblems.setModel(new javax.swing.AbstractListModel<String>() {
+        listProblems.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         listProblems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listProblems.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -139,6 +139,7 @@ public class ProblemasJug extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void DificilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DificilActionPerformed
@@ -151,6 +152,7 @@ public class ProblemasJug extends javax.swing.JFrame {
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         setVisible(false);
+        
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed

@@ -5,16 +5,20 @@
  */
 package Presentacion;
 
+import Dominio.CtrlUsuarios;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Menu extends javax.swing.JFrame {
-
+    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(CtrlPresentacionUsuarios u) {
+        this.u = u;
         initComponents();
         setResizable(false);
 
@@ -30,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        Cancel = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
         Jugar = new javax.swing.JButton();
         Versus = new javax.swing.JButton();
         Competicion = new javax.swing.JButton();
@@ -42,10 +46,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jLabel1.setText("MENU");
 
-        Cancel.setText("Cancel");
-        Cancel.addActionListener(new java.awt.event.ActionListener() {
+        Logout.setText("Cerrar sesión");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelActionPerformed(evt);
+                LogoutActionPerformed(evt);
             }
         });
 
@@ -96,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(Cancel))
+                        .addComponent(Logout))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -124,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(Problemas)
                 .addGap(32, 32, 32)
-                .addComponent(Cancel)
+                .addComponent(Logout)
                 .addGap(10, 10, 10))
         );
 
@@ -132,9 +136,18 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-        setVisible(false);
-    }//GEN-LAST:event_CancelActionPerformed
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+
+        int p = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar sesión?", "Abandonando sesión", JOptionPane.YES_NO_OPTION);
+        if (p == 0) {
+            JOptionPane.showMessageDialog(null, "Hasta pronto, "+ u.getUL());
+            u.LogOutUser();
+            Inicio i = new Inicio();
+            setVisible(false);
+            i.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_LogoutActionPerformed
 
     private void JugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarActionPerformed
         ProblemasJug pj = new ProblemasJug();
@@ -186,15 +199,15 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+               // new Menu().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cancel;
     private javax.swing.JButton Competicion;
     private javax.swing.JButton Jugar;
+    private javax.swing.JButton Logout;
     private javax.swing.JButton Problemas;
     private javax.swing.JButton Versus;
     private javax.swing.JLabel jLabel1;
