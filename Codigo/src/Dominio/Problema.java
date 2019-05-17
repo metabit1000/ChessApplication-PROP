@@ -85,24 +85,6 @@ public final class Problema {
         rank.setElemento(nombre, tiempo);
     }
     
-    public void printTablero() {
-        int count = 8;
-        System.out.println("   -----------------");
-        for (int x=0; x < 8; x++) {
-            System.out.print(count + " |");
-            for (int y=0; y < 8; y++) {
-                if (board[x][y] == null) System.out.print(" +");
-                else System.out.print(" " + board[x][y].getID());
-            }
-            System.out.println(" |");
-            
-            if (x == 7) {
-                System.out.println("   -----------------");
-                System.out.println("    a b c d e f g h");
-            }
-            --count;
-        }
-    }
     
     public String matrixToFen() {
         Ficha[][] f = board;
@@ -213,14 +195,10 @@ public final class Problema {
             }
         }
     }
-    public boolean moveFicha(String s1, String s2) {
+    public boolean moveFicha(Coordenada c1, Coordenada c2) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
-        Coordenada c1 = new Coordenada();
-        c1.stringToCoord(s1);
-        Coordenada c2 = new Coordenada();
-        c2.stringToCoord(s2);
         Ficha f1 = board[c1.getX()][c1.getY()];
         if (f1 != null) {
             ArrayList<Coordenada> pM = f1.posiblesMovimientos(this,c1);
@@ -235,12 +213,10 @@ public final class Problema {
                 return true;
             }
             else {
-                System.out.println("La coordenada de destino no es correcta.");
                 return false;
             }
         }
         else {
-            System.out.println("En la coordenada de origen no hay ficha.");
             return false;
         }
     }
@@ -281,9 +257,9 @@ public final class Problema {
                     ArrayList<Coordenada> pM1 = board[i][j].posiblesMovimientos(this,z);
                     for (int w = 0; w < pM1.size() ; w++) {
                         Ficha o = this.getFicha(pM1.get(w));
-                        boolean u = moveFicha(z.coordToString(),pM1.get(w).coordToString());
+                        boolean u = moveFicha(z,pM1.get(w));
                         if (!mate(color)) checkmate = false; 
-                        undoFicha(pM1.get(w).coordToString(),z.coordToString(), o);
+                        undoFicha(pM1.get(w),z, o);
                     }
                 }
             }
@@ -292,14 +268,10 @@ public final class Problema {
     }
       
 
-    public void undoFicha(String s1, String s2, Ficha j) {
+    public void undoFicha(Coordenada c1, Coordenada c2, Ficha j) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
         //en c2, nos la comemos
-        Coordenada c1 = new Coordenada();
-        c1.stringToCoord(s1);
-        Coordenada c2 = new Coordenada();
-        c2.stringToCoord(s2);
         Ficha f1 = getFicha(c1);
         setFicha(c2, f1);
         removeFicha(c1);

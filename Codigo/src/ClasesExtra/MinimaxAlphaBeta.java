@@ -105,7 +105,7 @@ public class MinimaxAlphaBeta {
             for (int x = 0; x < movesPosibles.size(); ++x) {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 //if (p.checkmate(col)) return new Pair(currMove,movePosible);  
                 int val = col ? min(p,depth-1,-10000,10000,!col): max(p,depth-1,-10000,10000,!col);
                 if (!p.mate(!col)) {
@@ -119,7 +119,7 @@ public class MinimaxAlphaBeta {
                         bestMovePosible = movePosible; 
                     }
                 }
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 //System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
@@ -138,9 +138,9 @@ public class MinimaxAlphaBeta {
             for (int x = 0; x < movesPosibles.size(); ++x) { 
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 int val = max(p,depth-1,alpha,beta,!col);
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 if (val < lowestSeenValue) lowestSeenValue = val;
                 beta = Math.min(beta, val);
                 if (beta <= alpha) return lowestSeenValue; //rompo poda
@@ -161,9 +161,9 @@ public class MinimaxAlphaBeta {
             for (int x = 0; x < movesPosibles.size(); ++x) { 
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 int val = min(p,depth-1,alpha,beta,!col);
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 if (val > highestSeenValue) highestSeenValue = val;
                 alpha = Math.max(alpha,val);
                 if (beta <= alpha) return highestSeenValue; //rompo poda

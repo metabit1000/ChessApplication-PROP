@@ -65,10 +65,11 @@ public class VistaJugar {
                                 if (movimientoPosibleOk()) {
                                     casillaFinalPulsada = true; 
                                     moverFicha(); //en presentacion
-                                    //moverFicha(posicionInicio,posicionFinal); //en dominio
+                                    moverFicha(posicionInicio,posicionFinal); //en dominio
                                 } 
                                 else {
-                                    casillaFinalPulsada = false; //para que vuelva a probar
+                                    casillaFinalPulsada = false; 
+                                    casillaInicioPulsada = false; //para que vuelva a probar
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }  
                             }

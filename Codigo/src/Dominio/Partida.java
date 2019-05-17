@@ -54,6 +54,25 @@ public class Partida {
     public Problema getProblema() {
         return p;
     }
+    
+    public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal){ //color es el turno
+        Ficha o = p.getFicha(cordFinal);
+        if(color == p.getFicha(cordInicio).getColor() && p.moveFicha(cordInicio,cordFinal)){
+            if (p.mate(!p.getFicha(cordFinal).getColor())) {
+                System.out.println("Estás en jaque. Vuelve a intentarlo.");
+                p.undoFicha(cordFinal,cordInicio,o);
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+        else {
+            System.out.println("Vuelva a intentarlo");
+            return -1;
+        }  
+    }
+    
    /* public void playJugadorVSMaquina() {
         int cont = 0;
         String coordenada1,coordenada2;
@@ -199,27 +218,5 @@ public class Partida {
         return cont;
     }
     */
-    public int mover(boolean color,String cord1,String cord2 ){
-        //para la ficha con color color (true = blanco, false = negro), en coordenada de origen cord1 y coordenada de destino cord2,
-        //devuelve -1 si al mover esa ficha el jugador está en jaque o si esa posición es inválida. devolverá 0 en caso de ser una posicion correcta.
-        Coordenada c1 = new Coordenada();
-        c1.stringToCoord(cord1);
-        Coordenada c2 = new Coordenada();
-        c2.stringToCoord(cord2);
-        Ficha o = p.getFicha(c2);
-        if(color == p.getFicha(c1).getColor() && p.moveFicha(cord1,cord2)){
-            if (p.mate(!p.getFicha(c2).getColor())) {
-                System.out.println("Estás en jaque. Vuelve a intentarlo.");
-                p.undoFicha(c2.coordToString(),c1.coordToString(),o);
-                return -1;
-            }
-            else {
-                return 0;
-            }
-        }
-        else {
-            System.out.println("Vuelva a intentarlo");
-            return -1;
-        }  
-    }
+    
 }

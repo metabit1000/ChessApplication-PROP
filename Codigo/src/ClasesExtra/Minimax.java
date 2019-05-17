@@ -23,9 +23,9 @@ public class Minimax {
             for (int x = 0; x < movesPosibles.size(); ++x) { 
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 int val = max(p,depth-1,!col);
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 if (val < lowestSeenValue) lowestSeenValue = val;
             }
         }
@@ -44,9 +44,9 @@ public class Minimax {
             for (int x = 0; x < movesPosibles.size(); ++x) { 
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 int val = min(p,depth-1,!col);
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 if (val > highestSeenValue) highestSeenValue = val;
             }
         }
@@ -67,7 +67,7 @@ public class Minimax {
             for (int x = 0; x < movesPosibles.size(); ++x) {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
-                p.moveFicha(currMove.coordToString(),movePosible.coordToString());
+                p.moveFicha(currMove,movePosible);
                 if (p.checkmate(col)) return new Pair(currMove,movePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
                 int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
                 if (!p.mate(!col)) {
@@ -81,7 +81,7 @@ public class Minimax {
                         bestMovePosible = movePosible; 
                     }
                 }
-                p.undoFicha(movePosible.coordToString(),currMove.coordToString(),o);
+                p.undoFicha(movePosible,currMove,o);
                 System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }

@@ -205,7 +205,6 @@ public class CtrlProblemas {
                 coordR.stringToCoord(pos);
                 try {
                     crear.setFicha(coordR,r);
-                    crear.printTablero();
                 } catch (ArrayIndexOutOfBoundsException e2){
                     System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
                     break;
