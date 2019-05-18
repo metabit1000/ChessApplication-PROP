@@ -1,10 +1,8 @@
 package Presentacion;
 
 import ClasesExtra.Coordenada;
-import ClasesExtra.Pair;
 import Dominio.CtrlPartida;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *

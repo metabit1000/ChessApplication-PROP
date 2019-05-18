@@ -13,7 +13,6 @@ public class Partida {
     private Problema p = new Problema();
     private Jugador player1;
     private Jugador player2;
-    //aqui el tiempo?
 
     public Partida() {}
     

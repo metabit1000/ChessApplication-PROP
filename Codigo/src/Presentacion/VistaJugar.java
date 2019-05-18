@@ -22,6 +22,7 @@ public class VistaJugar {
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
+    private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el inicial del problema
 
     VistaJugar(int id) {
@@ -55,42 +56,58 @@ public class VistaJugar {
 
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //if jugador contra jugador!
                         int res = 0;
-
-                        if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
-                            posicionInicio = getPosicionBoton(e);
-                            casillaInicioPulsada = true;
-                        } else if (casillaInicioPulsada && !casillaFinalPulsada) {
-                            posicionFinal = getPosicionBoton(e);
-                            if (movimientoPosibleOk()) {
-                                casillaFinalPulsada = true;
-                                res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
-                                if (res == -1) {
-                                    JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
-                                    casillaFinalPulsada = false;
-                                    casillaInicioPulsada = false;
-                                } else if (res == -2) {
+                        
+                        if (tipo == 0) { //Humano vs Humano
+                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                                posicionInicio = getPosicionBoton(e);
+                                casillaInicioPulsada = true;
+                            } 
+                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                                posicionFinal = getPosicionBoton(e);
+                                if (movimientoPosibleOk()) {
+                                    casillaFinalPulsada = true;
+                                    res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
+                                    if (res == -1) {
+                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                        casillaFinalPulsada = false;
+                                        casillaInicioPulsada = false;
+                                    } else if (res == -2) {
+                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                    } else {
+                                        moverFicha(); //en presentacionif (ctrlJ.checkMate(turno)) JOptionPane.showMessageDialog(null, "Es jaque mate");
+                                        turno = !turno; //si es correcto el movimiento, pasa el turno al siguiente
+                                        if (ctrlJ.checkMate(!turno)) {
+                                            turno = !turno; //cambio el turno para escribirlo por pantalla
+                                            JOptionPane.showMessageDialog(null, "Es Jaque Mate. Ganan las " + obtenerTurno()); //!turno porque he cambiado de turno antes
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
+                                        }
+                                    }
+                                } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
                                     JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                 } else {
-                                    moverFicha(); //en presentacionif (ctrlJ.checkMate(turno)) JOptionPane.showMessageDialog(null, "Es jaque mate");
-                                    turno = !turno; //si es correcto el movimiento, pasa el turno al siguiente
-                                    if (ctrlJ.checkMate(!turno)) {
-                                        turno = !turno; //cambio el turno para escribirlo por pantalla
-                                        JOptionPane.showMessageDialog(null, "Es Jaque Mate. Ganan las " + obtenerTurno()); //!turno porque he cambiado de turno antes
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
-                                    }
+                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }
-                            } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) {
-                                JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
-                            }
 
-                            //reseteo para el siguiente movimiento
-                            casillaFinalPulsada = false;
-                            casillaInicioPulsada = false;
+                                //reseteo para el siguiente movimiento
+                                casillaFinalPulsada = false;
+                                casillaInicioPulsada = false;
+                            }
+                        }
+                        else { //Humano vs Maquina
+                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                                posicionInicio = getPosicionBoton(e);
+                                casillaInicioPulsada = true;
+                            } 
+                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                                posicionFinal = getPosicionBoton(e);
+                                 
+                                 //de alguna manera tendre que coger la maquina...ya que las maquinas no clican xd
+                                casillaFinalPulsada = false;
+                                casillaInicioPulsada = false;
+
+                            }    
                         }
                     }
                 };
