@@ -55,6 +55,14 @@ public class Partida {
         return p;
     }
     
+    public boolean checkMate(boolean turno) {
+        return p.checkmate(turno);
+    }
+    
+    public boolean getColor(Coordenada c) {
+        return p.getFicha(c).getColor();
+    }
+    
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal){ //color es el turno
         Ficha o = p.getFicha(cordFinal);
         int res = 0; //todo correcto
@@ -63,7 +71,8 @@ public class Partida {
                 p.undoFicha(cordFinal,cordInicio,o);
                 res = -1; //"Estás en jaque. Vuelve a intentarlo."
             }
-        } else res = -2; 
+        } 
+        else res = -2;  //No es tu turno
         return res;
     }
     

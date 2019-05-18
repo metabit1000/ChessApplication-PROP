@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 public class VistaJugar {
+
     private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado
     private static JPanel gui = new JPanel(new BorderLayout(3, 3));
@@ -19,8 +20,8 @@ public class VistaJugar {
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private static final String COLS = "ABCDEFGH";
-    private Coordenada posicionInicio,posicionFinal;
-    private boolean casillaInicioPulsada = false,casillaFinalPulsada = false;
+    private Coordenada posicionInicio, posicionFinal;
+    private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el inicial del problema
 
     VistaJugar(int id) {
@@ -35,59 +36,65 @@ public class VistaJugar {
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
 
-
         chessBoard = new JPanel(new GridLayout(0, 9));
         chessBoard.setBorder(new LineBorder(Color.BLACK));
         gui.add(chessBoard);
 
         // create the chess board squares
-        Insets buttonMargin = new Insets(0,0,0,0);
+        Insets buttonMargin = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
-                if ((jj % 2 == 1 && ii % 2 == 1)|| (jj % 2 == 0 && ii % 2 == 0)) {
+                if ((jj % 2 == 1 && ii % 2 == 1) || (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.decode("#EFDAB7"));
                 } else {
                     b.setBackground(Color.decode("#B38865"));
                 }
-                ActionListener a = new ActionListener(){
-                    
+                ActionListener a = new ActionListener() {
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //if jugador contra jugador!
                         int res = 0;
-                        
+
                         if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
                             posicionInicio = getPosicionBoton(e);
                             casillaInicioPulsada = true;
-                        }
-                        else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                        } else if (casillaInicioPulsada && !casillaFinalPulsada) {
                             posicionFinal = getPosicionBoton(e);
                             if (movimientoPosibleOk()) {
-                                casillaFinalPulsada = true; 
-                                res = ctrlJ.moverFicha(turno,posicionInicio,posicionFinal); //en dominio
+                                casillaFinalPulsada = true;
+                                res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
                                 if (res == -1) {
                                     JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
                                     casillaFinalPulsada = false;
                                     casillaInicioPulsada = false;
-                                } 
-                                else if (res == -2) JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-                                else {
-                                    moverFicha(); //en presentacion
+                                } else if (res == -2) {
+                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                } else {
+                                    moverFicha(); //en presentacionif (ctrlJ.checkMate(turno)) JOptionPane.showMessageDialog(null, "Es jaque mate");
                                     turno = !turno; //si es correcto el movimiento, pasa el turno al siguiente
-                                    JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
+                                    if (ctrlJ.checkMate(!turno)) {
+                                        turno = !turno; //cambio el turno para escribirlo por pantalla
+                                        JOptionPane.showMessageDialog(null, "Es Jaque Mate. Ganan las " + obtenerTurno()); //!turno porque he cambiado de turno antes
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
+                                    }
                                 }
-                            } 
-                            else JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
-                                
+                            } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) {
+                                JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                            }
+
                             //reseteo para el siguiente movimiento
-                            casillaFinalPulsada = false; 
-                            casillaInicioPulsada = false; 
+                            casillaFinalPulsada = false;
+                            casillaInicioPulsada = false;
                         }
                     }
                 };
-                
+
                 b.addActionListener(a);
                 chessBoardSquares[jj][ii] = b;
             }
@@ -100,12 +107,12 @@ public class VistaJugar {
             chessBoard.add(
                     new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
         }
-        
+
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
                     case 0:
-                        chessBoard.add(new JLabel("" + (8-ii),SwingConstants.CENTER));
+                        chessBoard.add(new JLabel("" + (8 - ii), SwingConstants.CENTER));
                     default:
                         chessBoard.add(chessBoardSquares[jj][ii]);
                 }
@@ -113,40 +120,46 @@ public class VistaJugar {
         }
         introducirProblema(); //introduzco el problema a jugar al tablero
     }
-    
+
     private Coordenada getPosicionBoton(ActionEvent e) {
-        int resX = 0,resY = 0;
+        int resX = 0, resY = 0;
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 if (e.getSource().equals(chessBoardSquares[jj][ii])) {
                     resX = ii;
                     resY = jj;
-                } 
-            }        
-        } 
-        return new Coordenada(resX,resY);
+                }
+            }
+        }
+        return new Coordenada(resX, resY);
     }
-    
+
     private void moverFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
     }
-    
+
     private boolean movimientoPosibleOk() {
-        boolean b  = false;
+        boolean b = false;
         ArrayList<Coordenada> res = ctrlJ.posiblesMovimientos(posicionInicio);
-        for (int i = 0; i < res.size(); ++i)
-            if (res.get(i).equals(posicionFinal)) b = true;
+        for (int i = 0; i < res.size(); ++i) {
+            if (res.get(i).equals(posicionFinal)) {
+                b = true;
+            }
+        }
         return b;
     }
-    
+
     private static String obtenerTurno() {
         String turn;
-        if (turno) turn = "blancas.";
-        else turn = "negras.";
+        if (turno) {
+            turn = "blancas.";
+        } else {
+            turn = "negras.";
+        }
         return turn;
     }
-    
+
     private final void cargarImagenes() {
         try {
             BufferedImage bi = ImageIO.read(new File("fichas.png"));
@@ -159,7 +172,7 @@ public class VistaJugar {
             System.exit(1);
         }
     }
-    
+
     private final void introducirProblema() {
         char[][] c = ctrlJ.getTablero(2); //id 2 para probar
         for (int i = 0; i < 8; ++i) {
@@ -177,10 +190,10 @@ public class VistaJugar {
                     case 'q':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][2]));
                         break;
-                    case 'T':
+                    case 'R':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][0]));
                         break;
-                    case 't':
+                    case 'r':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][0]));
                         break;
                     case 'N':
@@ -198,7 +211,7 @@ public class VistaJugar {
                     case 'P':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][5]));
                         break;
-                    case 'p': 
+                    case 'p':
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][5]));
                         break;
                     default:
@@ -207,7 +220,7 @@ public class VistaJugar {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         Runnable r = new Runnable() {
 

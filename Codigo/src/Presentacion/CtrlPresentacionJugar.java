@@ -20,6 +20,10 @@ public class CtrlPresentacionJugar {
         return res;
     }
     
+    public boolean getColor(Coordenada c) {
+        return ctrlP.getColor(c);
+    }
+    
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return ctrlP.posiblesMovimientos(c);
     }
@@ -30,6 +34,10 @@ public class CtrlPresentacionJugar {
     
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
         return ctrlP.moverFicha(color, cordInicio, cordFinal);
+    }
+    
+    public boolean checkMate(boolean turno) {
+        return ctrlP.checkMate(turno);
     }
     
     /*public void playJugadores() {

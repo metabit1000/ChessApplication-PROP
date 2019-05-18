@@ -28,9 +28,9 @@ public class CtrlPartida {
         char[][] res = p.convertirTablero();
         return res;
     }
-    
-    public void moverFicha() {
-        //game.moverFicha(destino,final);
+   
+    public boolean getColor(Coordenada c) {
+        return game.getColor(c);
     }
     
     public boolean getTurnoInicial() {
@@ -47,5 +47,9 @@ public class CtrlPartida {
     
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
         return game.moverFicha(color, cordInicio, cordFinal);
+    }
+    
+    public boolean checkMate(boolean turno) {
+        return game.checkMate(turno);
     }
 }
