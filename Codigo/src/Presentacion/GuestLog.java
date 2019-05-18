@@ -15,10 +15,10 @@ public class GuestLog extends javax.swing.JFrame {
 
     private String user;
     private String password;
-    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios()
-            ; 
+    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios(); 
     
-    public GuestLog() {
+    public GuestLog(CtrlPresentacionUsuarios u) {
+        this.u = u;
         initComponents();
     }
 
@@ -129,7 +129,7 @@ public class GuestLog extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Usuario no registrado.");
         }
         else {
-            ProblemasJug p = new ProblemasJug();
+            ProblemasJug p = new ProblemasJug(u);
             setVisible(false);
             p.setVisible(true); 
         }
@@ -169,7 +169,7 @@ public class GuestLog extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuestLog().setVisible(true);
+                //new GuestLog().setVisible(true);
             }
         });
     }

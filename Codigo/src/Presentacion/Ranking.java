@@ -18,10 +18,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Jordi
  */
 public class Ranking extends javax.swing.JFrame {
-private Map<String,Double> rank = new HashMap<>();
-       CtrlRanking  Cr = new CtrlRanking () ; 
-    public Ranking() {
-         rank = Cr.getmap(1);
+    
+    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
+    private Map<String,Double> rank = new HashMap<>();
+    CtrlRanking  Cr = new CtrlRanking () ; 
+    private String Problemas;
+    private int id; 
+    
+    public Ranking(CtrlPresentacionUsuarios u, int i, String p) {
+        this.u = u;
+        this.id = i;
+        this.Problemas = p;
+         rank = Cr.getmap(i);
            DefaultTableModel modelo = new DefaultTableModel();
            modelo.addColumn("Nombre");
            modelo.addColumn("Tiempo");
@@ -110,8 +118,20 @@ private Map<String,Double> rank = new HashMap<>();
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
        setVisible(false);
-       Menu  m = new Menu();
-       m.setVisible(true);
+       if (Problemas.equals("PJ")) {
+            ProblemasJug pj = new ProblemasJug(u);
+            pj.setVisible(true);
+       }
+       else if (Problemas.equals("PVS")) {
+            ProblemasVS pvs = new ProblemasVS(u);
+            pvs.setVisible(true);
+       }
+       else {
+            ProblemasMaq m = new ProblemasMaq(u);
+            m.setVisible(true);
+       }
+       
+       
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -147,7 +167,7 @@ private Map<String,Double> rank = new HashMap<>();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ranking().setVisible(true);
+                //new Ranking().setVisible(true);
             }
         });
     }

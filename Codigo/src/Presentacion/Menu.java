@@ -150,19 +150,21 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void JugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarActionPerformed
-        ProblemasJug pj = new ProblemasJug();
+        ProblemasJug pj = new ProblemasJug(u);
         setVisible(false);
         pj.setVisible(true); 
     }//GEN-LAST:event_JugarActionPerformed
 
     private void VersusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VersusActionPerformed
-        ProblemasVS pvs = new ProblemasVS();
+        ProblemasVS pvs = new ProblemasVS(u);
         setVisible(false);
         pvs.setVisible(true);
     }//GEN-LAST:event_VersusActionPerformed
 
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
-        // TODO add your handling code here:
+        ProblemasMaq pm = new ProblemasMaq(u);
+        setVisible(false);
+        pm.setVisible(true);
     }//GEN-LAST:event_CompeticionActionPerformed
 
     private void ProblemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProblemasActionPerformed

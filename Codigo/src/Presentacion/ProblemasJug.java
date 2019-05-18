@@ -5,17 +5,34 @@
  */
 package Presentacion;
 
+import Dominio.CtrlProblemas;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
 /**
  *
- * @author joan.manuel.ramos
+ * @author jota
  */
 public class ProblemasJug extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ProblemasJug
-     */
-    public ProblemasJug() {
+    private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
+    public ProblemasJug(CtrlPresentacionUsuarios u) {
+        this.u = u;
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        CtrlProblemas cp = new CtrlProblemas();
+        for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
+            listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
+        }
+        
+        this.setVisible(true); 
+        this.setTitle("Problemas");  
         initComponents();
+        JLista.setModel(listModel);
+        JLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setResizable(false);
+        
         Dificultad.add(Facil);
         Dificultad.add(Dificil);
     }
@@ -31,7 +48,7 @@ public class ProblemasJug extends javax.swing.JFrame {
 
         Dificultad = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listProblems = new javax.swing.JList<String>();
+        JLista = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         Dificil = new javax.swing.JRadioButton();
         Facil = new javax.swing.JRadioButton();
@@ -41,14 +58,14 @@ public class ProblemasJug extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listProblems.setModel(new javax.swing.AbstractListModel() {
+        JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        listProblems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        listProblems.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(listProblems);
+        JLista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        JLista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(JLista);
 
         jLabel1.setText("Problemas");
 
@@ -92,22 +109,6 @@ public class ProblemasJug extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Facil)
-                            .addComponent(Dificil))
-                        .addGap(70, 70, 70))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Ranking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Play, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(72, 72, 72))))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
@@ -116,6 +117,21 @@ public class ProblemasJug extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(Cancel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Facil)
+                            .addComponent(Dificil))
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Ranking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Play, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(72, 72, 72))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,8 +139,7 @@ public class ProblemasJug extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Play)
                         .addGap(18, 18, 18)
@@ -132,8 +147,9 @@ public class ProblemasJug extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Facil)
                         .addGap(9, 9, 9)
-                        .addComponent(Dificil)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(Dificil))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(Cancel)
                 .addContainerGap())
         );
@@ -151,7 +167,9 @@ public class ProblemasJug extends javax.swing.JFrame {
     }//GEN-LAST:event_FacilActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        Menu m = new Menu(u);
         setVisible(false);
+        m.setVisible(true);
         
     }//GEN-LAST:event_CancelActionPerformed
 
@@ -160,11 +178,16 @@ public class ProblemasJug extends javax.swing.JFrame {
     }//GEN-LAST:event_PlayActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
-        Ranking r = new Ranking();
-        setVisible(false);
-        r.setVisible(true); 
+        if (selectProblem() > -1) {
+            Ranking r = new Ranking(u, selectProblem()+1, "PJ");
+            setVisible(false);
+            r.setVisible(true); 
+        }
     }//GEN-LAST:event_RankingActionPerformed
 
+    public int selectProblem() {
+        return JLista.getSelectedIndex();
+    }
     /**
      * @param args the command line arguments
      */
@@ -195,7 +218,7 @@ public class ProblemasJug extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProblemasJug().setVisible(true);
+                //new ProblemasJug().setVisible(true);
             }
         });
     }
@@ -205,10 +228,10 @@ public class ProblemasJug extends javax.swing.JFrame {
     private javax.swing.JRadioButton Dificil;
     private javax.swing.ButtonGroup Dificultad;
     private javax.swing.JRadioButton Facil;
+    private javax.swing.JList<String> JLista;
     private javax.swing.JButton Play;
     private javax.swing.JButton Ranking;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listProblems;
     // End of variables declaration//GEN-END:variables
 }
