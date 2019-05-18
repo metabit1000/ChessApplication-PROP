@@ -63,7 +63,7 @@ public class Partida {
                 p.undoFicha(cordFinal,cordInicio,o);
                 res = -1; //"Estás en jaque. Vuelve a intentarlo."
             }
-        } 
+        } else res = -2; 
         return res;
     }
     

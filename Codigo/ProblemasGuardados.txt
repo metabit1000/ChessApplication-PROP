@@ -4,7 +4,7 @@ alex 20.0
 joan 30.0
 jordi 80.0
 .
-2 3K4/8/8/p3k3/pp1B4/N5N1/P2Q4/8 w 3
+2 3K4/8/8/p3k3/p2B4/Np4N1/P2Q4/8 w 3
 alex 10.0
 joan 30.0
 .

@@ -21,6 +21,7 @@ public class VistaJugar {
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio,posicionFinal;
     private boolean casillaInicioPulsada = false,casillaFinalPulsada = false;
+    private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el inicial del problema
 
     VistaJugar(int id) {
         this.id = id;
@@ -54,33 +55,39 @@ public class VistaJugar {
                     
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //if jugador contra jugador
-                        if (ctrlJ.getTurnoInicial()) {
-                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
-                                posicionInicio = getPosicionBoton(e);
-                                casillaInicioPulsada = true;
-                            }
-                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
-                                posicionFinal = getPosicionBoton(e);
-                                if (movimientoPosibleOk()) {
-                                    casillaFinalPulsada = true; 
-                                    int res = ctrlJ.moverFicha(true,posicionInicio,posicionFinal); //en dominio
-                                    if (res == -1) JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
-                                    else moverFicha(); //en presentacion
+                        //if jugador contra jugador!
+                        int res = 0;
+                        
+                        if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                            posicionInicio = getPosicionBoton(e);
+                            casillaInicioPulsada = true;
+                        }
+                        else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                            posicionFinal = getPosicionBoton(e);
+                            if (movimientoPosibleOk()) {
+                                casillaFinalPulsada = true; 
+                                res = ctrlJ.moverFicha(turno,posicionInicio,posicionFinal); //en dominio
+                                if (res == -1) {
+                                    JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                    casillaFinalPulsada = false;
+                                    casillaInicioPulsada = false;
                                 } 
+                                else if (res == -2) JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                 else {
-                                    casillaFinalPulsada = false; 
-                                    casillaInicioPulsada = false; //para que vuelva a probar
-                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
-                                }  
-                            }
-                            else {  //no se donde ponerlo xd...aqui tendria que picar dos veces el usuario
-                                casillaInicioPulsada = false;
-                                casillaFinalPulsada = false;
-                            }
-                        } 
+                                    moverFicha(); //en presentacion
+                                    turno = !turno; //si es correcto el movimiento, pasa el turno al siguiente
+                                    JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
+                                }
+                            } 
+                            else JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                                
+                            //reseteo para el siguiente movimiento
+                            casillaFinalPulsada = false; 
+                            casillaInicioPulsada = false; 
+                        }
                     }
                 };
+                
                 b.addActionListener(a);
                 chessBoardSquares[jj][ii] = b;
             }
@@ -122,7 +129,7 @@ public class VistaJugar {
     
     private void moverFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
-        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar
+        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
     }
     
     private boolean movimientoPosibleOk() {
@@ -131,6 +138,13 @@ public class VistaJugar {
         for (int i = 0; i < res.size(); ++i)
             if (res.get(i).equals(posicionFinal)) b = true;
         return b;
+    }
+    
+    private static String obtenerTurno() {
+        String turn;
+        if (turno) turn = "blancas.";
+        else turn = "negras.";
+        return turn;
     }
     
     private final void cargarImagenes() {
@@ -145,7 +159,6 @@ public class VistaJugar {
             System.exit(1);
         }
     }
-    
     
     private final void introducirProblema() {
         char[][] c = ctrlJ.getTablero(2); //id 2 para probar
@@ -212,10 +225,7 @@ public class VistaJugar {
                 // ensures the minimum size is enforced.
                 f.setMinimumSize(f.getSize());
                 f.setVisible(true);
-                String turno;
-                if (ctrlJ.getTurnoInicial()) turno = "blancas.";
-                else turno = "negras.";
-                JOptionPane.showMessageDialog(null, "El turno es de las " + turno);
+                JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
             }
         };
         SwingUtilities.invokeLater(r);
