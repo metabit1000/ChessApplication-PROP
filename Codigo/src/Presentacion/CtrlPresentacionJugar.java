@@ -22,6 +22,10 @@ public class CtrlPresentacionJugar {
         return ctrlP.getColor(c);
     }
     
+    public int getNumMovimientos() {
+        return ctrlP.getNumMovimientos();
+    }
+    
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return ctrlP.posiblesMovimientos(c);
     }

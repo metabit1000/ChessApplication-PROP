@@ -23,7 +23,8 @@ public class VistaJugar {
     private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
     private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
-    private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el inicial del problema
+    private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
+    private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
 
     VistaJugar(int id) {
         this.id = id;
@@ -50,7 +51,7 @@ public class VistaJugar {
                 if ((jj % 2 == 1 && ii % 2 == 1) || (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.decode("#EFDAB7"));
                 } else {
-                    b.setBackground(Color.decode("#B38865"));
+                    b.setBackground(Color.decode("#B38865")); //color background casillas
                 }
                 ActionListener a = new ActionListener() {
 
@@ -75,12 +76,20 @@ public class VistaJugar {
                                     } else if (res == -2) {
                                         JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                     } else {
-                                        moverFicha(); //en presentacionif (ctrlJ.checkMate(turno)) JOptionPane.showMessageDialog(null, "Es jaque mate");
-                                        turno = !turno; //si es correcto el movimiento, pasa el turno al siguiente
-                                        if (ctrlJ.checkMate(!turno)) {
-                                            turno = !turno; //cambio el turno para escribirlo por pantalla
-                                            JOptionPane.showMessageDialog(null, "Es Jaque Mate. Ganan las " + obtenerTurno()); //!turno porque he cambiado de turno antes
-                                        } else {
+                                        moverFicha(); //en presentacion
+                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos (NO ESTA BIEN)
+                                        
+                                        if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
+                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
+                                            //actualizar ranking debidamente del usuario1
+                                        }
+                                        else if (movimientosPartida > ctrlJ.getNumMovimientos()){
+                                            turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
+                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
+                                            //actualizar ranking debidamente del usuario2
+                                        }
+                                        else {
+                                            turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
                                             JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
                                         }
                                     }
@@ -106,7 +115,6 @@ public class VistaJugar {
                                  //de alguna manera tendre que coger la maquina...ya que las maquinas no clican xd
                                 casillaFinalPulsada = false;
                                 casillaInicioPulsada = false;
-
                             }    
                         }
                     }
