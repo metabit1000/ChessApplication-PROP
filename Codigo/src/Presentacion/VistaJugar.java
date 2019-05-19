@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class VistaJugar extends JFrame {
+public class VistaJugar extends javax.swing.JFrame {
 
     private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado

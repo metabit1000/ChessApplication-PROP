@@ -12,10 +12,10 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 public class PartidaVS extends javax.swing.JFrame {
-    
+
     private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado
-    private static JPanel guid = new JPanel(new BorderLayout(3, 3));
+    private static JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
@@ -25,13 +25,23 @@ public class PartidaVS extends javax.swing.JFrame {
     private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
-    
-    public PartidaVS() {
-        this.gui = gui;
-        initComponents();
+
+    public PartidaVS(/*int id*/) {
+        //this.id = id;
         initializeGui();
+        this.add(gui);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                this.setLocationByPlatform(true);
+
+                // ensures the frame is the minimum size it needs to be
+                // in order display the components within it
+                this.pack();
+                // ensures the minimum size is enforced.
+                this.setMinimumSize(this.getSize());
+                this.setVisible(true);
+        
     }
-    
+
     private final void initializeGui() {
         // set up the main GUI
         cargarImagenes();
@@ -42,7 +52,7 @@ public class PartidaVS extends javax.swing.JFrame {
         chessBoard = new JPanel(new GridLayout(0, 9));
         chessBoard.setBorder(new LineBorder(Color.BLACK));
         gui.add(chessBoard);
-
+            
         // create the chess board squares
         Insets buttonMargin = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
@@ -146,7 +156,7 @@ public class PartidaVS extends javax.swing.JFrame {
         }
         introducirProblema(); //introduzco el problema a jugar al tablero
     }
-    
+
     private Coordenada getPosicionBoton(ActionEvent e) {
         int resX = 0, resY = 0;
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
@@ -251,18 +261,18 @@ public class PartidaVS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gui = new javax.swing.JPanel();
+        fg = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout guiLayout = new javax.swing.GroupLayout(gui);
-        gui.setLayout(guiLayout);
-        guiLayout.setHorizontalGroup(
-            guiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout fgLayout = new javax.swing.GroupLayout(fg);
+        fg.setLayout(fgLayout);
+        fgLayout.setHorizontalGroup(
+            fgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
-        guiLayout.setVerticalGroup(
-            guiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        fgLayout.setVerticalGroup(
+            fgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
@@ -271,16 +281,16 @@ public class PartidaVS extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(gui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(144, 144, 144)
+                .addComponent(fg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(gui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(fg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pack();
@@ -295,18 +305,18 @@ public class PartidaVS extends javax.swing.JFrame {
             @Override
             
             public void run() {
-                VistaJugar cb = new VistaJugar(/*id*/); //esto no se si esta bien de cara a coger el id de la anterior vista
-                JFrame f = new JFrame("");
-                f.add(guid);
-                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                f.setLocationByPlatform(true);
-
-                // ensures the frame is the minimum size it needs to be
-                // in order display the components within it
-                f.pack();
-                // ensures the minimum size is enforced.
-                f.setMinimumSize(f.getSize());
-                f.setVisible(true);
+                PartidaVS cb = new PartidaVS(/*id*/); //esto no se si esta bien de cara a coger el id de la anterior vista
+                //JFrame f = new JFrame("");
+//                f.add(gui);
+//                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//                f.setLocationByPlatform(true);
+//
+//                // ensures the frame is the minimum size it needs to be
+//                // in order display the components within it
+//                f.pack();
+//                // ensures the minimum size is enforced.
+//                f.setMinimumSize(f.getSize());
+//                f.setVisible(true);
                 JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
             }
         };
@@ -314,6 +324,6 @@ public class PartidaVS extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel gui;
+    private javax.swing.JPanel fg;
     // End of variables declaration//GEN-END:variables
 }

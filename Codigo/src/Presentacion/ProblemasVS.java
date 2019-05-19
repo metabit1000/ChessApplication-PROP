@@ -129,7 +129,7 @@ public class ProblemasVS extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
-        VistaJugar vj = new VistaJugar(/*selectProblem()*/);
+        PartidaVS vj = new PartidaVS(/*selectProblem()*/);
         setVisible(false);
         vj.setVisible(true);
         
