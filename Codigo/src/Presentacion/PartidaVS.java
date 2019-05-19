@@ -11,11 +11,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class VistaJugar extends JFrame {
-
+public class PartidaVS extends javax.swing.JFrame {
+    
     private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private static int id; //id del problema cargado
-    private static JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private static JPanel guid = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
@@ -25,12 +25,13 @@ public class VistaJugar extends JFrame {
     private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
-
-    VistaJugar(/*int id*/) {
-        //this.id = id;
+    
+    public PartidaVS() {
+        this.gui = gui;
+        initComponents();
         initializeGui();
     }
-
+    
     private final void initializeGui() {
         // set up the main GUI
         cargarImagenes();
@@ -145,7 +146,7 @@ public class VistaJugar extends JFrame {
         }
         introducirProblema(); //introduzco el problema a jugar al tablero
     }
-
+    
     private Coordenada getPosicionBoton(ActionEvent e) {
         int resX = 0, resY = 0;
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
@@ -245,8 +246,50 @@ public class VistaJugar extends JFrame {
             }
         }
     }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    public static void main(String[] args) {
+        gui = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout guiLayout = new javax.swing.GroupLayout(gui);
+        gui.setLayout(guiLayout);
+        guiLayout.setHorizontalGroup(
+            guiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        guiLayout.setVerticalGroup(
+            guiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(gui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(206, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(gui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         Runnable r = new Runnable() {
 
             @Override
@@ -254,7 +297,7 @@ public class VistaJugar extends JFrame {
             public void run() {
                 VistaJugar cb = new VistaJugar(/*id*/); //esto no se si esta bien de cara a coger el id de la anterior vista
                 JFrame f = new JFrame("");
-                f.add(gui);
+                f.add(guid);
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 f.setLocationByPlatform(true);
 
@@ -269,4 +312,8 @@ public class VistaJugar extends JFrame {
         };
         SwingUtilities.invokeLater(r);
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel gui;
+    // End of variables declaration//GEN-END:variables
 }

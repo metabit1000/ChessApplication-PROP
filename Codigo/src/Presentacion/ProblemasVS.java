@@ -5,6 +5,10 @@
  */
 package Presentacion;
 
+import Dominio.CtrlProblemas;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author joan.manuel.ramos
@@ -13,7 +17,19 @@ public class ProblemasVS extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
     public ProblemasVS(CtrlPresentacionUsuarios u) {
         this.u = u;
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        CtrlProblemas cp = new CtrlProblemas();
+        for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
+            listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
+        }
+        
+        this.setVisible(true); 
+        this.setTitle("Problemas");  
         initComponents();
+        JLista.setModel(listModel);
+        JLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setResizable(false);
+        
     }
 
     /**
@@ -27,24 +43,40 @@ public class ProblemasVS extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<String>();
+        JLista = new javax.swing.JList<String>();
         Cancel = new javax.swing.JButton();
+        Play = new javax.swing.JButton();
+        Ranking = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Problemas VS");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(JLista);
 
         Cancel.setText("Cancel");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
+            }
+        });
+
+        Play.setText("Play");
+        Play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlayActionPerformed(evt);
+            }
+        });
+
+        Ranking.setText("Ranking");
+        Ranking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RankingActionPerformed(evt);
             }
         });
 
@@ -58,21 +90,30 @@ public class ProblemasVS extends javax.swing.JFrame {
                         .addGap(163, 163, 163)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(Cancel)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Cancel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Play)
+                                    .addComponent(Ranking))))))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Play)
+                        .addGap(52, 52, 52)
+                        .addComponent(Ranking)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(Cancel)
                 .addGap(22, 22, 22))
         );
@@ -87,6 +128,25 @@ public class ProblemasVS extends javax.swing.JFrame {
         m.setVisible(true);
     }//GEN-LAST:event_CancelActionPerformed
 
+    private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
+        VistaJugar vj = new VistaJugar(/*selectProblem()*/);
+        setVisible(false);
+        vj.setVisible(true);
+        
+    }//GEN-LAST:event_PlayActionPerformed
+
+    private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
+        if (selectProblem() > -1) {
+            Ranking r = new Ranking(u, selectProblem()+1, "PJ");
+            setVisible(false);
+            r.setVisible(true); 
+        }
+        
+        
+    }//GEN-LAST:event_RankingActionPerformed
+    public int selectProblem() {
+        return JLista.getSelectedIndex();
+    }
     /**
      * @param args the command line arguments
      */
@@ -124,8 +184,10 @@ public class ProblemasVS extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
+    private javax.swing.JList<String> JLista;
+    private javax.swing.JButton Play;
+    private javax.swing.JButton Ranking;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

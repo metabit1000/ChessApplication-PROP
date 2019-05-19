@@ -124,19 +124,21 @@ public class GuestLog extends javax.swing.JFrame {
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         password = new String(pass.getPassword());
         user = username.getText();
-        boolean logueado = u.LogIn(user, password);
+        boolean logueado = u.LogInGuest(user, password);
         if (!logueado ){
             JOptionPane.showMessageDialog(null,"Usuario no registrado.");
         }
         else {
-            ProblemasJug p = new ProblemasJug(u);
+            ProblemasVS vs = new ProblemasVS(u);
             setVisible(false);
-            p.setVisible(true); 
+            vs.setVisible(true); 
         }
     }//GEN-LAST:event_LoginActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        Menu m = new Menu(u);
         setVisible(false);
+        m.setVisible(true);
     }//GEN-LAST:event_CancelActionPerformed
 
     /**
