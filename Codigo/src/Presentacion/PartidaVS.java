@@ -94,7 +94,7 @@ public class PartidaVS extends javax.swing.JFrame {
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             //actualizar ranking debidamente del usuario1
                                         }
-                                        else if (movimientosPartida > ctrlJ.getNumMovimientos()){
+                                        else if (movimientosPartida >= ctrlJ.getNumMovimientos()){
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
                                             //actualizar ranking debidamente del usuario2
