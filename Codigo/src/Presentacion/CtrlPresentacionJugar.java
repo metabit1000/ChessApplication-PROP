@@ -26,6 +26,14 @@ public class CtrlPresentacionJugar {
         return ctrlP.getNumMovimientos();
     }
     
+    public String getNombreJugador1() {
+        return ctrlP.getNombreJugador1();
+    }
+    
+    public String getNombreJugador2() {
+        return ctrlP.getNombreJugador2();
+    }
+    
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return ctrlP.posiblesMovimientos(c);
     }

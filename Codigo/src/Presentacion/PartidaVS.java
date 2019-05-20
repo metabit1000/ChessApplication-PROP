@@ -99,7 +99,7 @@ public class PartidaVS extends javax.swing.JFrame {
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-                                            //ctrlJ.actualizarRanking(nombreUsuario1, tiempoJ1);
+                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -107,7 +107,7 @@ public class PartidaVS extends javax.swing.JFrame {
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
-                                            //ctrlJ.actualizarRanking(nombreUsuario2, tiempoJ2);
+                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador2(), (double)tiempoJ2/1000000000);
                                         }
                                         else {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1

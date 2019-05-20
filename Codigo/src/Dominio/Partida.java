@@ -54,6 +54,14 @@ public class Partida {
         return p;
     }
     
+    public String getNombreJugador1() {
+        return player1.getNombre();
+    }
+    
+    public String getNombreJugador2() {
+        return player2.getNombre();
+    }
+    
     public boolean checkMate(boolean turno) {
         return p.checkmate(turno);
     }

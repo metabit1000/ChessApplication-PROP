@@ -14,13 +14,14 @@ public class CtrlPartida {
     
     public CtrlPartida() {}
     
-    public CtrlPartida(int tipoJuego,int dificultad,int id) {
+    public CtrlPartida(int tipoJuego,int dificultad,int id) { //creo la partida
         /*dificultad: 0 -> no tiene, 1 -> facil, 2 -> dificil
         tipoJuego: 0 ->  Jugar, ContraMaquina, 1 -> 1vs1, 2 -> competicion*/
         Problema p = ctrlP.obtenerProblema(id);
         if (tipoJuego == 0 && dificultad == 0){
             game = new Partida(new Usuario(),new Usuario(),p); 
         }
+        //else if ()
     }
     
     public char[][] getTablero(int id) {
@@ -41,6 +42,14 @@ public class CtrlPartida {
         return game.getNumMovimientos();
     }
     
+    public String getNombreJugador1() {
+        return game.getNombreJugador1();
+    }
+    
+    public String getNombreJugador2() {
+        return game.getNombreJugador2();
+    }
+    
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return game.posiblesMovimientos(c);
     }
@@ -56,4 +65,5 @@ public class CtrlPartida {
     public void actualizarRanking(String nombre,double tiempo) {
         game.actualizarRanking(nombre, tiempo);
     }
+    
 }
