@@ -62,6 +62,11 @@ public class Partida {
         return p.getFicha(c).getColor();
     }
     
+    public void actualizarRanking(String nombre,double tiempo) {
+        if (p.existeix(nombre)) p.actualizarRanking(nombre, tiempo);
+        else p.introducirElemento(nombre,tiempo);
+    }
+    
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal){ //color es el turno
         Ficha o = p.getFicha(cordFinal);
         int res = 0; //todo correcto

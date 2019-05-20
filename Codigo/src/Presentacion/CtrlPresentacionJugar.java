@@ -42,6 +42,10 @@ public class CtrlPresentacionJugar {
         return ctrlP.checkMate(turno);
     }
     
+    public void actualizarRanking(String nombre,double tiempo) {
+        ctrlP.actualizarRanking(nombre, tiempo);
+    }
+    
     /*public void playJugadores() {
         int cont = 0;
         String coordenada1,coordenada2;

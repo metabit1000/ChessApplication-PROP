@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
+import java.lang.System; //para nanotime()
 
 public class PartidaVS extends javax.swing.JFrame {
 
@@ -25,21 +26,21 @@ public class PartidaVS extends javax.swing.JFrame {
     private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
-
+    
+    /* Variables para calcular el tiempo */
+    private long tiempoJ1 = 0; 
+    private long tiempoJ2 = 0; //se inicializa a 0 al inicio
+    private long startTime = 0;
+    
     public PartidaVS(/*int id*/) {
         //this.id = id;
         initializeGui();
         this.add(gui);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                this.setLocationByPlatform(true);
-
-                // ensures the frame is the minimum size it needs to be
-                // in order display the components within it
-                this.pack();
-                // ensures the minimum size is enforced.
-                this.setMinimumSize(this.getSize());
-                this.setVisible(true);
-        
+        this.setLocationByPlatform(true);
+        this.pack();
+        this.setMinimumSize(this.getSize());
+        this.setVisible(true); 
     }
 
     private final void initializeGui() {
@@ -70,11 +71,14 @@ public class PartidaVS extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int res = 0;
                         
-                        if (tipo == 0) { //Humano vs Humano
+                        /*HUMANO VS HUMANO */
+                        if (tipo == 0) { 
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
+                                startTime = System.nanoTime(); //empiezo a contar
                             } 
+                            
                             else if (casillaInicioPulsada && !casillaFinalPulsada) {
                                 posicionFinal = getPosicionBoton(e);
                                 if (movimientoPosibleOk()) {
@@ -91,31 +95,48 @@ public class PartidaVS extends javax.swing.JFrame {
                                         if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos (NO ESTA BIEN)
                                         
                                         if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+                                            
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-                                            //actualizar ranking debidamente del usuario1
+                                            //ctrlJ.actualizarRanking(nombreUsuario1, tiempoJ1);
                                         }
-                                        else if (movimientosPartida >= ctrlJ.getNumMovimientos()){
+                                        else if (movimientosPartida == ctrlJ.getNumMovimientos()){
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+                                            
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
-                                            //actualizar ranking debidamente del usuario2
+                                            //ctrlJ.actualizarRanking(nombreUsuario2, tiempoJ2);
                                         }
                                         else {
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+                                            
                                             turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
                                             JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
                                         }
                                     }
                                 } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
+                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+                                    
                                     JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                 } else {
+                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+                                    
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }
-
+                                JOptionPane.showMessageDialog(null, "Tiempo es: "+tiempoJ1/100000000+"segundos");
+                                
                                 //reseteo para el siguiente movimiento
                                 casillaFinalPulsada = false;
                                 casillaInicioPulsada = false;
                             }
                         }
-                        else { //Humano vs Maquina
+                        /*HUMANO VS MAQUINA */
+                        else { 
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;

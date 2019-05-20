@@ -52,4 +52,8 @@ public class CtrlPartida {
     public boolean checkMate(boolean turno) {
         return game.checkMate(turno);
     }
+    
+    public void actualizarRanking(String nombre,double tiempo) {
+        game.actualizarRanking(nombre, tiempo);
+    }
 }
