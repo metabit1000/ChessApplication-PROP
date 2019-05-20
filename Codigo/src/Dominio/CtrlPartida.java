@@ -1,6 +1,7 @@
 package Dominio;
 
 import ClasesExtra.Coordenada;
+import ClasesExtra.Pair;
 import Persistencia.CtrlDatosProblemas;
 import java.util.ArrayList;
 
@@ -17,11 +18,17 @@ public class CtrlPartida {
     public CtrlPartida(int tipoJuego,int dificultad,int id) { //creo la partida
         /*dificultad: 0 -> no tiene, 1 -> facil, 2 -> dificil
         tipoJuego: 0 ->  Jugar, ContraMaquina, 1 -> 1vs1, 2 -> competicion*/
+        
         Problema p = ctrlP.obtenerProblema(id);
         if (tipoJuego == 0 && dificultad == 0){
-            game = new Partida(new Usuario(),new Usuario(),p); 
+            game = new Partida(new Usuario(),new Usuario(),p);  //hay que ponerle nombres
         }
-        //else if ()
+        else if (tipoJuego == 1 && dificultad == 0) {
+            game = new Partida(new Usuario(true,"Jose","Aals"),new MaquinaEasy(false,"m1",3),p);
+        }
+        else if (tipoJuego == 1 && dificultad == 1) {
+            game = new Partida(new Usuario(),new MaquinaHard(),p);
+        }
     }
     
     public char[][] getTablero(int id) {
@@ -57,6 +64,10 @@ public class CtrlPartida {
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
         return game.moverFicha(color, cordInicio, cordFinal);
     }
+    
+    public Pair<Coordenada,Coordenada> moverFichaMaquina() {
+        return game.moverFichaMaquina();
+    }   
     
     public boolean checkMate(boolean turno) {
         return game.checkMate(turno);

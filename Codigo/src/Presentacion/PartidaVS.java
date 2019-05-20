@@ -1,6 +1,7 @@
 package Presentacion;
 
 import ClasesExtra.Coordenada;
+import ClasesExtra.Pair;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +24,7 @@ public class PartidaVS extends javax.swing.JFrame {
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
-    private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
+    private int tipo = 1; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
     
@@ -92,14 +93,14 @@ public class PartidaVS extends javax.swing.JFrame {
                                         JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                     } else {
                                         moverFicha(); //en presentacion
-                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos (NO ESTA BIEN)
+                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
                                         
                                         if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);
+                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -128,7 +129,6 @@ public class PartidaVS extends javax.swing.JFrame {
                                     
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }
-                                JOptionPane.showMessageDialog(null, "Tiempo es: "+tiempoJ1/100000000+"segundos");
                                 
                                 //reseteo para el siguiente movimiento
                                 casillaFinalPulsada = false;
@@ -137,14 +137,66 @@ public class PartidaVS extends javax.swing.JFrame {
                         }
                         /*HUMANO VS MAQUINA */
                         else { 
-                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click (aqui la maquina NO entra)
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
+                                startTime = System.nanoTime(); //empiezo a contar para el usuario
                             } 
-                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
+                            else if (casillaInicioPulsada && !casillaFinalPulsada) { 
                                 posicionFinal = getPosicionBoton(e);
-                                 
-                                 //de alguna manera tendre que coger la maquina...ya que las maquinas no clican xd
+                                if (movimientoPosibleOk()) {
+                                    casillaFinalPulsada = true;
+                                    res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
+                                    if (res == -1) {
+                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                        casillaFinalPulsada = false;
+                                        casillaInicioPulsada = false;
+                                    } else if (res == -2) {
+                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                    } else {
+                                        moverFicha(); //en presentacion
+                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
+                                        
+                                        if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            
+                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
+                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
+                                        }
+                                        else if (movimientosPartida == ctrlJ.getNumMovimientos()){
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            
+                                            turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
+                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
+                                        }
+                                        else {
+                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                            
+                                            turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
+                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
+                                            
+                                            //AQUI TENDRIA QUE IR LA MAQUINA
+                                            
+                                            Pair<Coordenada,Coordenada> movMaquina = ctrlJ.moverFichaMaquina(); //cojo el movimento mejor y muevo en dominio
+                                            posicionInicio = movMaquina.getKey();
+                                            posicionFinal = movMaquina.getValue();
+                                            moverFicha(); //muevo en dominio
+                                            turno = !turno; 
+                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
+                                        }
+                                    }
+                                } 
+                                else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
+                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                    
+                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                } 
+                                else {
+                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+                                    
+                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                                }
+
                                 casillaFinalPulsada = false;
                                 casillaInicioPulsada = false;
                             }    

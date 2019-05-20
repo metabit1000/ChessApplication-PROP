@@ -1,6 +1,7 @@
 package Dominio;
 
 import ClasesExtra.Coordenada;
+import ClasesExtra.Pair;
 import Dominio.fichas.Ficha;
 import java.lang.System; //para nanotime()
 import java.util.ArrayList;
@@ -86,6 +87,12 @@ public class Partida {
         } 
         else res = -2;  //No es tu turno
         return res;
+    }
+    
+    public Pair<Coordenada,Coordenada> moverFichaMaquina() {
+        Pair<Coordenada,Coordenada> res = player2.getNextMove(p); 
+        p.moveFicha(res.getKey(), res.getValue()); //lo aplico en dominio
+        return res; //devuelvo el mejor movimiento para la capa de presentacion
     }
     
    /* public void playJugadorVSMaquina() {

@@ -82,7 +82,6 @@ public class Minimax {
                     }
                 }
                 p.undoFicha(movePosible,currMove,o);
-                System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
         return new Pair(bestCurrMove,bestMovePosible);
