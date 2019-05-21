@@ -50,11 +50,9 @@ public class CtrlUsuarios {
         }
     }
     
-    public ArrayList<Integer> getProblemasCreados(String nombre, String password) {
+    public ArrayList<Integer> getProblemasCreados(String nombre) {
         ArrayList<Integer> res = new ArrayList();
-        if (cj.usuarioRegistrado(nombre,password)) {
-            res = cj.getProblemasCreados(nombre,password);
-        }
+        res = cj.getProblemasCreados(nombre);
         return res;
     }
     
