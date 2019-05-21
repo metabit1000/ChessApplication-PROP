@@ -4,6 +4,7 @@ import Dominio.Usuario;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,13 +56,13 @@ public class CtrlPresentacionUsuarios {
     
     public boolean LogInGuest(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
-        if(UsuarioRegistrado(nom,password)) {
+        if(UsuarioRegistrado(nom,password) && !getUserLogged().equals(nom)) {
             try {
                 ctrlU.loginGuest(nom, password);
             } catch (IOException ex) {
                 Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return true; 
+            return true;
         }
         else return false; 
     }

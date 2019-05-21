@@ -168,7 +168,9 @@ public class VistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_CompeticionActionPerformed
 
     private void ProblemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProblemasActionPerformed
-        // TODO add your handling code here:
+        VistaProblemasUsuarios pu = new VistaProblemasUsuarios(u);
+        setVisible(false);
+        pu.setVisible(true);
     }//GEN-LAST:event_ProblemasActionPerformed
 
     /**

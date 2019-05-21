@@ -126,7 +126,7 @@ public class VistaGuestLog extends javax.swing.JFrame {
         user = username.getText();
         boolean logueado = u.LogInGuest(user, password);
         if (!logueado ){
-            JOptionPane.showMessageDialog(null,"Usuario no registrado.");
+            JOptionPane.showMessageDialog(null,"Usuario incorrecto");
         }
         else {
             VistaProblemasVS vs = new VistaProblemasVS(u);
