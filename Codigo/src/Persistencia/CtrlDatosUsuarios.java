@@ -20,7 +20,7 @@ public class CtrlDatosUsuarios {
     BufferedReader br;
     String path = "UsuariosRegistrados.txt";
     
-    public CtrlDatosUsuarios(){
+     public CtrlDatosUsuarios(){
         archivo = null;
         fr = null;
         br = null;
@@ -96,7 +96,7 @@ public class CtrlDatosUsuarios {
         }
     }
     
-    public ArrayList<Integer> getProblemasCreados(String nombre, String password) {
+    public ArrayList<Integer> getProblemasCreados(String nombre) {
         ArrayList<Integer> res = new ArrayList();
         if (archivo == null) {
             throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
@@ -107,12 +107,12 @@ public class CtrlDatosUsuarios {
                 String linea;
                 while((linea = br.readLine()) != null) {
                     String[] lineaDivididaId = linea.split(" ");
-                    if(lineaDivididaId[0].equals(nombre) && lineaDivididaId[1].equals(password)) {
+                    if(lineaDivididaId[0].equals(nombre)) {
                         for (int i = 2; i < lineaDivididaId.length; ++i) {
                             res.add(Integer.parseInt(lineaDivididaId[i]));
                         }
                     }
-                    break; //me ahorro bucles
+                    //break; //me ahorro bucles
                 }
             }
         }catch(IOException | NumberFormatException e) {
