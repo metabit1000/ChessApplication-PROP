@@ -10,8 +10,8 @@ import ClasesExtra.Pair;
 public class MaquinaHard extends Maquina {
     MaquinaHard() {}
     
-    MaquinaHard(Boolean color,String nombre,int profundidad) {
-        super(color,nombre,profundidad);
+    MaquinaHard(Boolean color,int profundidad) {
+        super(color,profundidad);
     }
     
     public Pair getNextMove(Problema p) {

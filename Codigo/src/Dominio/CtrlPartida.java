@@ -25,10 +25,10 @@ public class CtrlPartida {
             game = new Partida(new Usuario(true,u.getUserLogged()," "),new Usuario(false,u.getGuest()," "),p);  
         }
         else if (tipoJuego == 1 && dificultad == 0) {
-            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaEasy(false,"m1",3),p);
+            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaEasy(false,3),p);
         }
         else if (tipoJuego == 1 && dificultad == 1) {
-            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaHard(false,"m1",3),p);
+            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaHard(false,3),p);
         }
     }
     

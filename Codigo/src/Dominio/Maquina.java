@@ -11,8 +11,8 @@ public abstract class Maquina extends Jugador {
     
     public Maquina() {}
     
-    public Maquina(Boolean color,String nombre,int profundidad) {
-        super(color,nombre);
+    public Maquina(Boolean color,int profundidad) {
+        super(color);
         d = profundidad;
     }
   

@@ -28,5 +28,4 @@ public class Usuario extends Jugador {
         //esta función pone la contraseña password a la contraseña del usuario
         this.password = password;
     }
-    
 }

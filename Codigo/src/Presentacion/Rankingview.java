@@ -26,7 +26,7 @@ import javax.swing.JScrollBar;
 public class Rankingview  extends JFrame{
     
        private Map<String,Double> rank = new HashMap<>();
-       CtrlRanking  Cr = new CtrlRanking () ; 
+       CtrlPresentacionRanking  Cr = new CtrlPresentacionRanking () ; 
        public Rankingview(){
            super("Mi tabla");
            rank = Cr.getmap(1);

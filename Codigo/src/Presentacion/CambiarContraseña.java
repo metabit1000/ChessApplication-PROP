@@ -136,7 +136,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         System.out.println(passwordActual+" "+pass1+" "+pass2);
         if (pass1.equals(pass2) && !passwordActual.equals(pass1)){
             u.cambiarContraseña(passwordActual,pass1); //da igual si es pass1 o pass2
-            Inicio r = new Inicio();
+            VistaInicio r = new VistaInicio();
             setVisible(false);
             r.setVisible(true); 
             JOptionPane.showMessageDialog(null,"Contraseña cambiada");

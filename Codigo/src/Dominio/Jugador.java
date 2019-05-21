@@ -11,6 +11,10 @@ public class Jugador {
     
     public Jugador() { }    
     
+    public Jugador(boolean color) {
+        this.color = color;
+    }
+    
     public Jugador(boolean color, String nombre) {
         this.color = color;
         this.nombre = nombre;

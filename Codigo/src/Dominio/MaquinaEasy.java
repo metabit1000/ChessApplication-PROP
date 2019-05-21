@@ -9,8 +9,8 @@ import ClasesExtra.*;
 public class MaquinaEasy extends Maquina {
     MaquinaEasy() {}
     
-    MaquinaEasy(Boolean color,String nombre,int profundidad) {
-        super(color,nombre,profundidad);
+    MaquinaEasy(Boolean color,int profundidad) {
+        super(color,profundidad);
     }
     
     public Pair getNextMove(Problema p) {
