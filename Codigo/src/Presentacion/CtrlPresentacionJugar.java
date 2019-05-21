@@ -10,12 +10,14 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class CtrlPresentacionJugar {
-    private int id; //id del problema a jugar
-    private int tipo; //tipo, se pondra en la constructora
-    private CtrlPartida ctrlP = new CtrlPartida(1,0,1); //prueba
+    private CtrlPartida ctrlP = new CtrlPartida(); //prueba
     
-    public CtrlPresentacionJugar() { //aqui tendria que llegar tambien el ctrlUsuarios
+    public CtrlPresentacionJugar() {}
+    
+    public CtrlPresentacionJugar(int id, CtrlPresentacionUsuarios u, String tipo) { //aqui tendria que llegar tambien el ctrlUsuarios
         //aqui inicializo el id, tipo y tal
+        //if (tipo == "JG")
+        ctrlP = new CtrlPartida(0,0,id,u);
     }
     
     public char[][] getTablero(int id) {

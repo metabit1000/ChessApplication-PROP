@@ -129,7 +129,7 @@ public class ProblemasVS extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
-        PartidaVS vj = new PartidaVS(/*selectProblem()*/);
+        PartidaVS vj = new PartidaVS(selectProblem()+1,u,"PJ");
         setVisible(false);
         vj.setVisible(true);
         
@@ -140,9 +140,7 @@ public class ProblemasVS extends javax.swing.JFrame {
             Ranking r = new Ranking(u, selectProblem()+1, "PJ");
             setVisible(false);
             r.setVisible(true); 
-        }
-        
-        
+        }   
     }//GEN-LAST:event_RankingActionPerformed
     public int selectProblem() {
         return JLista.getSelectedIndex();

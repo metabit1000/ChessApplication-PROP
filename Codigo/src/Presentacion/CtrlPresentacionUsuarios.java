@@ -12,6 +12,14 @@ import java.util.logging.Logger;
 public class CtrlPresentacionUsuarios {
     CtrlUsuarios ctrlU = new CtrlUsuarios();
 
+    public String getUserLogged() {
+        return ctrlU.getUserLogged();
+    }
+    
+    public String getGuest() {
+        return ctrlU.getGuest();
+    }
+    
     public Boolean UsuarioRegistrado(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
 

@@ -5,7 +5,7 @@ import ClasesExtra.*;
  *
  * @author Jordi
  */
-public abstract class Jugador {
+public class Jugador {
     protected Boolean color; //negro = false, blanco = true
     protected String nombre; 
     
@@ -26,6 +26,4 @@ public abstract class Jugador {
         return nombre;
     }
     
-    public abstract Pair getNextMove(Problema p);
-        // con esta función obtendremos donde se va a mover nuestro jugador , estas coordenadas seran validas i de esta manera el movimiento ser correcto
 }

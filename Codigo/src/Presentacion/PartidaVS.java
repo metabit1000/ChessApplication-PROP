@@ -15,7 +15,8 @@ import java.lang.System; //para nanotime()
 
 public class PartidaVS extends javax.swing.JFrame {
 
-    private static CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
+    private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
+    private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
     private static int id; //id del problema cargado
     private static JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
@@ -26,15 +27,19 @@ public class PartidaVS extends javax.swing.JFrame {
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
     private int tipo = 1; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
-    private static boolean turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
+    private boolean turno;
     
     /* Variables para calcular el tiempo */
     private long tiempoJ1 = 0; 
     private long tiempoJ2 = 0; //se inicializa a 0 al inicio
     private long startTime = 0;
     
-    public PartidaVS(/*int id*/) {
-        //this.id = id;
+    public PartidaVS(int id, CtrlPresentacionUsuarios u, String tipo) {
+        this.id = id;
+        this.usuarios = u;
+        ctrlJ = new CtrlPresentacionJugar(id,u,tipo);
+        turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
+        
         initializeGui();
         this.add(gui);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -69,8 +74,8 @@ public class PartidaVS extends javax.swing.JFrame {
                 ActionListener a = new ActionListener() {
 
                     @Override
-                    public void actionPerformed(ActionEvent e) {
-                        int res = 0;
+                    public void actionPerformed(ActionEvent e) {  //DONDE PONGO EL TURNO INICIAL??
+                        int res = 0; 
                         
                         /*HUMANO VS HUMANO */
                         if (tipo == 0) { 
@@ -101,6 +106,10 @@ public class PartidaVS extends javax.swing.JFrame {
                                             
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
+                                            
+                                            ProblemasVS m = new ProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            setVisible(false);
+                                            m.setVisible(true);
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -161,7 +170,7 @@ public class PartidaVS extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
+                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -175,7 +184,7 @@ public class PartidaVS extends javax.swing.JFrame {
                                             turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
                                             JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
                                             
-                                            //AQUI TENDRIA QUE IR LA MAQUINA
+                                            //PARTE QUE JUEGA LA MAQUINA
                                             
                                             Pair<Coordenada,Coordenada> movMaquina = ctrlJ.moverFichaMaquina(); //cojo el movimento mejor y muevo en dominio
                                             posicionInicio = movMaquina.getKey();
@@ -259,7 +268,7 @@ public class PartidaVS extends javax.swing.JFrame {
         return b;
     }
 
-    private static String obtenerTurno() {
+    private String obtenerTurno() {
         String turn;
         if (turno) {
             turn = "blancas.";
@@ -378,19 +387,7 @@ public class PartidaVS extends javax.swing.JFrame {
             @Override
             
             public void run() {
-                PartidaVS cb = new PartidaVS(/*id*/); //esto no se si esta bien de cara a coger el id de la anterior vista
-                //JFrame f = new JFrame("");
-//                f.add(gui);
-//                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                f.setLocationByPlatform(true);
-//
-//                // ensures the frame is the minimum size it needs to be
-//                // in order display the components within it
-//                f.pack();
-//                // ensures the minimum size is enforced.
-//                f.setMinimumSize(f.getSize());
-//                f.setVisible(true);
-                JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
+                //PartidaVS cb = new PartidaVS(); 
             }
         };
         SwingUtilities.invokeLater(r);

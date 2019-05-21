@@ -29,11 +29,11 @@ public class Ranking extends javax.swing.JFrame {
         this.u = u;
         this.id = i;
         this.Problemas = p;
-         rank = Cr.getmap(i);
-           DefaultTableModel modelo = new DefaultTableModel();
-           modelo.addColumn("Nombre");
-           modelo.addColumn("Tiempo");
-           Iterator iterator=rank.keySet().iterator();
+        rank = Cr.getmap(i);
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Tiempo");
+        Iterator iterator = rank.keySet().iterator();
         while(iterator.hasNext()){
             Object key = iterator.next();
           

@@ -90,7 +90,8 @@ public class Partida {
     }
     
     public Pair<Coordenada,Coordenada> moverFichaMaquina() {
-        Pair<Coordenada,Coordenada> res = player2.getNextMove(p); 
+        Maquina m = (Maquina)player2;  //NI IDEA DE SI SE PUEDE HACER ESTO XD
+        Pair<Coordenada,Coordenada> res = m.getNextMove(p); 
         p.moveFicha(res.getKey(), res.getValue()); //lo aplico en dominio
         return res; //devuelvo el mejor movimiento para la capa de presentacion
     }
