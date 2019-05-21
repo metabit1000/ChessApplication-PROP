@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
-import java.lang.System; //para nanotime()
 
 public class VistaPartidaVS extends javax.swing.JFrame {
 
@@ -25,7 +24,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
-    private int tipo = 1; //0 -> jugador vs jugador, 1 -> jugador vs maquina
+    private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private boolean turno;
     
@@ -109,7 +108,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
-                                            m.setVisible(true);
+                                            m.setVisible(true); //vuelvo atras
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -118,6 +117,10 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador2(), (double)tiempoJ2/1000000000);
+                                            
+                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            setVisible(false);
+                                            m.setVisible(true); //vuelvo atras
                                         }
                                         else {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1

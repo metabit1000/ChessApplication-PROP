@@ -17,7 +17,7 @@ public class CtrlPresentacionJugar {
     public CtrlPresentacionJugar(int id, CtrlPresentacionUsuarios u, String tipo) { //aqui tendria que llegar tambien el ctrlUsuarios
         //aqui inicializo el id, tipo y tal
         //if (tipo == "JG")
-        ctrlP = new CtrlPartida(1,0,id,u);
+        ctrlP = new CtrlPartida(0,0,id,u);
     }
     
     public char[][] getTablero(int id) {
