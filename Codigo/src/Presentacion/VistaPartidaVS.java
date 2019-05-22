@@ -46,7 +46,6 @@ public class VistaPartidaVS extends javax.swing.JFrame {
         
         introducirProblema(); //introduzco el problema a jugar 
         
-        
         this.add(gui);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationByPlatform(true);

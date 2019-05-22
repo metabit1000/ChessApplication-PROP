@@ -16,7 +16,7 @@ public class CtrlPresentacionJugar {
     
     public CtrlPresentacionJugar(int id, CtrlPresentacionUsuarios u, String tipo, int dificultad) { 
         //aqui inicializo el id, tipo y tal
-        if (tipo == "JG") ctrlP = new CtrlPartida(0,dificultad,id,u);
+        if (tipo == "PVS") ctrlP = new CtrlPartida(0,dificultad,id,u);
         else ctrlP = new CtrlPartida(1,dificultad,id,u);
     }
     
