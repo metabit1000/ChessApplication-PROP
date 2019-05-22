@@ -2,6 +2,8 @@ package Presentacion;
 
 import ClasesExtra.Coordenada;
 import ClasesExtra.Pair;
+import Dominio.Problema;
+import Persistencia.CtrlDatosProblemas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,25 +15,30 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 public class VistaCrearModificarProblema extends javax.swing.JFrame {
-
+    
+    private CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
-    private static int id; //id del problema cargado
-    private static JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private int id; //id del problema cargado
+    private JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
+    private JButton[][] Fichas = new JButton[2][6];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
+    private JPanel fichasBoard;
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
-    private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
-    private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
+    private int casillaInicioPulsada = 0;
+    private boolean casillaFinalPulsada = false;
+    private char[][] aux;
     
     public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) {
         this.id = id;
         this.usuarios = u;
-        //ctrlJ = new CtrlPresentacionJugar(id,u,tipo);
-        
+        Problema p = ctrlP.obtenerProblema(id);
+        this.aux = p.convertirTablero();
         initializeGui();
+        introducirProblema(); //introduzco el problema a jugar al tablero
         this.add(gui);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationByPlatform(true);
@@ -63,164 +70,42 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                     b.setBackground(Color.decode("#B38865")); //color background casillas
                 }
                 ActionListener a = new ActionListener() {
-
                     @Override
-                    public void actionPerformed(ActionEvent e) {  //DONDE PONGO EL TURNO INICIAL??
-                        int res = 0; 
-                        
-                        /*HUMANO VS HUMANO */
-//                        if (tipo == 0) { 
-//                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
-//                                posicionInicio = getPosicionBoton(e);
-//                                casillaInicioPulsada = true;
-//                                startTime = System.nanoTime(); //empiezo a contar
-//                            } 
-//                            
-//                            else if (casillaInicioPulsada && !casillaFinalPulsada) {
-//                                posicionFinal = getPosicionBoton(e);
-//                                if (movimientoPosibleOk()) {
-//                                    casillaFinalPulsada = true;
-//                                    res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
-//                                    if (res == -1) {
-//                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
-//                                        casillaFinalPulsada = false;
-//                                        casillaInicioPulsada = false;
-//                                    } else if (res == -2) {
-//                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-//                                    } else {
-//                                        moverFicha(); //en presentacion
-//                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
-//                                        
-//                                        if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-//                                            
-//                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-//                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
-//                                            
-//                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
-//                                            setVisible(false);
-//                                            m.setVisible(true); //vuelvo atras
-//                                        }
-//                                        else if (movimientosPartida == ctrlJ.getNumMovimientos()){
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-//                                            
-//                                            turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
-//                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
-//                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador2(), (double)tiempoJ2/1000000000);
-//                                            
-//                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
-//                                            setVisible(false);
-//                                            m.setVisible(true); //vuelvo atras
-//                                        }
-//                                        else {
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-//                                            
-//                                            turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
-//                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
-//                                        }
-//                                    }
-//                                } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-//                                    
-//                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-//                                } else {
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-//                                    
-//                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
-//                                }
-//                                
-//                                //reseteo para el siguiente movimiento
-//                                casillaFinalPulsada = false;
-//                                casillaInicioPulsada = false;
-//                            }
-//                        }
-                        /*HUMANO VS MAQUINA */
-//                        else { 
-//                            if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click (aqui la maquina NO entra)
-//                                posicionInicio = getPosicionBoton(e);
-//                                casillaInicioPulsada = true;
-//                                startTime = System.nanoTime(); //empiezo a contar para el usuario
-//                            } 
-//                            else if (casillaInicioPulsada && !casillaFinalPulsada) { 
-//                                posicionFinal = getPosicionBoton(e);
-//                                if (movimientoPosibleOk()) {
-//                                    casillaFinalPulsada = true;
-//                                    res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
-//                                    if (res == -1) {
-//                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
-//                                        casillaFinalPulsada = false;
-//                                        casillaInicioPulsada = false;
-//                                    } else if (res == -2) {
-//                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-//                                    } else {
-//                                        moverFicha(); //en presentacion
-//                                        if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
-//                                        
-//                                        if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            
-//                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
-//                                            ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
-//                                        }
-//                                        else if (movimientosPartida == ctrlJ.getNumMovimientos()){
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            
-//                                            turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
-//                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
-//                                        }
-//                                        else {
-//                                            if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                            
-//                                            turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
-//                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
-//                                            
-//                                            //PARTE QUE JUEGA LA MAQUINA
-//                                            
-//                                            Pair<Coordenada,Coordenada> movMaquina = ctrlJ.moverFichaMaquina(); //cojo el movimento mejor y muevo en dominio
-//                                            posicionInicio = movMaquina.getKey();
-//                                            posicionFinal = movMaquina.getValue();
-//                                            moverFicha(); //muevo en dominio
-//                                            turno = !turno; 
-//                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
-//                                        }
-//                                    }
-//                                } 
-//                                else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    
-//                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
-//                                } 
-//                                else {
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    
-//                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
-//                                }
-//
-//                                casillaFinalPulsada = false;
-//                                casillaInicioPulsada = false;
-//                            }    
-//                        }
+                    public void actionPerformed(ActionEvent e) { 
+                        if (casillaInicioPulsada == 0 && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                            if (getPosicionBoton(e) != null) {
+                                posicionInicio = getPosicionBoton(e);
+                                casillaInicioPulsada = 1;
+                            }
+                            if (getPosicionFichas(e) != null) {
+                                posicionInicio = getPosicionFichas(e);
+                                casillaInicioPulsada = 2;
+                            }
+                        } 
+                        else if (casillaInicioPulsada != 0 && !casillaFinalPulsada) {
+                            posicionFinal = getPosicionBoton(e);
+                            casillaFinalPulsada = true;
+                            if (casillaInicioPulsada == 1) {
+                                moverFicha();
+                            }
+                            else if (casillaInicioPulsada == 2) {
+                                ponerFicha();
+                            }
+                            casillaFinalPulsada = false;
+                            casillaInicioPulsada = 0;
+                        }
                     }
                 };
-
                 b.addActionListener(a);
                 chessBoardSquares[jj][ii] = b;
             }
         }
-
         //fill the chess board
         chessBoard.add(new JLabel(""));
         // fill the top row
         for (int ii = 0; ii < 8; ii++) {
-            chessBoard.add(
-                    new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
+            chessBoard.add(new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
         }
-
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
@@ -231,7 +116,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 }
             }
         }
-        introducirProblema(); //introduzco el problema a jugar al tablero
     }
 
     private Coordenada getPosicionBoton(ActionEvent e) {
@@ -246,10 +130,27 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         }
         return new Coordenada(resX, resY);
     }
+    
+    private Coordenada getPosicionFichas(ActionEvent e) {
+        int resX = 0, resY = 0;
+        for (int ii = 0; ii < Fichas.length; ii++) {
+            for (int jj = 0; jj < Fichas[ii].length; jj++) {
+                if (e.getSource().equals(Fichas[jj][ii])) {
+                    resX = ii;
+                    resY = jj;
+                }
+            }
+        }
+        return new Coordenada(resX, resY);
+    }
 
     private void moverFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
+    }
+    
+    private void ponerFicha() {
+        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
     }
 
 
@@ -267,7 +168,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
 
     private final void introducirProblema() {
-       char[][] c = ctrlJ.getTablero(); //id 2 para probar
+       char[][] c = aux;
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {
@@ -313,6 +214,13 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             }
         }
     }
+    private final void introducirFichas() {
+        for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 6; j++) {
+                    chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[j][i]));
+                }
+            }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -324,26 +232,45 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        lol = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("jButton1");
+
+        javax.swing.GroupLayout lolLayout = new javax.swing.GroupLayout(lol);
+        lol.setLayout(lolLayout);
+        lolLayout.setHorizontalGroup(
+            lolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 532, Short.MAX_VALUE)
+        );
+        lolLayout.setVerticalGroup(
+            lolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 516, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(701, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(65, 65, 65))
+                .addContainerGap(292, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
+                .addGap(141, 141, 141)
                 .addComponent(jButton1)
-                .addContainerGap(640, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addComponent(lol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -367,5 +294,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel lol;
     // End of variables declaration//GEN-END:variables
 }
