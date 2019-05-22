@@ -15,6 +15,11 @@ public abstract class Maquina extends Jugador {
         super(color);
         d = profundidad;
     }
-  
+  /**
+   * pre:-
+   * post:Devuelve un par de movimientos correctos
+   * @param p
+   * @return 
+   */
     public abstract Pair getNextMove(Problema p);
 }
