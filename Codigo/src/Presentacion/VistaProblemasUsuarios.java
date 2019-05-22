@@ -46,6 +46,7 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
         Modificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JLista = new javax.swing.JList();
+        Cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,11 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
         });
 
         Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -65,20 +71,32 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JLista);
 
+        Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(CrearNuevoProblema)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(105, 105, 105)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(Modificar)
                 .addGap(59, 59, 59))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(CrearNuevoProblema))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(Cancel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,16 +111,38 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)))
                 .addComponent(CrearNuevoProblema, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(26, 26, 26)
+                .addComponent(Cancel)
+                .addGap(34, 34, 34))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearNuevoProblemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearNuevoProblemaActionPerformed
-        // TODO add your handling code here:
+        VistaCrearModificarProblema cmp = new VistaCrearModificarProblema(-1, u);
+        setVisible(false);
+        cmp.setVisible(true);
     }//GEN-LAST:event_CrearNuevoProblemaActionPerformed
 
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        if (selectProblem() > -1) {
+            VistaCrearModificarProblema cmp = new VistaCrearModificarProblema(selectProblem(), u);
+            setVisible(false);
+            cmp.setVisible(true);
+        }
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        VistaMenu m = new VistaMenu(u);
+        setVisible(false);
+        m.setVisible(true);
+    }//GEN-LAST:event_CancelActionPerformed
+
+    public int selectProblem() {
+        return JLista.getSelectedIndex();
+    }
     /**
      * @param args the command line arguments
      */
@@ -140,6 +180,7 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancel;
     private javax.swing.JButton CrearNuevoProblema;
     private javax.swing.JList JLista;
     private javax.swing.JButton Modificar;
