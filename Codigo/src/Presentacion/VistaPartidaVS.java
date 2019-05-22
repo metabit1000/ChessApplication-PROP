@@ -27,6 +27,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private boolean turno;
+    private char[][] aux;
     
     /* Variables para calcular el tiempo */
     private long tiempoJ1 = 0; 
@@ -38,6 +39,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
         this.usuarios = u;
         ctrlJ = new CtrlPresentacionJugar(id,u,tipo);
         turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
+        aux = ctrlJ.getTablero(id); 
         
         initializeGui();
         this.add(gui);
@@ -108,6 +110,8 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
+                                            //ctrlJ = new CtrlPresentacionJugar(id,usuarios,"JG");
+                                            introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
@@ -120,6 +124,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
+                                            introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
                                         else {
@@ -174,12 +179,22 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
+                                            
+                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            setVisible(false);
+                                            introducirProblema(); //reseteo el problema para proximas partidas
+                                            m.setVisible(true); //vuelvo atras
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
+                                            
+                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            setVisible(false);
+                                            introducirProblema(); //reseteo el problema para proximas partidas
+                                            m.setVisible(true); //vuelvo atras
                                         }
                                         else {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
@@ -254,7 +269,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
         }
         return new Coordenada(resX, resY);
     }
-
+    
     private void moverFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
@@ -295,7 +310,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     }
 
     private final void introducirProblema() {
-        char[][] c = ctrlJ.getTablero(2); //id 2 para probar
+        char[][] c = aux;
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {
@@ -336,6 +351,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                         chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][5]));
                         break;
                     default:
+                        chessBoardSquares[j][i].setIcon(null);
                         break;
                 }
             }
@@ -343,7 +359,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         fg = new javax.swing.JPanel();
@@ -379,7 +395,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     /**
      * @param args the command line arguments
@@ -390,13 +406,13 @@ public class VistaPartidaVS extends javax.swing.JFrame {
             @Override
             
             public void run() {
-                //PartidaVS cb = new VistaPartidaVS(); 
+                //VistaPartidaVS cb = new VistaPartidaVS(); 
             }
         };
         SwingUtilities.invokeLater(r);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JPanel fg;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
