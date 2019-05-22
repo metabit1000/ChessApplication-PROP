@@ -13,7 +13,12 @@ public class MaquinaHard extends Maquina {
     MaquinaHard(Boolean color,int profundidad) {
         super(color,profundidad);
     }
-    
+     /**
+     * pre:Dado un problema queremos obtener un Pair de una posicion valida
+     * post:Devolvera un Pair correcto y con el mejor movimientos entre los posibles
+     * @param p
+     * @return 
+     */
     public Pair getNextMove(Problema p) {
         MinimaxAlphaBeta m = new MinimaxAlphaBeta();
         Pair move = new Pair();
