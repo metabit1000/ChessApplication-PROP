@@ -4,6 +4,7 @@ import Dominio.CtrlProblemas;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
@@ -13,6 +14,8 @@ import javax.swing.ListSelectionModel;
  */
 public class VistaProblemasJug extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
+    private int dificultad = 0;
+    
     public VistaProblemasJug(CtrlPresentacionUsuarios u) {
         this.u = u;
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -154,22 +157,27 @@ public class VistaProblemasJug extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DificilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DificilActionPerformed
-        // TODO add your handling code here:
+        dificultad = 2; //dificil
     }//GEN-LAST:event_DificilActionPerformed
     
     private void FacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacilActionPerformed
-        // TODO add your handling code here:
+        dificultad = 1;
     }//GEN-LAST:event_FacilActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         VistaMenu m = new VistaMenu(u);
         setVisible(false);
-        m.setVisible(true);
-        
+        m.setVisible(true); 
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
-        // TODO add your handling code here:
+        if (dificultad != 0) {
+            int id = selectProblem()+1;
+            VistaPartidaVS vj = new VistaPartidaVS(id,u,"PJ",dificultad);
+            setVisible(false);
+            vj.setVisible(true); 
+        }
+        else JOptionPane.showMessageDialog(null, "Tienes que escoger la dificultad de la maquina antes de jugar."); 
     }//GEN-LAST:event_PlayActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed

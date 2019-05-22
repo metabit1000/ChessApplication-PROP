@@ -24,7 +24,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
-    private int tipo = 0; //0 -> jugador vs jugador, 1 -> jugador vs maquina
+    private String tipo; //PVS -> jugador vs jugador, PJ -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar
     private boolean turno;
     private char[][] aux;
@@ -34,10 +34,11 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     private long tiempoJ2 = 0; //se inicializa a 0 al inicio
     private long startTime = 0;
     
-    public VistaPartidaVS(int id, CtrlPresentacionUsuarios u, String tipo) {
+    public VistaPartidaVS(int id, CtrlPresentacionUsuarios u, String tipo, int dificultad) {
         this.id = id;
         this.usuarios = u;
-        ctrlJ = new CtrlPresentacionJugar(id,u,tipo);
+        ctrlJ = new CtrlPresentacionJugar(id,u,tipo,dificultad);
+        this.tipo = tipo;
         turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
         aux = ctrlJ.getTablero(); //guardo el tablero en una variable auxiliar para luego resetearlo
         
@@ -83,7 +84,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                         int res = 0; 
                         
                         /*HUMANO VS HUMANO */
-                        if (tipo == 0) { 
+                        if (tipo.equals("PVS")) { 
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
@@ -162,7 +163,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                             }
                         }
                         /*HUMANO VS MAQUINA */
-                        else { 
+                        else { //tipo == PJ
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click (aqui la maquina NO entra)
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;

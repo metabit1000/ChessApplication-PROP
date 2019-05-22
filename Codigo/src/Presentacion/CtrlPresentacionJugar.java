@@ -14,10 +14,10 @@ public class CtrlPresentacionJugar {
     
     public CtrlPresentacionJugar() {}
     
-    public CtrlPresentacionJugar(int id, CtrlPresentacionUsuarios u, String tipo) { //aqui tendria que llegar tambien el ctrlUsuarios
+    public CtrlPresentacionJugar(int id, CtrlPresentacionUsuarios u, String tipo, int dificultad) { 
         //aqui inicializo el id, tipo y tal
-        //if (tipo == "JG")
-        ctrlP = new CtrlPartida(0,0,id,u);
+        if (tipo == "JG") ctrlP = new CtrlPartida(0,dificultad,id,u);
+        else ctrlP = new CtrlPartida(1,dificultad,id,u);
     }
     
     public char[][] getTablero() {
