@@ -17,7 +17,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
     private int id; //id del problema cargado
-    private static JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
@@ -117,7 +117,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             ctrlJ.resetTablero(id); //reseteo tablero en dominio
                                             turno = ctrlJ.getTurnoInicial(); 
                                             movimientosPartida = 0;
-                                            //introducirProblema(); //reseteo el problema para proximas partidas
+                                            introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
