@@ -36,49 +36,102 @@ public class Partida {
         player2 = m2;
         this.p = p;
     }
+      /**
+     * pre:dado una partida queremos saber cual es el turno incial
+     * post:devuelve quien es el turno incial , si es false -> negro si es true->blanco
+     * @return turno
+     */
 
     public boolean getTurnoInicial() {
         return p.getTurno(); //turno inicial del problema
     }
-    
+        /**
+     * pre:dado un problema queremos saber cuantos movimientos debemos hacer para superar el problema
+     * post:devolvera el numero de movimientos
+     * @return p.getNumMovimientos
+     */
     public int getNumMovimientos() {
         return p.getNumMovimientos();  //num movimientos del problema
     }
-    
+    /**
+     * pre:Dado una partida queremos saber todos los posibles movimientos en una Coordenada determinada
+     * post: devuelve una arraylist con los movimientos posibles
+     * @param c
+     * @return res
+     */
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         ArrayList<Coordenada> res = p.getFicha(c).posiblesMovimientos(p, c);
         return res;
     }
-    
+    /**
+     * pre:-
+     * post:devuelve el problema que esta jugando en la partida
+     * @return p
+     */
     public Problema getProblema() {
         return p;
     }
-    
+     /**
+     * pre:Donat un problema p existente
+     * post:El atributo privado p sera el mismo que pasamos por parámetros
+     
+     * @return p
+     */
     public void setProblema(Problema p) {
         this.p = p;
     }
-    
+    /**
+     * pre:Dado un jugador1 queremos obtener su nombre 
+     * post:Devolveremos el nombre del jugador1 
+     * @return 
+     */
     public String getNombreJugador1() {
         return player1.getNombre();
     }
-    
+     /**
+     * pre:Dado un jugador2 queremos obtener su nombre
+     * post:Devolveremos el nombre del jugador2
+     * @return 
+     */
     public String getNombreJugador2() {
         return player2.getNombre();
     }
-    
+     /**
+     * pre:Dado una partida quedremos saber si en el problema hay mate
+     * post:Devolveremos si hay mate 
+     * @param turno
+     * @return 
+     */
     public boolean checkMate(boolean turno) {
         return p.checkmate(turno);
     }
-    
+    /**
+     * pre:dado una coordenada queremos saber de que color es la ficha que hay en esta posición 
+     * post:devolveremos el color de la ficha , false-> negra o true->blanca
+     * @param c
+     * @return 
+     */
     public boolean getColor(Coordenada c) {
         return p.getFicha(c).getColor();
     }
-    
+      /**
+     * pre : dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo para superar el problema 
+     * post:un nuevo tiempo y nombre estaran introducidos en el ranking 
+     * @param nombre
+     * @param tiempo 
+     */
     public void actualizarRanking(String nombre,double tiempo) {
         if (p.existeix(nombre)) p.actualizarRanking(nombre, tiempo);
         else p.introducirElemento(nombre,tiempo);
     }
-    
+    /**
+     * pre:Dado un movimiento queremos saber si es correcto 
+     * post:devolvera 0 si es correcto , -1 si estas en jaque o -2 si no es tu turno 
+     * @param color
+     * @param cordInicio
+     * @param cordFinal
+     * @return 
+     */
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal){ //color es el turno
         Ficha o = p.getFicha(cordFinal);
         int res = 0; //todo correcto
@@ -91,6 +144,11 @@ public class Partida {
         else res = -2;  //No es tu turno
         return res;
     }
+    /**
+     * pre:Queremos saber cual es el mejor movimiento de la máquina 
+     * post:Devolvera el mejor movimiento de la máquina 
+     * @return 
+     */
     
     public Pair<Coordenada,Coordenada> moverFichaMaquina() {
         Maquina m = (Maquina)player2;  //para corregir el error de que usuario no tiene getNextMove()
