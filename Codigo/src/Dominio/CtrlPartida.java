@@ -32,7 +32,7 @@ public class CtrlPartida {
         }
     }
     
-    public char[][] getTablero(int id) {
+    public char[][] getTablero() {
         Problema p = game.getProblema();
         char[][] res = p.convertirTablero();
         return res;
@@ -78,4 +78,8 @@ public class CtrlPartida {
         game.actualizarRanking(nombre, tiempo);
     }
     
+    public void resetTablero(int id) {
+        Problema aux = ctrlP.obtenerProblema(id);
+        game.setProblema(aux); //reseteo el problema
+    }
 }

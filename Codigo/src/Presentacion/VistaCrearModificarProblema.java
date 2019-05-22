@@ -267,7 +267,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
 
     private final void introducirProblema() {
-        char[][] c = ctrlJ.getTablero(2); //id 2 para probar
+       char[][] c = ctrlJ.getTablero(); //id 2 para probar
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {

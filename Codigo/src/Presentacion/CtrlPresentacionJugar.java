@@ -20,8 +20,8 @@ public class CtrlPresentacionJugar {
         ctrlP = new CtrlPartida(0,0,id,u);
     }
     
-    public char[][] getTablero(int id) {
-        char[][] res = ctrlP.getTablero(id);
+    public char[][] getTablero() {
+        char[][] res = ctrlP.getTablero();
         return res;
     }
     
@@ -65,4 +65,7 @@ public class CtrlPresentacionJugar {
         ctrlP.actualizarRanking(nombre, tiempo);
     }
     
+    public void resetTablero(int id) {
+        ctrlP.resetTablero(id);
+    }
 }

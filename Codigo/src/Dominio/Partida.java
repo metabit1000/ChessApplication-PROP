@@ -54,6 +54,10 @@ public class Partida {
         return p;
     }
     
+    public void setProblema(Problema p) {
+        this.p = p;
+    }
+    
     public String getNombreJugador1() {
         return player1.getNombre();
     }

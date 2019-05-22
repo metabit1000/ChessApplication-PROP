@@ -90,7 +90,6 @@ public final class Problema {
         ctrlP.modificarRanking(id, rank); //actualizo en persistencia
     }
     
-    
     public String matrixToFen() {
         Ficha[][] f = board;
         String fen = "";

@@ -16,7 +16,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
 
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
-    private static int id; //id del problema cargado
+    private int id; //id del problema cargado
     private static JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
@@ -39,9 +39,13 @@ public class VistaPartidaVS extends javax.swing.JFrame {
         this.usuarios = u;
         ctrlJ = new CtrlPresentacionJugar(id,u,tipo);
         turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
-        aux = ctrlJ.getTablero(id); 
+        aux = ctrlJ.getTablero(); //guardo el tablero en una variable auxiliar para luego resetearlo
         
         initializeGui();
+        
+        introducirProblema(); //introduzco el problema a jugar 
+        
+        
         this.add(gui);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationByPlatform(true);
@@ -110,8 +114,10 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
-                                            //ctrlJ = new CtrlPresentacionJugar(id,usuarios,"JG");
-                                            introducirProblema(); //reseteo el problema para proximas partidas
+                                            ctrlJ.resetTablero(id); //reseteo tablero en dominio
+                                            turno = ctrlJ.getTurnoInicial(); 
+                                            movimientosPartida = 0;
+                                            //introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
                                         else if (movimientosPartida == ctrlJ.getNumMovimientos()){
@@ -124,6 +130,9 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
+                                            ctrlJ.resetTablero(id); //reseteo tablero en dominio
+                                            turno = ctrlJ.getTurnoInicial(); 
+                                            movimientosPartida = 0;
                                             introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
@@ -182,6 +191,9 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
+                                            ctrlJ.resetTablero(id); //reseteo tablero en dominio
+                                            turno = ctrlJ.getTurnoInicial(); 
+                                            movimientosPartida = 0;
                                             introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
@@ -193,6 +205,9 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
+                                            ctrlJ.resetTablero(id); //reseteo tablero en dominio
+                                            turno = ctrlJ.getTurnoInicial(); 
+                                            movimientosPartida = 0;
                                             introducirProblema(); //reseteo el problema para proximas partidas
                                             m.setVisible(true); //vuelvo atras
                                         }
@@ -254,9 +269,8 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                 }
             }
         }
-        introducirProblema(); //introduzco el problema a jugar al tablero
     }
-
+    
     private Coordenada getPosicionBoton(ActionEvent e) {
         int resX = 0, resY = 0;
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {

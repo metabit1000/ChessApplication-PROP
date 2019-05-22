@@ -129,10 +129,10 @@ public class VistaProblemasVS extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
-        VistaPartidaVS vj = new VistaPartidaVS(selectProblem()+1,u,"PJ");
+        int id = selectProblem()+1;
+        VistaPartidaVS vj = new VistaPartidaVS(id,u,"PJ");
         setVisible(false);
-        vj.setVisible(true);
-        
+        vj.setVisible(true); 
     }//GEN-LAST:event_PlayActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
