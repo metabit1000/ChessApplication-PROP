@@ -3,7 +3,6 @@ package Dominio;
 import ClasesExtra.Coordenada;
 import ClasesExtra.Pair;
 import Dominio.fichas.Ficha;
-import java.lang.System; //para nanotime()
 import java.util.ArrayList;
 
 /**

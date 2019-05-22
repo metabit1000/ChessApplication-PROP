@@ -60,6 +60,7 @@ public class CtrlDatosUsuarios {
                 bw.newLine(); //salto de linea en fichero
                 out.append(nombre +" "+ password);
             }
+            fw.close();
             out.close();
             bw.close();
         } catch (IOException e) {
@@ -112,8 +113,8 @@ public class CtrlDatosUsuarios {
                             res.add(Integer.parseInt(lineaDivididaId[i]));
                         }
                     }
-                    //break; //me ahorro bucles
                 }
+                br.close();
             }
         }catch(IOException | NumberFormatException e) {
             System.out.println(e);

@@ -100,6 +100,7 @@ public class CtrlDatosProblemas {
                         break; //para que no continue buscando en el fichero
                    }
                 }
+                br.close();
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -108,7 +109,7 @@ public class CtrlDatosProblemas {
     }
     
     public boolean existeProblema(int id) {
-        String numId= String.valueOf(id); //para convertir a string el id
+        String numId = String.valueOf(id); //para convertir a string el id
         boolean b = false;
         try {
             if (archivo.exists()) {
@@ -119,6 +120,7 @@ public class CtrlDatosProblemas {
                    if(lineaDividida[0].equals(numId)) b = true; //obtengo el primer valor que es el ID
                 }
             }
+            br.close();
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -151,6 +153,7 @@ public class CtrlDatosProblemas {
                         break; //para que no continue buscando en el fichero
                    }
                 }
+                br.close();
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -186,6 +189,7 @@ public class CtrlDatosProblemas {
                     aux = new Ranking();
                     res.add(probl);
                 }
+                br.close();
             }
         } catch (IOException e) {
             System.out.println(e);

@@ -2,6 +2,7 @@ package Dominio;
 
 import ClasesExtra.Coordenada;
 import Dominio.fichas.*;
+import Persistencia.CtrlDatosProblemas;
 import java.util.*;
 /**
  *
@@ -73,16 +74,20 @@ public final class Problema {
     
     //Métodos para el ranking
     public void actualizarRanking(String nombre,double tiempo) {
+        CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
         rank.setActualizar(nombre,tiempo);
+        ctrlP.modificarRanking(id, rank); 
     }
     
     public boolean existeix(String nom){
-        if(rank.existeix(nom))return true ;
+        if(rank.existeix(nom)) return true;
         else return false ; 
     }
     
     public void introducirElemento(String nombre,double tiempo) {
+        CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
         rank.setElemento(nombre, tiempo);
+        ctrlP.modificarRanking(id, rank); //actualizo en persistencia
     }
     
     
