@@ -73,6 +73,7 @@ public class CtrlDatosProblemas {
                 }
                 out.write("."); //para saber que finaliza el ranking ahi
             }
+            fw.close();
             out.close();
             bw.close();
         } catch (IOException e) {
@@ -81,7 +82,7 @@ public class CtrlDatosProblemas {
     }
     
     public Ranking obtenerRanking(int id) {
-        String numId= String.valueOf(id); //para convertir a string el id
+        String numId = String.valueOf(id); //para convertir a string el id
         Ranking res = new Ranking();
         boolean b = false;
         try {
