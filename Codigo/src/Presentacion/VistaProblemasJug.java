@@ -173,7 +173,7 @@ public class VistaProblemasJug extends javax.swing.JFrame {
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
         if (dificultad != 0) {
             int id = selectProblem()+1;
-            VistaPartidaVS vj = new VistaPartidaVS(id,u,"PJ",dificultad);
+            VistaPartida vj = new VistaPartida(id,u,"PJ",dificultad);
             setVisible(false);
             vj.setVisible(true); 
         }

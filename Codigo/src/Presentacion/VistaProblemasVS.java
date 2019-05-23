@@ -130,7 +130,7 @@ public class VistaProblemasVS extends javax.swing.JFrame {
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
         int id = selectProblem()+1;
-        VistaPartidaVS vj = new VistaPartidaVS(id,u,"PVS",0); //no hay dificultad
+        VistaPartida vj = new VistaPartida(id,u,"PVS",0); //no hay dificultad
         setVisible(false);
         vj.setVisible(true); 
     }//GEN-LAST:event_PlayActionPerformed
