@@ -7,9 +7,7 @@ package Presentacion;
 
 import Dominio.CtrlProblemas;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -18,8 +16,8 @@ import javax.swing.ListSelectionModel;
  */
 public class VistaProblemasMaq extends javax.swing.JFrame {
     
-    private Boolean difBlanco;  //true -> FACIL, false -> DIFICIL
-    private Boolean difNegro;  //true -> FACIL, false -> DIFICIL
+    private int difBlanco = 0;  //1 -> FACIL, 2 -> DIFICIL
+    private int difNegro = 0;  
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
     public VistaProblemasMaq(CtrlPresentacionUsuarios u) {
         this.u = u;
@@ -219,19 +217,19 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FacilNegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacilNegroActionPerformed
-        difNegro = true;
+        difNegro = 1;
     }//GEN-LAST:event_FacilNegroActionPerformed
 
     private void FacilBlancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacilBlancoActionPerformed
-        difBlanco = true;
+        difBlanco = 1;
     }//GEN-LAST:event_FacilBlancoActionPerformed
 
     private void DificilBlancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DificilBlancoActionPerformed
-        difBlanco = false;
+        difBlanco = 2;
     }//GEN-LAST:event_DificilBlancoActionPerformed
 
     private void DificilNegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DificilNegroActionPerformed
-        difNegro = false;
+        difNegro = 2;
     }//GEN-LAST:event_DificilNegroActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
@@ -243,8 +241,15 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     }//GEN-LAST:event_RankingActionPerformed
 
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
-        if (difBlanco != null && difNegro != null && selectProblems().length > 0) {
-            //nueva vista como parametros selectProblems(), difBlanco y difNegro
+        if (difBlanco != 0 && difNegro != 0 && selectProblems().length > 0) {
+            int res[] = selectProblems();
+            CtrlPresentacionJugarMaq ctrlJ = new CtrlPresentacionJugarMaq(difBlanco,difNegro,res[0]); //inicializo la partida en dominio
+            ctrlJ.playNProblemas(res);
+            //se podria hacer una vista para mostrar el resultado de manera mas bonita 
+            JOptionPane.showMessageDialog(null,"Puntuacion Maquina1: "+ ctrlJ.getPuntuacionM1()+" Puntuacion Maquina2: "+ ctrlJ.getPuntuacionM2());
+            if (ctrlJ.getPuntuacionM1() > ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la Maquina1");
+            else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la Maquina2");
+            else JOptionPane.showMessageDialog(null,"Empate");
         }
     }//GEN-LAST:event_CompeticionActionPerformed
 
