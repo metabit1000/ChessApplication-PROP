@@ -238,6 +238,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             setVisible(false);
             r.setVisible(true);
         }
+        else JOptionPane.showMessageDialog(null,"Seleccione solo un problema para ver el ranking");
     }//GEN-LAST:event_RankingActionPerformed
 
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
@@ -251,6 +252,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la Maquina2");
             else JOptionPane.showMessageDialog(null,"Empate");
         }
+        else JOptionPane.showMessageDialog(null,"No ha escogido los parametros correctamente. Vuelva a intentarlo");
     }//GEN-LAST:event_CompeticionActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed

@@ -186,7 +186,7 @@ public class Partida {
         boolean pt = p.getTurno();
         int compare;
         //if (!validar) compare = p.getNumMovimientos(); //?
-        //else 
+        //else ??esto que
         compare = 50;
         while (cont < compare && !win) {
             Pair <Coordenada,Coordenada> moves  = new Pair();
