@@ -23,11 +23,15 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JPanel guiF = new JPanel();
     private JPanel guiDef = new JPanel();
+    private JPanel guiFiBo = new JPanel();
+    private JPanel guiBo = new JPanel();
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton[][] Fichas = new JButton[2][6];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private JPanel fichasBoard;
+    private JButton Cancel = new JButton();
+    private JButton Validar = new JButton();
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private int casillaInicioPulsada = 0;
@@ -39,14 +43,23 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         this.usuarios = u;
         Problema p = ctrlP.obtenerProblema(id);
         this.aux = p.convertirTablero();
+        guiFiBo.setLayout(new BoxLayout(guiFiBo, BoxLayout.Y_AXIS));
         guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
-        
-        //guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.));
+        Cancel.setText("Cancel");
+        Validar.setText("Validar");
+        Cancel.setPreferredSize(new Dimension(140, 60));
+        Cancel.setFont(new java.awt.Font("Tahoma", 0, 20)); 
+        Validar.setPreferredSize(new Dimension(140, 60));
+        Validar.setFont(new java.awt.Font("Tahoma", 0, 20)); 
         initializeGui();
         introducirProblema(); //introduzco el problema a jugar al tablero
         introducirFichas();
+        guiBo.add(Validar);
+        guiBo.add(Cancel);
+        guiFiBo.add(guiF);
+        guiFiBo.add(guiBo);
         guiDef.add(gui);
-        guiDef.add(guiF);
+        guiDef.add(guiFiBo);
         this.add(guiDef);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationByPlatform(true);
@@ -69,7 +82,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         fichasBoard = new JPanel(new GridLayout(0, 6));
         fichasBoard.setBorder(new LineBorder(Color.BLACK));
         guiF.add(fichasBoard);
-        //gui.add(guiF);
         
         // create the chess board squares
         Insets buttonMarginF = new Insets(0, 0, 0, 0);

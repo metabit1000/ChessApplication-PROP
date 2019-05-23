@@ -17,7 +17,7 @@ public class Partida {
     /*Para las MaquinaVSMaquina */
     private int puntuacionMaq1; //num partidas ganadas
     private int puntuacionMaq2;
-
+    private int numMov;
     public Partida() {}
     
     public Partida(Usuario j1,Usuario j2,Problema p) {
@@ -41,6 +41,7 @@ public class Partida {
         this.p = p;
         puntuacionMaq1 = 0;
         puntuacionMaq2 = 0;
+        numMov = 0;
     }
       /**
      * pre:dado una partida queremos saber cual es el turno incial
@@ -84,6 +85,10 @@ public class Partida {
      */
     public Problema getProblema() {
         return p;
+    }
+    
+    public int getNumM() {
+        return numMov;
     }
      /**
      * pre:Donat un problema p existente
@@ -130,7 +135,7 @@ public class Partida {
     }
       /**
      * pre: dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo para superar el problema 
-     * post: un nuevo tiempo y nombre estaran introducidos en el ranking 
+     * post:un nuevo tiempo y nombre estaran introducidos en el ranking 
      * @param nombre
      * @param tiempo 
      */
@@ -173,21 +178,21 @@ public class Partida {
     
     public void playNProblemas(Problema p) {
         this.p = p; //actualizo el problema a jugar
-        playMaquinas(); //juegan y actualizan las variables puntuacion
+        playMaquinas(false); //juegan y actualizan las variables puntuacion
     }
    
     
-    public void playMaquinas() {
+    public void playMaquinas(boolean validar) {
         int cont = 0;
         String coordenada1, coordenada2;
         String c;
         boolean win = false;
         boolean turno = p.getTurno();
         boolean pt = p.getTurno();
+        
         int compare;
-        //if (!validar) compare = p.getNumMovimientos(); //?
-        //else ??esto que
-        compare = 50;
+        if (validar) compare = 50;
+        else compare = p.getNumMovimientos();
         while (cont < compare && !win) {
             Pair <Coordenada,Coordenada> moves  = new Pair();
             if (turno) {
