@@ -189,7 +189,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
                                             
-                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            VistaProblemasJug m = new VistaProblemasJug(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
                                             ctrlJ.resetTablero(id); //reseteo tablero en dominio
                                             turno = ctrlJ.getTurnoInicial(); 
@@ -203,7 +203,7 @@ public class VistaPartidaVS extends javax.swing.JFrame {
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
                                             
-                                            VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
+                                            VistaProblemasJug m = new VistaProblemasJug(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
                                             ctrlJ.resetTablero(id); //reseteo tablero en dominio
                                             turno = ctrlJ.getTurnoInicial(); 
