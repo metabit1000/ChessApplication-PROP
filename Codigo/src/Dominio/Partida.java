@@ -129,8 +129,8 @@ public class Partida {
         return p.getFicha(c).getColor();
     }
       /**
-     * pre : dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo para superar el problema 
-     * post:un nuevo tiempo y nombre estaran introducidos en el ranking 
+     * pre: dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo para superar el problema 
+     * post: un nuevo tiempo y nombre estaran introducidos en el ranking 
      * @param nombre
      * @param tiempo 
      */

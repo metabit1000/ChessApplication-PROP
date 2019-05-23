@@ -21,6 +21,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
     private int id; //id del problema cargado
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private JPanel guiF = new JPanel();
+    private JPanel guiDef = new JPanel();
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton[][] Fichas = new JButton[2][6];
     private Image[][] chessPieceImages = new Image[2][6];
@@ -37,9 +39,15 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         this.usuarios = u;
         Problema p = ctrlP.obtenerProblema(id);
         this.aux = p.convertirTablero();
+        guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
+        
+        //guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.));
         initializeGui();
         introducirProblema(); //introduzco el problema a jugar al tablero
-        this.add(gui);
+        introducirFichas();
+        guiDef.add(gui);
+        guiDef.add(guiF);
+        this.add(guiDef);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationByPlatform(true);
         this.pack();
@@ -58,7 +66,45 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         chessBoard.setBorder(new LineBorder(Color.BLACK));
         gui.add(chessBoard);
             
+        fichasBoard = new JPanel(new GridLayout(0, 6));
+        fichasBoard.setBorder(new LineBorder(Color.BLACK));
+        guiF.add(fichasBoard);
+        //gui.add(guiF);
+        
         // create the chess board squares
+        Insets buttonMarginF = new Insets(0, 0, 0, 0);
+        for (int ii = 0; ii < Fichas.length; ii++) {
+            for (int jj = 0; jj < Fichas[ii].length; jj++) {
+                JButton b = new JButton();
+                b.setMargin(buttonMarginF);
+                
+                ActionListener a = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) { 
+                        if (casillaInicioPulsada == 0 && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                            if (getPosicionFichas(e) != null) {
+                                posicionInicio = getPosicionFichas(e);
+                                casillaInicioPulsada = 2;
+                            }
+                        } 
+                        else if (casillaInicioPulsada != 0 && !casillaFinalPulsada) {
+                            if (getPosicionFichas(e) != null) {
+                                posicionFinal = getPosicionBoton(e);
+                                    casillaFinalPulsada = true;
+                                    casillaInicioPulsada = 0;
+                                
+                                
+                            }
+                            casillaFinalPulsada = false;
+                            casillaInicioPulsada = 0;
+                        }
+                    }
+                };
+                b.addActionListener(a);
+                Fichas[ii][jj] = b;
+            }
+        }
+        
         Insets buttonMargin = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
@@ -76,10 +122,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                             if (getPosicionBoton(e) != null) {
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = 1;
-                            }
-                            if (getPosicionFichas(e) != null) {
-                                posicionInicio = getPosicionFichas(e);
-                                casillaInicioPulsada = 2;
                             }
                         } 
                         else if (casillaInicioPulsada != 0 && !casillaFinalPulsada) {
@@ -116,6 +158,11 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 }
             }
         }
+        for (int ii = 0; ii < 2; ii++) {
+            for (int jj = 0; jj < 6; jj++) {
+                fichasBoard.add(Fichas[ii][jj]);
+            }
+        }
     }
 
     private Coordenada getPosicionBoton(ActionEvent e) {
@@ -135,7 +182,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         int resX = 0, resY = 0;
         for (int ii = 0; ii < Fichas.length; ii++) {
             for (int jj = 0; jj < Fichas[ii].length; jj++) {
-                if (e.getSource().equals(Fichas[jj][ii])) {
+                if (e.getSource().equals(Fichas[ii][jj])) {
                     resX = ii;
                     resY = jj;
                 }
@@ -150,7 +197,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
     
     private void ponerFicha() {
-        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
+        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
     }
 
 
@@ -217,7 +264,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private final void introducirFichas() {
         for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 6; j++) {
-                    chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[j][i]));
+                    Fichas[i][j].setIcon(new ImageIcon(chessPieceImages[i][j]));
                 }
             }
     }
