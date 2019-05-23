@@ -16,7 +16,8 @@ public class CtrlPartida {
     
     public CtrlPartida() {}
     
-    public CtrlPartida(int tipoJuego,int dificultad,int id,CtrlPresentacionUsuarios u) { //creo la partida
+    /* Constructora para Jug VS Jug y Jug VS Maq */
+    public CtrlPartida(int tipoJuego,int dificultad,int id,CtrlPresentacionUsuarios u) { 
         /*dificultad: 0 -> no tiene, 1 -> facil, 2 -> dificil
         tipoJuego: 0 ->  Jugar, ContraMaquina, 1 -> 1vs1 */
         
@@ -30,6 +31,41 @@ public class CtrlPartida {
         else if (tipoJuego == 1 && dificultad == 2) {
             game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaHard(false,3),p);
         }
+    }
+    
+    /* Constructora para Maquina VS Maquina */
+    public CtrlPartida(int difBlancas, int difNegras,int problInicial) { 
+        Problema p = ctrlP.obtenerProblema(problInicial); //problema inicial
+        
+        if (difBlancas == 1 && difNegras == 1) {
+            game = new Partida(new MaquinaEasy(true,3),new MaquinaEasy(false,3),p);
+        } 
+        else if (difBlancas == 1 && difNegras == 2) {
+            game = new Partida(new MaquinaEasy(true,3),new MaquinaHard(false,3),p);
+        }
+        
+        else if (difBlancas == 2 && difNegras == 1) {
+            game = new Partida(new MaquinaHard(true,3),new MaquinaEasy(false,3),p);
+        }
+        
+        else if (difBlancas == 2 && difNegras == 2) {
+            game = new Partida(new MaquinaHard(true,3),new MaquinaHard(false,3),p);
+        }
+    }
+    
+    public void playNProblemas(int res[]) {
+        for (int i = 0; i < res.length; i++) {
+            Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no se hace y es necesario para coger bien el id
+            game.playNProblemas(p);
+        }
+    }
+    
+    public int getPuntuacionM1() {
+        return game.getPuntuacionM1();
+    }
+    
+    public int getPuntuacionM2() {
+        return game.getPuntuacionM2();
     }
     
     public char[][] getTablero() {

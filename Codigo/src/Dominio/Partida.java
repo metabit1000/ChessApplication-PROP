@@ -13,6 +13,10 @@ public class Partida {
     private Problema p = new Problema();
     private Jugador player1;
     private Jugador player2;
+    
+    /*Para las MaquinaVSMaquina */
+    private int puntuacionMaq1; //num partidas ganadas
+    private int puntuacionMaq2;
 
     public Partida() {}
     
@@ -35,6 +39,8 @@ public class Partida {
         player1 = m1;
         player2 = m2;
         this.p = p;
+        puntuacionMaq1 = 0;
+        puntuacionMaq2 = 0;
     }
       /**
      * pre:dado una partida queremos saber cual es el turno incial
@@ -42,6 +48,14 @@ public class Partida {
      * @return turno
      */
 
+    public int getPuntuacionM1(){
+        return puntuacionMaq1;
+    }
+    
+    public int getPuntuacionM2(){
+        return puntuacionMaq2;
+    }
+    
     public boolean getTurnoInicial() {
         return p.getTurno(); //turno inicial del problema
     }
@@ -157,57 +171,51 @@ public class Partida {
         return res; //devuelvo el mejor movimiento para la capa de presentacion
     }
     
+    public void playNProblemas(Problema p) {
+        this.p = p; //actualizo el problema a jugar
+        playMaquinas(); //juegan y actualizan las variables puntuacion
+    }
    
-   /* 
-    public int playMaquinaVSMaquina(boolean validar) {
+    
+    public void playMaquinas() {
         int cont = 0;
         String coordenada1, coordenada2;
-        Scanner sc = new Scanner(System.in);
         String c;
         boolean win = false;
-        if (p.getTurno()) c = "blancas.";
-        else c = "negras.";
-        System.out.println("En este problema, empiezan las "+c);
-        turno = p.getTurno();
+        boolean turno = p.getTurno();
         boolean pt = p.getTurno();
         int compare;
-        if (!validar) compare = p.getNumMovimientos();
-        else compare = 50;
-        p.printTablero();
+        //if (!validar) compare = p.getNumMovimientos(); //?
+        //else 
+        compare = 50;
         while (cont < compare && !win) {
-            String t;
-            if (turno) t = "blancas.";
-            else t = "negras.";
-            System.out.println("El turno es de las "+ t);
-            System.out.println("Por favor, haga su movimiento");
             Pair <Coordenada,Coordenada> moves  = new Pair();
             if (turno) {
-                moves = player1.getNextMove(p);
+                Maquina m1 = (Maquina)player1;
+                moves = m1.getNextMove(p);
                 if (turno == pt) {
                     ++cont;
-                }
-                
+                }  
             }
             else {
-                moves = player2.getNextMove(p);
+                Maquina m2 = (Maquina)player2;
+                moves = m2.getNextMove(p);
                 if (turno == pt) {
                     ++cont;
                 }
             }
-            p.moveFicha(moves.getKey().coordToString(),moves.getValue().coordToString());
-            if (p.checkmate(turno)){
+            p.moveFicha(moves.getKey(),moves.getValue());
+            if (p.checkmate(turno)){ 
+                //ganan las blancas
                 win = true;
-                System.out.println("Fin del juego. Ganan las "+t);
+                ++puntuacionMaq1;
             }
-            p.printTablero();
             turno = !turno;
         }
         if (!win) {
-            p.printTablero();
-            System.out.println("Se ha excedido el número de movimientos del problema.");
+            //ganan las negras
+            ++puntuacionMaq2;
         }
-        return cont;
     }
-    */
     
 }
