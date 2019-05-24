@@ -103,45 +103,88 @@ public class CtrlPartida {
         return game.getColor(c);
     }
    /**
-    * 
+    * pre:-
+    * post:Devuelve el turno inicial , es decir , que color sera el que empieze la partida
     * @return 
     */
     public boolean getTurnoInicial() {
         return game.getTurnoInicial();
     }
-    
+    /**
+     * pre:-
+     * post:Devuelve el numero de movimientos en los cuales se puede superar el problema
+     * @return 
+     */
     public int getNumMovimientos() {
         return game.getNumMovimientos();
     }
-    
+     /**
+     * pre:-
+     * post:Devuelve el nombre del Jugador 1 
+     * @return 
+     */
     public String getNombreJugador1() {
         return game.getNombreJugador1();
     }
-    
+    /**
+     * pre:-
+     * post:Devuelve el nombre del Jugador 3
+     * @return 
+     */
     public String getNombreJugador2() {
         return game.getNombreJugador2();
     }
-    
+    /**
+     * pre:Dada una coordenada valida
+     * post: Devuelve el arraylist con todas las coordenas posibles en las cuales la ficha que esta en la coordenada c 
+     * @param c
+     * @return 
+     */
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return game.posiblesMovimientos(c);
     }
-    
+    /**
+     * pre:Dado un color diferente a null y dos coordenadas validas
+     * post:devuelve un int en el cual si es 0 el movimiento es correcto , si es -1 estas en jaque y si es -2 no es tu turno
+     * @param color
+     * @param cordInicio
+     * @param cordFinal
+     * @return 
+     */
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
         return game.moverFicha(color, cordInicio, cordFinal);
     }
-    
+     /**
+     * pre:-
+     * post:La maquina mueve su ficha 
+     * @return 
+     */
     public Pair<Coordenada,Coordenada> moverFichaMaquina() {
         return game.moverFichaMaquina();
     }   
-    
+    /**
+     * pre:Dado un boolean turno diferente a null 
+     * post:Devuelve si hace mate 
+     * @param turno
+     * @return 
+     */
     public boolean checkMate(boolean turno) {
         return game.checkMate(turno);
     }
-    
+    /**
+     * pre:Dado un nombre y un tiempo difrente a null
+     * post:Se añade el nombre y el tiempo en el ranking de el problema 
+     * @param nombre
+     * @param tiempo 
+     */
     public void actualizarRanking(String nombre,double tiempo) {
         game.actualizarRanking(nombre, tiempo);
     }
-    
+    /**
+     * pre: Dada una id de un problema existente
+     * post:Modifica el problema poniendolo como estaba en un inicio
+     * @param id 
+     */
     public void resetTablero(int id) {
         Problema aux = ctrlP.obtenerProblema(id);
         game.setProblema(aux); //reseteo el problema
