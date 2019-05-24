@@ -18,7 +18,8 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
         String nom = u.getUserLogged();
         CtrlUsuarios ctrlU = new CtrlUsuarios();
         for (int i = 0; i < ctrlU.getProblemasCreados(nom).size(); ++i) {
-            listModel.addElement("Problema "+(ctrlU.getProblemasCreados(nom).get(i)+1)+". Movimientos: "+cp.getProblema(i).getNumMovimientos());
+            int aux = ctrlU.getProblemasCreados(nom).get(i); //cojo los ids de los problemas creados por el usuario
+            listModel.addElement("Problema "+(ctrlU.getProblemasCreados(nom).get(i))+". Movimientos: "+cp.getProblema(aux).getNumMovimientos());
         }
         
         this.setVisible(true); 
