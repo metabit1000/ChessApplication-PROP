@@ -46,13 +46,23 @@ public class CtrlProblemas {
     */
     
     public CtrlProblemas() {}
-    
+    /**
+     * pre:Dado una id de un problema
+     * post:Devuelve el map que contien el ranking de este problema
+     * @param id
+     * @return 
+     */
     public Map<String,Double> getmap(int id ){
         Ranking a = new Ranking();
          a = problems.obtenerRanking(id);
          return a.getmap();
     }
-    
+    /**
+     * pre:Dado un Problema p  y diferente a null
+     * post:Añade el Problema p en la base de datos 
+     * 
+     * @param p 
+     */
     public void addProblema(Problema p) {
         //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)
         //y numM como numero de movimientos en los que se puede resolver el problema.
@@ -62,18 +72,32 @@ public class CtrlProblemas {
         }
         else System.out.println("Este problema ya esta registrado.");
     }
-    
+    /**
+     * pre:Dado una id de un  problema
+     * post:Retornaremos que si existe esa id en algun problema
+     * @param id
+     * @return 
+     */
     public boolean existProblem(int id) {
         //retorna true si el problema con id id existe en el mapa de Problemas
         return problems.existeProblema(id);
     }
-    
+    /**
+     * pre:-
+     * post:Devuelve un arraylist con todos los problemas
+     * @return 
+     */
     public ArrayList<Problema> getAllProblemasJuego() {
         ArrayList<Problema> res = new ArrayList();
         res = problems.getAllProblemas();
         return res;
     }
-    
+    /**
+     * pre:Dado Problema crear diferente a null
+     * post:Devuelve true si cumple las condiciones necesarias para crear un problema sino false
+     * @param crear
+     * @return 
+     */
     public boolean cumpleRestriccionFichas(Problema crear) {
         //devuelve falso si viola algunas de las restricciones basicas de un tablero de ajedrez: es decir, retornará falso en el caso de que
         //existan mas de 2 alfiles, caballos, torres, mas de 8 peones, mas de 1 reina y no haya un rey. Estas restricciones se miran por color.
@@ -185,7 +209,15 @@ public class CtrlProblemas {
         }
         return true;
     }
-    
+    /**
+     * pre:Dado un Problema a crear , un String ficha ,color,pos diferente a null
+     * 
+     * post:Añade la ficha con su color en la posición indica en pos 
+     * @param crear
+     * @param ficha
+     * @param color
+     * @param pos 
+     */
     public void anadirFicha(Problema crear, String ficha, String color, String pos) {
         //añade la ficha ficha con color color y posicion pos al tablero del problema crear
         switch(ficha) {
@@ -319,7 +351,12 @@ public class CtrlProblemas {
                 break;
         }
     }
-    
+    /**
+     * pre:Dado un int id diferente a null 
+     * post:Devuelve el Problema que corresponde a la id si existe esta sino devulve un problema vacio
+     * @param id
+     * @return 
+     */
     public Problema getProblema(int id) {
         Problema res = new Problema();
         if (existProblem(id)) {
@@ -327,7 +364,12 @@ public class CtrlProblemas {
         } 
         return res;
     }
-    
+    /**
+     * pre:Dado un int id y un Ranking newR diferente a null
+     * post:Actualizara el ranking del problema
+     * @param id
+     * @param newR 
+     */
     public void actualizarRanking(int id, Ranking newR) {
         if (existProblem(id)) {
             problems.modificarRanking(id, newR);
