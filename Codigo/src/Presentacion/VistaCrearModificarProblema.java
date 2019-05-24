@@ -25,16 +25,25 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private JPanel guiBo = new JPanel();
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton[][] Fichas = new JButton[2][6];
+    private JButton [][] swapAux = new JButton [1][1];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private JPanel fichasBoard;
     private JButton Cancel = new JButton();
     private JButton Validar = new JButton();
+    private JLabel Pregunta = new JLabel("¿En cuántos movimientos ganarán las blancas?");
     private static final String COLS = "ABCDEFGH";
     private Coordenada posicionInicio, posicionFinal;
     private int casillaInicioPulsada = 0;
     private boolean casillaFinalPulsada = false;
     private char[][] aux;
+    private JComboBox Combo = new JComboBox();
+    
+    private int numMovs;
+    
+    public void setNumMovs(int j) {
+        this.numMovs = j;
+    }
     
     public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) {
         this.id = id;
@@ -49,12 +58,49 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         Cancel.setFont(new java.awt.Font("Tahoma", 0, 20)); 
         Validar.setPreferredSize(new Dimension(140, 60));
         Validar.setFont(new java.awt.Font("Tahoma", 0, 20)); 
+        Validar.setEnabled(true);
+        Cancel.setEnabled(true);
+        Combo.addItem("1");
+        Combo.addItem("2");
+        Combo.addItem("3");
+        Combo.addItem("4");
+        
+        Combo.setSize(100, 200);
+        
+        Combo.addActionListener(new ActionListener(){ 
+            @Override
+            public void actionPerformed(ActionEvent e){  
+                
+                setNumMovs(Combo.getSelectedIndex()+1);
+            }  
+        });
+        Cancel.addActionListener(new ActionListener(){  
+            @Override
+            public void actionPerformed(ActionEvent e){  
+                VistaMenu m = new VistaMenu(u);
+                setVisible(false);
+                m.setVisible(true); 
+            }  
+        });
+        Validar.addActionListener(new ActionListener(){  
+            @Override
+            public void actionPerformed(ActionEvent e){  
+                VistaMenu m = new VistaMenu(u);
+                setVisible(false);
+                m.setVisible(true); 
+            }  
+        });
         initializeGui();
         introducirProblema(); //introduzco el problema a jugar al tablero
         introducirFichas();
+        
+        printeameElCHAR(sacarProblema());
+        Pregunta.setFont(new java.awt.Font("Tahoma", 0, 20)); 
         guiBo.add(Validar);
         guiBo.add(Cancel);
         guiFiBo.add(guiF);
+        guiFiBo.add(Pregunta);
+        guiFiBo.add(Combo);
         guiFiBo.add(guiBo);
         guiDef.add(gui);
         guiDef.add(guiFiBo);
@@ -68,7 +114,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
 
     private final void initializeGui() {
         // set up the main GUI
-        cargarImagenes();
+        
+        //cargarImagenes();
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
@@ -87,7 +134,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             for (int jj = 0; jj < Fichas[ii].length; jj++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMarginF);
-                
                 ActionListener a = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) { 
@@ -168,6 +214,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 }
             }
         }
+        
+        
         for (int ii = 0; ii < 2; ii++) {
             for (int jj = 0; jj < 6; jj++) {
                 fichasBoard.add(Fichas[ii][jj]);
@@ -204,66 +252,98 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private void moverFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
+        
     }
     
     private void ponerFicha() {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
     }
-
-
-    private final void cargarImagenes() {
-        try {
-            BufferedImage bi = ImageIO.read(new File("fichas.png"));
-            for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 6; j++) {
-                    chessPieceImages[i][j] = bi.getSubimage(j * 64, i * 64, 64, 64);
+    private void swapFicha() {
+        Insets buttonMarginS = new Insets(0, 0, 0, 0);
+        JButton s = new JButton();
+        s.setMargin(buttonMarginS);
+        swapAux[0][0] = s;
+        swapAux[0][0].setIcon(chessBoardSquares[posicionFinal.getX()][posicionFinal.getY()].getIcon());
+        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
+        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(swapAux[0][0].getIcon()); //movimiento
+    }
+    
+    //matriz de botones a matriz de chars
+    private char[][] sacarProblema() {
+        JButton[][] jb = this.chessBoardSquares;
+        char[][] r = new char[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (chessBoardSquares[j][i].getIcon() != null) {
+                    if (chessBoardSquares[j][i].getIcon().toString().equals("K1.png"))  r[i][j] = 'K';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("k.png")) r[i][j] = 'k';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("Q1.png")) r[i][j] = 'Q';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("q.png")) r[i][j] = 'q';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("R1.png")) r[i][j] = 'R';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("r.png")) r[i][j] = 'r';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("N1.png")) r[i][j] = 'N';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("n.png")) r[i][j] = 'n';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("B1.png")) r[i][j] = 'B';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("b.png")) r[i][j] = 'b';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("P1.png")) r[i][j] = 'P';
+                    else if (chessBoardSquares[j][i].getIcon().toString().equals("p.png")) r[i][j] = 'p';
                 }
+                else r[i][j] = '.';
             }
-        } catch (Exception e) {
-            System.exit(1);
+            
+        }
+        return r;
+    }
+    
+    public void printeameElCHAR(char[][] c) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                System.out.print(c[i][j] +" ");
+            }
+            System.out.println("");
         }
     }
-
+    
     private final void introducirProblema() {
-       char[][] c = aux;
+        char[][] c = aux;
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 switch (c[i][j]) {
                     case 'K':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][3]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("K1.png"));
                         break;
                     case 'k':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][3]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("k.png"));
                         break;
                     case 'Q':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][2]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("Q1.png"));
                         break;
                     case 'q':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][2]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("q.png"));
                         break;
                     case 'R':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][0]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("R1.png"));
                         break;
                     case 'r':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][0]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("r.png"));
                         break;
                     case 'N':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][4]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("N1.png"));
                         break;
                     case 'n':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][4]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("n.png"));
                         break;
                     case 'B':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][1]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("B1.png"));
                         break;
                     case 'b':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][1]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("b.png"));
                         break;
                     case 'P':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[1][5]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("P1.png"));
                         break;
                     case 'p':
-                        chessBoardSquares[j][i].setIcon(new ImageIcon(chessPieceImages[0][5]));
+                        chessBoardSquares[j][i].setIcon(new ImageIcon("p.png"));
                         break;
                     default:
                         break;
@@ -272,12 +352,33 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         }
     }
     private final void introducirFichas() {
-        for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 6; j++) {
-                    Fichas[i][j].setIcon(new ImageIcon(chessPieceImages[i][j]));
-                }
-            }
+        Fichas[1][3].setIcon(new ImageIcon("K1.png"));
+        Fichas[0][3].setIcon(new ImageIcon("k.png"));
+        Fichas[1][2].setIcon(new ImageIcon("Q1.png"));
+        Fichas[0][2].setIcon(new ImageIcon("q.png"));
+        Fichas[1][0].setIcon(new ImageIcon("R1.png"));
+        Fichas[0][0].setIcon(new ImageIcon("r.png"));
+        Fichas[1][4].setIcon(new ImageIcon("N1.png"));
+        Fichas[0][4].setIcon(new ImageIcon("n.png"));
+        Fichas[1][1].setIcon(new ImageIcon("B1.png"));
+        Fichas[0][1].setIcon(new ImageIcon("b.png"));
+        Fichas[1][5].setIcon(new ImageIcon("P1.png"));
+        Fichas[0][5].setIcon(new ImageIcon("p.png"));
+        
+                
     }
+    //            chessPieceImages[1][3].setIcon(K1);
+//            chessPieceImages[0][3] = k;
+//            chessPieceImages[1][2] = Q1;
+//            chessPieceImages[0][2] = q;
+//            chessPieceImages[1][0] = R1;
+//            chessPieceImages[0][0] = r;
+//            chessPieceImages[1][4] = N1;
+//            chessPieceImages[0][4] = n;
+//            chessPieceImages[1][1] = B1;
+//            chessPieceImages[0][1] = b;
+//            chessPieceImages[1][5] = P1;
+//            chessPieceImages[0][5] = p;
 
     /**
      * This method is called from within the constructor to initialize the form.
