@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Presentacion;
 
 import Dominio.CtrlProblemas;
@@ -12,7 +7,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Joan
  */
 public class VistaProblemasUsuarios extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
@@ -23,7 +18,7 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
         String nom = u.getUserLogged();
         CtrlUsuarios ctrlU = new CtrlUsuarios();
         for (int i = 0; i < ctrlU.getProblemasCreados(nom).size(); ++i) {
-            listModel.addElement("Problema "+(ctrlU.getProblemasCreados(nom).get(i)+1)+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
+            listModel.addElement("Problema "+(ctrlU.getProblemasCreados(nom).get(i)+1)+". Movimientos: "+cp.getProblema(i).getNumMovimientos());
         }
         
         this.setVisible(true); 

@@ -320,12 +320,11 @@ public class CtrlProblemas {
         }
     }
     
-    public Problema seleccionProblema(int id) {
+    public Problema getProblema(int id) {
         Problema res = new Problema();
         if (existProblem(id)) {
             res = problems.obtenerProblema(id);
         } 
-        else System.out.println("No existe este problema");
         return res;
     }
     

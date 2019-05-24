@@ -18,6 +18,7 @@ public class Partida {
     private int puntuacionMaq1; //num partidas ganadas
     private int puntuacionMaq2;
     private int numMov;
+    
     public Partida() {}
     
     public Partida(Usuario j1,Usuario j2,Problema p) {

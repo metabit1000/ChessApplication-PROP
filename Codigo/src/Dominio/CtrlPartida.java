@@ -26,26 +26,26 @@ public class CtrlPartida {
             game = new Partida(new Usuario(true,u.getUserLogged()," "),new Usuario(false,u.getGuest()," "),p);  
         }
         else if (tipoJuego == 1 && dificultad == 1) {
-            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaEasy(false,3),p);
+            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaEasy(false,p.getNumMovimientos()),p);
         }
         else if (tipoJuego == 1 && dificultad == 2) {
-            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaHard(false,3),p);
+            game = new Partida(new Usuario(true,u.getUserLogged()," "),new MaquinaHard(false,p.getNumMovimientos()),p);
         }
     }
     
     /* Constructora para Maquina VS Maquina */
     public CtrlPartida(int difBlancas, int difNegras,int problInicial) { 
         Problema p = ctrlP.obtenerProblema(problInicial); //problema inicial
-        
+        System.out.println(p.getNumMovimientos());
         if (difBlancas == 1 && difNegras == 1) {
-            game = new Partida(new MaquinaEasy(true,3),new MaquinaEasy(false,3),p);
+            game = new Partida(new MaquinaEasy(true,p.getNumMovimientos()),new MaquinaEasy(false,p.getNumMovimientos()),p);
         } 
         else if (difBlancas == 1 && difNegras == 2) {
-            game = new Partida(new MaquinaEasy(true,3),new MaquinaHard(false,3),p);
+            game = new Partida(new MaquinaEasy(true,p.getNumMovimientos()),new MaquinaHard(false,p.getNumMovimientos()),p);
         }
         
         else if (difBlancas == 2 && difNegras == 1) {
-            game = new Partida(new MaquinaHard(true,3),new MaquinaEasy(false,3),p);
+            game = new Partida(new MaquinaHard(true,p.getNumMovimientos()),new MaquinaEasy(false,p.getNumMovimientos()),p);
         }
         
         else if (difBlancas == 2 && difNegras == 2) {
@@ -58,8 +58,8 @@ public class CtrlPartida {
      * @param res 
      */
     public void playNProblemas(int res[]) {
-        for (int i = 0; i < res.length; i++) {
-            Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no se hace y es necesario para coger bien el id
+        for (int i = 1; i < res.length; i++) {
+            Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no lo puedo hacer y es necesario para coger bien el id
             game.playNProblemas(p);
         }
     }

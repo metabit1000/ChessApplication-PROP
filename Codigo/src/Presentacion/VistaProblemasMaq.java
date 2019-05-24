@@ -244,7 +244,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
         if (difBlanco != 0 && difNegro != 0 && selectProblems().length > 0) {
             int res[] = selectProblems();
-            CtrlPresentacionJugarMaq ctrlJ = new CtrlPresentacionJugarMaq(difBlanco,difNegro,res[0]); //inicializo la partida en dominio
+            CtrlPresentacionJugarMaq ctrlJ = new CtrlPresentacionJugarMaq(difBlanco,difNegro,res[0]+1); //inicializo la partida en dominio
             ctrlJ.playNProblemas(res);
             //se podria hacer una vista para mostrar el resultado de manera mas bonita 
             JOptionPane.showMessageDialog(null,"Puntuacion Maquina1: "+ ctrlJ.getPuntuacionM1()+" Puntuacion Maquina2: "+ ctrlJ.getPuntuacionM2());
