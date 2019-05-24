@@ -183,7 +183,10 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                             posicionFinal = getPosicionBoton(e);
                             casillaFinalPulsada = true;
                             if (casillaInicioPulsada == 1) {
-                                if (b.getIcon() != null) swapFicha(); 
+                                if (posicionInicio.getY() == posicionFinal.getY() && posicionInicio.getX() == posicionFinal.getX()) {
+                                    moverFicha();
+                                }
+                                else if (b.getIcon() != null) swapFicha(); 
                                 else moverFicha();
                             }
                             else if (casillaInicioPulsada == 2) {
