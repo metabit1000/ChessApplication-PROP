@@ -25,7 +25,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private JPanel guiBo = new JPanel();
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton[][] Fichas = new JButton[2][6];
-    private JButton [][] swapAux = new JButton [1][1];
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private JPanel fichasBoard;
@@ -184,7 +183,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                             posicionFinal = getPosicionBoton(e);
                             casillaFinalPulsada = true;
                             if (casillaInicioPulsada == 1) {
-                                moverFicha();
+                                if (b.getIcon() != null) swapFicha(); 
+                                else moverFicha();
                             }
                             else if (casillaInicioPulsada == 2) {
                                 ponerFicha();
@@ -259,13 +259,9 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
     }
     private void swapFicha() {
-        Insets buttonMarginS = new Insets(0, 0, 0, 0);
-        JButton s = new JButton();
-        s.setMargin(buttonMarginS);
-        swapAux[0][0] = s;
-        swapAux[0][0].setIcon(chessBoardSquares[posicionFinal.getX()][posicionFinal.getY()].getIcon());
-        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
-        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(swapAux[0][0].getIcon()); //movimiento
+        JButton s = new JButton(chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].getIcon());
+        chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
+        chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(s.getIcon()); //movimiento
     }
     
     //matriz de botones a matriz de chars
