@@ -114,6 +114,66 @@ public final class Problema {
         return res;
     }
     
+    public void convertirMatrizFichas(char[][] c) {
+        //matriz de chars a matriz de fichas y luego matriz to fen
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (c[i][j] != '.') {
+                    switch(c[i][j]) {
+                        case 'R':
+                        Rook R = new Rook(true, 'R');
+                        board[i][j] = R;
+                        break;
+                    case 'P':
+                        Pawn P = new Pawn(true, 'P');
+                        board[i][j] = P;
+                        break;
+                    case 'N':
+                        Knight N = new Knight(true, 'N');
+                        board[i][j] = N;
+                        break;
+                    case 'B':
+                        Bishop B = new Bishop(true, 'B');
+                        board[i][j] = B;
+                        break;
+                    case 'Q':
+                        Queen Q = new Queen(true, 'Q');
+                        board[i][j] = Q;
+                        break;
+                    case 'K':
+                        King K = new King(true, 'K');
+                        board[i][j] = K;
+                        break;
+                    case 'r':
+                        Rook r = new Rook(false, 'r');
+                        board[i][j] = r;
+                        break;
+                    case 'p':
+                        Pawn p = new Pawn(false, 'p');
+                        board[i][j] = p;
+                        break;
+                    case 'n':
+                        Knight n = new Knight(false,'n');
+                        board[i][j] = n;
+                        break;
+                    case 'b':
+                        Bishop b = new Bishop(false,'b');
+                        board[i][j] = b;
+                        break;
+                    case 'q':
+                        Queen q = new Queen(false,'q');
+                        board[i][j] = q;
+                        break;
+                    case 'k':
+                        King k = new King(false,'k');
+                        board[i][j] = k;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
     //Métodos para el ranking
     /**
      * pre:Dado un ranking , un nombre y un tiempo existente
