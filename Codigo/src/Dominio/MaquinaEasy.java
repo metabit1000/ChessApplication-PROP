@@ -13,7 +13,7 @@ public class MaquinaEasy extends Maquina {
         super(color,profundidad);
     }
     /**
-     * pre:Dado un problema queremos obtener un Pair de una posicion valida
+     * pre:Dado un problema exixtente
      * post:Devolvera un Pair correcto y con el mejor movimientos entre los posibles
      * @param p
      * @return 

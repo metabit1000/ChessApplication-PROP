@@ -91,7 +91,7 @@ public class Partida {
         return numMov;
     }
      /**
-     * pre:Donat un problema p existente
+     * pre:Dado un problema p existente
      * post:El atributo privado p sera el mismo que pasamos por parámetros
      
      * @return p
@@ -100,7 +100,7 @@ public class Partida {
         this.p = p;
     }
     /**
-     * pre:Dado un jugador1 queremos obtener su nombre 
+     * pre:-
      * post:Devolveremos el nombre del jugador1 
      * @return 
      */
@@ -108,7 +108,7 @@ public class Partida {
         return player1.getNombre();
     }
      /**
-     * pre:Dado un jugador2 queremos obtener su nombre
+     * pre:-
      * post:Devolveremos el nombre del jugador2
      * @return 
      */
@@ -116,8 +116,8 @@ public class Partida {
         return player2.getNombre();
     }
      /**
-     * pre:Dado una partida quedremos saber si en el problema hay mate
-     * post:Devolveremos si hay mate 
+     * pre:Boolean turno diferente null
+     * post:Devolveremos si hay mate en ese color
      * @param turno
      * @return 
      */
@@ -125,7 +125,7 @@ public class Partida {
         return p.checkmate(turno);
     }
     /**
-     * pre:dado una coordenada queremos saber de que color es la ficha que hay en esta posición 
+     * pre:dado una coordenada valida y diferente a null
      * post:devolveremos el color de la ficha , false-> negra o true->blanca
      * @param c
      * @return 
@@ -134,7 +134,7 @@ public class Partida {
         return p.getFicha(c).getColor();
     }
       /**
-     * pre: dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo para superar el problema 
+     * pre: dado un ranking ya existente queremos insertar el nombre del usuario y su tiempo diferente a null
      * post:un nuevo tiempo y nombre estaran introducidos en el ranking 
      * @param nombre
      * @param tiempo 
@@ -144,7 +144,7 @@ public class Partida {
         else p.introducirElemento(nombre,tiempo);
     }
     /**
-     * pre:Dado un movimiento queremos saber si es correcto 
+     * pre:Dado una coordenada incial y final diferentes a null y un color diferente a null 
      * post:devolvera 0 si es correcto , -1 si estas en jaque o -2 si no es tu turno 
      * @param color
      * @param cordInicio
@@ -164,7 +164,7 @@ public class Partida {
         return res;
     }
     /**
-     * pre:Queremos saber cual es el mejor movimiento de la máquina 
+     * pre:-
      * post:Devolvera el mejor movimiento de la máquina 
      * @return 
      */
@@ -175,13 +175,21 @@ public class Partida {
         p.moveFicha(res.getKey(), res.getValue()); //lo aplico en dominio
         return res; //devuelvo el mejor movimiento para la capa de presentacion
     }
-    
+    /**
+     * pre:Dado un Problema p existen 
+     * post:Haremos jugar las maquinas en n problemas
+     * @param p 
+     */
     public void playNProblemas(Problema p) {
         this.p = p; //actualizo el problema a jugar
         playMaquinas(false); //juegan y actualizan las variables puntuacion
     }
    
-    
+    /**
+     * pre:Dado un boolean validar el cual es diferente a null , si es false es un problema no existente y true si ya era existente
+     * post:En est metodo haremos jugar las maquinas entre ellas , incrementaremos el contador de la máquina que haya ganado
+     * @param validar 
+     */
     public void playMaquinas(boolean validar) {
         int cont = 0;
         String coordenada1, coordenada2;

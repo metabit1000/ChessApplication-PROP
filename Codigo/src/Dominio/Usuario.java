@@ -18,12 +18,20 @@ public class Usuario extends Jugador {
         super(color,nombre);
         this.password = password;
     }
-       
+       /**
+        * pre:-
+        * post: Devolvera la contraseña del Usuario
+        * @return 
+        */
     public String getPassword() {
         // devulve la contraseña del usuario
         return this.password;
     }
-    
+    /**
+     * pre:String password diferente a null
+     * post:Pone la variable password como la password del atributo privado
+     * @param password 
+     */
     public void setPassword(String password) {
         //esta función pone la contraseña password a la contraseña del usuario
         this.password = password;

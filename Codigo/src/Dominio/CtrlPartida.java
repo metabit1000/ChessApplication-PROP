@@ -52,32 +52,60 @@ public class CtrlPartida {
             game = new Partida(new MaquinaHard(true,3),new MaquinaHard(false,3),p);
         }
     }
-    
+    /**
+     * pre:Dado un vector de int no vacio
+     * post:Simularemos las partidas maquina vs maquina de los problemas que encontramos en la variable res
+     * @param res 
+     */
     public void playNProblemas(int res[]) {
         for (int i = 0; i < res.length; i++) {
             Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no se hace y es necesario para coger bien el id
             game.playNProblemas(p);
         }
     }
+   /**
+    * pre:-
+    * post:Devuelve la puntuación de la máquina 1
+    * @return 
+    */
     
     public int getPuntuacionM1() {
         return game.getPuntuacionM1();
     }
     
+    /**
+     * pre:-
+     * post:Devuelve la puntuación de la máquina 2
+     * @return 
+     */
+    
     public int getPuntuacionM2() {
         return game.getPuntuacionM2();
     }
     
+    /**
+     * pre:-
+     * post: Devuelve el tablero del problema de tipo char
+     * @return 
+     */
     public char[][] getTablero() {
         Problema p = game.getProblema();
         char[][] res = p.convertirTablero();
         return res;
     }
-   
+   /**
+    * pre: Dado una Coordena c valida
+    * post:Retorna el color de la coordena c 
+    * @param c
+    * @return 
+    */
     public boolean getColor(Coordenada c) {
         return game.getColor(c);
     }
-    
+   /**
+    * 
+    * @return 
+    */
     public boolean getTurnoInicial() {
         return game.getTurnoInicial();
     }

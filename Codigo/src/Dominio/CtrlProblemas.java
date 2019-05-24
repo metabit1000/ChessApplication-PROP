@@ -50,7 +50,7 @@ public class CtrlProblemas {
     public Map<String,Double> getmap(int id ){
         Ranking a = new Ranking();
          a = problems.obtenerRanking(id);
-         return a.getmap(id);
+         return a.getmap();
     }
     
     public void addProblema(Problema p) {

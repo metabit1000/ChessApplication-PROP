@@ -20,7 +20,7 @@ public class Jugador {
         this.nombre = nombre;
     }  
     /**
- * pre:Dado un Jugador con un color queremos obtener su color
+ * pre:-
  * post:devuleve un booleano el cual nos devuelve false si es negro y si es blanco es true 
  * @return color
  */    
@@ -29,7 +29,7 @@ public class Jugador {
         return color;
     }
     /**
-     * pre:Dado un jugador queremos obtener su nombre 
+     * pre:- 
      * post:Devolvemo el nombre del jugador
      * @return nombre
      */

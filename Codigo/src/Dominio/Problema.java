@@ -24,43 +24,85 @@ public final class Problema {
         numMovimientos = numMov;
         rank = r;
     }
-     
+    /**
+     * pre:Dado una coordenada existente 
+     * post: Devuelve una Ficha
+     * @param c
+     * @return 
+     */ 
     public Ficha getFicha(Coordenada c) {
         return board[c.getX()][c.getY()];
     }
-    
+    /**
+     * pre:Dado una coordenada y una ficha valida 
+     * post:La ficha se ha introducido en el board
+     * @param c
+     * @param f 
+     */
     public void setFicha(Coordenada c, Ficha f) {
         board[c.getX()][c.getY()] = f;
     }
-    
+    /**
+     * pre:-
+     * post:Devueelve la id del problema en questión
+     * @return 
+     */
     public int getId() {
         return id;
     }
-    
+    /**
+     * pre:Dado el booleano f diferente a null
+     * post:El turno inicial es f 
+     * @param f 
+     */
     public void setTurno(Boolean f) {
         turnoInicial = f;
     }
-        
+        /**
+         * pre:-
+         * post:Devuelve el color del turno incial
+         * @return 
+         */
     public boolean getTurno() {
         return turnoInicial;
     }
-    
+    /**
+     * pre:-
+     * post:Devulve el numero de movimiento en el cual podemos resolver el problema
+     * @return 
+     */
     public int getNumMovimientos() {
         return numMovimientos;
     }
-    
+    /**
+     * pre:Dado un num diferente a 0 
+     * post:Numero de movimiento es igual a num
+     * @param num 
+     */
     public void setNumMovimientos(int num) {
         numMovimientos = num;
     }
-    
+    /**
+     * pre:-
+     * post: Devolveremos el string que representa el fen 
+     * @return 
+     */
     public String getFen() {
         return matrixToFen();
     }
-    
+    /**
+     * pre:-
+     * post:Devolvemos el ranking del problema
+     * @return 
+     */
     public Ranking getRanking() {
         return rank;
     }
-    
+    /**
+     * pre:Dado la matriz Board inicializada previamente
+     * post:Devolvemos la matriz de chars
+     * @return 
+     */
     public char[][] convertirTablero() {
         char[][] res = new char[8][8];
         for (int i = 0; i < 8; ++i) {
@@ -73,23 +115,44 @@ public final class Problema {
     }
     
     //Métodos para el ranking
+    /**
+     * pre:Dado un ranking , un nombre y un tiempo existente
+     * post: Actualizas el ranking con el nombre y el tiempo
+     * @param nombre
+     * @param tiempo 
+     */
     public void actualizarRanking(String nombre,double tiempo) {
         CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
         rank.setActualizar(nombre,tiempo);
         ctrlP.modificarRanking(id, rank); 
     }
-    
+    /**
+     * pre:Dado un nombre diferente a null
+     * post : Devolveremos true si el nom existe en el ranking y falso si no existe en el ranking
+     * @param nom
+     * @return 
+     */
     public boolean existeix(String nom){
         if(rank.existeix(nom)) return true;
         else return false ; 
     }
     
+    /**
+     * pre:Ddado un  nombre diferente a null y un tiempo no negativo 
+     * post:El nombre y el tiempo son añadidos correctamente al ranking
+     * @param nombre
+     * @param tiempo 
+     */
     public void introducirElemento(String nombre,double tiempo) {
         CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
         rank.setElemento(nombre, tiempo);
         ctrlP.modificarRanking(id, rank); //actualizo en persistencia
     }
-    
+    /**
+     * pre:Dado la matriz Board inicializada previamente
+     * post: Devuelve el fen equivalente a nuestra matriz de Fichas
+     * @return 
+     */
     public String matrixToFen() {
         Ficha[][] f = board;
         String fen = "";
@@ -118,7 +181,11 @@ public final class Problema {
         else fen += "b";
         return fen;
     }
-     
+     /**
+      * pre:Dado  un string diferente a null
+      * post: Convierte el fen en nuestra matriz llamada board al traducir esta notación
+      * @param fen 
+      */
     public void fenToMatrix(String fen) {
         int j = 0; //y
         int i = 0; //x
@@ -199,6 +266,13 @@ public final class Problema {
             }
         }
     }
+    /**
+     * pre:Dado dos coordenadas validas
+     * post: La ficha en la coordenada c1 se movera a la coordenada c2 si es un moviemiento valido
+     * @param c1
+     * @param c2
+     * @return 
+     */
     public boolean moveFicha(Coordenada c1, Coordenada c2) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
@@ -225,13 +299,22 @@ public final class Problema {
         }
     }
     
-    
+    /**
+     * pre:Dada una coordanada c valida 
+     * post:Eliminaremos la ficha de nuestro board en la coordenada c 
+     * @param c 
+     */
     public void removeFicha(Coordenada c) {
         int i = c.getX();
         int j = c.getY();
         board[i][j] = null;
     }
-    
+    /**
+     * pre:Dado un booleano color diferente a null
+     * post : Devolvera true si existe un jaque en nuestro board por parte del color que represanta el boleano
+     * @param color
+     * @return 
+     */
     public boolean mate (boolean color ){
         boolean  mate = false;
         for (int i = 0; i < 8 ; i++) {
@@ -251,7 +334,12 @@ public final class Problema {
         }
         return mate ; 
     }
-    
+    /**
+     * pre:Dado un boleano color diferente a null
+     * post : Devolver true si el color esta haciendo jaque mate sino devolvera false 
+     * @param color
+     * @return 
+     */
     public boolean checkmate(Boolean color) {
         boolean checkmate = true;
         for (int i = 0; i < 8 ; i++) {
@@ -271,7 +359,13 @@ public final class Problema {
         return checkmate;
     }
       
-
+/**
+ * pre:Dados dos coordenadas validas y una ficha diferente no null
+ * post: Devolveremos a la Ficha j a la coordenada c1 donde estaba originalmente ya que deshacemos el movimiento anterior 
+ * @param c1
+ * @param c2
+ * @param j 
+ */
     public void undoFicha(Coordenada c1, Coordenada c2, Ficha j) {
         //dadas dos posiciones, mueve la ficha de coord c1 a c2 siempre y cuando c2 se pueda acceder,
         //no haya una ficha de igual color a la que movemos y este dentro del tablero. Si hay una ficha rival 
@@ -285,6 +379,12 @@ public final class Problema {
     } 
     
     //Cambio de Coordenada a Problema
+    /**
+     * pre : Dado una Coordenada diferente a null
+     * post: Devolveremos true si es una coordenada valida sino devolveremos fals
+     * @param c
+     * @return 
+     */
     public Boolean esValid(Coordenada c) {
         int x = c.getX();
         int y = c.getY();
