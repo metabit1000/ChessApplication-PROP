@@ -58,7 +58,7 @@ public class CtrlPartida {
      * @param res 
      */
     public void playNProblemas(int res[]) {
-        for (int i = 1; i < res.length; i++) {
+        for (int i = 0; i < res.length; i++) {
             Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no lo puedo hacer y es necesario para coger bien el id
             game.playNProblemas(p);
         }
