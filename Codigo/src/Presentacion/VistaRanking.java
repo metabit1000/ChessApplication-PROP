@@ -24,8 +24,10 @@ public class VistaRanking extends javax.swing.JFrame {
         this.u = u;
         this.id = i;
         this.Problemas = p;
+                initComponents();
+
         rank = Cr.getmap(i);
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = ( DefaultTableModel) jTable2.getModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Tiempo");
         Iterator iterator = rank.keySet().iterator();
@@ -39,23 +41,7 @@ public class VistaRanking extends javax.swing.JFrame {
            
            
   
-           JTable tabla = new JTable(modelo);
-            tabla.setEnabled(false);
-            tabla.setRowHeight(50);
-            tabla.setRowHeight(50, 50);
-            tabla.setFont(new java.awt.Font("Tahoma", 0, 20)); 
-           JScrollPane scroll = new JScrollPane(tabla);
-           tabla.setBounds(12,12,300,500);
-           scroll.setBounds(12,22,300,500);
-           add(scroll);
-           
-           setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           setLayout(null);
-           
-           
-        setLocationRelativeTo(null);        // Centering on screen...
-        setResizable(false);
-        initComponents();
+        
 
     }
  
@@ -71,6 +57,10 @@ public class VistaRanking extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -87,6 +77,27 @@ public class VistaRanking extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.disabledForeground"));
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTable2.setForeground(new java.awt.Color(0, 0, 255));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable2.setGridColor(new java.awt.Color(153, 153, 255));
+        jTable2.setRowHeight(30);
+        jScrollPane1.setViewportView(jTable2);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setText("Ranking");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setText("Ranking");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,19 +105,34 @@ public class VistaRanking extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(447, 447, 447)
-                        .addComponent(jButton1))
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(476, 476, 476)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jButton1))
         );
 
@@ -177,6 +203,10 @@ public class VistaRanking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
