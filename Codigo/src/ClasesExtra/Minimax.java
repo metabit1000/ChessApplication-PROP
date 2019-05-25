@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Minimax {   
     public Minimax() {}
    
-    public int min(Problema p, int depth, boolean col) {
+    private int min(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -32,7 +32,7 @@ public class Minimax {
         return lowestSeenValue;
     }
     
-    public int max(Problema p, int depth, boolean col) {
+    private int max(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -88,7 +88,7 @@ public class Minimax {
     }
     
     /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
-    public int evaluationBoard(Problema p) {
+    private int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -98,7 +98,7 @@ public class Minimax {
         return totalEvaluation;
     }
     
-    public int getPieceValue (Ficha piece,int x,int y) {
+    private int getPieceValue (Ficha piece,int x,int y) {
         if (piece == null) 
             return 0;
         return getAbsoluteValue(piece,x,y);
@@ -106,7 +106,7 @@ public class Minimax {
     
     /* Dada una ficha del tablero, te da su valor según su tipo y color. 
        El valor se ha escogido según la importancia de la ficha en el ajedrez*/
-    public int getAbsoluteValue(Ficha piece,int x,int y) {
+    private int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
@@ -138,7 +138,7 @@ public class Minimax {
     }
     
     /* Retorna las posiciones de las fichas del mismo color de todo un tablero */
-    public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
+    private ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {

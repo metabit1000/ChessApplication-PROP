@@ -1,6 +1,7 @@
 package Dominio;
 
 import ClasesExtra.Coordenada;
+import ClasesExtra.MinimaxPuro;
 import Dominio.fichas.*;
 import Persistencia.CtrlDatosProblemas;
 import java.util.*;
@@ -208,6 +209,15 @@ public final class Problema {
         rank.setElemento(nombre, tiempo);
         ctrlP.modificarRanking(id, rank); //actualizo en persistencia
     }
+    
+    public boolean validarProblema() {
+        MinimaxPuro minimax = new MinimaxPuro();
+        boolean res = false;
+        int aux = minimax.decisionMinimax(this, id, turnoInicial);
+        if (aux == 1) res = true;
+        return res;
+    }
+    
     /**
      * pre:Dado la matriz Board inicializada previamente
      * post: Devuelve el fen equivalente a nuestra matriz de Fichas

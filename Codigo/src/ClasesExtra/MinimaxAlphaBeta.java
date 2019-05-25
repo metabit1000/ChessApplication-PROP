@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Àlex
  */
 public class MinimaxAlphaBeta {    
-    int [][] pawnEvalWhite =
+    private final int [][] pawnEvalWhite =
     {
         {0,  0,  0,  0,  0,  0,  0,  0},
         {50,  50,  50,  50,  50,  50,  50,  50},
@@ -21,9 +21,9 @@ public class MinimaxAlphaBeta {
         {0,  0,  0,  0,  0,  0,  0,  0}
     };
 
-    int [][] pawnEvalBlack = reverseArray(pawnEvalWhite);
+    private final int [][] pawnEvalBlack = reverseArray(pawnEvalWhite);
     
-    int [][] knightEval =
+    private final int [][] knightEval =
     {
         {-50, -40, -30, -30, -30, -30, -40, -50},
         {-40, -20,  0,  0,  0,  0, -20, -40},
@@ -35,7 +35,7 @@ public class MinimaxAlphaBeta {
         {-50, -40, -30, -30, -30, -30, -40, -50}
     };
 
-    int [][] bishopEvalWhite = 
+    private final int [][] bishopEvalWhite = 
     {
         { -20, -10, -10, -10, -10, -10, -10, -20},
         { -10,  0,  0,  0,  0,  0,  0, -10},
@@ -47,9 +47,9 @@ public class MinimaxAlphaBeta {
         { -20, -10, -10, -10, -10, -10, -10, -20}
     };
 
-    int [][] bishopEvalBlack = reverseArray(bishopEvalWhite);
+    private final int [][] bishopEvalBlack = reverseArray(bishopEvalWhite);
 
-    int [][] rookEvalWhite = 
+    private final int [][] rookEvalWhite = 
     {
         {  0,  0,  0,  0,  0,  0,  0,  0},
         {  5,  10,  10,  10,  10,  10,  10,  5},
@@ -61,9 +61,9 @@ public class MinimaxAlphaBeta {
         {  0,   0, 0,  5,  5,  0,  0,  0}
     };
 
-    int [][] rookEvalBlack = reverseArray(rookEvalWhite);
+    private final int [][] rookEvalBlack = reverseArray(rookEvalWhite);
 
-    int [][] evalQueen = 
+    private final int [][] evalQueen = 
     {
         { -20, -10, -10, -5, -5, -10, -10, -20},
         { -10,  0,  0,  0,  0,  00,  0, -10},
@@ -75,7 +75,7 @@ public class MinimaxAlphaBeta {
         { -20, -10, -10, -5, -5, -10, -10, -20}
     };
 
-    int [][] kingEvalWhite = 
+    private final int [][] kingEvalWhite = 
     {
         { -30, -40, -40, -50, -50, -40, -40, -30},
         { -30, -40, -40, -50, -50, -40, -40, -30},
@@ -87,7 +87,7 @@ public class MinimaxAlphaBeta {
         {  20,  30,  10,  0,  0,  10,  30,  20}
     };
 
-    int [][] kingEvalBlack = reverseArray(kingEvalWhite);
+    private final int [][] kingEvalBlack = reverseArray(kingEvalWhite);
 
     public MinimaxAlphaBeta() {}
     
@@ -126,7 +126,7 @@ public class MinimaxAlphaBeta {
         return new Pair(bestCurrMove,bestMovePosible);
     }
     
-    public int min(Problema p, int depth, int alpha, int beta, boolean col) {
+    private int min(Problema p, int depth, int alpha, int beta, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -149,7 +149,7 @@ public class MinimaxAlphaBeta {
         return lowestSeenValue;
     }
     
-    public int max(Problema p, int depth, int alpha, int beta, boolean col) {
+    private int max(Problema p, int depth, int alpha, int beta, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -173,7 +173,7 @@ public class MinimaxAlphaBeta {
     }
     
     /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
-    public int evaluationBoard(Problema p) {
+    private int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -183,7 +183,7 @@ public class MinimaxAlphaBeta {
         return totalEvaluation;
     }
     
-    public int getPieceValue (Ficha piece,int x,int y) {
+    private int getPieceValue (Ficha piece,int x,int y) {
         if (piece == null) 
             return 0;
         return getAbsoluteValue(piece,x,y);
@@ -191,7 +191,7 @@ public class MinimaxAlphaBeta {
     
     /* Dada una ficha del tablero, te da su valor según su tipo y color. 
        El valor se ha escogido según la importancia de la ficha en el ajedrez*/
-    public int getAbsoluteValue(Ficha piece,int x,int y) {
+    private int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
@@ -223,7 +223,7 @@ public class MinimaxAlphaBeta {
     }
     
     /* Retorna las posiciones de las fichas del mismo color de todo un tablero */
-    public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
+    private ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
@@ -235,7 +235,7 @@ public class MinimaxAlphaBeta {
         return moves;
     }
     
-    public int [][] reverseArray(int [][] array) {
+    private int [][] reverseArray(int [][] array) {
         int xn = 8;
         int yn = 8;
         int res [][] = new int[xn][yn];
