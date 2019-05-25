@@ -10,8 +10,15 @@ import java.util.ArrayList;
  */
 public class Minimax {   
     public Minimax() {}
-   
-    private int min(Problema p, int depth, boolean col) {
+   /**
+    * pre:Dado un Problema P existente , un int depth no nula y un boolean col no nulo
+    * post:devolveremos la evaluación de la parte del min del minimax
+    * @param p
+    * @param depth
+    * @param col
+    * @return 
+    */
+    public int min(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -31,8 +38,15 @@ public class Minimax {
         }
         return lowestSeenValue;
     }
-    
-    private int max(Problema p, int depth, boolean col) {
+    /**
+     * pre:Dado un Problema P existente , un int depth no nula y un boolean col no nulo
+     *  post:devolveremos la evaluación de la parte del max del minimax
+     * @param p
+     * @param depth
+     * @param col
+     * @return 
+     */
+    public int max(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -53,8 +67,16 @@ public class Minimax {
         return highestSeenValue;
     }
     
-    /* Dado un problema, una profundidad y un color para la máquina, devuelve el mejor movimiento 
-       de todos sus posibles teniendo en cuenta el color */
+
+    /**
+     * pre:Dado un problema, una profundidad y un color para la máquina no nulos
+     * post:devuelve el mejor movimiento 
+       de todos sus posibles teniendo en cuenta el color
+     * @param p
+     * @param depth
+     * @param col
+     * @return 
+     */
     public Pair decisionMinimax(Problema p, int depth, boolean col) {
         int highestSeenValue = -9999;
         int lowestSeenValue = 9999;
@@ -87,8 +109,14 @@ public class Minimax {
         return new Pair(bestCurrMove,bestMovePosible);
     }
     
-    /* Dado un problema, retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida  */
-    private int evaluationBoard(Problema p) {
+    
+ /**
+  * pre:Dado un problema no nulo 
+  * post:Retorna la evaluación (suma de los valores de todas las fichas del tablero) en un momento dado de la partida
+  * @param p
+  * @return 
+  */
+    public int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -97,16 +125,28 @@ public class Minimax {
         }
         return totalEvaluation;
     }
-    
-    private int getPieceValue (Ficha piece,int x,int y) {
+    /**
+     * pre:Dado una Ficha piece no nula y sus posiciones x ,y no nulas
+     * @param piece
+     * @param x
+     * @param y
+     * @return 
+     */
+    public int getPieceValue (Ficha piece,int x,int y) {
         if (piece == null) 
             return 0;
         return getAbsoluteValue(piece,x,y);
     }
-    
-    /* Dada una ficha del tablero, te da su valor según su tipo y color. 
-       El valor se ha escogido según la importancia de la ficha en el ajedrez*/
-    private int getAbsoluteValue(Ficha piece,int x,int y) {
+  
+    /**
+     * pre:Dada una ficha del tablero
+     * post:Devolvemos su valor segun el tipo y el color
+     * @param piece
+     * @param x
+     * @param y
+     * @return 
+     */
+    public int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
@@ -137,8 +177,15 @@ public class Minimax {
         return -1;
     }
     
-    /* Retorna las posiciones de las fichas del mismo color de todo un tablero */
-    private ArrayList<Coordenada> posiciones(Problema p, boolean color) {
+    
+    /**
+     * pre:Dado un Problema p existente y un boolean color diferente a null
+     * post:Retorna las posiciones de las fichas del mismo color de todo un tablero
+     * @param p
+     * @param color
+     * @return 
+     */
+    public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
