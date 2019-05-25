@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -18,6 +16,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
     private CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
+    private CtrlPresentacionRanking ctrlR = new CtrlPresentacionRanking();
     private CtrlPresentacionProblema ctrlPP = new CtrlPresentacionProblema();
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
     private int id; //id del problema cargado
@@ -87,8 +86,11 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e){  
                 switch(cp.getRestricciones(sacarProblema())) {
-                    case 0:
-                        
+                    case 0://A VALIDAR!!, if (se valida para esos numMovs o bien hay solucion para ese numMovs
+                        if (true) {
+                            JOptionPane.showMessageDialog(null,"Se subira el problema con ID "+(cp.getAllProblemasJuego().size()+1)+".");
+                            ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                        }
                         break;
                     case 1:
                         JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres negras");
@@ -147,12 +149,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                     case 19:
                         JOptionPane.showMessageDialog(null,"Las negras ya han ganado");
                         break;
-                      
-                        
-                    
-                    
                 }
-        //printeameElCHAR(sacarProblema());
             }  
         });
         initializeGui();
@@ -230,6 +227,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
+                ImageIcon icon = new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
+                b.setIcon(icon);
                 if ((jj % 2 == 1 && ii % 2 == 1) || (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.decode("#EFDAB7"));
                 } else {

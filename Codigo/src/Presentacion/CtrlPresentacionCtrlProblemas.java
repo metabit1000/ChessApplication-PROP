@@ -1,6 +1,8 @@
 package Presentacion;
 
 import Dominio.CtrlProblemas;
+import Dominio.Problema;
+import java.util.ArrayList;
 
 /**
  * 
@@ -12,6 +14,10 @@ public class CtrlPresentacionCtrlProblemas {
     
     public int getRestricciones(char[][] c) {
         return cp.cumpleRestriccionFichas(c);
+    }
+    
+    public ArrayList<Problema> getAllProblemasJuego() {
+        return cp.getAllProblemasJuego();
     }
     
 }

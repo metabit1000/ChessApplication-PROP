@@ -24,4 +24,9 @@ public class CtrlPresentacionProblema {
         Problema p = cdp.obtenerProblema(id);
         return p.convertirTablero();
     }
+    public String dameFEN(char[][] c) {
+        p.convertirMatrizFichas(c);
+        p.setTurno(true);
+        return p.matrixToFen();
+    }
 }

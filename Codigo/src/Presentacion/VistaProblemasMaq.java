@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Presentacion;
-
-import Dominio.CtrlProblemas;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -22,7 +20,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     public VistaProblemasMaq(CtrlPresentacionUsuarios u) {
         this.u = u;
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        CtrlProblemas cp = new CtrlProblemas();
+        CtrlPresentacionCtrlProblemas cp = new CtrlPresentacionCtrlProblemas();
         for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
             listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
         }
