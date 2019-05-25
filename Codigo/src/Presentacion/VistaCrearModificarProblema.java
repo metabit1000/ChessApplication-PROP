@@ -1,8 +1,8 @@
 package Presentacion;
 
 import ClasesExtra.Coordenada;
-import Dominio.Problema;
 import Persistencia.CtrlDatosProblemas;
+import Persistencia.CtrlDatosUsuarios;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +14,11 @@ import javax.swing.border.*;
 
 public class VistaCrearModificarProblema extends javax.swing.JFrame {
     
+    private CtrlPresentacionCtrlProblemas cp = new CtrlPresentacionCtrlProblemas();
     private CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
+    private CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
+    private CtrlPresentacionProblema ctrlPP = new CtrlPresentacionProblema();
     private CtrlPresentacionUsuarios usuarios = new CtrlPresentacionUsuarios();
     private int id; //id del problema cargado
     private JPanel gui = new JPanel(new BorderLayout(3, 3));
@@ -47,8 +50,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) {
         this.id = id;
         this.usuarios = u;
-        Problema p = ctrlP.obtenerProblema(id);
-        this.aux = p.convertirTablero();
+        this.aux = ctrlPP.obtenerYconvertirTablero(id);        
         guiFiBo.setLayout(new BoxLayout(guiFiBo, BoxLayout.Y_AXIS));
         guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
         Cancel.setText("Cancel");
@@ -84,16 +86,79 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         Validar.addActionListener(new ActionListener(){  
             @Override
             public void actionPerformed(ActionEvent e){  
-                VistaMenu m = new VistaMenu(u);
-                setVisible(false);
-                m.setVisible(true); 
+                switch(cp.getRestricciones(sacarProblema())) {
+                    case 0:
+                        
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres negras");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres blancas");
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 reina negra");
+                        break;
+                    case 4:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 reina blanca");
+                        break;
+                    case 5:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil negro en las casillas blancas");
+                        break;
+                    case 6:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil negro en las casillas negras");
+                        break;
+                    case 7:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil blanco en las casillas blancas");
+                        break;
+                    case 8:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil blanco en las casillas negras");
+                        break;
+                    case 9:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 caballos negros");
+                        break;
+                    case 10:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 caballos blancos");
+                        break;
+                    case 11:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 8 peones negros");
+                        break;
+                    case 12:
+                        JOptionPane.showMessageDialog(null,"Los peones negros deben de estar correctamente posicionados");
+                        break;
+                    case 13:
+                        JOptionPane.showMessageDialog(null,"No puede haber más de 8 peones blancos");
+                        break;
+                    case 14:
+                        JOptionPane.showMessageDialog(null,"Los peones blancos deben de estar correctamente posicionados");
+                        break;
+                    case 15:
+                        JOptionPane.showMessageDialog(null,"Tiene que haber 1 rey blanco");
+                        break;
+                    case 16:
+                        JOptionPane.showMessageDialog(null,"Tiene que haber 1 rey negro");
+                        break;
+                    case 17:
+                        JOptionPane.showMessageDialog(null,"Las blancas ya están haciendo jaque al rey negro");
+                        break;
+                    case 18:
+                        JOptionPane.showMessageDialog(null,"Las blancas ya han ganado");
+                        break;
+                    case 19:
+                        JOptionPane.showMessageDialog(null,"Las negras ya han ganado");
+                        break;
+                      
+                        
+                    
+                    
+                }
+        //printeameElCHAR(sacarProblema());
             }  
         });
         initializeGui();
         introducirProblema(); //introduzco el problema a jugar al tablero
         introducirFichas();
         
-        printeameElCHAR(sacarProblema());
         Pregunta.setFont(new java.awt.Font("Tahoma", 0, 20)); 
         guiBo.add(Validar);
         guiBo.add(Cancel);
