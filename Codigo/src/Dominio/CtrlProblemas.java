@@ -18,8 +18,10 @@ public class CtrlProblemas {
     private CtrlDatosProblemas problems = new CtrlDatosProblemas();
     private static final int numr = 2;
     private static final int numR = 2;
-    private static final int numb = 2;
-    private static final int numB = 2;
+    private static final int numbW = 1;
+    private static final int numBW = 1;
+    private static final int numbB = 1;
+    private static final int numBB = 1;
     private static final int numn = 2;
     private static final int numN = 2;
     private static final int nump = 8;
@@ -98,7 +100,7 @@ public class CtrlProblemas {
      * @param crear
      * @return 
      */
-    public boolean cumpleRestriccionFichas(Problema crear) {
+    public int cumpleRestriccionFichas(char[][] crear) {
         //devuelve falso si viola algunas de las restricciones basicas de un tablero de ajedrez: es decir, retornará falso en el caso de que
         //existan mas de 2 alfiles, caballos, torres, mas de 8 peones, mas de 1 reina y no haya un rey. Estas restricciones se miran por color.
         int r = 0; 
@@ -106,86 +108,97 @@ public class CtrlProblemas {
         int k = 0;
         int p = 0;
         int q = 0;
-        int b = 0;
+        int bW = 0;
+        int bB = 0;
         int R = 0;
         int N = 0;
         int K = 0;
         int P = 0;
         int Q = 0;
-        int B = 0;
+        int BW = 0;
+        int BB = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (crear.getFicha(new Coordenada(i,j)) != null) {
-                    char c = crear.getFicha(new Coordenada(i,j)).getID();
-                    switch(c) {
+                if (crear[i][j] != '.') {
+                    switch(crear[i][j]) {
                         case 'r':
                             ++r;
                             if (r > numr) {
-                                System.out.println("No puede haber más de 2 torres negras");
-                                return false;
+                                return 1;
                             }
                             break;
                         case 'R':
                             ++R;
                             if (R > numR) {
-                                System.out.println("No puede haber más de 2 torres blancas");
-                                return false;
+                                return 2;
                             }
                             break;
                         case 'q':
                             ++q;
                             if (q > numq) {
-                                System.out.println("No puede haber más de 1 reina negra");
-                                return false;
+                                return 3;
                             }
                             break;
                         case 'Q':
                             ++Q;
                             if (Q > numQ) {
-                                System.out.println("No puede haber más de 1 reina blanca");
-                                return false;
+                                return 4;
                             }
                             break;
                         case 'b':
-                            ++b;
-                            if (b > numb) {
-                                System.out.println("No puede haber más de 2 alfiles negros");
-                                return false;
+                            if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
+                                ++bW;
+                                if (bW > numbW) {
+                                    return 5;
+                                }
+                            } else {
+                                ++bB;
+                                if (bB > numbB) {
+                                    return 6;
+                                }
                             }
                             break;
                         case 'B':
-                            ++B;
-                            if (B > numB) {
-                                System.out.println("No puede haber más de 2 alfiles blancos");
-                                return false;
+                            if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
+                                ++BW;
+                                if (BW > numBW) {
+                                    return 7;
+                                }
+                            } else {
+                                ++BB;
+                                if (BB > numBB) {
+                                    return 8;
+                                }
                             }
                             break;
                         case 'n':
                             ++n;
                             if (n > numn) {
-                                System.out.println("No puede haber más de 2 caballos negros");
-                                return false;
+                                return 9;
                             }
                             break;
                         case 'N':
                             ++N;
                             if (N > numN) {
-                                System.out.println("No puede haber más de 2 caballos blancos");
-                                return false;
+                                return 10;
                             }
                             break;
                         case 'p':
                             ++p;
                             if (p > nump) {
-                                System.out.println("No puede haber más de 8 peones negros");
-                                return false;
+                                return 11;
+                            }
+                            if (i == 0) {
+                                return 12;
                             }
                             break;
                         case 'P':
                             ++P;
                             if (P > numP) {
-                                System.out.println("No puede haber más de 8 peones blancos");
-                                return false;
+                                return 13;
+                            }
+                            if (i == 7) {
+                                return 14;
                             }
                             break;
                         case 'k':
@@ -200,14 +213,17 @@ public class CtrlProblemas {
             }
         }
         if (K != numK) {
-            System.out.println("Tiene que haber 1 rey blanco");
-            return false;
+            return 15;
         }
         if (k != numk) {
-            System.out.println("Tiene que haber 1 rey negro");
-            return false;
+            return 16;
         }
-        return true;
+        Problema JaqueMate = new Problema();
+        JaqueMate.convertirMatrizFichas(crear);
+        if (JaqueMate.checkmate(true)) return 18;
+        if (JaqueMate.checkmate(false)) return 19;
+        if (JaqueMate.mate(true)) return 17;
+        return 0;
     }
     /**
      * pre:Dado un Problema a crear , un String ficha ,color,pos diferente a null
