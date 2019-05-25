@@ -45,37 +45,29 @@ public class CtrlDatosProblemas {
     }
     
     public void introducirProblema(int id, String fen, int numM, Ranking r) {
+        File nuevo = new File("random.txt"); //fichero auxiliar que cambiara de nombre
         if (archivo == null) {
             throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
         }
-         try {
-            fw = new FileWriter(archivo,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw);
-            if (archivo.length() == 0) {
-                out.write(id+" "+ fen+" "+numM); //escribo fen y otros
-                bw.newLine(); //salto de linea en fichero                
-                ArrayList<String> s = r.toArrayDeStrings(); 
-                for (int i = 0; i < s.size(); ++i) { //escribo ranking
-                    out.write(s.get(i));
-                    bw.newLine();
-                }
-                out.write("."); //para saber que finaliza el ranking ahi
-            } 
-            else {
-                bw.newLine(); //salto de linea en fichero
-                out.write(id+" "+ fen+" "+numM); //escribo fen y otros
-                bw.newLine(); 
-                ArrayList<String> s = r.toArrayDeStrings();
-                for (int i = 0; i < s.size(); ++i) {  //escribo ranking
-                    out.write(s.get(i));
-                    bw.newLine(); 
-                }
-                out.write("."); //para saber que finaliza el ranking ahi
+        try {
+            br = new BufferedReader(new FileReader(archivo));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(nuevo,true));
+            String linea;
+            while((linea = br.readLine()) != null) {
+                Escribir(nuevo,linea);
             }
-            fw.close();
-            out.close();
+            linea = String.valueOf(id) + " " + fen + " " + String.valueOf(numM);
+            Escribir(nuevo, linea);
+            ArrayList<String> s = r.toArrayDeStrings();
+            for (int i = 0; i < s.size(); ++i) {  //escribo ranking
+                Escribir(nuevo,s.get(i)); 
+            }
+            Escribir(nuevo,"."); //para saber que finaliza el ranking ahi
+            
+            br.close();
             bw.close();
+            borrar(archivo); //borro archivo anterior
+            nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. NO ME LO RENOMBRA!!
         } catch (IOException e) {
             System.out.println("Error en introducirProblema");
         }
@@ -228,7 +220,7 @@ public class CtrlDatosProblemas {
                 br.close(); 
                 bw.close();
                 borrar(archivo); //borro archivo anterior
-                nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. NO ME LO RENOMBRA!!
+                nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. 
             }   
             else System.out.println("No existe el fichero");
         } catch (IOException e) {

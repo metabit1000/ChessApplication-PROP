@@ -213,7 +213,7 @@ public final class Problema {
     public boolean validarProblema() {
         MinimaxPuro minimax = new MinimaxPuro();
         boolean res = false;
-        int aux = minimax.decisionMinimax(this, id, turnoInicial);
+        int aux = minimax.decisionMinimax(this, numMovimientos, turnoInicial);
         if (aux == 1) res = true;
         return res;
     }

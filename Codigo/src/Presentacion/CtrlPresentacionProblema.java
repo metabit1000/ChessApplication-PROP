@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package Presentacion;
 
@@ -11,7 +7,7 @@ import Persistencia.CtrlDatosProblemas;
 
 /**
  * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author joan
  */
 public class CtrlPresentacionProblema {
     Problema p = new Problema();

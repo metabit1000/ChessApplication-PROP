@@ -72,7 +72,6 @@ public class CtrlProblemas {
         if (!existProblem(p.getId())) {
                 problems.introducirProblema(p.getId(),p.getFen(), p.getNumMovimientos(),p.getRanking());
         }
-        else System.out.println("Este problema ya esta registrado.");
     }
     /**
      * pre:Dado una id de un  problema
