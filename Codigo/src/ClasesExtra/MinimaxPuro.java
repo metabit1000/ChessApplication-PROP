@@ -11,10 +11,14 @@ import java.util.ArrayList;
 public class MinimaxPuro {
     
     private int min(Problema p, int depth, boolean col) {
-        if (depth == 0){
-            if (p.checkmate(!col)) return 1 ; 
-            else return -1;
-        };
+        if (depth == 0 || p.checkmate(col)){
+                     if (!p.checkmate(!col)) return -1 ;
+                     else return 1 ; 
+                     
+
+        }
+              
+        
         int val =+999999;
         ArrayList<Coordenada> moves = posiciones(p,col);
         Coordenada currMove,movePosible;
@@ -40,8 +44,8 @@ public class MinimaxPuro {
      * @return 
      */
     private int max(Problema p, int depth, boolean col) {
-        if (depth == 0) {
-            if (p.checkmate(col)) return 1 ; 
+        if (depth == 0 || p.checkmate(col)) {
+            if(p.checkmate(col)) return 1;
             else return -1;
         }
         int val = -99999;
@@ -84,7 +88,7 @@ public class MinimaxPuro {
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
                 if(p.checkmate(col)) return 1 ; 
-                val = col ? min(p,depth-1,!col): max(p,depth-1,!col);        
+                val =  min(p,depth-1,!col); 
                     if(val > max){
                     max = val;
                 }
