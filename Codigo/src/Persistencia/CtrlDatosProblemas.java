@@ -190,13 +190,49 @@ public class CtrlDatosProblemas {
         return res;
     }
     
+    public void modificarProblema(int id, String fen, int numM, Ranking newR) {
+        String numId = String.valueOf(id); //para convertir a string el id
+        File nuevo = new File("random.txt"); //fichero auxiliar que cambiara de nombre
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" "); 
+                    if(lineaDivididaId[0].equals(numId)) {   
+                        linea = String.valueOf(id) + " " + fen + " " + String.valueOf(numM);
+                        Escribir(nuevo,linea);
+                        ArrayList<String> s = newR.toArrayDeStrings();
+                        String linea2 = null;
+                        for (int i = 0; i < s.size(); ++i) Escribir(nuevo,s.get(i));
+                        Escribir(nuevo,".");//para saber que finaliza el ranking ahi
+                        boolean aux = false;
+                        while (!aux &&(linea2 = br.readLine()) != null) { //para seguir en el siguiente problema
+                            String[] lineaDivididaAux = linea2.split(" "); 
+                            if (lineaDivididaAux[0].equals(".")) aux = true;
+                        }
+                        linea = linea2;
+                    }   
+                    else {
+                        Escribir(nuevo,linea);
+                    }    
+                }  
+                br.close(); 
+                borrar(archivo); //borro archivo anterior
+                nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. 
+            }   
+            else System.out.println("No existe el fichero");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
     public void modificarRanking(int id,Ranking newR) {
         String numId = String.valueOf(id); //para convertir a string el id
         File nuevo = new File("random.txt"); //fichero auxiliar que cambiara de nombre
         try {
             if (archivo.exists()) {
                 br = new BufferedReader(new FileReader(archivo));
-                BufferedWriter bw = new BufferedWriter(new FileWriter(nuevo,true));
                 String linea;
                 while((linea = br.readLine()) != null) {
                     String[] lineaDivididaId = linea.split(" "); 
@@ -218,7 +254,6 @@ public class CtrlDatosProblemas {
                     }    
                 }  
                 br.close(); 
-                bw.close();
                 borrar(archivo); //borro archivo anterior
                 nuevo.renameTo(archivo);  //Renombro el archivo con el anterior. 
             }   
