@@ -68,7 +68,7 @@ public class CtrlDatosUsuarios {
         }
     }
     
-    public void introducirProblemaCreado(String nombre, String password, int id) {
+    public void introducirProblemaCreado(String nombre, int id) {
         File nuevo = new File("random.txt"); //fichero auxiliar
         String cambiar = null;
         try {
@@ -77,7 +77,7 @@ public class CtrlDatosUsuarios {
                 String linea;
                 while((linea = br.readLine()) != null) {
                     String[] lineaDivididaId = linea.split(" ");
-                    if(lineaDivididaId[0].equals(nombre) && lineaDivididaId[1].equals(password)) {
+                    if(lineaDivididaId[0].equals(nombre)) {
                         for (int i = 0; i < lineaDivididaId.length; ++i) {
                             if (i == 0) cambiar = lineaDivididaId[0];
                             else cambiar = cambiar +" "+ lineaDivididaId[i];
