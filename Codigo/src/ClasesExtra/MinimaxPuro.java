@@ -29,10 +29,6 @@ public class MinimaxPuro {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-               /* if (p.checkmate(!col)) {
-                    p.undoFicha(movePosible,currMove,o);
-                    return 1;
-                }*/
                 val = Math.min(val,max(p,depth-1,!col));
                 p.undoFicha(movePosible,currMove,o);
                 System.out.println(val);
