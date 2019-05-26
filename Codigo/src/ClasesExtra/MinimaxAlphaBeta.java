@@ -106,9 +106,9 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                //if (p.checkmate(col)) return new Pair(currMove,movePosible);  
-                int val = col ? min(p,depth-1,-10000,10000,!col): max(p,depth-1,-10000,10000,!col);
+                if (p.checkmate(col)) return new Pair(currMove,movePosible);  
                 if (!p.mate(!col)) {
+                    int val = col ? min(p,depth-1,-10000,10000,!col): max(p,depth-1,-10000,10000,!col);
                     if (col & val > highestSeenValue) {
                         highestSeenValue = val;
                         bestCurrMove = currMove; //coordenada origin
@@ -120,7 +120,6 @@ public class MinimaxAlphaBeta {
                     }
                 }
                 p.undoFicha(movePosible,currMove,o);
-                //System.out.println("Valor devuelto: "+highestSeenValue+ " Origen: "+bestCurrMove.coordToString()+ " Destino: "+ bestMovePosible.coordToString());
             }
         }
         return new Pair(bestCurrMove,bestMovePosible);
@@ -139,11 +138,16 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                int val = max(p,depth-1,alpha,beta,!col);
-                p.undoFicha(movePosible,currMove,o);
-                if (val < lowestSeenValue) lowestSeenValue = val;
-                beta = Math.min(beta, val);
-                if (beta <= alpha) return lowestSeenValue; //rompo poda
+                if (!p.mate(!col)) { 
+                    int val = max(p,depth-1,alpha,beta,!col);
+                    if (val < lowestSeenValue) lowestSeenValue = val;
+                    beta = Math.min(beta, val);
+                    if (beta <= alpha) {
+                        p.undoFicha(movePosible,currMove,o);
+                        return lowestSeenValue; //rompo poda
+                    } 
+                }
+                p.undoFicha(movePosible,currMove,o); 
             }
         }
         return lowestSeenValue;
@@ -162,11 +166,16 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                int val = min(p,depth-1,alpha,beta,!col);
+                if (!p.mate(!col)) { 
+                    int val = min(p,depth-1,alpha,beta,!col);
+                    if (val > highestSeenValue) highestSeenValue = val;
+                    alpha = Math.max(alpha,val);
+                    if (beta <= alpha){
+                        p.undoFicha(movePosible,currMove,o);
+                        return highestSeenValue; //rompo poda
+                    } 
+                }
                 p.undoFicha(movePosible,currMove,o);
-                if (val > highestSeenValue) highestSeenValue = val;
-                alpha = Math.max(alpha,val);
-                if (beta <= alpha) return highestSeenValue; //rompo poda
             }
         }
         return highestSeenValue;
