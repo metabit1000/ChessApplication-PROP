@@ -41,7 +41,7 @@ public class VistaPartida extends javax.swing.JFrame {
         this.tipo = tipo;
         turno = ctrlJ.getTurnoInicial(); //se inicializa con el turno inicial del problema
         aux = ctrlJ.getTablero(); //guardo el tablero en una variable auxiliar para luego resetearlo
-        
+        startTime = System.nanoTime(); //empiezo a contar
         initializeGui();
         
         introducirProblema(); //introduzco el problema a jugar 
@@ -81,13 +81,12 @@ public class VistaPartida extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {  //DONDE PONGO EL TURNO INICIAL??
                         int res = 0; 
-                        
                         /*HUMANO VS HUMANO */
+                        
                         if (tipo.equals("PVS")) { 
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
-                                startTime = System.nanoTime(); //empiezo a contar
                             } 
                             
                             else if (casillaInicioPulsada && !casillaFinalPulsada) {
@@ -142,16 +141,17 @@ public class VistaPartida extends javax.swing.JFrame {
                                             
                                             turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
                                             JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
+                                            startTime = System.nanoTime(); //empiezo a contar
                                         }
                                     }
                                 } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                     
                                     JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                 } else {
-                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
+//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                     
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }
@@ -166,7 +166,7 @@ public class VistaPartida extends javax.swing.JFrame {
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click (aqui la maquina NO entra)
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
-                                startTime = System.nanoTime(); //empiezo a contar para el usuario
+                                //startTime = System.nanoTime(); //empiezo a contar para el usuario
                             } 
                             else if (casillaInicioPulsada && !casillaFinalPulsada) { 
                                 posicionFinal = getPosicionBoton(e);
@@ -224,17 +224,19 @@ public class VistaPartida extends javax.swing.JFrame {
                                             posicionFinal = movMaquina.getValue();
                                             moverFicha(); //muevo en dominio
                                             turno = !turno; 
+                                            
                                             JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
+                                            startTime = System.nanoTime(); //empiezo a contar
                                         }
                                     }
                                 } 
                                 else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                     
                                     JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
                                 } 
                                 else {
-                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
+//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                     
                                     JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
                                 }
@@ -373,7 +375,7 @@ public class VistaPartida extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -390,7 +392,7 @@ public class VistaPartida extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     /**
      * @param args the command line arguments
@@ -431,6 +433,6 @@ public class VistaPartida extends javax.swing.JFrame {
         SwingUtilities.invokeLater(r);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify                     
+    // End of variables declaration                   
 }
