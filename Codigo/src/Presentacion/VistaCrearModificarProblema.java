@@ -45,11 +45,15 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     public void setNumMovs(int j) {
         this.numMovs = j;
     }
+    public int getID() {
+        return this.id;
+    }
     
     public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) {
         this.id = id;
         this.usuarios = u;
-        this.aux = ctrlPP.obtenerYconvertirTablero(id);        
+        if (getID() != -1) this.aux = ctrlPP.obtenerYconvertirTablero(ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1));
+        else this.aux = ctrlPP.obtenerYconvertirTablero(id);        
         guiFiBo.setLayout(new BoxLayout(guiFiBo, BoxLayout.Y_AXIS));
         guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
         Cancel.setText("Cancel");
@@ -87,10 +91,19 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e){  
                 switch(cp.getRestricciones(sacarProblema())) {
                     case 0://A VALIDAR!!, if (se valida para esos numMovs o bien hay solucion para ese numMovs
-                        if (true) {
-                            JOptionPane.showMessageDialog(null,"Se subira el problema con ID "+(cp.getAllProblemasJuego().size()+1)+".");
-                            ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                        
+                        if (ctrlPP.Validar((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank())) {
+                            if (getID() == -1) {
+                                JOptionPane.showMessageDialog(null,"Se subira el problema con ID "+(cp.getAllProblemasJuego().size()+1)+".");
+                                ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                                ctrlU.introducirProblemaCreado(usuarios.getUserLogged(),cp.getAllProblemasJuego().size());
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null,"Se actualizará el problema con ID "+(ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1))+".");
+                                ctrlP.modificarProblema((ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1)), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                            }
                         }
+                        else JOptionPane.showMessageDialog(null,"El problema no se puede solucionar en "+numMovs+" movimientos");
                         break;
                     case 1:
                         JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres negras");

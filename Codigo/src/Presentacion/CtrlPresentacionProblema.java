@@ -3,6 +3,7 @@
 package Presentacion;
 
 import Dominio.Problema;
+import Dominio.Ranking;
 import Persistencia.CtrlDatosProblemas;
 
 /**
@@ -12,6 +13,11 @@ import Persistencia.CtrlDatosProblemas;
 public class CtrlPresentacionProblema {
     Problema p = new Problema();
     CtrlDatosProblemas cdp = new CtrlDatosProblemas();
+    
+    public boolean Validar(int id,String fen, int numMov, Ranking r) {
+        Problema c = new Problema(id,fen,numMov,r);
+        return c.validarProblema();
+    }
     
     public char[][] convertirTablero() {
         return p.convertirTablero();

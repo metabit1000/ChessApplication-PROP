@@ -124,7 +124,7 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         if (selectProblem() > -1) {
-            VistaCrearModificarProblema cmp = new VistaCrearModificarProblema(selectProblem()+1, u);
+            VistaCrearModificarProblema cmp = new VistaCrearModificarProblema((selectProblem()+1), u);
             setVisible(false);
             cmp.setVisible(true);
         }
