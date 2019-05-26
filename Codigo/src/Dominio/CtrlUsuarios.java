@@ -44,10 +44,10 @@ public class CtrlUsuarios {
     
     
     /* Introduce a los usuarios registrados en el fichero UsuariosGuardados.txt un nuevo problema */
-    public void introducirProblemaCreado(String nom,String pass,int id) {
-        if (cj.usuarioRegistrado(nom,pass)) {
-            cj.introducirProblemaCreado(nom,pass,id);
-        }
+    public void introducirProblemaCreado(String nom,int id) {
+        
+        cj.introducirProblemaCreado(nom,id);
+        
     }
     
     public ArrayList<Integer> getProblemasCreados(String nombre) {
