@@ -31,9 +31,12 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                int val = max(p,depth-1,!col);
+                if (!p.mate(!col)) {
+                    int val = max(p,depth-1,!col);
+                    if (val < lowestSeenValue) lowestSeenValue = val;
+                }
                 p.undoFicha(movePosible,currMove,o);
-                if (val < lowestSeenValue) lowestSeenValue = val;
+                
             }
         }
         return lowestSeenValue;
@@ -59,9 +62,11 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                int val = min(p,depth-1,!col);
+                if (!p.mate(!col)) {
+                    int val = min(p,depth-1,!col);
+                    if (val > highestSeenValue) highestSeenValue = val;
+                }
                 p.undoFicha(movePosible,currMove,o);
-                if (val > highestSeenValue) highestSeenValue = val;
             }
         }
         return highestSeenValue;
@@ -91,8 +96,8 @@ public class Minimax {
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
                 if (p.checkmate(col)) return new Pair(currMove,movePosible);  //caso en que encuentre un jaquemate en uno de los posibles movimientos
-                int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
                 if (!p.mate(!col)) {
+                    int val = col ? min(p,depth-1,!col): max(p,depth-1,!col);
                     if (col & val > highestSeenValue) {
                         highestSeenValue = val;
                         bestCurrMove = currMove; //coordenada origin
