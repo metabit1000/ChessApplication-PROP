@@ -19,7 +19,7 @@ public class MinimaxPuro {
             else return -1; 
         }
 
-        int val = 9999;
+        int val = -1;
         ArrayList<Coordenada> moves = posiciones(p,col);
         Coordenada currMove,movePosible;
         for (int i = 0; i < moves.size(); ++i) {
@@ -29,10 +29,14 @@ public class MinimaxPuro {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                val = Math.min(val,max(p,depth-1,!col));
+                if (!p.mate(!col)) {
+                    val = max(p,depth-1,!col);
+                }
                 p.undoFicha(movePosible,currMove,o);
                 System.out.println(val);
+                if (val == 1) break;
             }
+            if (val == 1) break;
         }
         return val;
     }
@@ -51,7 +55,7 @@ public class MinimaxPuro {
             else return -1;
         }
         
-        int val = -9999;
+        int val = -1;
         ArrayList<Coordenada> moves = posiciones(p,col);
         Coordenada currMove,movePosible;
         for (int i = 0; i < moves.size(); ++i) {
@@ -61,9 +65,13 @@ public class MinimaxPuro {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                val = Math.max(val, min(p,depth-1,!col));
+                if (!p.mate(!col)) {
+                    val = min(p,depth-1,!col);
+                }
                 p.undoFicha(movePosible,currMove,o);
+                if (val == 1) break;
             }
+            if (val == 1) break;
         }
         return val;
     }
@@ -80,7 +88,7 @@ public class MinimaxPuro {
      */
     public int decisionMinimax(Problema p, int depth, boolean col) { //hace de "max"
         int val = 0;
-        int max = -9999;
+       // int max = -9999;
         Coordenada currMove,movePosible;
         ArrayList<Coordenada> moves = posiciones(p,col);
         for (int i = 0; i < moves.size(); ++i) {
@@ -90,17 +98,19 @@ public class MinimaxPuro {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                if(p.checkmate(col)) return 1; //si en un mov hay checkmate, acabo
-                val =  min(p,depth-1,!col);
-                if(val > max){
-                    max = val;
+                //if(p.checkmate(col)) return 1; //si en un mov hay checkmate, acabo
+                if (!p.mate(!col)) {
+                    val = min(p,depth-1,!col);
                 }
+//                if(val > max){
+//                    max = val;
+//                }
                 p.undoFicha(movePosible,currMove,o);
                 if (val == 1) break;
             }
             if (val == 1) break;
         }
-        return max;
+        return val;
     }
     
     private ArrayList<Coordenada> posiciones(Problema p, boolean color) {
