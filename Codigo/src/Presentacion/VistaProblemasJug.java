@@ -1,6 +1,8 @@
 package Presentacion;
 
 import Dominio.CtrlProblemas;
+import java.awt.Dialog;
+import java.awt.Font;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -24,9 +26,12 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
         }
         
-        this.setVisible(true); 
-        this.setTitle("Problemas");  
         initComponents();
+        setSize(800,800);
+        setTitle("¡Bienvenido!");
+        this.setLocationRelativeTo(null);
+        setResizable(false);
+        JLista.setFont(new Font("Dialog", Font.PLAIN, 18));
         JLista.setModel(listModel);
         JLista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setResizable(false);
@@ -46,26 +51,28 @@ public class VistaProblemasJug extends javax.swing.JFrame {
 
         Dificultad = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JLista = new javax.swing.JList<>();
+        JLista = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         Dificil = new javax.swing.JRadioButton();
         Facil = new javax.swing.JRadioButton();
         Cancel = new javax.swing.JButton();
         Play = new javax.swing.JButton();
         Ranking = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JLista.setModel(new javax.swing.AbstractListModel<String>() {
+        JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         JLista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         JLista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(JLista);
 
-        jLabel1.setText("Problemas");
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 48)); // NOI18N
+        jLabel1.setText("JUGAR CONTRA LA MÁQUINA");
 
         Dificil.setText("Dificil");
         Dificil.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +88,7 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             }
         });
 
-        Cancel.setText("Cancel");
+        Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/home.png"))); // NOI18N
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
@@ -95,61 +102,72 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             }
         });
 
-        Ranking.setText("Ranking");
+        Ranking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ranking.png"))); // NOI18N
         Ranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RankingActionPerformed(evt);
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ojo.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
+                .addComponent(Ranking, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(Cancel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Play, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Facil)
                             .addComponent(Dificil))
-                        .addGap(70, 70, 70))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Ranking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Play, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(72, 72, 72))))
+                        .addGap(70, 70, 70))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(Cancel)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Play)
-                        .addGap(18, 18, 18)
-                        .addComponent(Ranking)
-                        .addGap(18, 18, 18)
-                        .addComponent(Facil)
-                        .addGap(9, 9, 9)
-                        .addComponent(Dificil))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Ranking, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(Play)
+                            .addGap(89, 89, 89)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(118, 118, 118)
+                            .addComponent(Facil)
+                            .addGap(9, 9, 9)
+                            .addComponent(Dificil))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(237, 237, 237)
+                            .addComponent(jButton1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(Cancel)
-                .addContainerGap())
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -235,6 +253,7 @@ public class VistaProblemasJug extends javax.swing.JFrame {
     private javax.swing.JList<String> JLista;
     private javax.swing.JButton Play;
     private javax.swing.JButton Ranking;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

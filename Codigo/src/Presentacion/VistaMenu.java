@@ -20,6 +20,9 @@ public class VistaMenu extends javax.swing.JFrame {
     public VistaMenu(CtrlPresentacionUsuarios u) {
         this.u = u;
         initComponents();
+        setSize(800,800);
+        setTitle("¡Bienvenido!");
+        this.setLocationRelativeTo(null);
         setResizable(false);
 
     }
@@ -39,21 +42,23 @@ public class VistaMenu extends javax.swing.JFrame {
         Versus = new javax.swing.JButton();
         Competicion = new javax.swing.JButton();
         Problemas = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        Problemas1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 48)); // NOI18N
         jLabel1.setText("MENU");
 
-        Logout.setText("Cerrar sesión");
+        Logout.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/exit.png"))); // NOI18N
         Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogoutActionPerformed(evt);
             }
         });
 
-        Jugar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        Jugar.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Jugar.setText("Jugar");
         Jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +66,7 @@ public class VistaMenu extends javax.swing.JFrame {
             }
         });
 
-        Versus.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        Versus.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Versus.setText("1 VS 1");
         Versus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +74,7 @@ public class VistaMenu extends javax.swing.JFrame {
             }
         });
 
-        Competicion.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        Competicion.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Competicion.setText("Competicion");
         Competicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +82,7 @@ public class VistaMenu extends javax.swing.JFrame {
             }
         });
 
-        Problemas.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        Problemas.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Problemas.setText("Problemas");
         Problemas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,51 +90,60 @@ public class VistaMenu extends javax.swing.JFrame {
             }
         });
 
+        Problemas1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        Problemas1.setText("Ranking");
+        Problemas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Problemas1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Webp.net-resizeimage.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(199, 199, 199))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(Logout))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Jugar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Versus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Competicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(Problemas)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Versus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Competicion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Problemas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Problemas1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(36, 36, 36)))
+                .addContainerGap(300, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(Logout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(Jugar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Versus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Competicion)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(Jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Problemas)
-                .addGap(32, 32, 32)
-                .addComponent(Logout)
-                .addGap(10, 10, 10))
+                .addComponent(Versus, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Competicion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Problemas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Problemas1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -173,6 +187,10 @@ public class VistaMenu extends javax.swing.JFrame {
         pu.setVisible(true);
     }//GEN-LAST:event_ProblemasActionPerformed
 
+    private void Problemas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Problemas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Problemas1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,8 +232,9 @@ public class VistaMenu extends javax.swing.JFrame {
     private javax.swing.JButton Jugar;
     private javax.swing.JButton Logout;
     private javax.swing.JButton Problemas;
+    private javax.swing.JButton Problemas1;
     private javax.swing.JButton Versus;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

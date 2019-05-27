@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.util.logging.Level;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.io.IOException;
+import javax.swing.UIManager;
 
 
 /**
@@ -27,6 +29,9 @@ public class VistaInicio extends javax.swing.JFrame {
      */
     public VistaInicio() {
         initComponents();
+        setSize(800,800);
+        setTitle("¡Bienvenido!");
+        this.setLocationRelativeTo(null);
         setResizable(false);
     }
      private String user;
@@ -41,7 +46,7 @@ public class VistaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -51,22 +56,24 @@ public class VistaInicio extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
-        jLabel1.setText("User");
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        jLabel1.setText("Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
-        jLabel2.setText("Password");
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 25)); // NOI18N
+        jLabel2.setText("Contraseña");
 
+        jTextField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
+        jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -78,8 +85,8 @@ public class VistaInicio extends javax.swing.JFrame {
             }
         });
 
-        Singup.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        Singup.setText("Sing up");
+        Singup.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        Singup.setText("Registrarse");
         Singup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SingupMouseClicked(evt);
@@ -91,8 +98,8 @@ public class VistaInicio extends javax.swing.JFrame {
             }
         });
 
-        Login.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        Login.setText("Log in");
+        Login.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        Login.setText("Iniciar sesión");
         Login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginMouseClicked(evt);
@@ -111,7 +118,7 @@ public class VistaInicio extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Preset-Chess-Logo.png"))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel4.setText("¡Bienvenido!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,31 +126,27 @@ public class VistaInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+                .addContainerGap(261, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(293, 293, 293)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Singup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Singup, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(298, 298, 298))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel4)))
-                .addGap(176, 176, 176))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(249, 249, 249))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPasswordField1, jTextField1});
@@ -151,11 +154,11 @@ public class VistaInicio extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(50, 50, 50)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -163,11 +166,11 @@ public class VistaInicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Login)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Singup)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Singup, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jPasswordField1, jTextField1});
@@ -177,11 +180,13 @@ public class VistaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        password =new String(jPasswordField1.getPassword());;
+        password =new String(jPasswordField1.getPassword());
         user =jTextField1.getText();
         boolean  logueado= u.LogIn(user, password);
         if (!logueado ){
-            JOptionPane.showMessageDialog(null,"Registre al usuario");
+            JLabel label = new JLabel("Registre al usuario");
+            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label, "Registre al usuario", JOptionPane.WARNING_MESSAGE);
         }
         else {
             VistaMenu m = new VistaMenu(u);
@@ -219,7 +224,9 @@ public class VistaInicio extends javax.swing.JFrame {
         user =jTextField1.getText();
         boolean  logueado= u.LogIn(user, password);
         if (!logueado ){
-            JOptionPane.showMessageDialog(null,"Registre al usuario");
+            JLabel label = new JLabel("Registre al usuario");
+            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label, "Registre al usuario", JOptionPane.WARNING_MESSAGE);
         }
         else {
             VistaMenu m = new VistaMenu(u);

@@ -65,7 +65,7 @@ public class VistaRanking extends javax.swing.JFrame {
         setAlwaysOnTop(true);
 
         jTable2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.disabledForeground"));
-        jTable2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTable2.setFont(new java.awt.Font("Imprint MT Shadow", 0, 24)); // NOI18N
         jTable2.setForeground(new java.awt.Color(0, 0, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,7 +79,7 @@ public class VistaRanking extends javax.swing.JFrame {
         jTable2.setRowHeight(30);
         jScrollPane1.setViewportView(jTable2);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
         jLabel2.setText("Ranking");
 
         jButton2.setText("OK");

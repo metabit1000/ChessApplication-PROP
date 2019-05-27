@@ -375,7 +375,7 @@ public class VistaPartida extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -392,7 +392,7 @@ public class VistaPartida extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
     /**
      * @param args the command line arguments
@@ -433,6 +433,6 @@ public class VistaPartida extends javax.swing.JFrame {
         SwingUtilities.invokeLater(r);
     }
 
-    // Variables declaration - do not modify                     
-    // End of variables declaration                   
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
 }
