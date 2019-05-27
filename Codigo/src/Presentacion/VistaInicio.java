@@ -184,9 +184,9 @@ public class VistaInicio extends javax.swing.JFrame {
         user =jTextField1.getText();
         boolean  logueado= u.LogIn(user, password);
         if (!logueado ){
-            JLabel label = new JLabel("Registre al usuario");
+            JLabel label = new JLabel("Usuario incorrecto");
             label.setFont(new Font("Dialog", Font.PLAIN, 18));
-            JOptionPane.showMessageDialog(null, label, "Registre al usuario", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, label, "Usuario incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         else {
             VistaMenu m = new VistaMenu(u);
@@ -224,9 +224,9 @@ public class VistaInicio extends javax.swing.JFrame {
         user =jTextField1.getText();
         boolean  logueado= u.LogIn(user, password);
         if (!logueado ){
-            JLabel label = new JLabel("Registre al usuario");
+            JLabel label = new JLabel("Usuario incorrecto");
             label.setFont(new Font("Dialog", Font.PLAIN, 18));
-            JOptionPane.showMessageDialog(null, label, "Registre al usuario", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, label, "Usuario incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         else {
             VistaMenu m = new VistaMenu(u);
@@ -241,7 +241,9 @@ public class VistaInicio extends javax.swing.JFrame {
             user =jTextField1.getText();
             boolean  logueado= u.LogIn(user, password);
             if (!logueado ){
-                JOptionPane.showMessageDialog(null,"Registre al usuario");
+                JLabel label = new JLabel("Usuario incorrecto");
+                label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                JOptionPane.showMessageDialog(null, label, "Usuario incorrecto", JOptionPane.WARNING_MESSAGE);
             }
             else {
                 VistaMenu m = new VistaMenu(u);

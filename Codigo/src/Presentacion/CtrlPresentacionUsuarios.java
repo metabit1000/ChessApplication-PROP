@@ -78,17 +78,18 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public boolean Registro(String nom,String password) {
+    public int Registro(String nom,String password) {
         Usuario u = new Usuario(false,nom,password);
+        int h = 0;
         if(!UsuarioRegistrado(nom,password)){
             try {
-                ctrlU.registrarUsuario(nom, password);
+                h = ctrlU.registrarUsuario(nom, password);
             } catch (IOException ex) {
                 Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return true; 
+            return h; 
         }
-        else return false; 
+        else return 4; 
     }
     
     public boolean contraseñaok(String pasword){
@@ -116,5 +117,13 @@ public class CtrlPresentacionUsuarios {
     }
     public ArrayList<Integer> getProblemasCreados(String nombre) {
         return ctrlU.getProblemasCreados(nombre);
+    }
+    public Boolean existeNombre(String u) {
+        try {
+            ctrlU.existeNombre(u);
+        } catch (IOException ex) {
+            Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
