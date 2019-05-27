@@ -2,6 +2,9 @@ package Presentacion;
 
 import Dominio.CtrlProblemas;
 import Dominio.CtrlUsuarios;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 
@@ -123,14 +126,24 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearNuevoProblemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearNuevoProblemaActionPerformed
-        VistaCrearModificarProblema cmp = new VistaCrearModificarProblema(-1, u);
+        VistaCrearModificarProblema cmp = null;
+        try {
+            cmp = new VistaCrearModificarProblema(-1, u);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaProblemasUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
         setVisible(false);
         cmp.setVisible(true);
     }//GEN-LAST:event_CrearNuevoProblemaActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         if (selectProblem() > -1) {
-            VistaCrearModificarProblema cmp = new VistaCrearModificarProblema((selectProblem()+1), u);
+            VistaCrearModificarProblema cmp = null;
+            try {
+                cmp = new VistaCrearModificarProblema((selectProblem()+1), u);
+            } catch (IOException ex) {
+                Logger.getLogger(VistaProblemasUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
             setVisible(false);
             cmp.setVisible(true);
         }
