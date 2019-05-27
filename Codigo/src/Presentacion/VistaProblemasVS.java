@@ -43,40 +43,52 @@ public class VistaProblemasVS extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JLista = new javax.swing.JList<>();
+        JLista = new javax.swing.JList<String>();
         Cancel = new javax.swing.JButton();
         Play = new javax.swing.JButton();
         Ranking = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Problemas VS");
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 48)); // NOI18N
+        jLabel1.setText("JUGAR CONTRA INVITADO");
 
-        JLista.setModel(new javax.swing.AbstractListModel<String>() {
+        JLista.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
+        JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(JLista);
 
-        Cancel.setText("Cancel");
+        Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/back (2).png"))); // NOI18N
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
             }
         });
 
-        Play.setText("Play");
+        Play.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 48)); // NOI18N
+        Play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/play.png"))); // NOI18N
         Play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PlayActionPerformed(evt);
             }
         });
 
-        Ranking.setText("Ranking");
+        Ranking.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 48)); // NOI18N
+        Ranking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ranking.png"))); // NOI18N
         Ranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RankingActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ojo.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -84,38 +96,42 @@ public class VistaProblemasVS extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(104, 104, 104))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(183, 183, 183)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Cancel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Play)
-                                    .addComponent(Ranking))))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                            .addComponent(Play)
+                            .addComponent(Ranking)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(Cancel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
                 .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addGap(117, 117, 117)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Play)
-                        .addGap(52, 52, 52)
-                        .addComponent(Ranking)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Ranking)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Play))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(Cancel)
-                .addGap(22, 22, 22))
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -142,6 +158,12 @@ public class VistaProblemasVS extends javax.swing.JFrame {
             r.setVisible(true); 
         }   
     }//GEN-LAST:event_RankingActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        VistaPreview r = new VistaPreview(selectProblem()+1, u);
+        //setVisible(false);
+        r.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     public int selectProblem() {
         return JLista.getSelectedIndex();
     }
@@ -188,6 +210,7 @@ public class VistaProblemasVS extends javax.swing.JFrame {
     private javax.swing.JList<String> JLista;
     private javax.swing.JButton Play;
     private javax.swing.JButton Ranking;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

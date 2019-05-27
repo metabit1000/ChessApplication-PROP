@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -40,7 +42,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     private char[][] aux;
     private JComboBox Combo = new JComboBox();
     
-    private int numMovs;
+    private int numMovs = 1;
     
     public void setNumMovs(int j) {
         this.numMovs = j;
@@ -49,26 +51,26 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         return this.id;
     }
     
-    public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) {
+    public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) throws IOException {
         this.id = id;
         this.usuarios = u;
         if (getID() != -1) this.aux = ctrlPP.obtenerYconvertirTablero(ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1));
         else this.aux = ctrlPP.obtenerYconvertirTablero(id);        
         guiFiBo.setLayout(new BoxLayout(guiFiBo, BoxLayout.Y_AXIS));
         guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
-        Cancel.setText("Cancel");
+        Image img = ImageIO.read(getClass().getResource("back (2).png"));
+        Cancel.setIcon(new ImageIcon(img));
         Validar.setText("Validar");
-        Cancel.setPreferredSize(new Dimension(140, 60));
-        Cancel.setFont(new java.awt.Font("Tahoma", 0, 20)); 
-        Validar.setPreferredSize(new Dimension(140, 60));
-        Validar.setFont(new java.awt.Font("Tahoma", 0, 20)); 
+        Cancel.setPreferredSize(new Dimension(80, 80));
+        Validar.setPreferredSize(new Dimension(120, 60));
+        Validar.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); 
         Validar.setEnabled(true);
         Cancel.setEnabled(true);
         Combo.addItem("1");
         Combo.addItem("2");
         Combo.addItem("3");
         Combo.addItem("4");
-        
+        Combo.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18));
         Combo.setSize(100, 200);
         
         Combo.addActionListener(new ActionListener(){ 
@@ -81,7 +83,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         Cancel.addActionListener(new ActionListener(){  
             @Override
             public void actionPerformed(ActionEvent e){  
-                VistaMenu m = new VistaMenu(u);
+                VistaProblemasUsuarios m = new VistaProblemasUsuarios(u);
                 setVisible(false);
                 m.setVisible(true); 
             }  
@@ -169,13 +171,16 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         introducirProblema(); //introduzco el problema a jugar al tablero
         introducirFichas();
         
-        Pregunta.setFont(new java.awt.Font("Tahoma", 0, 20)); 
+        Pregunta.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); 
+        guiBo.add(Pregunta);
+        guiBo.add(Combo);
         guiBo.add(Validar);
-        guiBo.add(Cancel);
+        //guiBo.add(Cancel);
         guiFiBo.add(guiF);
-        guiFiBo.add(Pregunta);
-        guiFiBo.add(Combo);
+        //guiFiBo.add(Pregunta);
+        
         guiFiBo.add(guiBo);
+        guiFiBo.add(Cancel);
         guiDef.add(gui);
         guiDef.add(guiFiBo);
         this.add(guiDef);

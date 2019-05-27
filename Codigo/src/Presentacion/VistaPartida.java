@@ -95,11 +95,15 @@ public class VistaPartida extends javax.swing.JFrame {
                                     casillaFinalPulsada = true;
                                     res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
                                     if (res == -1) {
-                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                        JLabel label = new JLabel("Estás en jaque, vuelve a intentarlo");
+                                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                        JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                         casillaFinalPulsada = false;
                                         casillaInicioPulsada = false;
                                     } else if (res == -2) {
-                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                        JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
+                                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                        JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                     } else {
                                         moverFicha(); //en presentacion
                                         if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
@@ -108,8 +112,11 @@ public class VistaPartida extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
-                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
+                                            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                            JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
+                                            
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
@@ -124,8 +131,10 @@ public class VistaPartida extends javax.swing.JFrame {
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
-                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador2(), (double)tiempoJ2/1000000000);
+                                            JLabel label = new JLabel("Problema no superado en el numero de movimientos del problema. Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ2/1000000000+" segundos.");
+                                            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                            JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
                                             
                                             VistaProblemasVS m = new VistaProblemasVS(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
@@ -140,7 +149,6 @@ public class VistaPartida extends javax.swing.JFrame {
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
                                             turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
-                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
                                             startTime = System.nanoTime(); //empiezo a contar
                                         }
                                     }
@@ -148,12 +156,16 @@ public class VistaPartida extends javax.swing.JFrame {
 //                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
 //                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                     
-                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                    JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
+                                    label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                 } else {
 //                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
 //                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                     
-                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                                    JLabel label = new JLabel("Este no es un movimiento correcto");
+                                    label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                 }
                                 
                                 //reseteo para el siguiente movimiento
@@ -174,20 +186,27 @@ public class VistaPartida extends javax.swing.JFrame {
                                     casillaFinalPulsada = true;
                                     res = ctrlJ.moverFicha(turno, posicionInicio, posicionFinal); //en dominio
                                     if (res == -1) {
-                                        JOptionPane.showMessageDialog(null, "Estás en jaque. Vuelve a intentarlo.");
+                                        JLabel label = new JLabel("Estás en jaque, vuelve a intentarlo");
+                                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                        JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                         casillaFinalPulsada = false;
                                         casillaInicioPulsada = false;
                                     } else if (res == -2) {
-                                        JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                        JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
+                                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                        JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                     } else {
                                         moverFicha(); //en presentacion
                                         if (turno == ctrlJ.getTurnoInicial()) ++movimientosPartida; //aumento el numero de movimientos 
                                         
                                         if (ctrlJ.checkMate(turno) && movimientosPartida == ctrlJ.getNumMovimientos()) {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-                                            
-                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno()); 
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
+                                            
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
+                                            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                            JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE); 
+                                            //ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
                                             
                                             VistaProblemasJug m = new VistaProblemasJug(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
@@ -201,7 +220,9 @@ public class VistaPartida extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
-                                            JOptionPane.showMessageDialog(null, "Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema"); 
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + ". Problema no superado en el número de movimientos del problema");
+                                            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                            JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
                                             
                                             VistaProblemasJug m = new VistaProblemasJug(usuarios); //para seguir teniendo los mismos registrados
                                             setVisible(false);
@@ -215,7 +236,6 @@ public class VistaPartida extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             
                                             turno = !turno; //si es correcto el movimiento y no es final de partida, pasa el turno al siguiente
-                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());  //anuncio el siguiente turno
                                             
                                             //PARTE QUE JUEGA LA MAQUINA
                                             
@@ -225,20 +245,22 @@ public class VistaPartida extends javax.swing.JFrame {
                                             moverFicha(); //muevo en dominio
                                             turno = !turno; 
                                             
-                                            JOptionPane.showMessageDialog(null, "El turno es de las " + obtenerTurno());
                                             startTime = System.nanoTime(); //empiezo a contar
                                         }
                                     }
                                 } 
                                 else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
 //                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-                                    
-                                    JOptionPane.showMessageDialog(null, "No es tu turno. Es el turno de las " + obtenerTurno());
+                                    JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
+                                    label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                 } 
                                 else {
 //                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                     
-                                    JOptionPane.showMessageDialog(null, "Ese no es un movimiento correcto, vuelva a intentarlo");
+                                    JLabel label = new JLabel("Este no es un movimiento correcto");
+                                    label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                 }
 
                                 casillaFinalPulsada = false;

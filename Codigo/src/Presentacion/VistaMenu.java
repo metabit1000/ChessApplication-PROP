@@ -6,6 +6,8 @@
 package Presentacion;
 
 import Dominio.CtrlUsuarios;
+import java.awt.Font;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -99,6 +101,11 @@ public class VistaMenu extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Webp.net-resizeimage.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,10 +158,13 @@ public class VistaMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-
-        int p = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar sesión?", "Abandonando sesión", JOptionPane.YES_NO_OPTION);
+        JLabel label = new JLabel("¿Seguro que quieres cerrar sesión?");
+        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+        int p = JOptionPane.showConfirmDialog(null, label, "Abandonando sesión",  JOptionPane.YES_NO_OPTION);
         if (p == 0) {
-            JOptionPane.showMessageDialog(null, "Hasta pronto, "+ u.getUL());
+            JLabel label2 = new JLabel("Hasta pronto, "+ u.getUL());
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Abandonando sesión", JOptionPane.INFORMATION_MESSAGE);
             u.LogOutUser();
             VistaInicio i = new VistaInicio();
             setVisible(false);
@@ -188,8 +198,17 @@ public class VistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_ProblemasActionPerformed
 
     private void Problemas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Problemas1ActionPerformed
-        // TODO add your handling code here:
+        VistaProblemaRanking pu;
+        pu = new VistaProblemaRanking(u);
+        setVisible(false);
+        pu.setVisible(true);
     }//GEN-LAST:event_Problemas1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        VistaProfile pu = new VistaProfile(u);
+        setVisible(false);
+        pu.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

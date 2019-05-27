@@ -25,9 +25,11 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
         }
         
-        this.setVisible(true); 
-        this.setTitle("Problemas");  
+        this.setVisible(true);  
         initComponents();
+        setSize(800,800);
+        setTitle("Competición entre máquinas");
+        this.setLocationRelativeTo(null);
         JLista.setModel(listModel);
         JLista.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         setResizable(false);
@@ -61,11 +63,14 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
         DificilNegro = new javax.swing.JRadioButton();
         Ranking = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PROBLEMAS MAQUINAS");
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 48)); // NOI18N
+        jLabel1.setText("COMPETICIÓN ENTRE MÁQUINAS");
 
+        JLista.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         JLista.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -84,6 +89,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         });
 
+        FacilNegro.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         FacilNegro.setText("Facil");
         FacilNegro.setActionCommand("FacilNegro");
         FacilNegro.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +98,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         });
 
+        FacilBlanco.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         FacilBlanco.setText("Facil");
         FacilBlanco.setActionCommand("FacilBlanco");
         FacilBlanco.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +107,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         });
 
+        DificilBlanco.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         DificilBlanco.setText("Dificil");
         DificilBlanco.setActionCommand("DificilBlanco");
         DificilBlanco.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +116,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         });
 
+        DificilNegro.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         DificilNegro.setText("Dificil");
         DificilNegro.setActionCommand("DificilNegro");
         DificilNegro.addActionListener(new java.awt.event.ActionListener() {
@@ -116,98 +125,93 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         });
 
-        Ranking.setText("Ranking");
+        Ranking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ranking.png"))); // NOI18N
         Ranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RankingActionPerformed(evt);
             }
         });
 
-        Cancel.setText("Cancel");
+        Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/back (2).png"))); // NOI18N
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ojo.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DificilBlanco)
-                            .addComponent(FacilBlanco))
-                        .addGap(65, 65, 65)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
-                .addComponent(Competicion)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DificilNegro)
-                            .addComponent(FacilNegro))
-                        .addGap(95, 95, 95))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(Ranking)
-                .addGap(73, 73, 73))
+                    .addComponent(Cancel)
+                    .addComponent(jLabel1))
+                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
+                .addGap(203, 203, 203)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(jLabel1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Ranking)
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DificilBlanco)
+                                    .addComponent(FacilBlanco)))
+                            .addComponent(jLabel2))
                         .addGap(40, 40, 40)
-                        .addComponent(Cancel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Competicion)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DificilNegro)
+                                    .addComponent(FacilNegro))))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Ranking)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(FacilBlanco)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(DificilBlanco))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(FacilNegro)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(DificilNegro))))
+                                .addComponent(FacilBlanco)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DificilBlanco))
                             .addComponent(Competicion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Cancel)
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(Cancel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(Ranking)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FacilNegro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DificilNegro)))
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -245,9 +249,9 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             CtrlPresentacionJugarMaq ctrlJ = new CtrlPresentacionJugarMaq(difBlanco,difNegro,res[0]+1); //inicializo la partida en dominio
             ctrlJ.playNProblemas(res);
             //se podria hacer una vista para mostrar el resultado de manera mas bonita 
-            JOptionPane.showMessageDialog(null,"Puntuacion Maquina1: "+ ctrlJ.getPuntuacionM1()+" Puntuacion Maquina2: "+ ctrlJ.getPuntuacionM2());
-            if (ctrlJ.getPuntuacionM1() > ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la Maquina1");
-            else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la Maquina2");
+            JOptionPane.showMessageDialog(null,"Puntuación blanca: "+ ctrlJ.getPuntuacionM1()+" Puntuación negra: "+ ctrlJ.getPuntuacionM2());
+            if (ctrlJ.getPuntuacionM1() > ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la blanca");
+            else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la negra");
             else JOptionPane.showMessageDialog(null,"Empate");
         }
         else JOptionPane.showMessageDialog(null,"No ha escogido los parametros correctamente. Vuelva a intentarlo");
@@ -313,6 +317,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     private javax.swing.JRadioButton FacilNegro;
     private javax.swing.JList JLista;
     private javax.swing.JButton Ranking;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
