@@ -12,23 +12,25 @@ import Persistencia.CtrlDatosProblemas;
  * @author joan
  */
 public class CtrlPresentacionProblema {
-        CtrlProblemas cp = new CtrlProblemas();
-
+    Problema p = new Problema();	        
+    CtrlDatosProblemas cdp = new CtrlDatosProblemas();
     
-    public boolean Validar(int id,String fen, int numMov) {
-        
-        return cp.validar(id,fen,numMov);
+    public boolean Validar(int id,String fen, int numMov, Ranking r) {
+        Problema c = new Problema(id,fen,numMov,r);	
+         return c.validarProblema();
     }
     
     public char[][] convertirTablero() {
-        return cp.convertirTablero();
-    }
+        return p.convertirTablero();    }
     public char[][] obtenerYconvertirTablero(int id) {
         
-        return cp.obtenerYconvertirTablero(id);
+        Problema p = cdp.obtenerProblema(id);	
+         return p.convertirTablero();
     }
     public String dameFEN(char[][] c) {
-        return cp.dameFEN(c);
+        p.convertirMatrizFichas(c);	        
+        p.setTurno(true);	
+         return p.matrixToFen();
       
     }
 }
