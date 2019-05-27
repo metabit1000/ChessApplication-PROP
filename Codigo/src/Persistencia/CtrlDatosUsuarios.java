@@ -48,22 +48,22 @@ public class CtrlDatosUsuarios {
     }
     
     public void escribirUsuario(String nombre, String password) {
-        System.out.println(nombre + password);
-        if (archivo == null) {
-            throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
-        }
+        File nuevo = new File("random.txt"); //fichero auxiliar
+        String cambiar = null;
         try {
-            fw = new FileWriter(archivo,true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw);
-            if (archivo.length() == 0) out.write(nombre+" "+ password); //en caso de estar vacio...
-            else {
-                bw.newLine(); //salto de linea en fichero
-                out.append(nombre +" "+ password);
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    Escribir(nuevo,linea);
+                } 
+                linea = nombre + " " + password;
+                Escribir(nuevo, linea);
+                br.close();
+                borrar(archivo); //borro archivo anterior
+                nuevo.renameTo(archivo);  //Renombro el archivo con el anterior.
             }
-            fw.close();
-            out.close();
-            bw.close();
+            else System.out.println("No existe el fichero");
         } catch (IOException e) {
             System.out.println(e);
         }
