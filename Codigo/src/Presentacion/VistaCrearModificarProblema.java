@@ -96,13 +96,27 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                         
                         if (ctrlPP.Validar((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank())) {
                             if (getID() == -1) {
-                                JOptionPane.showMessageDialog(null,"Se subira el problema con ID "+(cp.getAllProblemasJuego().size()+1)+".");
-                                ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
-                                ctrlU.introducirProblemaCreado(usuarios.getUserLogged(),cp.getAllProblemasJuego().size());
+                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se subirá el problema con ID "+(cp.getAllProblemasJuego().size()+1)+". ¿Estás seguro?");
+                                label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                int p = JOptionPane.showConfirmDialog(null, label, "Subir problema",  JOptionPane.YES_NO_OPTION);
+                                if (p == 0) {
+                                    ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                                    ctrlU.introducirProblemaCreado(usuarios.getUserLogged(),cp.getAllProblemasJuego().size());
+                                    JLabel label2 = new JLabel("Problema subido");
+                                    label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label2, "Problema subido", JOptionPane.INFORMATION_MESSAGE);
+                                }
                             }
                             else {
-                                JOptionPane.showMessageDialog(null,"Se actualizará el problema con ID "+(ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1))+".");
-                                ctrlP.modificarProblema((ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1)), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se actualizará el problema con ID "+(cp.getAllProblemasJuego().size()+1)+" y se perderán los datos del ranking. ¿Estás seguro?");
+                                label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                int p = JOptionPane.showConfirmDialog(null, label, "Actualizar problema",  JOptionPane.YES_NO_OPTION);
+                                if (p == 0) {
+                                    ctrlP.modificarProblema((ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1)), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                                    JLabel label2 = new JLabel("Problema actualizado");
+                                    label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+                                    JOptionPane.showMessageDialog(null, label2, "Problema actualizado", JOptionPane.INFORMATION_MESSAGE);
+                                }
                             }
                         }
                         else JOptionPane.showMessageDialog(null,"El problema no se puede solucionar en "+numMovs+" movimientos");
