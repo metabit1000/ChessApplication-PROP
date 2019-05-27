@@ -28,18 +28,18 @@ public class CtrlUsuarios {
         else return "No hay guest disponible";
     }
     
-    public void registrarUsuario(String nom, String pass) throws IOException {
+    public int registrarUsuario(String nom, String pass) throws IOException {
         //da de alta un usuario con nombre nom y contraseña pass. en el caso de que ya exista un usuario con nombre nom, no se dará de alta
         //y en el caso de que la contraseña no cumpla las condiciones tampoco se dará de alta.
         Usuario usIntroducido = new Usuario(false,nom,pass);
-        if (!existUser(usIntroducido)) {
+        if (!existeNombre(nom)) {
             if (correctPass(pass)) {
                 cj.escribirUsuario(nom,pass);
-                System.out.println("Usuario registrado correctamente.");
+                return 1;//System.out.println("Usuario registrado correctamente.");
             }
-            else System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+            else return 2; //System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
         }
-        else System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
+        else return 3;//System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
     }
     
     
@@ -123,6 +123,11 @@ public class CtrlUsuarios {
     public Boolean existUser(Usuario u) throws IOException {
         //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
         return cj.usuarioRegistrado(u.getNombre(),u.getPassword());
+    }
+    
+    public Boolean existeNombre(String u) throws IOException {
+        //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
+        return cj.existeNombre(u);
     }
 }
 
