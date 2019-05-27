@@ -2,6 +2,7 @@
 
 package Presentacion;
 
+import Dominio.CtrlProblemas;
 import Dominio.Problema;
 import Dominio.Ranking;
 import Persistencia.CtrlDatosProblemas;
@@ -11,24 +12,23 @@ import Persistencia.CtrlDatosProblemas;
  * @author joan
  */
 public class CtrlPresentacionProblema {
-    Problema p = new Problema();
-    CtrlDatosProblemas cdp = new CtrlDatosProblemas();
+        CtrlProblemas cp = new CtrlProblemas();
+
     
-    public boolean Validar(int id,String fen, int numMov, Ranking r) {
-        Problema c = new Problema(id,fen,numMov,r);
-        return c.validarProblema();
+    public boolean Validar(int id,String fen, int numMov) {
+        
+        return cp.validar(id,fen,numMov);
     }
     
     public char[][] convertirTablero() {
-        return p.convertirTablero();
+        return cp.convertirTablero();
     }
     public char[][] obtenerYconvertirTablero(int id) {
-        Problema p = cdp.obtenerProblema(id);
-        return p.convertirTablero();
+        
+        return cp.obtenerYconvertirTablero(id);
     }
     public String dameFEN(char[][] c) {
-        p.convertirMatrizFichas(c);
-        p.setTurno(true);
-        return p.matrixToFen();
+        return cp.dameFEN(c);
+      
     }
 }

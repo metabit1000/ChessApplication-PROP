@@ -1,6 +1,5 @@
 package Presentacion;
 import Dominio.CtrlUsuarios;
-import Dominio.Usuario;
 import Persistencia.CtrlDatosUsuarios;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +24,9 @@ public class CtrlPresentacionUsuarios {
     }
     
     public Boolean UsuarioRegistrado(String nom,String password) {
-        Usuario u = new Usuario(false,nom,password);
 
         try {
-            return ctrlU.existUser(u);
+            return ctrlU.existUser(nom,password);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +35,6 @@ public class CtrlPresentacionUsuarios {
     }
   
     public boolean LogIn(String nom,String password) {
-        Usuario u = new Usuario(false,nom,password);
         if(UsuarioRegistrado(nom,password)) {
             try {
                 ctrlU.loginUsuario(nom, password);
@@ -58,7 +55,6 @@ public class CtrlPresentacionUsuarios {
     }
     
     public boolean LogInGuest(String nom,String password) {
-        Usuario u = new Usuario(false,nom,password);
         if(UsuarioRegistrado(nom,password) && !getUserLogged().equals(nom)) {
             try {
                 ctrlU.loginGuest(nom, password);
@@ -78,18 +74,16 @@ public class CtrlPresentacionUsuarios {
         else return false; 
     }
     
-    public int Registro(String nom,String password) {
-        Usuario u = new Usuario(false,nom,password);
-        int h = 0;
+    public boolean Registro(String nom,String password) {
         if(!UsuarioRegistrado(nom,password)){
             try {
-                h = ctrlU.registrarUsuario(nom, password);
+                ctrlU.registrarUsuario(nom, password);
             } catch (IOException ex) {
                 Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return h; 
+            return true; 
         }
-        else return 4; 
+        else return false; 
     }
     
     public boolean contraseñaok(String pasword){
@@ -104,7 +98,6 @@ public class CtrlPresentacionUsuarios {
     }
     
     public void cambiarContraseña(String pass,String passwordCambiar){
-        Usuario u = new Usuario();
         try {
             ctrlU.modificarPassword(ctrlU.getUserLogged(),pass,passwordCambiar);
         } catch (IOException ex) {
@@ -117,13 +110,5 @@ public class CtrlPresentacionUsuarios {
     }
     public ArrayList<Integer> getProblemasCreados(String nombre) {
         return ctrlU.getProblemasCreados(nombre);
-    }
-    public Boolean existeNombre(String u) {
-        try {
-            ctrlU.existeNombre(u);
-        } catch (IOException ex) {
-            Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
     }
 }
