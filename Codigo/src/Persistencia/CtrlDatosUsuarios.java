@@ -48,6 +48,7 @@ public class CtrlDatosUsuarios {
     }
     
     public void escribirUsuario(String nombre, String password) {
+        System.out.println(nombre + password);
         if (archivo == null) {
             throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
         }
@@ -131,6 +132,24 @@ public class CtrlDatosUsuarios {
                 while((linea = br.readLine()) != null) {
                    String[] lineaDividida = linea.split(" ");
                    if(lineaDividida[0].equals(nombre) && lineaDividida[1].equals(password)) b = true;
+                }
+                br.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return b;
+    }
+    
+    public boolean existeNombre(String nombre)  {
+        boolean b = false;
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                   String[] lineaDividida = linea.split(" ");
+                   if(lineaDividida[0].equals(nombre)) b = true;
                 }
                 br.close();
             }
