@@ -178,7 +178,6 @@ public class VistaPartida extends javax.swing.JFrame {
                             if (!casillaInicioPulsada && b.getIcon() != null) { //hay pieza para mover y es el primer click (aqui la maquina NO entra)
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = true;
-                                //startTime = System.nanoTime(); //empiezo a contar para el usuario
                             } 
                             else if (casillaInicioPulsada && !casillaFinalPulsada) { 
                                 posicionFinal = getPosicionBoton(e);

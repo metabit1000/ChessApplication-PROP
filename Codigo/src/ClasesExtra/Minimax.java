@@ -31,10 +31,8 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                if (!p.mate(!col)) {
-                    int val = max(p,depth-1,!col);
-                    if (val < lowestSeenValue) lowestSeenValue = val;
-                }
+                int val = max(p,depth-1,!col);
+                if (val < lowestSeenValue) lowestSeenValue = val;
                 p.undoFicha(movePosible,currMove,o);
                 
             }
@@ -62,10 +60,8 @@ public class Minimax {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                if (!p.mate(!col)) {
-                    int val = min(p,depth-1,!col);
-                    if (val > highestSeenValue) highestSeenValue = val;
-                }
+                int val = min(p,depth-1,!col);
+                if (val > highestSeenValue) highestSeenValue = val;
                 p.undoFicha(movePosible,currMove,o);
             }
         }

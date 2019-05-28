@@ -138,15 +138,13 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                if (!p.mate(!col)) { 
-                    int val = max(p,depth-1,alpha,beta,!col);
-                    if (val < lowestSeenValue) lowestSeenValue = val;
-                    beta = Math.min(beta, val);
-                    if (beta <= alpha) {
-                        p.undoFicha(movePosible,currMove,o);
-                        return lowestSeenValue; //rompo poda
-                    } 
-                }
+                int val = max(p,depth-1,alpha,beta,!col);
+                if (val < lowestSeenValue) lowestSeenValue = val;
+                beta = Math.min(beta, val);
+                if (beta <= alpha) {
+                    p.undoFicha(movePosible,currMove,o);
+                    return lowestSeenValue; //rompo poda
+                } 
                 p.undoFicha(movePosible,currMove,o); 
             }
         }
@@ -166,15 +164,13 @@ public class MinimaxAlphaBeta {
                 movePosible = movesPosibles.get(x);
                 Ficha o = p.getFicha(movePosible);
                 p.moveFicha(currMove,movePosible);
-                if (!p.mate(!col)) { 
-                    int val = min(p,depth-1,alpha,beta,!col);
-                    if (val > highestSeenValue) highestSeenValue = val;
-                    alpha = Math.max(alpha,val);
-                    if (beta <= alpha){
-                        p.undoFicha(movePosible,currMove,o);
-                        return highestSeenValue; //rompo poda
-                    } 
-                }
+                int val = min(p,depth-1,alpha,beta,!col);
+                if (val > highestSeenValue) highestSeenValue = val;
+                alpha = Math.max(alpha,val);
+                if (beta <= alpha){
+                    p.undoFicha(movePosible,currMove,o);
+                    return highestSeenValue; //rompo poda
+                } 
                 p.undoFicha(movePosible,currMove,o);
             }
         }

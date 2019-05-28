@@ -22,7 +22,7 @@ public class MaquinaHard extends Maquina {
     public Pair getNextMove(Problema p) {
         MinimaxAlphaBeta m = new MinimaxAlphaBeta();
         Pair move = new Pair();
-        move = m.decisionMinimax(p, d, color);
+        move = m.decisionMinimax(p, 2*d-1, color);
         return move;
     }
 }
