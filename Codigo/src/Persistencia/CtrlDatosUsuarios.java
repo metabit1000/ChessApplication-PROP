@@ -159,7 +159,7 @@ public class CtrlDatosUsuarios {
         return b;
     }
     
-    public void modificarPassword(String nombre, String password, String newPassword) {
+    public void modificarPassword(String nombre, String newPassword) {
         File nuevo = new File("random.txt"); //fichero auxiliar
         String cambiar = null;
         try {
@@ -168,7 +168,7 @@ public class CtrlDatosUsuarios {
                 String linea;
                 while((linea = br.readLine()) != null) {
                     String[] lineaDividida = linea.split(" ");
-                    if(lineaDividida[0].equals(nombre) && lineaDividida[1].equals(password)) {
+                    if(lineaDividida[0].equals(nombre)) {
                         for (int i = 0; i < lineaDividida.length; ++i) {
                             switch (i) {
                                 case 0:

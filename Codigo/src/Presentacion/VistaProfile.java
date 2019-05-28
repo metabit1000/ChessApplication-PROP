@@ -5,8 +5,9 @@
  */
 package Presentacion;
 
-import java.awt.Font;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -41,10 +42,10 @@ public class VistaProfile extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         Nueva = new javax.swing.JLabel();
         Nueva2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        CambiarPassBoton = new javax.swing.JButton();
+        jPasswordNew2 = new javax.swing.JPasswordField();
+        jPasswordNew1 = new javax.swing.JPasswordField();
+        jPasswordActual = new javax.swing.JPasswordField();
         Actual = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -70,14 +71,19 @@ public class VistaProfile extends javax.swing.JFrame {
         Nueva2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Nueva2.setText("Repita la nueva contraseña");
 
-        jButton2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
-        jButton2.setText("Cambiar contraseña");
+        CambiarPassBoton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        CambiarPassBoton.setText("Cambiar contraseña");
+        CambiarPassBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CambiarPassBotonActionPerformed(evt);
+            }
+        });
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordNew2.setText("jPasswordField1");
 
-        jPasswordField2.setText("jPasswordField2");
+        jPasswordNew1.setText("jPasswordField2");
 
-        jPasswordField3.setText("jPasswordField3");
+        jPasswordActual.setText("jPasswordField3");
 
         Actual.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Actual.setText("Contraseña actual");
@@ -115,15 +121,15 @@ public class VistaProfile extends javax.swing.JFrame {
                                 .addComponent(Nueva2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jPasswordField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPasswordNew2)
+                            .addComponent(jPasswordActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordNew1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(172, 172, 172))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(281, 281, 281))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(CambiarPassBoton)
                         .addGap(267, 267, 267))))
         );
         layout.setVerticalGroup(
@@ -137,17 +143,17 @@ public class VistaProfile extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Actual))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nueva)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nueva2))
                 .addGap(41, 41, 41)
-                .addComponent(jButton2)
+                .addComponent(CambiarPassBoton)
                 .addGap(159, 159, 159)
                 .addComponent(jButton1)
                 .addGap(48, 48, 48))
@@ -161,6 +167,27 @@ public class VistaProfile extends javax.swing.JFrame {
         setVisible(false);
         m.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CambiarPassBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarPassBotonActionPerformed
+        String passwordActual = new String(jPasswordActual.getPassword());
+        String passwordNew1 = new String(jPasswordNew1.getPassword());
+        String passwordNew2 = new String(jPasswordNew2.getPassword());
+        
+        if (!passwordActual.equals(passwordNew1)) {
+            if (passwordNew1.equals(passwordNew2)) {
+                int aux = u.cambiarContraseña(passwordActual, passwordNew1);
+                if (aux == -1) JOptionPane.showMessageDialog(null, "La contraseña no es correcta, debe tener minimo 6 carácteres, tener mínimo una letra mayuscula y un número");
+                else {
+                    JOptionPane.showMessageDialog(null, "Contraseña cambiada correctamente.");
+                    VistaMenu m = new VistaMenu(u); //le hago volver al menu
+                    setVisible(false);
+                    m.setVisible(true);
+                }
+            }
+            else JOptionPane.showMessageDialog(null, "La contraseña que quiere cambiar no coincide. Vuelva a intentarlo");
+        }
+        else JOptionPane.showMessageDialog(null, "La contraseña no puede ser la misma. Vuelva a intentarlo.");
+    }//GEN-LAST:event_CambiarPassBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,15 +226,15 @@ public class VistaProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Actual;
+    private javax.swing.JButton CambiarPassBoton;
     private javax.swing.JLabel Nueva;
     private javax.swing.JLabel Nueva2;
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField jPasswordActual;
+    private javax.swing.JPasswordField jPasswordNew1;
+    private javax.swing.JPasswordField jPasswordNew2;
     // End of variables declaration//GEN-END:variables
 }

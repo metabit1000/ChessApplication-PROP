@@ -101,12 +101,14 @@ public class CtrlPresentacionUsuarios {
         return ctrlU.getGuest();
     }
     
-    public void cambiarContraseña(String pass,String passwordCambiar){
+    public int cambiarContraseña(String pass,String passwordCambiar){
+        int res = 0;
         try {
-            ctrlU.modificarPassword(ctrlU.getUserLogged(),pass,passwordCambiar);
+            res = ctrlU.modificarPassword(ctrlU.getUserLogged(),pass,passwordCambiar);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return res;
     }
 
     public void introducirProblemaCreado(String nombre, int id) {

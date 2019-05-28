@@ -45,9 +45,7 @@ public class CtrlUsuarios {
     
     /* Introduce a los usuarios registrados en el fichero UsuariosGuardados.txt un nuevo problema */
     public void introducirProblemaCreado(String nom,int id) {
-        
-        cj.introducirProblemaCreado(nom,id);
-        
+        cj.introducirProblemaCreado(nom,id);  
     }
     
     public ArrayList<Integer> getProblemasCreados(String nombre) {
@@ -56,12 +54,16 @@ public class CtrlUsuarios {
         return res;
     }
     
-    public void modificarPassword(String user,String password,String passCambiar) throws IOException {
+    public int modificarPassword(String user,String password,String passCambiar) throws IOException {
         Usuario usRegistrado = new Usuario(false,user,password);
+        int res = 0; //por default, todo va bien
         if (existUser(usRegistrado)) {
-            cj.modificarPassword(user,password, passCambiar);
-            System.out.println("Contraseña modificada correctamente");
+            if (correctPass(passCambiar)) {
+                cj.modificarPassword(user, passCambiar);
+            }
+            else res = -1; //en caso de que no sea correcta
         }
+        return res;
     }
     
     public void loginUsuario(String nom, String pass) throws IOException {
