@@ -66,6 +66,10 @@ public class CtrlUsuarios {
         return res;
     }
     
+    public String getPasswordUsuarioLogged() {
+        return cj.getPassword(UserLogged);
+    }
+    
     public void loginUsuario(String nom, String pass) throws IOException {
         //el usuario con nombre nom y contraseñas pass hace login en el caso de que el nombre de usuario y contraseña coincidan con un usuario
         //dado de alta previamente

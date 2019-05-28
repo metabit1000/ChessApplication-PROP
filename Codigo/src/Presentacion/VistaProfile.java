@@ -184,6 +184,7 @@ public class VistaProfile extends javax.swing.JFrame {
                     m.setVisible(true);
                 }
             }
+            else if (!u.getPasswordUsuarioLogged().equals(passwordActual)) JOptionPane.showMessageDialog(null, "La contraseña introducida no es la del usuario. Vuelva a intentarlo.");
             else JOptionPane.showMessageDialog(null, "La contraseña que quiere cambiar no coincide. Vuelva a intentarlo");
         }
         else JOptionPane.showMessageDialog(null, "La contraseña no puede ser la misma. Vuelva a intentarlo.");

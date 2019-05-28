@@ -111,6 +111,10 @@ public class CtrlPresentacionUsuarios {
         return res;
     }
 
+    public String getPasswordUsuarioLogged() {
+        return ctrlU.getPasswordUsuarioLogged();
+    }
+    
     public void introducirProblemaCreado(String nombre, int id) {
         ctrlU.introducirProblemaCreado(nombre,id);
     }

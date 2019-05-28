@@ -47,6 +47,30 @@ public class CtrlDatosUsuarios {
 
     }
     
+    public String getPassword(String nombreUser) {
+        String res = null;
+        if (archivo == null) {
+            throw new IllegalArgumentException("Error: No hay ningun archivo abierto.");
+        }
+        try {
+            if (archivo.exists()) {
+                br = new BufferedReader(new FileReader(archivo));
+                String linea;
+                while((linea = br.readLine()) != null) {
+                    String[] lineaDivididaId = linea.split(" ");
+                    if(lineaDivididaId[0].equals(nombreUser)) {
+                        res = lineaDivididaId[1];
+                    }
+                    break;
+                }
+                br.close();
+            }
+        }catch(IOException | NumberFormatException e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+    
     public void escribirUsuario(String nombre, String password) {
         File nuevo = new File("random.txt"); //fichero auxiliar
         String cambiar = null;
