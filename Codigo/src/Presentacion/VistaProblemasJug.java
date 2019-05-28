@@ -5,6 +5,7 @@ import java.awt.Dialog;
 import java.awt.Font;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -196,7 +197,11 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             setVisible(false);
             vj.setVisible(true); 
         }
-        else JOptionPane.showMessageDialog(null, "Tienes que escoger la dificultad de la maquina antes de jugar."); 
+        else {
+            JLabel label2 = new JLabel("Escoge la dificultad de la máquina");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        } 
     }//GEN-LAST:event_PlayActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
@@ -205,16 +210,23 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             setVisible(false);
             r.setVisible(true); 
         }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver el ranking");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_RankingActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (selectProblem() > -1) {
             VistaPreview r = new VistaPreview(selectProblem()+1, u);
-            
             r.setVisible(true);
         }
-            //setVisible(false);
-            
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver su vista previa");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public int selectProblem() {

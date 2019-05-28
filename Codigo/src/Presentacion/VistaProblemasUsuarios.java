@@ -2,10 +2,13 @@ package Presentacion;
 
 import Dominio.CtrlProblemas;
 import Dominio.CtrlUsuarios;
+import java.awt.Font;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -146,6 +149,11 @@ public class VistaProblemasUsuarios extends javax.swing.JFrame {
             }
             setVisible(false);
             cmp.setVisible(true);
+        }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para modificarlo");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_ModificarActionPerformed
 

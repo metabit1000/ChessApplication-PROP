@@ -6,7 +6,10 @@
 package Presentacion;
 
 import Dominio.CtrlProblemas;
+import java.awt.Font;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -145,10 +148,16 @@ public class VistaProblemasVS extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayActionPerformed
-        int id = selectProblem()+1;
-        VistaPartida vj = new VistaPartida(id,u,"PVS",0); //no hay dificultad
-        setVisible(false);
-        vj.setVisible(true); 
+        if (selectProblem() > -1) {
+            VistaPartida vj = new VistaPartida((selectProblem()+1),u,"PVS",0); //no hay dificultad
+            setVisible(false);
+            vj.setVisible(true); 
+        }
+        else {
+            JLabel label2 = new JLabel("Escoged un problema para jugar");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_PlayActionPerformed
 
     private void RankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingActionPerformed
@@ -156,13 +165,24 @@ public class VistaProblemasVS extends javax.swing.JFrame {
             VistaRanking r = new VistaRanking(u, selectProblem()+1, "PVS");
             setVisible(false);
             r.setVisible(true); 
-        }   
+        }  
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver el ranking");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_RankingActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VistaPreview r = new VistaPreview(selectProblem()+1, u);
-        //setVisible(false);
-        r.setVisible(true);
+        if (selectProblem() > -1) {
+            VistaPreview r = new VistaPreview(selectProblem()+1, u);
+            r.setVisible(true);
+        }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver su vista previa");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     public int selectProblem() {
         return JLista.getSelectedIndex();

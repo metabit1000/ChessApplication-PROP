@@ -4,7 +4,10 @@ import Presentacion.CtrlPresentacionUsuarios;
 import Presentacion.VistaMenu;
 import Presentacion.VistaPreview;
 import Presentacion.VistaRanking;
+import java.awt.Font;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 public class VistaProblemaRanking extends javax.swing.JFrame {
@@ -128,12 +131,22 @@ public class VistaProblemaRanking extends javax.swing.JFrame {
             setVisible(false);
             r.setVisible(true); 
         }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver el ranking");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (selectProblem() > -1) {
             VistaPreview r = new VistaPreview(selectProblem()+1, u);
             r.setVisible(true);
+        }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver su vista previa");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

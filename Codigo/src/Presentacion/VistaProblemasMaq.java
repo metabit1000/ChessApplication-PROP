@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Presentacion;
+import java.awt.Font;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -140,6 +142,11 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/ojo.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,7 +247,11 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             setVisible(false);
             r.setVisible(true);
         }
-        else JOptionPane.showMessageDialog(null,"Seleccione solo un problema para ver el ranking");
+        else {
+            JLabel label2 = new JLabel("Escoge un solo problema para ver el ranking");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_RankingActionPerformed
 
     private void CompeticionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompeticionActionPerformed
@@ -248,13 +259,31 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             int res[] = selectProblems();
             CtrlPresentacionJugarMaq ctrlJ = new CtrlPresentacionJugarMaq(difBlanco,difNegro,res[0]+1); //inicializo la partida en dominio
             ctrlJ.playNProblemas(res);
-            //se podria hacer una vista para mostrar el resultado de manera mas bonita 
-            JOptionPane.showMessageDialog(null,"Puntuación blanca: "+ ctrlJ.getPuntuacionM1()+" Puntuación negra: "+ ctrlJ.getPuntuacionM2());
-            if (ctrlJ.getPuntuacionM1() > ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la blanca");
-            else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) JOptionPane.showMessageDialog(null,"Gana la negra");
-            else JOptionPane.showMessageDialog(null,"Empate");
+            JLabel label2 = new JLabel("Puntuación blanca: "+ ctrlJ.getPuntuacionM1()+" Puntuación negra: "+ ctrlJ.getPuntuacionM2());
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Resultados", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null,"Puntuación blanca: "+ ctrlJ.getPuntuacionM1()+" Puntuación negra: "+ ctrlJ.getPuntuacionM2());
+            if (ctrlJ.getPuntuacionM1() > ctrlJ.getPuntuacionM2()) {
+                JLabel label1 = new JLabel("Gana la blanca");
+                label1.setFont(new Font("Dialog", Font.PLAIN, 18));
+                JOptionPane.showMessageDialog(null, label1, "Resultados", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(ctrlJ.getPuntuacionM1() < ctrlJ.getPuntuacionM2()) {
+                JLabel label1 = new JLabel("Gana la negra");
+                label1.setFont(new Font("Dialog", Font.PLAIN, 18));
+                JOptionPane.showMessageDialog(null, label1, "Resultados", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JLabel label1 = new JLabel("Empate");
+                label1.setFont(new Font("Dialog", Font.PLAIN, 18));
+                JOptionPane.showMessageDialog(null, label1, "Resultados", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        else JOptionPane.showMessageDialog(null,"No ha escogido los parametros correctamente. Vuelva a intentarlo");
+        else {
+            JLabel label1 = new JLabel("Escoga los parametros correctamente");
+            label1.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label1, "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_CompeticionActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
@@ -262,6 +291,18 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
         setVisible(false);
         m.setVisible(true);
     }//GEN-LAST:event_CancelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (selectProblem() > -1) {
+            VistaPreview r = new VistaPreview(selectProblem()+1, u);
+            r.setVisible(true);
+        }
+        else {
+            JLabel label2 = new JLabel("Escoge un problema para ver su vista previa");
+            label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     public int selectProblem() {
         return JLista.getSelectedIndex();
     }
