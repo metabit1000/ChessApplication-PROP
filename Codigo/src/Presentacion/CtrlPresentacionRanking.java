@@ -5,12 +5,10 @@
  */
 package Presentacion;
 import Dominio.CtrlProblemas;
-import Dominio.Ranking;
-import Dominio.Usuario;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,8 +22,5 @@ public class CtrlPresentacionRanking {
     public Map<String,Double> getmap(int id ){
         return ctrlP.getmap(id);
     }
-    public Ranking emptyRank() {
-        Ranking r = new Ranking();
-        return r;
-    }
+   
 }

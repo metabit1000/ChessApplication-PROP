@@ -5,14 +5,13 @@
  */
 package Presentacion;
 
-import Dominio.CtrlUsuarios;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Joan 
  */
 public class VistaMenu extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();

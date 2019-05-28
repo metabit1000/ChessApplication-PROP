@@ -1,8 +1,6 @@
 package Presentacion;
 
 import ClasesExtra.Coordenada;
-import Persistencia.CtrlDatosProblemas;
-import Persistencia.CtrlDatosUsuarios;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +13,6 @@ import javax.swing.border.*;
 public class VistaCrearModificarProblema extends javax.swing.JFrame {
     
     private CtrlPresentacionCtrlProblemas cp = new CtrlPresentacionCtrlProblemas();
-    private CtrlDatosProblemas ctrlP = new CtrlDatosProblemas();
-    private CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
     private CtrlPresentacionJugar ctrlJ = new CtrlPresentacionJugar();
     private CtrlPresentacionRanking ctrlR = new CtrlPresentacionRanking();
     private CtrlPresentacionProblema ctrlPP = new CtrlPresentacionProblema();
@@ -54,7 +50,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     public VistaCrearModificarProblema(int id, CtrlPresentacionUsuarios u) throws IOException {
         this.id = id;
         this.usuarios = u;
-        if (getID() != -1) this.aux = ctrlPP.obtenerYconvertirTablero(ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1));
+        if (getID() != -1) this.aux = ctrlPP.obtenerYconvertirTablero(ctrlPP.getidmodif(usuarios.getUserLogged(), id));
         else this.aux = ctrlPP.obtenerYconvertirTablero(id);        
         guiFiBo.setLayout(new BoxLayout(guiFiBo, BoxLayout.Y_AXIS));
         guiDef.setLayout(new BoxLayout(guiDef, BoxLayout.X_AXIS));
@@ -94,25 +90,25 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 switch(cp.getRestricciones(sacarProblema())) {
                     case 0://A VALIDAR!!, if (se valida para esos numMovs o bien hay solucion para ese numMovs
                         
-                        if (ctrlPP.Validar((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank())) {
+                        if (ctrlPP.Validar((ctrlPP.getAllProblemasJuegoSize()+1), ctrlPP.dameFEN(sacarProblema()), numMovs)) {
                             if (getID() == -1) {
-                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se subirá el problema con ID "+(cp.getAllProblemasJuego().size()+1)+". ¿Estás seguro?");
+                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se subirá el problema con ID "+(ctrlPP.getAllProblemasJuegoSize()+1)+". ¿Estás seguro?");
                                 label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                 int p = JOptionPane.showConfirmDialog(null, label, "Subir problema",  JOptionPane.YES_NO_OPTION);
                                 if (p == 0) {
-                                    ctrlP.introducirProblema((cp.getAllProblemasJuego().size()+1), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
-                                    ctrlU.introducirProblemaCreado(usuarios.getUserLogged(),cp.getAllProblemasJuego().size());
+                                    ctrlPP.introducirProblema(ctrlPP.dameFEN(sacarProblema()), numMovs );
+                                    ctrlPP.introducirProblemaCreado(usuarios.getUserLogged());
                                     JLabel label2 = new JLabel("Problema subido");
                                     label2.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label2, "Problema subido", JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }
                             else {
-                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se actualizará el problema con ID "+(cp.getAllProblemasJuego().size()+1)+" y se perderán los datos del ranking. ¿Estás seguro?");
+                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se actualizará el problema con ID "+(ctrlPP.getAllProblemasJuegoSize()+1)+" y se perderán los datos del ranking. ¿Estás seguro?");
                                 label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                 int p = JOptionPane.showConfirmDialog(null, label, "Actualizar problema",  JOptionPane.YES_NO_OPTION);
                                 if (p == 0) {
-                                    ctrlP.modificarProblema((ctrlU.getProblemasCreados(usuarios.getUserLogged()).get(id-1)), ctrlPP.dameFEN(sacarProblema()), numMovs, ctrlR.emptyRank());
+                                   ctrlPP.modificarProblema(sacarProblema(), numMovs, id-1, usuarios.getUserLogged());
                                     JLabel label2 = new JLabel("Problema actualizado");
                                     label2.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label2, "Problema actualizado", JOptionPane.INFORMATION_MESSAGE);

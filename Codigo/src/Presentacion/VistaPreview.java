@@ -1,7 +1,5 @@
 package Presentacion;
 
-import ClasesExtra.Coordenada;
-import ClasesExtra.Pair;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +20,6 @@ public class VistaPreview extends javax.swing.JFrame {
     private Image[][] chessPieceImages = new Image[2][6];
     private JPanel chessBoard;
     private static final String COLS = "ABCDEFGH";
-    private Coordenada posicionInicio, posicionFinal;
     private boolean casillaInicioPulsada = false, casillaFinalPulsada = false;
     private String tipo; //PVS -> jugador vs jugador, PJ -> jugador vs maquina
     private int movimientosPartida = 0; //movimientos que lleva la partida al jugar

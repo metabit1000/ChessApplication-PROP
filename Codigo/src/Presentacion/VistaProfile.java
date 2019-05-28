@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Joan
  */
 public class VistaProfile extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();
@@ -79,11 +79,11 @@ public class VistaProfile extends javax.swing.JFrame {
             }
         });
 
-        jPasswordNew2.setText("jPasswordField1");
-
-        jPasswordNew1.setText("jPasswordField2");
-
-        jPasswordActual.setText("jPasswordField3");
+        jPasswordNew2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordNew2ActionPerformed(evt);
+            }
+        });
 
         Actual.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
         Actual.setText("Contraseña actual");
@@ -120,10 +120,12 @@ public class VistaProfile extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(Nueva2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordNew2)
-                            .addComponent(jPasswordActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordNew1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPasswordActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPasswordNew1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPasswordNew2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(172, 172, 172))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -189,6 +191,10 @@ public class VistaProfile extends javax.swing.JFrame {
         }
         else JOptionPane.showMessageDialog(null, "La contraseña no puede ser la misma. Vuelva a intentarlo.");
     }//GEN-LAST:event_CambiarPassBotonActionPerformed
+
+    private void jPasswordNew2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordNew2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordNew2ActionPerformed
 
     /**
      * @param args the command line arguments

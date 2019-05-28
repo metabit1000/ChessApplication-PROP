@@ -134,6 +134,10 @@ public class VistaRanking extends javax.swing.JFrame {
             VistaProblemasJug pj = new VistaProblemasJug(u);
             pj.setVisible(true);
        }
+       else  if (Problemas.equals("PR")) {
+            VistaProblemaRanking pj = new VistaProblemaRanking(u);
+            pj.setVisible(true);
+       }
        else if (Problemas.equals("PVS")) {
             VistaProblemasVS pvs = new VistaProblemasVS(u);
             pvs.setVisible(true);

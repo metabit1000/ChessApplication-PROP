@@ -3,8 +3,6 @@
 package Presentacion;
 
 import Dominio.CtrlProblemas;
-import Dominio.Problema;
-import Dominio.Ranking;
 import Persistencia.CtrlDatosProblemas;
 
 /**
@@ -12,25 +10,38 @@ import Persistencia.CtrlDatosProblemas;
  * @author joan
  */
 public class CtrlPresentacionProblema {
-    Problema p = new Problema();	        
-    CtrlDatosProblemas cdp = new CtrlDatosProblemas();
-    
-    public boolean Validar(int id,String fen, int numMov, Ranking r) {
-        Problema c = new Problema(id,fen,numMov,r);	
-         return c.validarProblema();
+    CtrlProblemas pp= new CtrlProblemas();
+    public boolean Validar(int id,String fen, int numMov) {
+        
+        
+         return pp.Validar(id, fen, numMov);
     }
     
     public char[][] convertirTablero() {
-        return p.convertirTablero();    }
+        return pp.convertirTablero();    }
     public char[][] obtenerYconvertirTablero(int id) {
         
-        Problema p = cdp.obtenerProblema(id);	
-         return p.convertirTablero();
+         return pp.obtenerYconvertirTablero(id);
     }
     public String dameFEN(char[][] c) {
-        p.convertirMatrizFichas(c);	        
-        p.setTurno(true);	
-         return p.matrixToFen();
+       	
+         return pp.dameFEN(c);
       
+    }
+    public int getidmodif(String nombre , int i ){
+      return   pp.getIdCreado(i, nombre);
+    }
+   public void  introducirProblema(String fen , int numMov){
+       pp.introducirProblemanuevo(numMov, fen);
+   }
+   public void  modificarProblema(char[][]c , int numMov,int id , String nom ){
+       String fen = dameFEN(c);
+       pp.modificarProblema(numMov, fen, nom, id);
+   }
+   public void introducirProblemaCreado(String nom){
+       pp.introducirProblemaCreado(nom);
+   }
+    public int getAllProblemasJuegoSize() {
+       return pp.getAllProblemasJuegoSize();
     }
 }

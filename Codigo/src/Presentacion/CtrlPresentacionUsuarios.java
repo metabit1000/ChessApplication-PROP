@@ -1,7 +1,5 @@
 package Presentacion;
 import Dominio.CtrlUsuarios;
-import Dominio.Usuario;
-import Persistencia.CtrlDatosUsuarios;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,7 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class CtrlPresentacionUsuarios {
     CtrlUsuarios ctrlU = new CtrlUsuarios();
-    CtrlDatosUsuarios cdu = new CtrlDatosUsuarios();
 
     public String getUserLogged() {
         return ctrlU.getUserLogged();
@@ -25,9 +22,8 @@ public class CtrlPresentacionUsuarios {
     }
     
     public Boolean UsuarioRegistrado(String nom,String password) {
-            Usuario u = new Usuario(false,nom,password);
         try {
-            return ctrlU.existUser(u);
+            return ctrlU.existUser(nom,password);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,7 +73,6 @@ public class CtrlPresentacionUsuarios {
     }
     
     public int Registro(String nom,String password) {
-        Usuario u = new Usuario(false,nom,password);
         int h = 0;
         if(!UsuarioRegistrado(nom,password)){
             try {
