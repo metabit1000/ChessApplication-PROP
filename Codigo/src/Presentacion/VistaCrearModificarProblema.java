@@ -104,7 +104,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                                 }
                             }
                             else {
-                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se actualizará el problema con ID "+(ctrlPP.getAllProblemasJuegoSize()+1)+" y se perderán los datos del ranking. ¿Estás seguro?");
+                                JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se actualizará el problema con ID "+((usuarios.getProblemasCreados(usuarios.getUserLogged()).get(getID()-1)))+" y se perderán los datos del ranking. ¿Estás seguro?");
                                 label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                 int p = JOptionPane.showConfirmDialog(null, label, "Actualizar problema",  JOptionPane.YES_NO_OPTION);
                                 if (p == 0) {
@@ -115,64 +115,106 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                                 }
                             }
                         }
-                        else JOptionPane.showMessageDialog(null,"El problema no se puede solucionar en "+numMovs+" movimientos");
+                        else {
+                            JLabel label = new JLabel("El problema no se puede solucionar en "+numMovs+" movimientoso");
+                            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                            JOptionPane.showMessageDialog(null, label, "Error", JOptionPane.WARNING_MESSAGE);
+                        }
                         break;
                     case 1:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres negras");
+                        JLabel label = new JLabel("No puede haber más de 2 torres negras");
+                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 torres blancas");
+                        JLabel label2 = new JLabel("No puede haber más de 2 torres blancas");
+                        label2.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 3:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 reina negra");
+                        JLabel label3 = new JLabel("No puede haber más de 1 reina negra");
+                        label3.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label3, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 4:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 reina blanca");
+                        JLabel label4 = new JLabel("No puede haber más de 1 reina blanca");
+                        label4.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label4, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 5:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil negro en las casillas blancas");
+                        JLabel label5 = new JLabel("No puede haber más de 1 alfil negro en las casillas blancas");
+                        label5.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label5, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 6:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil negro en las casillas negras");
+                        JLabel label6 = new JLabel("No puede haber más de 1 alfil negro en las casillas negras");
+                        label6.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label6, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 7:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil blanco en las casillas blancas");
+                        JLabel label7 = new JLabel("No puede haber más de 1 alfil blanco en las casillas blancas");
+                        label7.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label7, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 8:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 1 alfil blanco en las casillas negras");
+                        JLabel label8 = new JLabel("No puede haber más de 1 alfil blanco en las casillas negras");
+                        label8.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label8, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 9:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 caballos negros");
+                        JLabel label9 = new JLabel("No puede haber más de 2 caballos negros");
+                        label9.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label9, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 10:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 2 caballos blancos");
+                        JLabel label10 = new JLabel("No puede haber más de 2 caballos blancos");
+                        label10.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label10, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 11:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 8 peones negros");
+                        JLabel label11 = new JLabel("No puede haber más de 8 peones negros");
+                        label11.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label11, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 12:
-                        JOptionPane.showMessageDialog(null,"Los peones negros deben de estar correctamente posicionados");
+                        JLabel label12 = new JLabel("Los peones negros deben de estar correctamente posicionados");
+                        label12.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label12, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 13:
-                        JOptionPane.showMessageDialog(null,"No puede haber más de 8 peones blancos");
+                        JLabel label13 = new JLabel("No puede haber más de 8 peones blancos");
+                        label13.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label13, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 14:
-                        JOptionPane.showMessageDialog(null,"Los peones blancos deben de estar correctamente posicionados");
+                        JLabel label14 = new JLabel("Los peones blancos deben de estar correctamente posicionados");
+                        label14.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label14, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 15:
-                        JOptionPane.showMessageDialog(null,"Tiene que haber 1 rey blanco");
+                        JLabel label15 = new JLabel("Tiene que haber 1 rey blanco");
+                        label15.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label15, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 16:
-                        JOptionPane.showMessageDialog(null,"Tiene que haber 1 rey negro");
+                        JLabel label16 = new JLabel("Tiene que haber 1 rey negro");
+                        label16.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label16, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 17:
-                        JOptionPane.showMessageDialog(null,"Las blancas ya están haciendo jaque al rey negro");
+                        JLabel label17 = new JLabel("Las blancas ya están haciendo jaque al rey negro");
+                        label17.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label17, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 18:
-                        JOptionPane.showMessageDialog(null,"Las blancas ya han ganado");
+                        JLabel label18 = new JLabel("Las blancas ya han ganado");
+                        label18.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label18, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                     case 19:
-                        JOptionPane.showMessageDialog(null,"Las negras ya han ganado");
+                        JLabel label19 = new JLabel("Las negras ya han ganado");
+                        label19.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label19, "Error", JOptionPane.WARNING_MESSAGE);
                         break;
                 }
             }  

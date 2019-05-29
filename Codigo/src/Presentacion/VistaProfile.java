@@ -5,6 +5,8 @@
  */
 package Presentacion;
 
+import java.awt.Font;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -175,21 +177,41 @@ public class VistaProfile extends javax.swing.JFrame {
         String passwordNew1 = new String(jPasswordNew1.getPassword());
         String passwordNew2 = new String(jPasswordNew2.getPassword());
         
-        if (!passwordActual.equals(passwordNew1)) {
-            if (passwordNew1.equals(passwordNew2)) {
-                int aux = u.cambiarContraseña(passwordActual, passwordNew1);
-                if (aux == -1) JOptionPane.showMessageDialog(null, "La contraseña no es correcta, debe tener minimo 6 carácteres, tener mínimo una letra mayuscula y un número");
+        if (u.getPasswordUsuarioLogged().equals(passwordActual)) {
+            if (!passwordActual.equals(passwordNew1)) {
+                if (passwordNew1.equals(passwordNew2)) {
+                    int aux = u.cambiarContraseña(passwordActual, passwordNew1);
+                    if (aux == -1) {
+                        JLabel label = new JLabel("La contraseña no es correcta, debe tener minimo 6 carácteres, tener mínimo una letra mayuscula y un número");
+                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label, "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else {
+                        JLabel label = new JLabel("Contraseña cambiada correctamente");
+                        label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                        JOptionPane.showMessageDialog(null, label, "Contraseña cambiada", JOptionPane.INFORMATION_MESSAGE);
+                        VistaMenu m = new VistaMenu(u); //le hago volver al menu
+                        setVisible(false);
+                        m.setVisible(true);
+                    }
+                }
                 else {
-                    JOptionPane.showMessageDialog(null, "Contraseña cambiada correctamente.");
-                    VistaMenu m = new VistaMenu(u); //le hago volver al menu
-                    setVisible(false);
-                    m.setVisible(true);
+                    JLabel label = new JLabel("La contraseña que quiere cambiar no coincide. Vuelva a intentarlo");
+                    label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                    JOptionPane.showMessageDialog(null, label, "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
                 }
             }
-            else if (!u.getPasswordUsuarioLogged().equals(passwordActual)) JOptionPane.showMessageDialog(null, "La contraseña introducida no es la del usuario. Vuelva a intentarlo.");
-            else JOptionPane.showMessageDialog(null, "La contraseña que quiere cambiar no coincide. Vuelva a intentarlo");
+            else {
+                JLabel label = new JLabel("La contraseña no puede ser la misma. Vuelva a intentarlo");
+                label.setFont(new Font("Dialog", Font.PLAIN, 18));
+                JOptionPane.showMessageDialog(null, label, "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
+            }
         }
-        else JOptionPane.showMessageDialog(null, "La contraseña no puede ser la misma. Vuelva a intentarlo.");
+        else {
+            JLabel label = new JLabel("La contraseña introducida no es la del usuario. Vuelva a intentarlo");
+            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label, "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_CambiarPassBotonActionPerformed
 
     private void jPasswordNew2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordNew2ActionPerformed
