@@ -23,8 +23,8 @@ public class VistaProblemasJug extends javax.swing.JFrame {
         this.u = u;
         DefaultListModel<String> listModel = new DefaultListModel<>();
         CtrlProblemas cp = new CtrlProblemas();
-        for (int i = 0; i < cp.getAllProblemasJuego().size(); ++i) {
-            listModel.addElement("Problema "+cp.getAllProblemasJuego().get(i).getId()+". Movimientos: "+cp.getAllProblemasJuego().get(i).getNumMovimientos());
+        for (int i = 0; i < cp.getAllProblemasJuegoSize(); ++i) {
+            listModel.addElement("Problema "+cp.getId(i)+". Movimientos: "+cp.getnumMov(i));
         }
         
         initComponents();
