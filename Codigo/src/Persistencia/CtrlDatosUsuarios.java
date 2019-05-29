@@ -60,8 +60,8 @@ public class CtrlDatosUsuarios {
                     String[] lineaDivididaId = linea.split(" ");
                     if(lineaDivididaId[0].equals(nombreUser)) {
                         res = lineaDivididaId[1];
+                        break;
                     }
-                    break;
                 }
                 br.close();
             }
