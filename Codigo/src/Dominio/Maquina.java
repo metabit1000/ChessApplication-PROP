@@ -15,9 +15,10 @@ public abstract class Maquina extends Jugador {
         super(color);
         d = profundidad;
     }
-  /**
-   * pre:-
-   * post:Devuelve un par de movimientos correctos
+    
+    /**
+   * pre: Problema no nulo
+   * post: Devuelve el mejor movimiento dado por el minimax
    * @param p
    * @return 
    */

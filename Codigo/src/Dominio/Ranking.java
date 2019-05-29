@@ -8,10 +8,11 @@ public class Ranking {
     private Map<String,Double> rank = new HashMap<>();
     
     public Ranking() {}
-        /**
-         * pre:-
-         * post:Ordena el ranking segun los valores de las keys
-         */
+    
+    /**
+     * pre:-
+     * post:Ordena el ranking segun los valores de las keys
+    */
     public void ordenar(){
         List<Map.Entry<String, Double>> list = new LinkedList<>(rank.entrySet());
         Collections.sort(list, (Map.Entry<String, Double> m1, Map.Entry<String, Double> m2) -> (m1.getValue()).compareTo(m2.getValue()));
@@ -19,7 +20,7 @@ public class Ranking {
         list.forEach((entry) -> {
             result.put(entry.getKey(), entry.getValue());
         });
-        rank= result;
+        rank = result;
     }
 
     /**
@@ -32,6 +33,7 @@ public class Ranking {
         if(rank.containsKey(nom))return true ;
         else return false ; 
     }
+    
     /**
      * pre:Dado un nombre y un tiempo no null
      * post:Insertaremos la key que sera la variable nombre y tiempo como su value
@@ -43,6 +45,7 @@ public class Ranking {
       if (tiempo >= 0)  rank.put(nombre,tiempo);
         ordenar();
     }
+    
     /**
      * pre:Dado una variable string nombre diferente a null y existente en el rank
      * post:Eliminaremos la key que representa el string nom y su valor asociado
@@ -51,6 +54,7 @@ public class Ranking {
     public void eliminarUsuario(String  nombre){
         rank.remove(nombre);
     }
+    
     /**
      * pre: Dado un tiempo no negativo y un nombre existente en el ranking
      * post: Actualizaremos el tiempo en resolver el problema de la key que representa nombre si este tiempo es menor que el anterior
@@ -65,6 +69,7 @@ public class Ranking {
             setElemento(nombre,tiempo);  
         }
     }
+    
     /**
      * pre:-
      * post: Devuelve el map de la variable rank
@@ -73,6 +78,7 @@ public class Ranking {
     public Map<String,Double> getmap( ){
         return rank; 
     }
+    
     /**
      * pre:-
      * post:Devolvera una arraylist con el ranking 

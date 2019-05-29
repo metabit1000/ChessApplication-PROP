@@ -15,11 +15,11 @@ public class Bishop extends Ficha{
         super(color,c);
     }
     
-    @Override
     /**
-     *  * pre:Dado un problema y una coordenada cualquiera dentro del tablero del problema
+     * pre:Dado un problema y una coordenada cualquiera dentro del tablero del problema
      * post: Devuelve todos los posibles movimientos que puede hacer una ficha según que tipo sea
      */
+    @Override
     public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada c) {
         ArrayList<Coordenada> res = new ArrayList();
         int x = c.getX();

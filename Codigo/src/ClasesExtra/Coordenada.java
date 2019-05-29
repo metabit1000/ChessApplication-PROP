@@ -30,11 +30,7 @@ public class Coordenada {
     public int getY() {
         return y;
     }
-    
-    public void printxy() {  
-        System.out.println(coordToString());
-    }
-    
+        
     public boolean equals(Object obj) {
         Coordenada p= (Coordenada)obj;
         return p.getX() == this.getX() && p.getY() == this.getY();

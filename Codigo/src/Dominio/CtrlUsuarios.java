@@ -2,8 +2,6 @@ package Dominio;
 import Persistencia.CtrlDatosUsuarios;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -35,11 +33,11 @@ public class CtrlUsuarios {
         if (!existeNombre(nom)) {
             if (correctPass(pass)) {
                 cj.escribirUsuario(nom,pass);
-                return 1;//System.out.println("Usuario registrado correctamente.");
+                return 1;//Usuario registrado correctamente.
             }
-            else return 2; //System.out.println("La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.");
+            else return 2; //La contraseña necesita como mínimo 6 carácteres y tener como mínimo una letra minúscula, una mayúscula y un número.
         }
-        else return 3;//System.out.println("El usuario con nombre " + nom + " ya existe. Prueba con otro.");
+        else return 3;//El usuario con nombre " + nom + " ya existe. Prueba con otro.
     }
     
     
@@ -70,35 +68,21 @@ public class CtrlUsuarios {
     }
     
     public void loginUsuario(String nom, String pass) throws IOException {
-        //el usuario con nombre nom y contraseñas pass hace login en el caso de que el nombre de usuario y contraseña coincidan con un usuario
-        //dado de alta previamente
-        if (!existUser(nom,pass)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
-        else {
-            UserLogged = nom;
-            System.out.println("Sesión iniciada satisfactoriamente");
-        }
+        UserLogged = nom;
     }
     
     public void loginGuest(String nom, String pass) throws IOException {
-       //el usuario con nombre nom y contraseñas pass inicia sesión como invitado en el caso de que el nombre de usuario y contraseña coincidan con un usuario
-        //dado de alta previamente
-        if (!existUser(nom,pass)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
-        else {
-            GuestLogged = nom;
-            System.out.println("Sesión iniciada satisfactoriamente");
-        }
+        GuestLogged = nom;
     }
     
     public void logoutUsuario() {
         //el usuario que habia logeado previamente pasa a no estarlo y por lo tanto el numbre del usuario loggeado pasa a ser null.
-        if (UserLogged != null)UserLogged = null;
-        else System.out.println("No esta logueado");
+        if (UserLogged != null) UserLogged = null;
     }
     
     public void logoutGuest() {
         //el usuario que habia logeado como invitado previamente pasa a no estarlo y por lo tanto el numbre del usuario loggeado pasa a ser null.
         if (UserLogged != null) GuestLogged = null;
-        else System.out.println("No esta logueado");
     }
     
     public Boolean correctPass(String pass) {
@@ -123,7 +107,7 @@ public class CtrlUsuarios {
         return pass.length() > 5 && n && m && M;
     }
     
-    public Boolean existUser( String nombre , String password) throws IOException {
+    public Boolean existUser(String nombre , String password) throws IOException {
         //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
         return cj.usuarioRegistrado(nombre,password);
     }
@@ -131,10 +115,6 @@ public class CtrlUsuarios {
     public Boolean existeNombre(String u) throws IOException {
         //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
         return cj.existeNombre(u);
-    }
-
-    public Boolean existUser1(String nom, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

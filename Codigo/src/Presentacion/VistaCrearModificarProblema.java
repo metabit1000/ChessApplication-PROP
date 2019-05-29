@@ -108,7 +108,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                                 label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                 int p = JOptionPane.showConfirmDialog(null, label, "Actualizar problema",  JOptionPane.YES_NO_OPTION);
                                 if (p == 0) {
-                                   ctrlPP.modificarProblema(sacarProblema(), numMovs, id-1, usuarios.getUserLogged());
+                                    ctrlPP.modificarProblema(sacarProblema(), numMovs, id-1, usuarios.getUserLogged());
                                     JLabel label2 = new JLabel("Problema actualizado");
                                     label2.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label2, "Problema actualizado", JOptionPane.INFORMATION_MESSAGE);

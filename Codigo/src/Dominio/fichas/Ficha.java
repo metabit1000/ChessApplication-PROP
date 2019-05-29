@@ -17,6 +17,7 @@ public abstract class Ficha {
         this.color = color;
         this.c = cfen;
     }
+    
     /**
      * pre:-
      * post:Devuelve el color de la ficha , true->Blanco false->Negro
@@ -25,6 +26,7 @@ public abstract class Ficha {
     public Boolean getColor() {
         return color;
     }
+    
     /**
      * pre:Dado el boolean c diferente a null
      * post:canviamos el color de la ficha al valor del boolean c 
@@ -33,15 +35,15 @@ public abstract class Ficha {
     public void setColor(Boolean c) {
         color = c;
     }
-       /**
-        * pre:-
-        * post:Devuelve la id de la ficha
-        * @return 
-        */
+    
+    /**
+     * pre:-
+     * post:Devuelve la id de la ficha
+     * @return 
+    */
     public Character getID() {
         return c;
     }
-    
    
     /**
      * pre:Dado un problema y una coordenada cualquiera dentro del tablero del problema

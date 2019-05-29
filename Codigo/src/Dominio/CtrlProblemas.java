@@ -1,11 +1,5 @@
 package Dominio;
-import ClasesExtra.*;
-import Dominio.fichas.Bishop;
-import Dominio.fichas.King;
-import Dominio.fichas.Knight;
-import Dominio.fichas.Pawn;
-import Dominio.fichas.Queen;
-import Dominio.fichas.Rook;
+
 import Persistencia.CtrlDatosProblemas;
 import Persistencia.CtrlDatosUsuarios;
 import java.util.ArrayList;
@@ -17,6 +11,8 @@ import java.util.Map;
  */
 public class CtrlProblemas {
     private CtrlDatosProblemas problems = new CtrlDatosProblemas();
+    
+    /* Restricciones de las fichas */
     private static final int numr = 2;
     private static final int numR = 2;
     private static final int numbW = 1;
@@ -32,23 +28,8 @@ public class CtrlProblemas {
     private static final int numq = 1;
     private static final int numQ = 1;
     
-    /*
-        Pair p1 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
-        Pair p2 = new Pair("2R3rk/3N4/7K/3N4/8/8/r4p2/8 w", 3);
-         Pair p3 = new Pair ("4n1bk/8/6PK/8/7N/8/8/8 w", 2);
-       Pair p4 = new Pair ("3K4/8/8/p2k4/pp1B4/N5N1/P2Q4/8 w", 3);
-        Pair p5 = new Pair ("1r6/5qpk/1b1R3B/3PpP2/8/6QP/5P2/6K1 w", 3);
-        Pair p6 = new Pair ("6RK/7Q/pkp5/ppp5/8/8/8/8 w",1);
-        
-        Problems.put("Jaque dificil en tres movimientos", p1);
-        Problems.put("Jaque facil en tres movimientos", p2);
-          Problems.put("Jaque facil en dos movimientos", p3);
-       Problems.put("Jaque chungo en tres movimientos", p4);
-        Problems.put("Jaque sencillo en tres movimientos", p5);
-    Problems.put("Jaque en 1 mov", p6);
-    */
-    
     public CtrlProblemas() {}
+    
     /**
      * pre:Dado una id de un problema
      * post:Devuelve el map que contien el ranking de este problema
@@ -57,65 +38,54 @@ public class CtrlProblemas {
      */
     public Map<String,Double> getmap(int id ){
         Ranking a = new Ranking();
-         a = problems.obtenerRanking(id);
-         return a.getmap();
+        a = problems.obtenerRanking(id);
+        return a.getmap();
     }
-    /**
-     * pre:Dado un Problema p  y diferente a null
-     * post:Añade el Problema p en la base de datos 
-     * 
-     * @param p 
-     */
-    public void addProblema(Problema p) {
-        //Añade un problema al map de Problemas, con Key id, y con valores fen (que será la codificación fen de dicho problema)
-        //y numM como numero de movimientos en los que se puede resolver el problema.
-        //en el caso de que el id ya exista en el map o ya exista un problema con un mismo fen, no se añadirá.
-        if (!existProblem(p.getId())) {
-                problems.introducirProblema(p.getId(),p.getFen(), p.getNumMovimientos(),p.getRanking());
-        }
+    
+    public void introducirProblemanuevo(int numMovs, String Fen){
+        Ranking r = new Ranking();
+        problems.introducirProblema((getAllProblemasJuegoSize()+1), Fen, numMovs,r);
     }
-    public void introducirProblemanuevo(int numMovs,String Fen ){
-         Ranking r = new Ranking();
-              problems.introducirProblema((getAllProblemasJuegoSize()+1), Fen, numMovs,r);
-    }
+    
     public void modificarProblema(int numMovs,String fen,String nom ,int id ){
         CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
         Ranking r = new Ranking();
-         problems.modificarProblema((ctrlU.getProblemasCreados(nom).get(id)),fen, numMovs, r);
-
+        problems.modificarProblema((ctrlU.getProblemasCreados(nom).get(id)),fen, numMovs, r);
     }
-       public void introducirProblemaCreado(String nom){
-                CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
-
-          ctrlU.introducirProblemaCreado(nom,getAllProblemasJuegoSize());
-
-       }
-
-           
-   public int getAllProblemasJuegoSize(){
-       ArrayList<Problema> res =  getAllProblemasJuego();
-       return res.size();
-   }
-    public boolean Validar(int id,String fen, int numMov) {
+       
+    public void introducirProblemaCreado(String nom){
+        CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
+        ctrlU.introducirProblemaCreado(nom,getAllProblemasJuegoSize());
+    }
+    
+    public int getAllProblemasJuegoSize(){
+        ArrayList<Problema> res = getAllProblemasJuego();
+        return res.size();
+    }
+    
+    public boolean Validar(int id, String fen, int numMov) {
         Ranking r = new Ranking();
         Problema c = new Problema(id,fen,numMov,r);	
-         return c.validarProblema();
-}
-     public char[][] convertirTablero() {
-             Problema p = new Problema();	        
-        return p.convertirTablero();    }
-    public char[][] obtenerYconvertirTablero(int id) {
-        
-        Problema p = problems.obtenerProblema(id);	
-         return p.convertirTablero();
+        return c.validarProblema();
     }
+    
+    public char[][] convertirTablero() {
+        Problema p = new Problema();	        
+        return p.convertirTablero();    
+    }
+    
+    public char[][] obtenerYconvertirTablero(int id) {
+        Problema p = problems.obtenerProblema(id);	
+        return p.convertirTablero();
+    }
+    
     public String dameFEN(char[][] c) {
-            Problema p = new Problema();	        
+        Problema p = new Problema();	        
         p.convertirMatrizFichas(c);	        
         p.setTurno(true);	
-         return p.matrixToFen();
-      
+        return p.matrixToFen();
     }
+    
     /**
      * pre:Dado una id de un  problema
      * post:Retornaremos que si existe esa id en algun problema
@@ -126,6 +96,7 @@ public class CtrlProblemas {
         //retorna true si el problema con id id existe en el mapa de Problemas
         return problems.existeProblema(id);
     }
+    
     /**
      * pre:-
      * post:Devuelve un arraylist con todos los problemas
@@ -136,6 +107,7 @@ public class CtrlProblemas {
         res = problems.getAllProblemas();
         return res;
     }
+    
     /**
      * pre:Dado Problema crear diferente a null
      * post:Devuelve true si cumple las condiciones necesarias para crear un problema sino false
@@ -267,148 +239,7 @@ public class CtrlProblemas {
         if (JaqueMate.mate(true)) return 17;
         return 0;
     }
-    /**
-     * pre:Dado un Problema a crear , un String ficha ,color,pos diferente a null
-     * 
-     * post:Añade la ficha con su color en la posición indica en pos 
-     * @param crear
-     * @param ficha
-     * @param color
-     * @param pos 
-     */
-    public void anadirFicha(Problema crear, String ficha, String color, String pos) {
-        //añade la ficha ficha con color color y posicion pos al tablero del problema crear
-        switch(ficha) {
-            case "r":
-                Rook r;
-                if (color.equals("n")) {
-                    r = new Rook(false, 'r');
-                }
-                else if (color.equals("b")) {
-                    r = new Rook(true, 'R');
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordR = new Coordenada();
-                coordR.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordR,r);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-            case "k":
-                King k;
-                if (color.equals("n")) {
-                    k = new King(false, 'k');
-                   // hayReyNegro = true;
-                }
-                else if (color.equals("b")) {
-                    k = new King(true, 'K');
-                  //  hayReyBlanco = true;
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordK = new Coordenada();
-                coordK.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordK,k);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-            case "q":
-                Queen q;
-                if (color.equals("n")) {
-                    q = new Queen(false, 'q');
-                }
-                else if (color.equals("b")) {
-                    q = new Queen(true, 'Q');
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordQ = new Coordenada();
-                coordQ.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordQ,q);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-            case "p":
-                Pawn p;
-                if (color.equals("n")) {
-                    p = new Pawn(false, 'p');
-                }
-                else if (color.equals("b")) {
-                    p = new Pawn(true, 'P');
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordP = new Coordenada();
-                coordP.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordP,p);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-            case "b":
-                Bishop b;
-                if (color.equals("n")) {
-                    b = new Bishop(false, 'b');
-                }
-                else if (color.equals("b")) {
-                    b = new Bishop(true, 'B');
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordB = new Coordenada();
-                coordB.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordB,b);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-            case "n":
-                Knight n;
-                if (color.equals("n")) {
-                    n = new Knight(false, 'n');
-                }
-                else if (color.equals("b")) {
-                    n = new Knight(true, 'N');
-                }
-                else {
-                    System.out.println("Error, vuelva a intentarlo");
-                    break;
-                }
-                Coordenada coordN = new Coordenada();
-                coordN.stringToCoord(pos);
-                try {
-                    crear.setFicha(coordN,n);
-                } catch (ArrayIndexOutOfBoundsException e2){
-                    System.out.println("Coordenadas fuera del rango del tablero, vuelva a probar.");
-                    break;
-                }
-                break;
-        }
-    }
+    
     /**
      * pre:Dado un int id diferente a null 
      * post:Devuelve el Problema que corresponde a la id si existe esta sino devulve un problema vacio
@@ -422,6 +253,7 @@ public class CtrlProblemas {
         } 
         return res;
     }
+    
     /**
      * pre:Dado un int id y un Ranking newR diferente a null
      * post:Actualizara el ranking del problema
@@ -440,12 +272,12 @@ public class CtrlProblemas {
     }
 
     public int getId(int i) {
-         ArrayList<Problema>l = getAllProblemasJuego();
+        ArrayList<Problema>l = getAllProblemasJuego();
         return l.get(i).getId();
     }
-     public int getIdCreado(int i,String nom ) {
-                 CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
-
-                return  ctrlU.getProblemasCreados(nom).get(i-1);
+    
+    public int getIdCreado(int i,String nom ) {
+        CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
+        return ctrlU.getProblemasCreados(nom).get(i-1);
     }
 }

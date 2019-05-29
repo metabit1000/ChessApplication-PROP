@@ -36,10 +36,10 @@ public class CtrlPartida {
     /* Constructora para Maquina VS Maquina */
     public CtrlPartida(int difBlancas, int difNegras,int problInicial) { 
         Problema p = ctrlP.obtenerProblema(problInicial); //problema inicial
-        System.out.println(p.getNumMovimientos());
         if (difBlancas == 1 && difNegras == 1) {
             game = new Partida(new MaquinaEasy(true,p.getNumMovimientos()),new MaquinaEasy(false,p.getNumMovimientos()),p);
         } 
+        
         else if (difBlancas == 1 && difNegras == 2) {
             game = new Partida(new MaquinaEasy(true,p.getNumMovimientos()),new MaquinaHard(false,p.getNumMovimientos()),p);
         }
@@ -52,23 +52,12 @@ public class CtrlPartida {
             game = new Partida(new MaquinaHard(true,3),new MaquinaHard(false,3),p);
         }
     }
-    /**
-     * pre:Dado un vector de int no vacio
-     * post:Simularemos las partidas maquina vs maquina de los problemas que encontramos en la variable res
-     * @param res 
-     */
-    public void playNProblemas(int res[]) {
-        for (int i = 0; i < res.length; i++) {
-            Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no lo puedo hacer y es necesario para coger bien el id
-            game.playNProblemas(p);
-        }
-    }
+    
    /**
     * pre:-
     * post:Devuelve la puntuación de la máquina 1
     * @return 
     */
-    
     public int getPuntuacionM1() {
         return game.getPuntuacionM1();
     }
@@ -78,7 +67,6 @@ public class CtrlPartida {
      * post:Devuelve la puntuación de la máquina 2
      * @return 
      */
-    
     public int getPuntuacionM2() {
         return game.getPuntuacionM2();
     }
@@ -93,6 +81,7 @@ public class CtrlPartida {
         char[][] res = p.convertirTablero();
         return res;
     }
+    
    /**
     * pre: Dado una Coordena c valida
     * post:Retorna el color de la coordena c 
@@ -102,6 +91,7 @@ public class CtrlPartida {
     public boolean getColor(Coordenada c) {
         return game.getColor(c);
     }
+    
    /**
     * pre:-
     * post:Devuelve el turno inicial , es decir , que color sera el que empieze la partida
@@ -110,6 +100,7 @@ public class CtrlPartida {
     public boolean getTurnoInicial() {
         return game.getTurnoInicial();
     }
+    
     /**
      * pre:-
      * post:Devuelve el numero de movimientos en los cuales se puede superar el problema
@@ -118,6 +109,7 @@ public class CtrlPartida {
     public int getNumMovimientos() {
         return game.getNumMovimientos();
     }
+    
      /**
      * pre:-
      * post:Devuelve el nombre del Jugador 1 
@@ -126,6 +118,7 @@ public class CtrlPartida {
     public String getNombreJugador1() {
         return game.getNombreJugador1();
     }
+    
     /**
      * pre:-
      * post:Devuelve el nombre del Jugador 3
@@ -134,6 +127,7 @@ public class CtrlPartida {
     public String getNombreJugador2() {
         return game.getNombreJugador2();
     }
+    
     /**
      * pre:Dada una coordenada valida
      * post: Devuelve el arraylist con todas las coordenas posibles en las cuales la ficha que esta en la coordenada c 
@@ -143,6 +137,7 @@ public class CtrlPartida {
     public ArrayList<Coordenada> posiblesMovimientos(Coordenada c) {
         return game.posiblesMovimientos(c);
     }
+    
     /**
      * pre:Dado un color diferente a null y dos coordenadas validas
      * post:devuelve un int en el cual si es 0 el movimiento es correcto , si es -1 estas en jaque y si es -2 no es tu turno
@@ -154,6 +149,7 @@ public class CtrlPartida {
     public int moverFicha(boolean color,Coordenada cordInicio,Coordenada cordFinal) {
         return game.moverFicha(color, cordInicio, cordFinal);
     }
+    
      /**
      * pre:-
      * post:La maquina mueve su ficha 
@@ -161,7 +157,8 @@ public class CtrlPartida {
      */
     public Pair<Coordenada,Coordenada> moverFichaMaquina() {
         return game.moverFichaMaquina();
-    }   
+    } 
+    
     /**
      * pre:Dado un boolean turno diferente a null 
      * post:Devuelve si hace mate 
@@ -171,6 +168,7 @@ public class CtrlPartida {
     public boolean checkMate(boolean turno) {
         return game.checkMate(turno);
     }
+    
     /**
      * pre:Dado un nombre y un tiempo difrente a null
      * post:Se añade el nombre y el tiempo en el ranking de el problema 
@@ -180,6 +178,7 @@ public class CtrlPartida {
     public void actualizarRanking(String nombre,double tiempo) {
         game.actualizarRanking(nombre, tiempo);
     }
+    
     /**
      * pre: Dada una id de un problema existente
      * post:Modifica el problema poniendolo como estaba en un inicio
@@ -188,5 +187,17 @@ public class CtrlPartida {
     public void resetTablero(int id) {
         Problema aux = ctrlP.obtenerProblema(id);
         game.setProblema(aux); //reseteo el problema
+    }
+    
+    /**
+     * pre:Dado un vector de int no vacio
+     * post:Simularemos las partidas maquina vs maquina de los problemas que encontramos en la variable res
+     * @param res 
+     */
+    public void playNProblemas(int res[]) {
+        for (int i = 0; i < res.length; i++) {
+            Problema p = ctrlP.obtenerProblema(res[i]+1); //+1 porque en presentacion no lo puedo hacer y es necesario para coger bien el id
+            game.playNProblemas(p);
+        }
     }
 }

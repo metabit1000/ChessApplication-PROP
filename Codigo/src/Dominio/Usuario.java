@@ -9,20 +9,32 @@ import java.util.Scanner;
  * @author joan
  */
 public class Usuario extends Jugador {
-    //nombre en jugador
+    private String nombre;
     private String password;
     
     public Usuario() {}
     
     public Usuario(boolean color, String nombre, String password) {
-        super(color,nombre);
+        super(color);
+        this.nombre = nombre;
         this.password = password;
     }
-       /**
-        * pre:-
-        * post: Devolvera la contraseña del Usuario
-        * @return 
-        */
+    
+     /**
+     * pre:- 
+     * post:Devolvemo el nombre del jugador
+     * @return nombre
+     */
+    public String getNombre() {
+        //devuelve el nombre del usuario
+        return nombre;
+    }
+    
+    /**
+    * pre:-
+    * post: Devolvera la contraseña del Usuario
+    * @return 
+    */
     public String getPassword() {
         // devulve la contraseña del usuario
         return this.password;

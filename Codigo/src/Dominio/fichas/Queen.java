@@ -16,11 +16,11 @@ public class Queen extends Ficha{
         super(color,c);
     }
     
-    @Override
     /**
      * pre:Dado un problema y una coordenada cualquiera dentro del tablero del problema
      * post: Devuelve todos los posibles movimientos que puede hacer una ficha según que tipo sea
-     */
+    */
+    @Override
     public ArrayList<Coordenada> posiblesMovimientos(Problema p, Coordenada cor) {
         Rook t = new Rook(color,c);
         Bishop a = new Bishop(color,c);
