@@ -14,7 +14,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author joan.manuel.ramos
+ * @author joan
  */
 public class VistaProblemasVS extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();

@@ -12,7 +12,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author jota
+ * @author joan
  */
 public class VistaProblemasMaq extends javax.swing.JFrame {
     

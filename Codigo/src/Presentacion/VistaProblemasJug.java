@@ -1,19 +1,15 @@
 package Presentacion;
 
 import Dominio.CtrlProblemas;
-import java.awt.Dialog;
 import java.awt.Font;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author jota
+ * @author joan
  */
 public class VistaProblemasJug extends javax.swing.JFrame {
     private CtrlPresentacionUsuarios u = new CtrlPresentacionUsuarios();

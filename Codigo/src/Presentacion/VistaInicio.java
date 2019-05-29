@@ -7,15 +7,9 @@ package Presentacion;
 
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.io.IOException;
-import javax.swing.UIManager;
+
 
 
 /**

@@ -1,9 +1,5 @@
 package Presentacion;
-import Presentacion.CtrlPresentacionCtrlProblemas;
-import Presentacion.CtrlPresentacionUsuarios;
-import Presentacion.VistaMenu;
-import Presentacion.VistaPreview;
-import Presentacion.VistaRanking;
+
 import java.awt.Font;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;

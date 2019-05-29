@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author joan.manuel.ramos
+ * @author joan
  */
 public class VistaGuestLog extends javax.swing.JFrame {
 

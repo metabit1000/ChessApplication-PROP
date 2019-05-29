@@ -6,9 +6,6 @@
 package Presentacion;
 import Dominio.CtrlProblemas;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Map;
 
 /**
@@ -16,9 +13,8 @@ import java.util.Map;
  * @author Jordi
  */
 public class CtrlPresentacionRanking {
-        CtrlProblemas ctrlP = new CtrlProblemas();
+    CtrlProblemas ctrlP = new CtrlProblemas();
 
-    
     public Map<String,Double> getmap(int id ){
         return ctrlP.getmap(id);
     }
