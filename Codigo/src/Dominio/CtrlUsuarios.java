@@ -55,9 +55,8 @@ public class CtrlUsuarios {
     }
     
     public int modificarPassword(String user,String password,String passCambiar) throws IOException {
-        Usuario usRegistrado = new Usuario(false,user,password);
         int res = 0; //por default, todo va bien
-        if (existUser(usRegistrado)) {
+        if (existUser(user,password)) {
             if (correctPass(passCambiar)) {
                 cj.modificarPassword(user, passCambiar);
             }
@@ -73,8 +72,7 @@ public class CtrlUsuarios {
     public void loginUsuario(String nom, String pass) throws IOException {
         //el usuario con nombre nom y contraseñas pass hace login en el caso de que el nombre de usuario y contraseña coincidan con un usuario
         //dado de alta previamente
-        Usuario usIntroducido = new Usuario(false,nom,pass); 
-        if (!existUser(usIntroducido)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
+        if (!existUser(nom,pass)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
         else {
             UserLogged = nom;
             System.out.println("Sesión iniciada satisfactoriamente");
@@ -84,8 +82,7 @@ public class CtrlUsuarios {
     public void loginGuest(String nom, String pass) throws IOException {
        //el usuario con nombre nom y contraseñas pass inicia sesión como invitado en el caso de que el nombre de usuario y contraseña coincidan con un usuario
         //dado de alta previamente
-        Usuario usIntroducido = new Usuario(false,nom,pass); 
-        if (!existUser(usIntroducido)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
+        if (!existUser(nom,pass)) System.out.println("El nombre de usuario o contraseña es incorrecto, vuelva a intentarlo");
         else {
             GuestLogged = nom;
             System.out.println("Sesión iniciada satisfactoriamente");
@@ -126,14 +123,18 @@ public class CtrlUsuarios {
         return pass.length() > 5 && n && m && M;
     }
     
-    public Boolean existUser(Usuario u) throws IOException {
+    public Boolean existUser( String nombre , String password) throws IOException {
         //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
-        return cj.usuarioRegistrado(u.getNombre(),u.getPassword());
+        return cj.usuarioRegistrado(nombre,password);
     }
     
     public Boolean existeNombre(String u) throws IOException {
         //devuelve true si el usuario existe en el fichero .txt, false en caso contrario
         return cj.existeNombre(u);
+    }
+
+    public Boolean existUser1(String nom, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

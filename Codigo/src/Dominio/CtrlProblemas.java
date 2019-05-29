@@ -7,6 +7,7 @@ import Dominio.fichas.Pawn;
 import Dominio.fichas.Queen;
 import Dominio.fichas.Rook;
 import Persistencia.CtrlDatosProblemas;
+import Persistencia.CtrlDatosUsuarios;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -72,6 +73,48 @@ public class CtrlProblemas {
         if (!existProblem(p.getId())) {
                 problems.introducirProblema(p.getId(),p.getFen(), p.getNumMovimientos(),p.getRanking());
         }
+    }
+    public void introducirProblemanuevo(int numMovs,String Fen ){
+         Ranking r = new Ranking();
+              problems.introducirProblema((getAllProblemasJuegoSize()+1), Fen, numMovs,r);
+    }
+    public void modificarProblema(int numMovs,String fen,String nom ,int id ){
+        CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
+        Ranking r = new Ranking();
+         problems.modificarProblema((ctrlU.getProblemasCreados(nom).get(id)),fen, numMovs, r);
+
+    }
+       public void introducirProblemaCreado(String nom){
+                CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
+
+          ctrlU.introducirProblemaCreado(nom,getAllProblemasJuegoSize());
+
+       }
+
+           
+   public int getAllProblemasJuegoSize(){
+       ArrayList<Problema> res =  getAllProblemasJuego();
+       return res.size();
+   }
+    public boolean Validar(int id,String fen, int numMov) {
+        Ranking r = new Ranking();
+        Problema c = new Problema(id,fen,numMov,r);	
+         return c.validarProblema();
+}
+     public char[][] convertirTablero() {
+             Problema p = new Problema();	        
+        return p.convertirTablero();    }
+    public char[][] obtenerYconvertirTablero(int id) {
+        
+        Problema p = problems.obtenerProblema(id);	
+         return p.convertirTablero();
+    }
+    public String dameFEN(char[][] c) {
+            Problema p = new Problema();	        
+        p.convertirMatrizFichas(c);	        
+        p.setTurno(true);	
+         return p.matrixToFen();
+      
     }
     /**
      * pre:Dado una id de un  problema
@@ -389,5 +432,20 @@ public class CtrlProblemas {
         if (existProblem(id)) {
             problems.modificarRanking(id, newR);
         }
+    }
+
+    public int getnumMov(int i) {
+        ArrayList<Problema>l = getAllProblemasJuego();
+        return l.get(i).getNumMovimientos();
+    }
+
+    public int getId(int i) {
+         ArrayList<Problema>l = getAllProblemasJuego();
+        return l.get(i).getId();
+    }
+     public int getIdCreado(int i,String nom ) {
+                 CtrlDatosUsuarios ctrlU = new CtrlDatosUsuarios();
+
+                return  ctrlU.getProblemasCreados(nom).get(i-1);
     }
 }
