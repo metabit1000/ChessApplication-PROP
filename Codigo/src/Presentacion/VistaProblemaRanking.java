@@ -16,7 +16,7 @@ public class VistaProblemaRanking extends javax.swing.JFrame {
             listModel.addElement("Problema "+cp.getId(i)+". Movimientos: "+cp.getnumMov(i));
         }
         
-        this.setVisible(true);  
+        
         initComponents();
         setSize(800,800);
         setTitle("Competición entre máquinas");
