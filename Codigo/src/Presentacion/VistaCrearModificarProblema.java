@@ -268,7 +268,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 ActionListener a = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) { 
-                        if (casillaInicioPulsada == 0 && b.getIcon() != null) { //hay pieza para mover y es el primer click
+                        if (b.getIcon() != null) { //hay pieza para mover y es el primer click
                             if (getPosicionFichas(e) != null) {
                                 posicionInicio = getPosicionFichas(e);
                                 casillaInicioPulsada = 2;
@@ -277,11 +277,10 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                         else if (casillaInicioPulsada != 0 && !casillaFinalPulsada) {
                             if (getPosicionFichas(e) != null) {
                                 posicionFinal = getPosicionBoton(e);
-                                    casillaFinalPulsada = true;
-                                    casillaInicioPulsada = 0;
-                                
-                                
+                                casillaFinalPulsada = true;
+                                casillaInicioPulsada = 0;
                             }
+                            
                             casillaFinalPulsada = false;
                             casillaInicioPulsada = 0;
                         }
@@ -308,7 +307,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) { 
                         if (casillaInicioPulsada == 0 && b.getIcon() != null) { //hay pieza para mover y es el primer click
-                            if (getPosicionBoton(e) != null) {
+                            if (getPosicionBoton(e) != null && b.getIcon() != null) {
                                 posicionInicio = getPosicionBoton(e);
                                 casillaInicioPulsada = 1;
                             }
@@ -320,8 +319,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                                 if (posicionInicio.getY() == posicionFinal.getY() && posicionInicio.getX() == posicionFinal.getX()) {
                                     moverFicha();
                                 }
-                                else if (b.getIcon() != null) swapFicha(); 
-                                else moverFicha();
+                                else if (b.getIcon() == null) moverFicha(); 
+                                else swapFicha();
                             }
                             else if (casillaInicioPulsada == 2) {
                                 ponerFicha();
