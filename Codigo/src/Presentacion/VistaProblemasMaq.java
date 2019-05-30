@@ -293,7 +293,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (selectProblem() > -1) {
+        if (selectProblems().length == 1) {
             VistaPreview r = new VistaPreview(selectProblem()+1, u);
             r.setVisible(true);
         }
