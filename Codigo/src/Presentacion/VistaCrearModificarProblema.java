@@ -241,7 +241,6 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         this.setLocationByPlatform(true);
         this.pack();
         this.setMinimumSize(this.getSize());
-        this.setVisible(true); 
     }
 
     private final void initializeGui() {
