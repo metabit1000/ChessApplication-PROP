@@ -25,8 +25,6 @@ public class VistaProblemasVS extends javax.swing.JFrame {
         for (int i = 0; i < cp.getAllProblemasJuegoSize(); ++i) {
             listModel.addElement("Problema "+cp.getId(i)+". Movimientos: "+cp.getnumMov(i));
         }
-        
-        this.setVisible(true); 
         this.setTitle("Problemas");  
         initComponents();
         JLista.setModel(listModel);
