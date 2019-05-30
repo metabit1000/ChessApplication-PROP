@@ -72,7 +72,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         Combo.addActionListener(new ActionListener(){ 
             @Override
             public void actionPerformed(ActionEvent e){  
-                
+                //listener para el combo
                 setNumMovs(Combo.getSelectedIndex()+1);
             }  
         });
@@ -85,11 +85,12 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             }  
         });
         Validar.addActionListener(new ActionListener(){  
+            //Se pulsa el botón de validar.
             @Override
             public void actionPerformed(ActionEvent e){  
                 switch(cp.getRestricciones(sacarProblema())) {
-                    case 0://A VALIDAR!!, if (se valida para esos numMovs o bien hay solucion para ese numMovs
-                        
+                    case 0://en este caso, no hay ninguna restricción y procederemos a validar desde el minimax puro.
+                        //devolverá true si el minimax puro encuentra un camino (a 2d-1) por el que las blancas hacen jaque mate en esos movimientos
                         if (ctrlPP.Validar((ctrlPP.getAllProblemasJuegoSize()+1), ctrlPP.dameFEN(sacarProblema()), numMovs)) {
                             if (getID() == -1) {
                                 JLabel label = new JLabel("Problema validado para "+ numMovs + " movimientos. Se subirá el problema con ID "+(ctrlPP.getAllProblemasJuegoSize()+1)+". ¿Estás seguro?");
@@ -259,7 +260,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         fichasBoard.setBorder(new LineBorder(Color.BLACK));
         guiF.add(fichasBoard);
         
-        // create the chess board squares
+        // creamos el tablero de Fichas
         Insets buttonMarginF = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < Fichas.length; ii++) {
             for (int jj = 0; jj < Fichas[ii].length; jj++) {
@@ -291,7 +292,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 Fichas[ii][jj] = b;
             }
         }
-        
+        //creamos tablero de ajedrez
         Insets buttonMargin = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
@@ -335,9 +336,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
                 chessBoardSquares[jj][ii] = b;
             }
         }
-        //fill the chess board
         chessBoard.add(new JLabel(""));
-        // fill the top row
         for (int ii = 0; ii < 8; ii++) {
             chessBoard.add(new JLabel(COLS.substring(ii, ii + 1), SwingConstants.CENTER));
         }
@@ -361,6 +360,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
 
     private Coordenada getPosicionBoton(ActionEvent e) {
+        //devuelve la posicion del boton pulsado en el tablero de ajedrez
         int resX = 0, resY = 0;
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
@@ -374,6 +374,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
     
     private Coordenada getPosicionFichas(ActionEvent e) {
+        //devuelve la posicion del boton pulsado en la tabla de fichas
         int resX = 0, resY = 0;
         for (int ii = 0; ii < Fichas.length; ii++) {
             for (int jj = 0; jj < Fichas[ii].length; jj++) {
@@ -387,15 +388,18 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
     }
 
     private void moverFicha() {
+        //mueve ficha de posicionInicio a posicionFinal y borra la de posicionInicio
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(null); //borrar el anterior
         
     }
     
     private void ponerFicha() {
+        //mueve ficha de posicionInicio a posicionFinal 
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(Fichas[posicionInicio.getX()][posicionInicio.getY()].getIcon()); //movimiento
     }
     private void swapFicha() {
+        //mueve ficha de posicionInicio a posicionFinal y de posicionFinal a posicionInicio
         JButton s = new JButton(chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].getIcon());
         chessBoardSquares[posicionFinal.getY()][posicionFinal.getX()].setIcon(chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].getIcon()); //movimiento
         chessBoardSquares[posicionInicio.getY()][posicionInicio.getX()].setIcon(s.getIcon()); //movimiento
@@ -427,16 +431,8 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
         }
         return r;
     }
-    
-    public void printeameElCHAR(char[][] c) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                System.out.print(c[i][j] +" ");
-            }
-            System.out.println("");
-        }
-    }
-    
+   
+    //asignamos las imagenes a cada ficha del tablero de ajedrez
     private final void introducirProblema() {
         char[][] c = aux;
         for (int i = 0; i < 8; ++i) {
@@ -484,6 +480,7 @@ public class VistaCrearModificarProblema extends javax.swing.JFrame {
             }
         }
     }
+    //asignamos imagenes a cada ficha del tablero de fichas
     private final void introducirFichas() {
         Fichas[1][3].setIcon(new ImageIcon("K1.png"));
         Fichas[0][3].setIcon(new ImageIcon("k.png"));
