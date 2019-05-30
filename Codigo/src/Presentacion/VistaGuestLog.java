@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Presentacion;
-
+import java.awt.Font;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -144,7 +145,9 @@ public class VistaGuestLog extends javax.swing.JFrame {
         user = username.getText();
         boolean logueado = u.LogInGuest(user, password);
         if (!logueado ){
-            JOptionPane.showMessageDialog(null,"Usuario incorrecto");
+            JLabel label = new JLabel("Usuario incorrecto");
+            label.setFont(new Font("Dialog", Font.PLAIN, 18));
+            JOptionPane.showMessageDialog(null, label, "Usuario incorrecto", JOptionPane.WARNING_MESSAGE);
         }
         else {
             VistaProblemasVS vs = new VistaProblemasVS(u);
