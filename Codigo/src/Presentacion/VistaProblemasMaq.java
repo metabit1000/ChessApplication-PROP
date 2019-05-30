@@ -280,7 +280,7 @@ public class VistaProblemasMaq extends javax.swing.JFrame {
             }
         }
         else {
-            JLabel label1 = new JLabel("Escoga los parametros correctamente");
+            JLabel label1 = new JLabel("Escoja los parametros correctamente");
             label1.setFont(new Font("Dialog", Font.PLAIN, 18));
             JOptionPane.showMessageDialog(null, label1, "Error", JOptionPane.WARNING_MESSAGE);
         }
