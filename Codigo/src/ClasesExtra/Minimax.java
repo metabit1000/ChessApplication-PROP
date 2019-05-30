@@ -18,7 +18,7 @@ public class Minimax {
     * @param col
     * @return 
     */
-    public int min(Problema p, int depth, boolean col) {
+    private int min(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -47,7 +47,7 @@ public class Minimax {
      * @param col
      * @return 
      */
-    public int max(Problema p, int depth, boolean col) {
+    private int max(Problema p, int depth, boolean col) {
         if (depth == 0) return evaluationBoard(p);
         
         ArrayList<Coordenada> moves = posiciones(p,col);
@@ -117,7 +117,7 @@ public class Minimax {
   * @param p
   * @return 
   */
-    public int evaluationBoard(Problema p) {
+    private int evaluationBoard(Problema p) {
         int totalEvaluation = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -133,7 +133,7 @@ public class Minimax {
      * @param y
      * @return 
      */
-    public int getPieceValue (Ficha piece,int x,int y) {
+    private int getPieceValue (Ficha piece,int x,int y) {
         if (piece == null) 
             return 0;
         return getAbsoluteValue(piece,x,y);
@@ -147,7 +147,7 @@ public class Minimax {
      * @param y
      * @return 
      */
-    public int getAbsoluteValue(Ficha piece,int x,int y) {
+    private int getAbsoluteValue(Ficha piece,int x,int y) {
         if (piece.getID() != null) 
             switch (piece.getID()) {
             case 'P':
@@ -186,7 +186,7 @@ public class Minimax {
      * @param color
      * @return 
      */
-    public ArrayList<Coordenada> posiciones(Problema p, boolean color) {
+    private ArrayList<Coordenada> posiciones(Problema p, boolean color) {
         ArrayList<Coordenada> moves = new ArrayList();
         for (int i = 0; i< 8; ++i) {
             for (int j = 0; j < 8; ++j) {
