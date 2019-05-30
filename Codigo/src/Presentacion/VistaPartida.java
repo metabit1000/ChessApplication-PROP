@@ -152,17 +152,11 @@ public class VistaPartida extends javax.swing.JFrame {
                                             startTime = System.nanoTime(); //empiezo a contar
                                         }
                                     }
-                                } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-                                    
+                                } else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba 
                                     JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
                                     label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
-                                } else {
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-//                                    else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
-                                    
+                                } else { 
                                     JLabel label = new JLabel("Este no es un movimiento correcto");
                                     label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
@@ -249,14 +243,11 @@ public class VistaPartida extends javax.swing.JFrame {
                                     }
                                 } 
                                 else if (ctrlJ.getColor(posicionInicio) != turno && !movimientoPosibleOk()) { //caso especial que no contemplaba
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                     JLabel label = new JLabel("No es tu turno. Es el turno de las " + obtenerTurno());
                                     label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
                                 } 
                                 else {
-//                                    if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
-                                    
                                     JLabel label = new JLabel("Este no es un movimiento correcto");
                                     label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                     JOptionPane.showMessageDialog(null, label, "Movimiento incorrecto", JOptionPane.WARNING_MESSAGE);
