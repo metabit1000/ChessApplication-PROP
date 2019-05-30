@@ -194,7 +194,7 @@ public class VistaProblemasJug extends javax.swing.JFrame {
             vj.setVisible(true); 
         }
         else {
-            JLabel label2 = new JLabel("Escoge la dificultad de la máquina");
+            JLabel label2 = new JLabel("Escoja los parametros correctamente");
             label2.setFont(new Font("Dialog", Font.PLAIN, 18));
             JOptionPane.showMessageDialog(null, label2, "Error", JOptionPane.WARNING_MESSAGE);
         } 
