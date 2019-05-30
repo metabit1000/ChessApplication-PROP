@@ -113,7 +113,7 @@ public class VistaPartida extends javax.swing.JFrame {
                                             else tiempoJ2 += (System.nanoTime() - startTime); //jugador2
                                             
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000); 
-                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " Con un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
                                             label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                             JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
                                             
@@ -132,7 +132,7 @@ public class VistaPartida extends javax.swing.JFrame {
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador2(), (double)tiempoJ2/1000000000);
-                                            JLabel label = new JLabel("Problema no superado en el numero de movimientos del problema. Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ2/1000000000+" segundos.");
+                                            JLabel label = new JLabel("Problema no superado en el numero de movimientos del problema. Ganan las " + obtenerTurno() + " Con un tiempo de "+(double)tiempoJ2/1000000000+" segundos.");
                                             label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                             JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
                                             
@@ -196,7 +196,7 @@ public class VistaPartida extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
                                             
-                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " en un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " Con un tiempo de "+(double)tiempoJ1/1000000000+" segundos.");
                                             label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                             JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE); 
                                             //ctrlJ.actualizarRanking(ctrlJ.getNombreJugador1(), (double)tiempoJ1/1000000000);  //solo actualizo el jugador si gana
@@ -213,7 +213,7 @@ public class VistaPartida extends javax.swing.JFrame {
                                             if (turno == ctrlJ.getTurnoInicial()) tiempoJ1 += (System.nanoTime() - startTime); //jugador1
                                             
                                             turno = !turno; //gana el contrincante, cambio el turno para sacarlo por pantalla
-                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + ". Problema no superado en el número de movimientos del problema");
+                                            JLabel label = new JLabel("Ganan las " + obtenerTurno() + " Problema no superado en el número de movimientos del problema");
                                             label.setFont(new Font("Dialog", Font.PLAIN, 18));
                                             JOptionPane.showMessageDialog(null, label, "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
                                             
