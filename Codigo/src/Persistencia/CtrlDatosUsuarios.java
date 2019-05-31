@@ -17,7 +17,7 @@ public class CtrlDatosUsuarios {
     private FileReader fr;
     private FileWriter fw;
     private BufferedReader br;
-    private String path = "UsuariosRegistrados.txt";
+    private String path = "BasesDeDatos/UsuariosRegistrados.txt";
     
     public CtrlDatosUsuarios(){
         archivo = null;
