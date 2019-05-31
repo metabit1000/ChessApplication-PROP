@@ -19,7 +19,7 @@ public class CtrlDatosProblemas {
     private FileReader fr;
     private FileWriter fw;
     private BufferedReader br;
-    private String path = "ProblemasGuardados.txt";
+    private String path = "BasesDeDatos/ProblemasGuardados.txt";
     
     public CtrlDatosProblemas(){
         archivo = null;
