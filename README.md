@@ -7,7 +7,7 @@ That year, the subject consisted in creating a desktop chess application in a th
 We wrote a document explaining the Java classes that we used and the IA algorithm, and other document as manual to know how to use the desktop application. You can see them in the following links:
 
 First document:
-Manual:
+Manual: https://github.com/metabit1000/PROP-FIB/blob/master/Proyecto/docs/Manual.pdf
 
 Some photos of the application:
 
