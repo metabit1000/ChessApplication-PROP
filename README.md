@@ -12,7 +12,7 @@ Manual: https://afly.co/4y93
 
 Some photos of the application: 
 
-![Image of App Login](https://raw.githubusercontent.com/metabit1000/DangerTracker/master/DangerTracker/images/Captura1.png)
+![Image of App Login](https://raw.githubusercontent.com/metabit1000/DangerTracker/master/ChessApplication-PROP/Proyecto/photos/Captura1.png)
 ![Image of Map](https://raw.githubusercontent.com/metabit1000/DangerTracker/master/DangerTracker/images/Captura2.png)
 ![Image of Contacts Part](https://raw.githubusercontent.com/metabit1000/DangerTracker/master/DangerTracker/images/Captura3.png)
 
