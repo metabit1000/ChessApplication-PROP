@@ -12,8 +12,7 @@ Manual: https://afly.co/4y93
 
 Some photos of the application: 
 
-Login: ![Image of App Login](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura.JPG)
-Menu: ![Image of Menu](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura3.JPG)
-Playing: ![Image of game](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura2.JPG)
-Creating a new problem to play: ![Image of creating](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura4.JPG)
-
+![Image of App Login](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura.JPG) *Login*
+![Image of Menu](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura3.JPG) *Menu*
+![Image of game](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura2.JPG) *Playing*
+![Image of creating](https://raw.githubusercontent.com/metabit1000/ChessApplication-PROP/master/Proyecto/photos/Captura4.JPG) *Creating a new problem to play: *
