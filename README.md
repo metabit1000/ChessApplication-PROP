@@ -9,4 +9,8 @@ We wrote a document explaining the Java classes that we used and the IA algorith
 First document:
 Manual:
 
+<<<<<<< HEAD
 Some photos of the application:
+=======
+Some photos of the application:
+>>>>>>> aadffd34df9f4601271826c336c87e83a9b64200
